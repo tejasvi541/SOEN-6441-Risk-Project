@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Map class holds the details of map in the game
  * Consists of data structures to access countries and continents and their neighbours of the map
  */
-public class Map {
+public class GMap {
 
     private String d_mapName;
     private boolean d_isValid;
@@ -16,7 +16,7 @@ public class Map {
     /**
      * Map Constructor to initialise the Class
      */
-    public Map(){
+    public GMap(){
         this.d_mapName="";
         this.d_isValid=false;
         this.d_continents= new HashMap<>();
@@ -27,7 +27,7 @@ public class Map {
      * Map Constructor to initialise the class
      * @param p_mapName Map name parameter
      */
-    public Map(String p_mapName){
+    public GMap(String p_mapName){
         this.d_mapName=p_mapName;
         this.d_isValid=false;
         this.d_continents= new HashMap<>();
@@ -43,7 +43,7 @@ public class Map {
     }
 
     /**
-     * Setter funtion of the map name
+     * Setter function of the map name
      * @param p_mapName function argument, means map name to be set
      */
     public void set_mapName(String p_mapName){
@@ -60,7 +60,7 @@ public class Map {
 
     /**
      * Setter function for if the map is valid
-     * @param p_isValid function argument to set the d_isValid datamember
+     * @param p_isValid function argument to set the d_isValid data-member
      */
     public void set_isValid(boolean p_isValid){
         this.d_isValid = p_isValid;

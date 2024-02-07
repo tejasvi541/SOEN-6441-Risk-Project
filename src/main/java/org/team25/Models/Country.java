@@ -42,12 +42,12 @@ public class Country {
      * @param p_parentContinent Index of the parent Continent of the country
      * @param p_xCoordinate X-coordinate of the Country for GUI
      * @param p_yCoordinate Y-coordinate of the Country for GUI
-     * @param p_map Map object in which country is present
+     * @param p_gMap Map object in which country is present
      */
-    public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, Map p_map){
+    public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, GMap p_gMap){
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        for(Continent c:p_map.get_continents().values()){
+        for(Continent c: p_gMap.get_continents().values()){
             if(c.get_continentFileIndex()==Integer.parseInt(p_parentContinent)) {
                 this.d_parentContinent = c.get_continentId();
             }

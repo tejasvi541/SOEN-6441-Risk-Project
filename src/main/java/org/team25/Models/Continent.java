@@ -20,7 +20,7 @@ public class Continent {
      * @param p_continentId Continent ID
      * @param p_controlValue Control Value of Continent
      */
-    Continent(String p_continentId, String p_controlValue){
+    public Continent(String p_continentId, String p_controlValue){
         this.d_continentId = p_continentId;
         this.d_controlValue = Integer.parseInt(p_controlValue);
         this.d_countries = new HashMap<String, Country>();
