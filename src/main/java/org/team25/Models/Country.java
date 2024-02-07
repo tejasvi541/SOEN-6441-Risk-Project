@@ -2,6 +2,11 @@ package org.team25.Models;
 
 import java.util.HashMap;
 
+/**
+ * Represents a country in a world map.
+ * Each country has an index, ID, parent continent, neighbors, number of armies, and coordinates for GUI display.
+ * @author Tejasvi
+ */
 public class Country {
 
     private int d_countryFileIndex;
@@ -42,9 +47,9 @@ public class Country {
     public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, Map p_map){
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        for(Continent c:p_map.getContinents().values()){
-            if(c.getInMapIndex()==Integer.parseInt(p_parentContinent)) {
-                this.d_parentContinent = c.getContinentId();
+        for(Continent c:p_map.get_continents().values()){
+            if(c.get_continentFileIndex()==Integer.parseInt(p_parentContinent)) {
+                this.d_parentContinent = c.get_continentId();
             }
         }
         this.d_neighbours = new HashMap<String, Country>();
