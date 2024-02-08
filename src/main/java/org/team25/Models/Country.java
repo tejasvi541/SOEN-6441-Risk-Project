@@ -35,7 +35,7 @@ public class Country {
     }
 
     /**
-     * Creates Country object having more arguements
+     * Creates Country object having more arguments
      * This constructor used while reading from ".map" files.
      * @param p_countryFileIndex index in map file
      * @param p_countryId ID of the Country

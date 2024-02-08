@@ -15,15 +15,16 @@ public class Continent {
 
 
     /**
-     * Constructor to initialise the Continent class with the arguements passed below
+     * Constructor to initialise the Continent class with the arguments passed below
      * Used during loading the map data
      * @param p_continentId Continent ID
      * @param p_controlValue Control Value of Continent
      */
-    public Continent(String p_continentId, String p_controlValue){
+    public Continent(String p_continentId, String p_controlValue,int p_continentFileIndex){
         this.d_continentId = p_continentId;
         this.d_controlValue = Integer.parseInt(p_controlValue);
         this.d_countries = new HashMap<String, Country>();
+        this.d_continentFileIndex = p_continentFileIndex;
     }
 
     /**
@@ -35,7 +36,7 @@ public class Continent {
     }
 
     /**
-     * Setter funtion to Continent Id
+     * Setter function to Continent Id
      * @param p_continentId Continent ID
      */
     public void set_continent(String p_continentId){
@@ -44,14 +45,14 @@ public class Continent {
 
     /**
      * Getter function of control value
-     * @return control value of the continet
+     * @return control value of the content
      */
     public int get_controlValue(){
         return this.d_controlValue;
     }
 
     /**
-     * Setter funtion of the control value which saves it in integer from string
+     * Setter function of the control value which saves it in integer from string
      * @param p_controlValue Control value of Continent
      */
     public void set_controlValue(String p_controlValue){
@@ -75,7 +76,7 @@ public class Continent {
     }
 
     /**
-     * Getter funtion for the Continent File Index
+     * Getter function for the Continent File Index
      * @return The Continent's Index on the file
      */
     public int get_continentFileIndex(){

@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * Map class holds the details of map in the game
  * Consists of data structures to access countries and continents and their neighbours of the map
+ * @author Tejasvi
  */
 public class GMap {
 
