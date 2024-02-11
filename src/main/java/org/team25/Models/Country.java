@@ -6,6 +6,7 @@ import java.util.HashMap;
  * Represents a country in a world map.
  * Each country has an index, ID, parent continent, neighbors, number of armies, and coordinates for GUI display.
  * @author Tejasvi
+ * @version 1.0.0
  */
 public class Country {
 
@@ -87,7 +88,7 @@ public class Country {
      * Country object references as values.
      * @return returns d_neighbors of this country
      */
-    public HashMap<String, Country> getNeighbours(){
+    public HashMap<String, Country> get_Neighbours(){
         return this.d_neighbours;
     }
 

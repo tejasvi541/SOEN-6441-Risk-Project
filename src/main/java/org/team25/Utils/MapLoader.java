@@ -14,6 +14,7 @@ import java.util.Scanner;
  * This is the main logic of the Map Loading here in this Map Loader class to load our maps and store in memory
  * to play or edit.
  * @author Tejasvi
+ * @version 1.0.0
  */
 public class MapLoader {
     public static int d_mapContinentIndex =1; // Tracking Continent Index
@@ -29,7 +30,7 @@ public class MapLoader {
         System.out.println("Enter Map file name:");
         String l_mapName = l_sc.nextLine();
         MapLoader l_loadedMap = new MapLoader();
-        l_loadedMap.readMap(l_mapName);
+        GMap d_gMap = l_loadedMap.readMap(l_mapName);
         l_sc.close();
     }
 
@@ -44,7 +45,7 @@ public class MapLoader {
         d_countriesList = new HashMap<Integer, Country>();
 
         try{
-            BufferedReader l_fileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_mapName+".txt"));
+            BufferedReader l_fileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_mapName+".map"));
             String l_lineString;
             while((l_lineString=l_fileReader.readLine())!=null){
                 switch (l_lineString){
@@ -163,8 +164,8 @@ public class MapLoader {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        if(!p_tempCountry.getNeighbours().containsKey(l_neighbourCountry.get_countryId().toLowerCase())){
-            p_tempCountry.getNeighbours().put(l_neighbourCountry.get_countryId().toLowerCase(), l_neighbourCountry);
+        if(!p_tempCountry.get_Neighbours().containsKey(l_neighbourCountry.get_countryId().toLowerCase())){
+            p_tempCountry.get_Neighbours().put(l_neighbourCountry.get_countryId().toLowerCase(), l_neighbourCountry);
         }
     }
 
