@@ -91,5 +91,38 @@ public class MapValidator {
         return true;
     }
 
+    /**
+     * This function checks if the continent is present in the GMap Object
+     * @param p_gMap GMap object
+     * @param p_continentId Id of the continent to be checked
+     * @return true/false if the continent exists or not
+     */
+    public boolean isContinentPresent(GMap p_gMap, String p_continentId){
+        return p_gMap.get_continents().containsKey(p_continentId.toLowerCase());
+    }
+
+    /**
+     * This function checks if the continent is present in the GMap Object
+     * @param p_gMap GMap object
+     * @param p_countryId Id of the continent to be checked
+     * @return true/false if the continent exists or not
+     */
+    public boolean isCountryPresent(GMap p_gMap, String p_countryId){
+        return p_gMap.get_countries().containsKey(p_countryId.toLowerCase());
+    }
+
+    /**
+     * Checks if any continent is Empty
+     * @param p_gMap Current GMap Object
+     * @return true/false if the continent is empty or not
+     */
+    public boolean isContinentEmpty(GMap p_gMap){
+        for(Continent l_continent : p_gMap.get_continents().values()){
+            if(l_continent.get_countries().isEmpty()){
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
