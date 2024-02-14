@@ -9,7 +9,7 @@ public class ValidationException extends Exception {
     /**
      * initialising a string to hold message
      */
-    String d_ErrorMessage = "Invalid command.Try again!";
+    String d_ErrorMessage = "Invalid input.Try again!";
 
     /**
      * Validation Exception Constructor

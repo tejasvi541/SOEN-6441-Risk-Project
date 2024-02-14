@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @author Bharti Chhabra
  * @version 1.0.0
  */
-public class MapEditor {
+public class MapEditorImpl implements MapEditor{
     /**
      * A data member for scanner
      */
@@ -34,7 +34,7 @@ public class MapEditor {
     /**
      * A data member that will log the data for the class
      */
-    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditor.class);
+    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditorImpl.class);
 
     /**
      * A data member to set the log level
@@ -44,7 +44,7 @@ public class MapEditor {
     /**
      * This is the default constructor
      */
-    public MapEditor() {
+    public MapEditorImpl() {
         this.d_GameMap = new GameMap();
     }
 
@@ -53,7 +53,7 @@ public class MapEditor {
      *
      * @param p_GameMap Parameter of the GamePhase is passed
      */
-    public MapEditor(GameMap p_GameMap) {
+    public MapEditorImpl(GameMap p_GameMap) {
         this.d_GameMap = p_GameMap;
     }
 
@@ -301,6 +301,7 @@ public class MapEditor {
                                 } catch (ValidationException e) {
                                     System.out.println(e.getMessage());
                                 }
+
                             }
                             break;
                         }
