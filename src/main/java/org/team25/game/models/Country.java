@@ -35,6 +35,34 @@ public class Country {
         this.d_numberOfArmies = 0;
     }
 
+    public void set_countryFileIndex(int d_countryFileIndex) {
+        this.d_countryFileIndex = d_countryFileIndex;
+    }
+
+    public void set_countryId(String d_countryId) {
+        this.d_countryId = d_countryId;
+    }
+
+    public void set_parentContinent(String d_parentContinent) {
+        this.d_parentContinent = d_parentContinent;
+    }
+
+    public void set_neighbours(HashMap<String, Country> d_neighbours) {
+        this.d_neighbours = d_neighbours;
+    }
+
+    public void set_numberOfArmies(int d_numberOfArmies) {
+        this.d_numberOfArmies = d_numberOfArmies;
+    }
+
+    public void set_xCoordinate(int d_xCoordinate) {
+        this.d_xCoordinate = d_xCoordinate;
+    }
+
+    public void set_yCoordinate(int d_yCoordinate) {
+        this.d_yCoordinate = d_yCoordinate;
+    }
+
     /**
      * Creates Country object having more arguments
      * This constructor used while reading from ".map" files.
