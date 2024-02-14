@@ -32,7 +32,14 @@ public class MapEditor {
      */
     private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList("showmap","editmap","editcontinent", "editcountry", "editneighbor", "validatemap","savemap");
 
+    /**
+     * A data member that will log the data for the class
+     */
     private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditor.class);
+
+    /**
+     * A data member to set the log level
+     */
     Level d_logLevel=Level.parse("INFO");
 
     /**
