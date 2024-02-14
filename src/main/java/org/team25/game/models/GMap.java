@@ -1,4 +1,7 @@
-package org.team25.Models;
+package org.team25.game.models;
+
+import org.team25.game.models.Continent;
+import org.team25.game.models.Country;
 
 import java.util.HashMap;
 

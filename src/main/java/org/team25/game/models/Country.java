@@ -1,4 +1,4 @@
-package org.team25.Models;
+package org.team25.game.models;
 
 import java.util.HashMap;
 

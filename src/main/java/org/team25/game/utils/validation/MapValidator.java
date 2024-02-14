@@ -1,4 +1,4 @@
-package org.team25.Utils;
+package org.team25.game.utils.validation;
 
 import java.util.HashMap;
 import org.jgrapht.*;
@@ -6,9 +6,9 @@ import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
-import org.team25.Models.Continent;
-import org.team25.Models.Country;
-import org.team25.Models.GMap;
+import org.team25.game.models.Continent;
+import org.team25.game.models.Country;
+import org.team25.game.models.GMap;
 
 
 

@@ -1,7 +1,7 @@
-package org.team25.Utils;
-import org.team25.Models.Continent;
-import org.team25.Models.Country;
-import org.team25.Models.GMap;
+package org.team25.game.controllers;
+import org.team25.game.models.Continent;
+import org.team25.game.models.Country;
+import org.team25.game.models.GMap;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
