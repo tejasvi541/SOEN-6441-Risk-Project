@@ -1,6 +1,5 @@
 package org.team25.service;
 
-import java.io.IOException;
 import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +51,7 @@ public class MapEditor {
     /**
      * This is the parametrised constructor
      *
-     * @param p_GameMap
+     * @param p_GameMap Parameter of the GamePhase is passed
      */
     public MapEditor(GameMap p_GameMap) {
         this.d_GameMap = p_GameMap;
@@ -63,19 +62,19 @@ public class MapEditor {
      * create,edit and save of map from commands.
      */
 
-    public GamePhase run() throws IOException {
+    public GamePhase run(GamePhase p_GamePhase)  {
         d_Logger.log(Level.parse("INFO"),"/----------------------------- Welcome to MAP EDITOR PHASE --------------------------------/");
         List<String> l_ListStream;
         while (true) {
             d_Logger.log(d_logLevel,"Type the required option for taking action on map:" + "\n" );
-            d_Logger.log(d_logLevel,"1. Type Help :to get list of commands for different actions  " + "\n" + "2. Type Exit : to exit from map editor phase and continue playing game");
+            d_Logger.log(d_logLevel,"1. Type Help :to get list of commands for different actions  " + "\n" );
+            d_Logger.log(d_logLevel,"2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
             d_Logger.log(d_logLevel,"------------------------------------------------------------------------------------------------------");
             String l_UserInput = d_sc.nextLine();
             List<String> l_list = new ArrayList<>();
             if (!(l_UserInput.contains("-"))){
                 //adding values that are not for editing
                 l_list.addAll(Arrays.asList(l_UserInput.split("")));
-                l_ListStream= l_list;
             }
             else {
                 //adding values that are for editing
@@ -84,8 +83,8 @@ public class MapEditor {
                         l_list.add(l_s.trim());
                     }
                 }
-                l_ListStream= l_list;
             }
+            l_ListStream= l_list;
 
             // validating the input stream passed by user
             boolean valid=validateUserInput(l_ListStream);
@@ -144,7 +143,7 @@ public class MapEditor {
                                 Country l_Country = new Country();
                                 l_Country.setName(l_CommandsArray[1]);
                                 l_Country.setContinent(l_CommandsArray[2]);
-                                l_countries.put(p_CountryName, l_Country);
+                                l_countries.put(l_CommandsArray[1], l_Country);
                                 contriesSet.add(l_Country);
                                 d_Logger.log(d_logLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
                             } else {
@@ -172,15 +171,16 @@ public class MapEditor {
                                 }
 
                                 //removing from countries data
-                                HashMap<String, Country> l_countries= d_GameMap.getCountries();
-                                l_countries.remove(l_Country.getName());
+                               else {
+                                    HashMap<String, Country> l_countries = d_GameMap.getCountries();
+                                    l_countries.remove(l_Country.getName());
 
-                                //removing from Continent data
-                                Continent l_continent=d_GameMap.getContinent(l_Country.getContinent());
-                                Set<Country> l_countriesSet=l_continent.getCountries();
-                                l_countriesSet.remove(l_Country.getName());
-                                d_Logger.log(d_logLevel,"Country "+l_CommandsArray[1]+" is successfullY removed .");
-
+                                    //removing from Continent data
+                                    Continent l_continent = d_GameMap.getContinent(l_Country.getContinent());
+                                    Set<Country> l_countriesSet = l_continent.getCountries();
+                                    l_countriesSet.remove(l_Country.getName());
+                                    d_Logger.log(d_logLevel, "Country " + l_CommandsArray[1] + " is successfullY removed .");
+                                }
                             } else {
                                 try {
                                     throw new ValidationException();
@@ -195,7 +195,7 @@ public class MapEditor {
                 }
 
                 // command to edit continent in map
-                case "edit_Continent": {
+                case "editcontinent": {
                     if (l_CommandsArray.length > 0) {
                         switch (l_CommandsArray[0]) {
                             case "add": {
@@ -290,11 +290,11 @@ public class MapEditor {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-                                else
-                                    HashMap<String, Country> l_neighbours =l_Country1.getNeighbors();
-                                l_neighbours.add(l_Country2);
-                                d_Logger.log(d_logLevel,"Neighbour "+l_Country2+" is successfullY added .");
-
+                                else {
+                                    HashMap<String, Country> l_neighbours = l_Country1.getNeighbors();
+                                    l_neighbours.add(l_Country2);
+                                    d_Logger.log(d_logLevel, "Neighbour " + l_Country2 + " is successfullY added .");
+                                }
                             } else {
                                 try {
                                     throw new ValidationException();
@@ -387,7 +387,6 @@ public class MapEditor {
                 case "exit": {
                     d_GameMap.clearGameMap();
                     d_GameMap.setGamePhase(GamePhase.StartUp);
-                    return p_GamePhase.nextState(GamePhase.StartUp);
                 }
                 //list of commands for assist Player
                 default: {
@@ -409,6 +408,7 @@ public class MapEditor {
                 }
             }
         }
+        return p_GamePhase.nextState(GamePhase.StartUp);
     }
 
 
