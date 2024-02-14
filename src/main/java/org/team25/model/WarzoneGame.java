@@ -76,7 +76,6 @@ public class WarzoneGame {
         finally{
             l_Scanner.close();
         }
-
-        //d_Engine.run();
+        d_GameEngine.run();
     }
 }
