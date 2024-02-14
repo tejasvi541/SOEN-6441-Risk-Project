@@ -91,7 +91,7 @@ public class MapEditor {
 
             if (!valid) {
                 if (l_UserInput.startsWith("Help")) {
-                    // if not available in list of commands ,trying to ask for help again
+                    //trying to ask for help again
                     l_ListStream.add("Help");
 
                 } else {
