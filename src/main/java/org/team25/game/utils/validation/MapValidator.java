@@ -1,9 +1,14 @@
 package org.team25.game.utils.validation;
 
+import java.util.HashMap;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
+import org.team25.game.models.Continent;
+import org.team25.game.models.Country;
+import org.team25.game.models.GMap;
 import org.team25.Models.Continent;
 import org.team25.Models.Country;
 import org.team25.Models.GameMap;
@@ -15,7 +20,6 @@ import java.util.HashMap;
 /**
  * This class uses an external library (JGraphT) to perform map validation tasks as presented in the Build handout
  * @author Tejasvi
- * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class MapValidator {
@@ -64,7 +68,7 @@ public class MapValidator {
      * @param p_gMap Current GMap Object
      * @return Generated Graph
      */
-    public static Graph<Country, DefaultEdge> generate_Graph(GameMap p_gMap){
+    public Graph<Country, DefaultEdge> generate_Graph(GMap p_gMap){
 
         // Add Vertex
         for(Country l_country : p_gMap.get_countries().values()){
@@ -80,7 +84,7 @@ public class MapValidator {
         return d_gMapObj;
     }
 
-    public static Graph<Country, DefaultEdge> generate_SubGraph(Graph<Country, DefaultEdge> p_subGraph, HashMap<String, Country> p_countries){
+    public Graph<Country, DefaultEdge> generate_SubGraph(Graph<Country, DefaultEdge> p_subGraph, HashMap<String, Country> p_countries){
         for(Country l_country : p_countries.values()){
             p_subGraph.addVertex(l_country);
         }
