@@ -62,7 +62,7 @@ public class MapEditor {
         while (true) {
             d_Logger.log(d_logLevel,"Type the required option for taking action on map:" + "\n" );
             d_Logger.log(d_logLevel,"1. Type Help :to get list of commands for different actions  " + "\n" + "2. Type Exit : to exit from map editor phase and continue playing game");
-            d_Logger.log(d_logLevel,"-----------------------------------------------------------------------------------------");
+            d_Logger.log(d_logLevel,"------------------------------------------------------------------------------------------------------");
             String l_UserInput = d_sc.nextLine();
             List<String> l_list = new ArrayList<>();
             if (!(l_UserInput.contains("-"))){
@@ -113,7 +113,7 @@ public class MapEditor {
                     }
 
 
-                     //command to edit country in map
+                    //command to edit country in map
                     case "editcountry": {
                         switch (l_CommandsArray[0]) {
                             case "add": {
@@ -146,7 +146,7 @@ public class MapEditor {
                             case "remove": {
                                 if (l_CommandsArray.length == 2) {
 
-                                  //  d_GameMap.removeCountry(l_CommandsArray[1]);
+                                    //  d_GameMap.removeCountry(l_CommandsArray[1]);
                                     Country l_Country = d_GameMap.getCountry(l_CommandsArray[1]);
 
                                     //handling null values
@@ -190,18 +190,18 @@ public class MapEditor {
                                     if (l_CommandsArray.length == 3) {
                                         if( l_CommandsArray[1]!= null){
                                             if (continents.containsKey(l_CommandsArray[1])) {
-                                              try {
-                                                  throw new ValidationException("Provided continent already exists in map,Try again with different continent !");
-                                               } catch (ValidationException e) {
+                                                try {
+                                                    throw new ValidationException("Provided continent already exists in map,Try again with different continent !");
+                                                } catch (ValidationException e) {
                                                     System.out.println(e.getMessage());
-                                               }
+                                                }
+                                            }
+                                            Continent l_Continent = new Continent();
+                                            l_Continent.setName(l_CommandsArray[1]);
+                                            l_Continent.set_controlValue(Integer.parseInt(l_CommandsArray[2]));
+                                            continents.put(l_CommandsArray[1], l_Continent);
+                                            d_Logger.log(d_logLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
                                         }
-                                        Continent l_Continent = new Continent();
-                                        l_Continent.setName(l_CommandsArray[1]);
-                                        l_Continent.set_controlValue(Integer.parseInt(l_CommandsArray[2]));
-                                        continents.put(l_CommandsArray[1], l_Continent);
-                                        d_Logger.log(d_logLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
-                                    }
                                         else {
                                             try {
                                                 throw new ValidationException("Provided continent does not exists .Try again with different continent !");
@@ -254,7 +254,7 @@ public class MapEditor {
                         break;
                     }
 
-                     // command to edit neighbor in map
+                    // command to edit neighbor in map
                     case "editneighbor": {
                         switch (l_CommandsArray[0]) {
                             case "add": {
@@ -279,8 +279,8 @@ public class MapEditor {
                                     }
                                     else
                                         HashMap<String, Country> l_neighbours =l_Country1.getNeighbors();
-                                         l_neighbours.add(l_Country2);
-                                         d_Logger.log(d_logLevel,"Neighbour "+l_Country2+" is successfullY added .");
+                                    l_neighbours.add(l_Country2);
+                                    d_Logger.log(d_logLevel,"Neighbour "+l_Country2+" is successfullY added .");
 
                                 } else {
                                     try {
@@ -312,8 +312,8 @@ public class MapEditor {
                                         }
                                     }
                                     else if (l_Country1.getNeighbors().contains(l_Country2) || l_Country2.getNeighbors().contains(l_Country1)) {
-                                            l_Country1.getNeighbors().remove(l_Country2);
-                                            d_Logger.log(d_logLevel,"Neighbour "+l_Country2+" is successfullY removed .");
+                                        l_Country1.getNeighbors().remove(l_Country2);
+                                        d_Logger.log(d_logLevel,"Neighbour "+l_Country2+" is successfullY removed .");
                                     }
                                     else{
                                         try {
@@ -323,10 +323,10 @@ public class MapEditor {
                                         }
                                     }
                                 }
-                                    else {
-                                       try {
-                                          throw new ValidationException();
-                                       } catch (ValidationException e) {
+                                else {
+                                    try {
+                                        throw new ValidationException();
+                                    } catch (ValidationException e) {
                                         System.out.println(e.getMessage());                                    }
                                 }
                                 break;
@@ -351,22 +351,22 @@ public class MapEditor {
                         MapValidator l_mapValidator=new MapValidator();
                         if (l_mapValidator.ValidateMapObject(d_GameMap)){
                             if (l_CommandsArray.length == 1) {
-                            d_GameMap.setName(l_CommandsArray[0]);
-                            d_Logger.log(d_logLevel," Enter type for save the file? Type the number.");
-                            d_Logger.log(d_logLevel,"1. Domination map \n2. Conquest map");
-                            Scanner l_Scanner = new Scanner(System.in);
-                            String l_Input = l_Scanner.nextLine();
-                            if (l_Input.equals("1")){
-                                d_GameMap.saveMap(false);
-                                d_Logger.log(d_logLevel,"The loaded file is of the format Domination map");
-                            }
-                            else if (l_Input.equals("2")) {
-                                d_GameMap.saveMap(true);
-                                d_Logger.log(d_logLevel,"The loaded file is of the format Conquest map");
-                            }
-                            else
-                                d_Logger.log(d_logLevel,"Please enter the right value");
-                        }}
+                                d_GameMap.setName(l_CommandsArray[0]);
+                                d_Logger.log(d_logLevel," Enter type for save the file? Type the number.");
+                                d_Logger.log(d_logLevel,"1. Domination map \n2. Conquest map");
+                                Scanner l_Scanner = new Scanner(System.in);
+                                String l_Input = l_Scanner.nextLine();
+                                if (l_Input.equals("1")){
+                                    d_GameMap.saveMap(false);
+                                    d_Logger.log(d_logLevel,"The loaded file is of the format Domination map");
+                                }
+                                else if (l_Input.equals("2")) {
+                                    d_GameMap.saveMap(true);
+                                    d_Logger.log(d_logLevel,"The loaded file is of the format Conquest map");
+                                }
+                                else
+                                    d_Logger.log(d_logLevel,"Please enter the right value");
+                            }}
                         break;
                     }
 
