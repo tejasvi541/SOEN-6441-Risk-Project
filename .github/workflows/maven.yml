@@ -21,26 +21,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
         
-    - name: Compile Project
-      run: |
-        ./mvnw compile
-        
-    - name: Run Unit Tests
-      run: |
-        ./mvnw test
-        
-    - name: Generate Javadoc
-      run: |
-        ./mvnw javadoc:javadoc
-        
-    - name: Upload Javadoc
-      uses: actions/upload-artifact@v2
-      with:
-        name: javadoc
-        path: target/site/apidocs
-
-    - name: Report Results
-      run: echo "CI Pipeline completed successfully."
+    - name: Build with Maven
+        run:mvn package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
