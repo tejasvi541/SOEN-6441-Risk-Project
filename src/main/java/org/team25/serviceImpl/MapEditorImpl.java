@@ -1,9 +1,10 @@
-package org.team25.service;
+package org.team25.serviceImpl;
 
 import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.team25.Utils.*;
+import org.team25.service.MapEditor;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * @author Bharti Chhabra
  * @version 1.0.0
  */
-public class MapEditorImpl implements MapEditor{
+public class MapEditorImpl implements MapEditor {
     /**
      * A data member for scanner
      */
