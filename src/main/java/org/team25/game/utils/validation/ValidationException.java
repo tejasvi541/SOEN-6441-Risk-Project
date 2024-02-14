@@ -1,4 +1,4 @@
-package org.team25.Utils;
+package org.team25.game.utils.validation;
 
 /**
  * This class handles user-defined exceptions that are raised during the normal execution

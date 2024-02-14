@@ -1,4 +1,4 @@
-package org.team25.service;
+package org.team25.game.interfaces;
 
 import java.util.List;
 

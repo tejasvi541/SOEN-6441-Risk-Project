@@ -1,10 +1,11 @@
-package org.team25.serviceImpl;
+package org.team25.game.controller;
 
 import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
-import org.team25.Utils.*;
-import org.team25.service.MapEditor;
+import org.team25.game.utils.*;
+import org.team25.game.interfaces.MapEditor;
+import org.team25.game.utils.validation.ValidationException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * @author Bharti Chhabra
  * @version 1.0.0
  */
-public class MapEditorImpl implements MapEditor {
+public class MapEditorController implements MapEditor {
     /**
      * A data member for scanner
      */
@@ -35,7 +36,7 @@ public class MapEditorImpl implements MapEditor {
     /**
      * A data member that will log the data for the class
      */
-    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditorImpl.class);
+    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditorController.class);
 
     /**
      * A data member to set the log level
@@ -45,7 +46,7 @@ public class MapEditorImpl implements MapEditor {
     /**
      * This is the default constructor
      */
-    public MapEditorImpl() {
+    public MapEditorController() {
         this.d_GameMap = new GameMap();
     }
 
@@ -54,7 +55,7 @@ public class MapEditorImpl implements MapEditor {
      *
      * @param p_GameMap Parameter of the GamePhase is passed
      */
-    public MapEditorImpl(GameMap p_GameMap) {
+    public MapEditorController(GameMap p_GameMap) {
         this.d_GameMap = p_GameMap;
     }
 
