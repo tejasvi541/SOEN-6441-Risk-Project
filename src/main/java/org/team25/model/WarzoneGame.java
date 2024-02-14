@@ -7,6 +7,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is used to initiate the gamePlay.
+ * @author Bharti Chhabra
+ * @version 1.0.0
+ */
 public class WarzoneGame {
 
     /**
@@ -66,7 +71,7 @@ public class WarzoneGame {
                 }
             }
         } catch (ValidationException p_Exception) {
-            System.out.println("Please choose the correct option from above-mentioned list");
+            System.out.println("Invalid option from above-mentioned list.Try Again !");
         }
         finally{
             l_Scanner.close();
