@@ -51,10 +51,6 @@ public class Country {
         this.d_neighbours = d_neighbours;
     }
 
-    public void set_numberOfArmies(int d_numberOfArmies) {
-        this.d_numberOfArmies = d_numberOfArmies;
-    }
-
     public void set_xCoordinate(int d_xCoordinate) {
         this.d_xCoordinate = d_xCoordinate;
     }
