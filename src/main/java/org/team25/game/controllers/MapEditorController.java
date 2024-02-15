@@ -5,10 +5,12 @@ import java.util.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.team25.game.interfaces.main_engine.GameFlowManager;
 import org.team25.game.interfaces.MapEditor;
 import org.team25.game.models.Continent;
 import org.team25.game.models.Country;
 import org.team25.game.models.GameMap;
+import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.MapValidator;
 import org.team25.game.utils.validation.ValidationException;
@@ -20,7 +22,7 @@ import org.team25.game.utils.validation.ValidationException;
  * @author Bharti Chhabra
  * @version 1.0.0
  */
-public class MapEditorController implements MapEditor {
+public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member for scanner
      */
@@ -424,4 +426,16 @@ public class MapEditorController implements MapEditor {
         return false;
     }
 
+    /**
+     * Starts the game controller.
+     *
+     * @param currentPhase The current phase of the game.
+     * @return The next phase of the game.
+     * @throws Exception If an issue occurs during execution.
+     */
+    @Override
+    public GamePhase start(GamePhase currentPhase) throws Exception {
+        run();
+        return currentPhase;
+    }
 }

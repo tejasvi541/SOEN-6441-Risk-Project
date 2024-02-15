@@ -6,7 +6,7 @@ import org.team25.game.models.GameMap;
 
 
 
-public class ShowMap {
+public class ShowMapController {
 
     private GameMap d_gameMap;
 
@@ -14,7 +14,7 @@ public class ShowMap {
      * Constructor to set the current GMap object to read and show the map
      * @param p_gameMap GMap Object Parameter
      */
-    public ShowMap(GameMap p_gameMap){
+    public ShowMapController(GameMap p_gameMap){
         this.d_gameMap = p_gameMap;
     }
 

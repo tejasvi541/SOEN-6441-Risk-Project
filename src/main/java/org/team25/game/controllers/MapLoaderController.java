@@ -16,7 +16,7 @@ import java.util.Scanner;
  * @author Tejasvi
  * @version 1.0.0
  */
-public class MapLoader {
+public class MapLoaderController {
     public static int d_mapContinentIndex =1; // Tracking Continent Index
     private GameMap d_gameMap;
     private HashMap<Integer, Country> d_countriesList;
@@ -29,7 +29,7 @@ public class MapLoader {
         Scanner l_sc = new Scanner(System.in);
         System.out.println("Enter Map file name:");
         String l_mapName = l_sc.nextLine();
-        MapLoader l_loadedMap = new MapLoader();
+        MapLoaderController l_loadedMap = new MapLoaderController();
         GameMap d_gameMap = l_loadedMap.readMap(l_mapName);
         l_sc.close();
     }

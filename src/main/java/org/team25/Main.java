@@ -1,25 +1,25 @@
 package org.team25;
 
 import org.team25.game.controllers.MapEditorController;
-import org.team25.game.controllers.MapLoader;
-import org.team25.game.controllers.ShowMap;
+import org.team25.game.controllers.MapLoaderController;
+import org.team25.game.controllers.ShowMapController;
 import org.team25.game.models.GameMap;
 
 public class Main {
     public static void main(String[] args) {
 
         GameMap gameMap = new GameMap();
-        MapLoader load = new MapLoader();
+        MapLoaderController load = new MapLoaderController();
 
         gameMap = load.readMap("Canada");
 
-        ShowMap showMap = new ShowMap(gameMap);
-        showMap.show(gameMap);
+        ShowMapController showMapController = new ShowMapController(gameMap);
+        showMapController.show(gameMap);
 
         MapEditorController editor = new MapEditorController(gameMap);
         while(true) {
             editor.run();
-            showMap.show(gameMap);
+            showMapController.show(gameMap);
         }
 
     }

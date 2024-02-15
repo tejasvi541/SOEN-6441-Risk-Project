@@ -5,9 +5,9 @@ import org.team25.game.models.game_play.GamePhase;
 
 public class GameEngine implements MainEngine {
 
-    private static GameSetting d_GameSettings;
-
-    /** Game phase instance representing the current state */
+    /**
+     * Game phase instance representing the current state
+     */
     private GamePhase d_GamePhase = GamePhase.MapEditor;
 
     /**
@@ -15,7 +15,8 @@ public class GameEngine implements MainEngine {
      */
     @Override
     public void configureEngine() {
-        GameEngine.super.configureEngine();
+        //Todo config engine
+
     }
 
     /**
@@ -25,7 +26,9 @@ public class GameEngine implements MainEngine {
      */
     @Override
     public void start() throws Exception {
-        MainEngine.super.start();
+
+        //Todo start map editing
+
     }
 
     /**
@@ -35,6 +38,6 @@ public class GameEngine implements MainEngine {
      */
     @Override
     public void setGamePhase(GamePhase p_gamePhase) {
-
+        //Todo set game phase
     }
 }
