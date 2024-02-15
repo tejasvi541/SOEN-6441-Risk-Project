@@ -2,8 +2,8 @@ package org.team25.game.utils.validation;
 
 import java.util.HashMap;
 import java.util.logging.Level;
-import java.util.logging.Logger;
-
+//import java.util.logging.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
@@ -33,23 +33,23 @@ public class MapValidator {
     public MapValidator() {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
-    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapValidator.class);
-    Level d_logLevel=Level.parse("INFO");
+//    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapValidator.class);
+//    Level d_logLevel=Level.parse("INFO");
 
 
     public boolean ValidateMapObject(GameMap p_GameMap)
     {
         Graph<Country, DefaultEdge> l_graph=generate_Graph(p_GameMap);
         if (!isConnected(l_graph)) {
-            d_Logger.log(d_logLevel,"Not a connected graph");
+//            d_Logger.log(d_logLevel,"Not a connected graph");
             return false;
         }
         if ( isContinentEmpty(p_GameMap)) {
-            d_Logger.log(d_logLevel,"continent is empty");
+//            d_Logger.log(d_logLevel,"continent is empty");
             return false;
         }
         if (!isContinentConnected(p_GameMap)) {
-            d_Logger.log(d_logLevel,"continent not connected");
+//            d_Logger.log(d_logLevel,"continent not connected");
             return false;
         }
         return true;
@@ -64,16 +64,16 @@ public class MapValidator {
 
         // Add Vertex
         for(Country l_country : p_gameMap.get_countries().values()){
-            d_gMapObj.addVertex(l_country);
+            this.d_gMapObj.addVertex(l_country);
         }
         // Add Neighbours
         for(Country l_country : p_gameMap.get_countries().values()){
             for(Country l_neighbour : l_country.get_Neighbours().values()){
-                d_gMapObj.addEdge(l_country, l_neighbour);
+                this.d_gMapObj.addEdge(l_country, l_neighbour);
             }
         }
 
-        return d_gMapObj;
+        return this.d_gMapObj;
     }
 
     public Graph<Country, DefaultEdge> generate_SubGraph(Graph<Country, DefaultEdge> p_subGraph, HashMap<String, Country> p_countries){
@@ -146,10 +146,10 @@ public class MapValidator {
     public boolean isContinentEmpty(GameMap p_gameMap){
         for(Continent l_continent : p_gameMap.get_continents().values()){
             if(l_continent.get_countries().isEmpty()){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 }

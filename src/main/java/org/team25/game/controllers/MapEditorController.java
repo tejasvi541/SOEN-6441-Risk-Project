@@ -2,7 +2,9 @@ package org.team25.game.controllers;
 
 import java.util.*;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.team25.game.interfaces.MapEditor;
 import org.team25.game.models.Continent;
 import org.team25.game.models.Country;
@@ -11,8 +13,6 @@ import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.MapValidator;
 import org.team25.game.utils.validation.ValidationException;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -39,12 +39,12 @@ public class MapEditorController implements MapEditor {
     /**
      * A data member that will log the data for the class
      */
-    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapEditorController.class);
+    private static final Logger d_Logger = LogManager.getLogger(MapEditorController.class);
 
     /**
      * A data member to set the log level
      */
-    Level d_LogLevel=Level.parse("INFO");
+    Level d_LogLevel=Level.INFO;
 
     /**
      * A data member to set status of editing phase
@@ -73,7 +73,7 @@ public class MapEditorController implements MapEditor {
      */
 
     public boolean run()  {
-        d_Logger.log(Level.parse("INFO"),"****************************** Welcome to MAP EDITOR PHASE *********************************");
+        d_Logger.log(d_LogLevel,"****************************** Welcome to MAP EDITOR PHASE *********************************");
         List<String> l_ListStream;
         while (true) {
             d_Logger.log(d_LogLevel,"Type the required option for taking action on map:" + "\n" );
@@ -100,7 +100,7 @@ public class MapEditorController implements MapEditor {
             boolean valid=validateUserInput(l_ListStream);
 
             if (!valid) {
-                if (l_UserInput.startsWith("Help")) {
+                if (l_UserInput.startsWith("Help") || l_UserInput.startsWith("help")) {
                     //trying to ask for help again
                     l_ListStream.add("Help");
 
@@ -142,7 +142,7 @@ public class MapEditorController implements MapEditor {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
                                 HashMap<String, Country> l_countries=d_GameMap.get_countries();
-                                if (l_countries.containsKey(l_CommandsArray[1])) {
+                                if (l_countries.containsKey(l_CommandsArray[1].toLowerCase())) {
                                     try {
                                         throw new ValidationException("Provided country already exist in a map.Try Again with different country !");
                                     } catch (ValidationException e) {
@@ -150,13 +150,9 @@ public class MapEditorController implements MapEditor {
                                     }
                                 }
                                 else{
-                                    Continent l_continent=d_GameMap.get_continents().get(l_CommandsArray[2]);
-                                    HashMap<String,Country> l_countriesMap=l_continent.get_countries();
-                                    Country l_Country = new Country();
-                                    l_Country.set_countryId(l_CommandsArray[1]);
-                                    l_Country.set_parentContinent(l_CommandsArray[2]);
-                                    l_countriesMap.put(l_CommandsArray[1], l_Country);
-                                    d_GameMap.get_continents().get(l_CommandsArray[2]).get_countries().put(l_CommandsArray[1],l_Country);
+                                    Country l_Country = new Country(l_CommandsArray[1], l_CommandsArray[2]);
+                                    d_GameMap.get_continents().get(l_CommandsArray[2].toLowerCase()).get_countries().put(l_CommandsArray[1].toLowerCase(), l_Country);
+                                    d_GameMap.get_countries().put(l_CommandsArray[1].toLowerCase(), l_Country);
                                     d_Logger.log(d_LogLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
                                     d_status=true;
                                 }
@@ -172,7 +168,9 @@ public class MapEditorController implements MapEditor {
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 2) {
 
-                                Country l_Country = d_GameMap.get_countries().get(l_CommandsArray[1]);
+                                Country l_Country = d_GameMap.get_countries().get(l_CommandsArray[1].toLowerCase());
+                                ArrayList<Country> l_tempList = new ArrayList<Country>();
+
 
                                 //handling null values
                                 if (l_Country==null) {
@@ -183,14 +181,20 @@ public class MapEditorController implements MapEditor {
                                     }
                                 }
                                else {
-                                   //removing country from Map data
-                                    HashMap<String, Country> l_countries = d_GameMap.get_countries();
-                                    l_countries.remove(l_Country.get_countryId());
 
-                                    //removing from Continent data
-                                    Continent l_continent = d_GameMap.get_continents().get(l_Country.get_parentContinent());
-                                    HashMap<String,Country> l_countriesMap=l_continent.get_countries();
-                                    l_countriesMap.remove(l_Country.get_countryId());
+                                    for(Country l_neighbour: l_Country.get_Neighbours().values()){
+                                        l_tempList.add(l_neighbour);
+                                    }
+                                    Iterator<Country> l_itr = l_tempList.listIterator();
+//                                    while(l_itr.hasNext()) {
+//                                        Country l_neighbor = l_itr.next();
+//                                        if(!removeNeighbor(d_GameMap, l_Country.get_countryId(), l_neighbor.get_countryId()))
+//                                            return false;
+//                                    }
+                                    d_GameMap.get_countries().remove(l_CommandsArray[1].toLowerCase());
+                                    d_GameMap.get_continents().get(l_Country.get_parentContinent().toLowerCase()).get_countries().remove(l_CommandsArray[1].toLowerCase());
+
+
                                     d_Logger.log(d_LogLevel, "Country " + l_CommandsArray[1] + " is successfullY removed .");
                                     d_status=true;
                                }
@@ -215,7 +219,7 @@ public class MapEditorController implements MapEditor {
                                 HashMap<String, Continent> continents = d_GameMap.get_continents();
                                 if (l_CommandsArray.length == 3) {
                                     if( l_CommandsArray[1]!= null){
-                                        if (continents.containsKey(l_CommandsArray[1])) {
+                                        if (continents.containsKey(l_CommandsArray[1].toLowerCase())) {
                                             try {
                                                 throw new ValidationException("Provided continent already exists in map,Try again with different continent !");
                                             } catch (ValidationException e) {
@@ -224,9 +228,7 @@ public class MapEditorController implements MapEditor {
                                         }
                                         else{
                                         Continent l_Continent = new Continent(l_CommandsArray[1],l_CommandsArray[2], d_GameMap.get_continents().size()+1);
-                                        //l_Continent.set_continent(l_CommandsArray[1]);
-                                        //l_Continent.set_controlValue(l_CommandsArray[2]);
-                                        continents.put(l_CommandsArray[1], l_Continent);
+                                        d_GameMap.get_continents().put(l_CommandsArray[1].toLowerCase(), l_Continent);
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
                                         d_status=true;
                                         }
@@ -251,9 +253,8 @@ public class MapEditorController implements MapEditor {
                             case Constants.REMOVE: {
                                 if (l_CommandsArray.length == 2) {
                                     HashMap<String, Continent> l_continents = d_GameMap.get_continents();
-                                    HashMap<String, Country> l_countries=d_GameMap.get_countries();
 
-                                    if (!l_continents.containsKey(l_CommandsArray[1])) {
+                                    if (!l_continents.containsKey(l_CommandsArray[1].toLowerCase())) {
                                         try {
                                             throw new ValidationException("Provided Continent does not exist in map.Try Again with valid continent !");
                                         } catch (ValidationException e) {
@@ -261,9 +262,9 @@ public class MapEditorController implements MapEditor {
                                         }
                                     }
                                     else{
-                                        HashMap<String,Country> l_countriesMap=l_continents.get(l_CommandsArray[1]).get_countries();
+                                        HashMap<String,Country> l_countriesMap=l_continents.get(l_CommandsArray[1].toLowerCase()).get_countries();
                                         l_countriesMap.clear();
-                                        l_continents.remove(l_CommandsArray[1]);
+                                        l_continents.remove(l_CommandsArray[1].toLowerCase());
                                         d_Logger.log(d_LogLevel,"All countries from continent "+l_CommandsArray[1]+" are successfulLY removed .");
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY removed .");
                                         d_status=true;
@@ -287,8 +288,8 @@ public class MapEditorController implements MapEditor {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1]);
-                                Country l_Country2 = d_GameMap.get_countries().get((l_CommandsArray[2]));
+                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1].toLowerCase());
+                                Country l_Country2 = d_GameMap.get_countries().get(l_CommandsArray[2].toLowerCase());
 
                                 //handling null values
                                 if (l_Country1==null && l_Country2==null) {
@@ -306,8 +307,8 @@ public class MapEditorController implements MapEditor {
                                     }
                                 }
                                 else {
-                                    HashMap<String, Country> l_neighbours = l_Country1.get_Neighbours();
-                                    l_neighbours.put(l_Country2.get_countryId(),l_Country2);
+                                    l_Country1.get_Neighbours().put(l_Country2.get_countryId().toLowerCase(), l_Country2);
+                                    l_Country2.get_Neighbours().put(l_Country1.get_countryId().toLowerCase(), l_Country1);
                                     d_Logger.log(d_LogLevel, "Neighbour " + l_Country2 + " is successfullY added .");
                                     d_status=true;
                                 }
@@ -322,8 +323,8 @@ public class MapEditorController implements MapEditor {
                         }
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 3) {
-                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1]);
-                                Country l_Country2 = d_GameMap.get_countries().get(l_CommandsArray[2]);
+                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1].toLowerCase());
+                                Country l_Country2 = d_GameMap.get_countries().get(l_CommandsArray[2].toLowerCase());
 
                                 //handling null values
                                 if (l_Country1==null && l_Country2==null) {
@@ -340,8 +341,9 @@ public class MapEditorController implements MapEditor {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-                                else if (l_Country1.get_Neighbours().containsKey(l_Country2) || l_Country2.get_Neighbours().containsKey(l_Country1)) {
-                                    l_Country1.get_Neighbours().remove(l_Country2);
+                                else if (l_Country1.get_Neighbours().containsKey(l_Country2.get_countryId().toLowerCase()) && l_Country2.get_Neighbours().containsKey(l_Country1.get_countryId().toLowerCase())) {
+                                    l_Country1.get_Neighbours().remove(l_Country2.get_countryId().toLowerCase());
+                                    l_Country2.get_Neighbours().remove(l_Country1.get_countryId().toLowerCase());
                                     d_Logger.log(d_LogLevel,"Neighbour "+l_Country2+" is successfullY removed .");
                                     d_status=true;
                                 }
