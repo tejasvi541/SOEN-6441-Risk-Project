@@ -140,5 +140,4 @@ public class Country {
         return "Country [countryName=" + d_countryId + ", xCoOrdinate=" + d_xCoordinate + ", yCoOrdinate=" + d_yCoordinate
                 + ", Parent Continent=" + d_parentContinent + "]";
     }
-
 }
