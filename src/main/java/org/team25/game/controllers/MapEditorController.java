@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.team25.game.interfaces.MapEditor;
 import org.team25.game.models.Continent;
 import org.team25.game.models.Country;
-import org.team25.game.models.GMap;
+import org.team25.game.models.GameMap;
 import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.MapValidator;
 import org.team25.game.utils.validation.ValidationException;
@@ -29,7 +29,7 @@ public class MapEditorController implements MapEditor {
     /**
      * A data member that stores map object
      */
-    GMap d_GameMap;
+    GameMap d_GameMap;
 
     /**
      * A data member that stores the list of commands used for editing,validating or saving a map
@@ -55,7 +55,7 @@ public class MapEditorController implements MapEditor {
      * This is the default constructor
      */
     public MapEditorController() {
-        this.d_GameMap = new GMap();
+        this.d_GameMap = new GameMap();
     }
 
     /**
@@ -63,7 +63,7 @@ public class MapEditorController implements MapEditor {
      *
      * @param p_GameMap Parameter of the GamePhase is passed
      */
-    public MapEditorController(GMap p_GameMap) {
+    public MapEditorController(GameMap p_GameMap) {
         this.d_GameMap = p_GameMap;
     }
 
@@ -223,7 +223,7 @@ public class MapEditorController implements MapEditor {
                                             }
                                         }
                                         else{
-                                        Continent l_Continent = new Continent(l_CommandsArray[1],l_CommandsArray[2]);
+                                        Continent l_Continent = new Continent(l_CommandsArray[1],l_CommandsArray[2], d_GameMap.get_continents().size()+1);
                                         //l_Continent.set_continent(l_CommandsArray[1]);
                                         //l_Continent.set_controlValue(l_CommandsArray[2]);
                                         continents.put(l_CommandsArray[1], l_Continent);

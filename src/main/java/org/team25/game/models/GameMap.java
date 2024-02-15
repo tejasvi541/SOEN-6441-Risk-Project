@@ -1,8 +1,5 @@
 package org.team25.game.models;
 
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-
 import java.util.HashMap;
 
 /**
@@ -11,7 +8,7 @@ import java.util.HashMap;
  * @author Tejasvi
  * @version 1.0.0
  */
-public class GMap {
+public class GameMap {
 
     private String d_mapName;
     private boolean d_isValid;
@@ -21,7 +18,7 @@ public class GMap {
     /**
      * Map Constructor to initialise the Class
      */
-    public GMap(){
+    public GameMap(){
         this.d_mapName="";
         this.d_isValid=false;
         this.d_continents= new HashMap<>();
@@ -32,7 +29,7 @@ public class GMap {
      * Map Constructor to initialise the class
      * @param p_mapName Map name parameter
      */
-    public GMap(String p_mapName){
+    public GameMap(String p_mapName){
         this.d_mapName=p_mapName;
         this.d_isValid=false;
         this.d_continents= new HashMap<>();

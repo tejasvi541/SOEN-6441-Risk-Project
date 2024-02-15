@@ -1,19 +1,19 @@
 package org.team25.game.utils.validation;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
+import org.team25.game.controllers.MapEditorController;
 import org.team25.game.models.Continent;
 import org.team25.game.models.Country;
-import org.team25.game.models.GMap;
-import org.team25.Models.Continent;
-import org.team25.Models.Country;
-import org.team25.Models.GameMap;
-
-import java.util.HashMap;
+import org.team25.game.models.GameMap;
 
 
 
@@ -33,6 +33,9 @@ public class MapValidator {
     public MapValidator() {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
+    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapValidator.class);
+    Level d_logLevel=Level.parse("INFO");
+
 
     public boolean ValidateMapObject(GameMap p_GameMap)
     {
@@ -41,23 +44,12 @@ public class MapValidator {
             d_Logger.log(d_logLevel,"Not a connected graph");
             return false;
         }
-        if ( isContinentEmpty(p_gMap)) {
+        if ( isContinentEmpty(p_GameMap)) {
             d_Logger.log(d_logLevel,"continent is empty");
             return false;
         }
-        if (!isContinentConnected(p_gMap)) {
+        if (!isContinentConnected(p_GameMap)) {
             d_Logger.log(d_logLevel,"continent not connected");
-            return false;
-        }
-        if ( !isContinentPresent(p_gMap, p_continentId)) {
-            d_Logger.log(d_logLevel,"Continent "+p_continentId+" not present");
-            return false;
-        }
-        if (!isCountryPresent(p_gMap, p_countryId)) {
-            d_Logger.log(d_logLevel,"Country "+p_countryId+" not present");
-            return false;
-        }
-        else {
             return false;
         }
         return true;
@@ -65,17 +57,17 @@ public class MapValidator {
 
     /**
      * This function takes a current GMap object and generate a JGraphT Graph for validation and other purposes
-     * @param p_gMap Current GMap Object
+     * @param p_gameMap Current GMap Object
      * @return Generated Graph
      */
-    public Graph<Country, DefaultEdge> generate_Graph(GMap p_gMap){
+    public Graph<Country, DefaultEdge> generate_Graph(GameMap p_gameMap){
 
         // Add Vertex
-        for(Country l_country : p_gMap.get_countries().values()){
+        for(Country l_country : p_gameMap.get_countries().values()){
             d_gMapObj.addVertex(l_country);
         }
         // Add Neighbours
-        for(Country l_country : p_gMap.get_countries().values()){
+        for(Country l_country : p_gameMap.get_countries().values()){
             for(Country l_neighbour : l_country.get_Neighbours().values()){
                 d_gMapObj.addEdge(l_country, l_neighbour);
             }
@@ -113,11 +105,11 @@ public class MapValidator {
 
     /**
      * This function checks if all the continent subgraphs are connected or not using the isConnected Function
-     * @param p_gMap GMap Object to obtain the continent in the current Map
+     * @param p_gameMap GMap Object to obtain the continent in the current Map
      * @return true/false if the continent subgraph is connected or not
      */
-    public boolean isContinentConnected(GMap p_gMap){
-        for(Continent l_continent : p_gMap.get_continents().values()){
+    public boolean isContinentConnected(GameMap p_gameMap){
+        for(Continent l_continent : p_gameMap.get_continents().values()){
             Graph<Country, DefaultEdge> subGraph = generate_SubGraph(new DefaultDirectedGraph<>(DefaultEdge.class), l_continent.get_countries());
             if(!isConnected(subGraph)){
                 return false;
@@ -128,31 +120,31 @@ public class MapValidator {
 
     /**
      * This function checks if the continent is present in the GMap Object
-     * @param p_gMap GMap object
+     * @param p_gameMap GMap object
      * @param p_continentId Id of the continent to be checked
      * @return true/false if the continent exists or not
      */
-    public boolean isContinentPresent(GMap p_gMap, String p_continentId){
-        return p_gMap.get_continents().containsKey(p_continentId.toLowerCase());
+    public boolean isContinentPresent(GameMap p_gameMap, String p_continentId){
+        return p_gameMap.get_continents().containsKey(p_continentId.toLowerCase());
     }
 
     /**
      * This function checks if the continent is present in the GMap Object
-     * @param p_gMap GMap object
+     * @param p_gameMap GMap object
      * @param p_countryId Id of the continent to be checked
      * @return true/false if the continent exists or not
      */
-    public boolean isCountryPresent(GMap p_gMap, String p_countryId){
-        return p_gMap.get_countries().containsKey(p_countryId.toLowerCase());
+    public boolean isCountryPresent(GameMap p_gameMap, String p_countryId){
+        return p_gameMap.get_countries().containsKey(p_countryId.toLowerCase());
     }
 
     /**
      * Checks if any continent is Empty
-     * @param p_gMap Current GMap Object
+     * @param p_gameMap Current GMap Object
      * @return true/false if the continent is empty or not
      */
-    public boolean isContinentEmpty(GMap p_gMap){
-        for(Continent l_continent : p_gMap.get_continents().values()){
+    public boolean isContinentEmpty(GameMap p_gameMap){
+        for(Continent l_continent : p_gameMap.get_continents().values()){
             if(l_continent.get_countries().isEmpty()){
                 return false;
             }

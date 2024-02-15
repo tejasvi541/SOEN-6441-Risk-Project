@@ -1,7 +1,7 @@
 package org.team25.game.controllers;
 import org.team25.game.models.Continent;
 import org.team25.game.models.Country;
-import org.team25.game.models.GMap;
+import org.team25.game.models.GameMap;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class MapLoader {
     public static int d_mapContinentIndex =1; // Tracking Continent Index
-    private GMap d_gMap;
+    private GameMap d_gameMap;
     private HashMap<Integer, Country> d_countriesList;
 
     /**
@@ -30,7 +30,7 @@ public class MapLoader {
         System.out.println("Enter Map file name:");
         String l_mapName = l_sc.nextLine();
         MapLoader l_loadedMap = new MapLoader();
-        GMap d_gMap = l_loadedMap.readMap(l_mapName);
+        GameMap d_gameMap = l_loadedMap.readMap(l_mapName);
         l_sc.close();
     }
 
@@ -40,8 +40,8 @@ public class MapLoader {
      * @param p_mapName Name of the map to be loaded
      * @return The Populated Map object
      */
-    public GMap readMap(String p_mapName){
-        d_gMap = new GMap(p_mapName);
+    public GameMap readMap(String p_mapName){
+        d_gameMap = new GameMap(p_mapName);
         d_countriesList = new HashMap<Integer, Country>();
 
         try{
@@ -69,7 +69,7 @@ public class MapLoader {
             System.out.println("Input/Output Problem");
             System.out.println(e.getMessage());
         }
-        return d_gMap;
+        return d_gameMap;
     }
 
     /**
@@ -83,7 +83,7 @@ public class MapLoader {
         try{
             while(!((l_lineString = p_fileReader.readLine()).isEmpty())){
                 String[] l_countryString = l_lineString.split("\\s+");
-                Country l_newCountry = new Country(l_countryString[0], l_countryString[1], l_countryString[2], l_countryString[3], l_countryString[4], d_gMap);
+                Country l_newCountry = new Country(l_countryString[0], l_countryString[1], l_countryString[2], l_countryString[3], l_countryString[4], d_gameMap);
                 try{
                     if(l_newCountry.get_parentContinent()==null){
                         System.out.println("Not Valid Map File");
@@ -113,7 +113,7 @@ public class MapLoader {
                 String[] l_continentString = l_lineString.split("\\s+");
 
                 if(Integer.parseInt(l_continentString[1])>=0) {
-                    d_gMap.get_continents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
+                    d_gameMap.get_continents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
                     d_mapContinentIndex++;
                 }else{
                     System.out.println("Not Valid Map File");
@@ -174,9 +174,9 @@ public class MapLoader {
      * @param p_newCountry  Country Name to be added
      */
     private void addCountryToContinentMap(Country p_newCountry){
-        Continent tempContinent = d_gMap.get_continents().get(p_newCountry.get_parentContinent().toLowerCase());
+        Continent tempContinent = d_gameMap.get_continents().get(p_newCountry.get_parentContinent().toLowerCase());
         tempContinent.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
-        d_gMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
+        d_gameMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
     }
 
 }
