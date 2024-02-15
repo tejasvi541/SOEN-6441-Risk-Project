@@ -1,9 +1,8 @@
-package org.team25.game.controller;
+package org.team25.game.controllers;
 
 import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
-import org.team25.game.utils.*;
 import org.team25.game.interfaces.MapEditor;
 import org.team25.game.utils.validation.ValidationException;
 
