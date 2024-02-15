@@ -1,5 +1,10 @@
 package org.team25.game.utils;
 
+/**
+ * This class handles defined constants
+ * @author Bharti Chhabra
+ * @version 1.0.0
+ */
 public class Constants {
 
     public static String TEAM_NAME = "team25";

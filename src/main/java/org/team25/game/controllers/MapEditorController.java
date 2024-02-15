@@ -68,8 +68,8 @@ public class MapEditorController implements MapEditor {
     }
 
     /**
-     * The start method of MapEditor phase that handles different modes for action on map
-     * create,edit and save of map from commands.
+     * This run method of MapEditor phase handles editing on map
+     *
      */
 
     public boolean run()  {
