@@ -4,6 +4,11 @@ import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.team25.game.interfaces.MapEditor;
+import org.team25.game.models.Continent;
+import org.team25.game.models.Country;
+import org.team25.game.models.GMap;
+import org.team25.game.utils.Constants;
+import org.team25.game.utils.validation.MapValidator;
 import org.team25.game.utils.validation.ValidationException;
 
 import java.util.logging.Level;
@@ -25,12 +30,12 @@ public class MapEditorController implements MapEditor {
     /**
      * A data member that stores map object
      */
-    GameMap d_GameMap;
+    GMap d_GameMap;
 
     /**
      * A data member that stores the list of commands used for editing,validating or saving a map
      */
-    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList("showmap","editmap","editcontinent", "editcountry", "editneighbor", "validatemap","savemap");
+    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList(Constants.SHOW_MAP,Constants.EDIT_MAP,Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR,Constants.VALIDATE_MAP);
 
     /**
      * A data member that will log the data for the class
@@ -43,10 +48,15 @@ public class MapEditorController implements MapEditor {
     Level d_LogLevel=Level.parse("INFO");
 
     /**
+     * A data member to set status of editing phase
+     */
+    boolean d_status=true;
+
+    /**
      * This is the default constructor
      */
     public MapEditorController() {
-        this.d_GameMap = new GameMap();
+        this.d_GameMap = new GMap();
     }
 
     /**
@@ -54,7 +64,7 @@ public class MapEditorController implements MapEditor {
      *
      * @param p_GameMap Parameter of the GamePhase is passed
      */
-    public MapEditorController(GameMap p_GameMap) {
+    public MapEditorController(GMap p_GameMap) {
         this.d_GameMap = p_GameMap;
     }
 
@@ -63,14 +73,14 @@ public class MapEditorController implements MapEditor {
      * create,edit and save of map from commands.
      */
 
-    public GamePhase run(GamePhase p_GamePhase)  {
-        d_Logger.log(Level.parse("INFO"),"/----------------------------- Welcome to MAP EDITOR PHASE --------------------------------/");
+    public boolean run()  {
+        d_Logger.log(Level.parse("INFO"),"****************************** Welcome to MAP EDITOR PHASE *********************************");
         List<String> l_ListStream;
         while (true) {
             d_Logger.log(d_LogLevel,"Type the required option for taking action on map:" + "\n" );
             d_Logger.log(d_LogLevel,"1. Type Help :to get list of commands for different actions  " + "\n" );
             d_Logger.log(d_LogLevel,"2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
-            d_Logger.log(d_LogLevel,"------------------------------------------------------------------------------------------------------");
+            d_Logger.log(d_LogLevel,"*******************************************************************************************************");
             String l_UserInput = d_sc.nextLine();
             List<String> l_list = new ArrayList<>();
             if (!(l_UserInput.contains("-"))){
@@ -105,33 +115,34 @@ public class MapEditorController implements MapEditor {
     }
 
 
-    public GamePhase action(List<String> p_ListStream) {
+    public boolean action(List<String> p_ListStream) {
         for(int l_index=0;l_index<p_ListStream.size();l_index++) {
             String[] l_CommandsArray = p_ListStream.get(l_index).split(" ");
             switch (p_ListStream.getFirst().toLowerCase()) {
 
                 // command to showcase map
-                case "showmap": {
+                case Constants.SHOW_MAP: {
                     //d_GameMap.showMap();
                     break;
                 }
 
                 // command to editmap
-                case "editmap": {
+                case Constants.EDIT_MAP: {
                     if (l_CommandsArray.length == 1) {
                         //MapLoader.readMapObject(d_GameMap);
-                        d_GameMap.showMap();
+                        //d_GameMap.showMap();
+                        d_status=true;
                     }
                     break;
                 }
 
 
                 //command to edit country in map
-                case "editcountry": {
+                case Constants.EDIT_COUNTRY: {
                     switch (l_CommandsArray[0]) {
-                        case "add": {
+                        case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                HashMap<String, Country> l_countries=d_GameMap.getCountries();
+                                HashMap<String, Country> l_countries=d_GameMap.get_countries();
                                 if (l_countries.containsKey(l_CommandsArray[1])) {
                                     try {
                                         throw new ValidationException("Provided country already exist in a map.Try Again with different country !");
@@ -139,14 +150,17 @@ public class MapEditorController implements MapEditor {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-                                Continent l_continent=d_GameMap.getContinent(l_CommandsArray[2]);
-                                Set<Country> contriesSet=l_continent.getCountries();
-                                Country l_Country = new Country();
-                                l_Country.setName(l_CommandsArray[1]);
-                                l_Country.setContinent(l_CommandsArray[2]);
-                                l_countries.put(l_CommandsArray[1], l_Country);
-                                contriesSet.add(l_Country);
-                                d_Logger.log(d_LogLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
+                                else{
+                                    Continent l_continent=d_GameMap.get_continents().get(l_CommandsArray[2]);
+                                    Set<Country> contriesSet=l_continent.get_countries().get(l_continent);
+                                    Country l_Country = new Country();
+                                    l_Country.set_countryId(l_CommandsArray[1]);
+                                    l_Country.setContinent(l_CommandsArray[2]);
+                                    l_countries.put(l_CommandsArray[1], l_Country);
+                                    contriesSet.add(l_Country);
+                                    d_Logger.log(d_LogLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
+                                    d_status=true;
+                                }
                             } else {
                                 try {
                                     throw new ValidationException();
@@ -156,11 +170,10 @@ public class MapEditorController implements MapEditor {
                             }
                             break;
                         }
-                        case "remove": {
+                        case Constants.REMOVE: {
                             if (l_CommandsArray.length == 2) {
 
-                                //  d_GameMap.removeCountry(l_CommandsArray[1]);
-                                Country l_Country = d_GameMap.getCountry(l_CommandsArray[1]);
+                                Country l_Country = d_GameMap.get_countries().get(l_CommandsArray[1]);
 
                                 //handling null values
                                 if (l_Country==null) {
@@ -173,15 +186,16 @@ public class MapEditorController implements MapEditor {
 
                                 //removing from countries data
                                else {
-                                    HashMap<String, Country> l_countries = d_GameMap.getCountries();
-                                    l_countries.remove(l_Country.getName());
+                                    HashMap<String, Country> l_countries = d_GameMap.get_countries();
+                                    l_countries.remove(l_Country.get_countryId());
 
                                     //removing from Continent data
-                                    Continent l_continent = d_GameMap.getContinent(l_Country.getContinent());
-                                    Set<Country> l_countriesSet = l_continent.getCountries();
-                                    l_countriesSet.remove(l_Country.getName());
+                                    Continent l_continent = d_GameMap.get_continents().get(l_Country.get_parentContinent());
+                                    Set<Country> l_countriesSet = l_continent.get_countries().get(l_continent);
+                                    l_countriesSet.remove(l_Country.get_countryId());
                                     d_Logger.log(d_LogLevel, "Country " + l_CommandsArray[1] + " is successfullY removed .");
-                                }
+                                    d_status=true;
+                               }
                             } else {
                                 try {
                                     throw new ValidationException();
@@ -196,11 +210,11 @@ public class MapEditorController implements MapEditor {
                 }
 
                 // command to edit continent in map
-                case "editcontinent": {
+                case Constants.EDIT_CONTINENT: {
                     if (l_CommandsArray.length > 0) {
                         switch (l_CommandsArray[0]) {
-                            case "add": {
-                                HashMap<String, Continent> continents = d_GameMap.getContinents();
+                            case Constants.ADD: {
+                                HashMap<String, Continent> continents = d_GameMap.get_continents();
                                 if (l_CommandsArray.length == 3) {
                                     if( l_CommandsArray[1]!= null){
                                         if (continents.containsKey(l_CommandsArray[1])) {
@@ -210,11 +224,14 @@ public class MapEditorController implements MapEditor {
                                                 System.out.println(e.getMessage());
                                             }
                                         }
+                                        else{
                                         Continent l_Continent = new Continent();
-                                        l_Continent.setName(l_CommandsArray[1]);
-                                        l_Continent.set_controlValue(Integer.parseInt(l_CommandsArray[2]));
+                                        l_Continent.set_continent(l_CommandsArray[1]);
+                                        l_Continent.set_controlValue(l_CommandsArray[2]);
                                         continents.put(l_CommandsArray[1], l_Continent);
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
+                                        d_status=true;
+                                        }
                                     }
                                     else {
                                         try {
@@ -233,10 +250,10 @@ public class MapEditorController implements MapEditor {
                                 }
                                 break;
                             }
-                            case "remove": {
+                            case Constants.REMOVE: {
                                 if (l_CommandsArray.length == 2) {
-                                    HashMap<String, Continent> l_continents = d_GameMap.getContinents();
-                                    HashMap<String, Country> l_countries=d_GameMap.getCountries();
+                                    HashMap<String, Continent> l_continents = d_GameMap.get_continents();
+                                    HashMap<String, Country> l_countries=d_GameMap.get_countries();
 
                                     if (!l_continents.containsKey(l_CommandsArray[1])) {
                                         try {
@@ -245,15 +262,19 @@ public class MapEditorController implements MapEditor {
                                             System.out.println(e.getMessage());
                                         }
                                     }
-                                    Set<String> l_CountriesSet = l_continents.remove(l_CommandsArray[1])
-                                            .getCountries()
-                                            .stream().map(L_country->L_country.getName)
+                                    else{
+                                        l_continents=l_continents.remove(l_CommandsArray[1]);
+                                        Set<String> l_CountriesSet = l_continents.remove(l_CommandsArray[1])
+                                            .get_countries()
+                                            .stream().map(l_country->l_country.get_countryId())
                                             .collect(Collectors.toSet());
                                     for (String l_CountryName : l_CountriesSet) {
                                         l_countries.remove(l_CountryName);
                                     }
                                     d_Logger.log(d_LogLevel,"All countries from continent "+l_CommandsArray[1]+" are successfulLY removed .");
                                     d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY removed .");
+                                    d_status=true;
+                                    }
                                 } else {
                                     try {
                                         throw new ValidationException();
@@ -269,12 +290,12 @@ public class MapEditorController implements MapEditor {
                 }
 
                 // command to edit neighbor in map
-                case "editneighbor": {
+                case Constants.EDIT_NEIGHBOUR: {
                     switch (l_CommandsArray[0]) {
-                        case "add": {
+                        case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                Country l_Country1 = d_GameMap.getCountry(l_CommandsArray[1]);
-                                Country l_Country2 = d_GameMap.getCountry(l_CommandsArray[2]);
+                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1]);
+                                Country l_Country2 = d_GameMap.get_countries().get((l_CommandsArray[2]));
 
                                 //handling null values
                                 if (l_Country1==null && l_Country2==null) {
@@ -292,9 +313,10 @@ public class MapEditorController implements MapEditor {
                                     }
                                 }
                                 else {
-                                    HashMap<String, Country> l_neighbours = l_Country1.getNeighbors();
-                                    l_neighbours.add(l_Country2);
+                                    HashMap<String, Country> l_neighbours = l_Country1.get_Neighbours();
+                                    l_neighbours.put(l_Country2.get_countryId(),l_Country2);
                                     d_Logger.log(d_LogLevel, "Neighbour " + l_Country2 + " is successfullY added .");
+                                    d_status=true;
                                 }
                             } else {
                                 try {
@@ -302,14 +324,13 @@ public class MapEditorController implements MapEditor {
                                 } catch (ValidationException e) {
                                     System.out.println(e.getMessage());
                                 }
-
                             }
                             break;
                         }
-                        case "remove": {
+                        case Constants.REMOVE: {
                             if (l_CommandsArray.length == 3) {
-                                Country l_Country1 = d_GameMap.getCountry(l_CommandsArray[1]);
-                                Country l_Country2 = d_GameMap.getCountry(l_CommandsArray[2]);
+                                Country l_Country1 = d_GameMap.get_countries().get(l_CommandsArray[1]);
+                                Country l_Country2 = d_GameMap.get_countries().get(l_CommandsArray[2]);
 
                                 //handling null values
                                 if (l_Country1==null && l_Country2==null) {
@@ -326,15 +347,16 @@ public class MapEditorController implements MapEditor {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-                                else if (l_Country1.getNeighbors().contains(l_Country2) || l_Country2.getNeighbors().contains(l_Country1)) {
-                                    l_Country1.getNeighbors().remove(l_Country2);
+                                else if (l_Country1.get_Neighbours().containsKey(l_Country2) || l_Country2.get_Neighbours().containsKey(l_Country1)) {
+                                    l_Country1.get_Neighbours().remove(l_Country2);
                                     d_Logger.log(d_LogLevel,"Neighbour "+l_Country2+" is successfullY removed .");
+                                    d_status=true;
                                 }
                                 else{
                                     try {
                                         throw new ValidationException("Provided mentioned countries are not neighbors of each other.Try Again with neighboring countries !");
                                     } catch (ValidationException e) {
-                                        throw new RuntimeException(e);
+                                        System.out.println(e.getMessage());
                                     }
                                 }
                             }
@@ -351,66 +373,43 @@ public class MapEditorController implements MapEditor {
                 }
 
                 // command to validate map
-                case "validatemap": {
+                case Constants.VALIDATE_MAP: {
                     MapValidator l_mapValidator=new MapValidator();
                     if (l_mapValidator.ValidateMapObject(d_GameMap)) {
                         d_Logger.log(d_LogLevel,"Map Validation successful");
+                        d_status=true;
                     } else {
                         d_Logger.log(d_LogLevel,"Map Validation failed ! check the provided inputs again.");
                     }
                     break;
                 }
 
-                //command to save map
-                case "savemap": {
-                    MapValidator l_mapValidator=new MapValidator();
-                    if (l_mapValidator.ValidateMapObject(d_GameMap)){
-                        if (l_CommandsArray.length == 1) {
-                            d_GameMap.setName(l_CommandsArray[0]);
-                            d_Logger.log(d_LogLevel," Enter type for save the file? Type the number.");
-                            d_Logger.log(d_LogLevel,"1. Domination map \n2. Conquest map");
-                            Scanner l_Scanner = new Scanner(System.in);
-                            String l_Input = l_Scanner.nextLine();
-                            if (l_Input.equals("1")){
-                                d_GameMap.saveMap(false);
-                                d_Logger.log(d_LogLevel,"The loaded file is of the format Domination map");
-                            }
-                            else if (l_Input.equals("2")) {
-                                d_GameMap.saveMap(true);
-                                d_Logger.log(d_LogLevel,"The loaded file is of the format Conquest map");
-                            }
-                            else
-                                d_Logger.log(d_LogLevel,"Please enter the right value");
-                        }}
-                    break;
-                }
-
                 //To exit from map editing phase
-                case "exit": {
-                    d_GameMap.clearGameMap();
-                    d_GameMap.setGamePhase(GamePhase.StartUp);
+                case Constants.EXIT: {
+                    d_status=true;
+                    //d_GameMap.clearGameMap();
                 }
                 //list of commands for assist Player
                 default: {
                     d_Logger.log(d_LogLevel,"Commands List for different operations:");
-                    d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
+                    d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
                     d_Logger.log(d_LogLevel,"To edit map file  : editmap filename");
                     d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
                     d_Logger.log(d_LogLevel,"To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID");
                     d_Logger.log(d_LogLevel,"To add or remove a country : editcountry -add countryID continentID -remove countryID");
                     d_Logger.log(d_LogLevel,"To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID");
-                    d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
+                    d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
                     d_Logger.log(d_LogLevel,"To save map file : savemap filename");
-                    d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
+                    d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
                     d_Logger.log(d_LogLevel,"Additional map commands:");
                     d_Logger.log(d_LogLevel,"To show the map: showmap");
                     d_Logger.log(d_LogLevel,"To validate map: validatemap");
-                    d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
+                    d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
 
                 }
             }
         }
-        return p_GamePhase.nextState(GamePhase.StartUp);
+        return d_status;
     }
 
 
