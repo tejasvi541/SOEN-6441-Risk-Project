@@ -13,7 +13,6 @@ import org.team25.game.utils.validation.ValidationException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 
 /**
@@ -152,12 +151,12 @@ public class MapEditorController implements MapEditor {
                                 }
                                 else{
                                     Continent l_continent=d_GameMap.get_continents().get(l_CommandsArray[2]);
-                                    Set<Country> contriesSet=l_continent.get_countries().get(l_continent);
+                                    HashMap<String,Country> l_countriesMap=l_continent.get_countries();
                                     Country l_Country = new Country();
                                     l_Country.set_countryId(l_CommandsArray[1]);
-                                    l_Country.setContinent(l_CommandsArray[2]);
-                                    l_countries.put(l_CommandsArray[1], l_Country);
-                                    contriesSet.add(l_Country);
+                                    l_Country.set_parentContinent(l_CommandsArray[2]);
+                                    l_countriesMap.put(l_CommandsArray[1], l_Country);
+                                    d_GameMap.get_continents().get(l_CommandsArray[2]).get_countries().put(l_CommandsArray[1],l_Country);
                                     d_Logger.log(d_LogLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
                                     d_status=true;
                                 }
@@ -183,16 +182,15 @@ public class MapEditorController implements MapEditor {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-
-                                //removing from countries data
                                else {
+                                   //removing country from Map data
                                     HashMap<String, Country> l_countries = d_GameMap.get_countries();
                                     l_countries.remove(l_Country.get_countryId());
 
                                     //removing from Continent data
                                     Continent l_continent = d_GameMap.get_continents().get(l_Country.get_parentContinent());
-                                    Set<Country> l_countriesSet = l_continent.get_countries().get(l_continent);
-                                    l_countriesSet.remove(l_Country.get_countryId());
+                                    HashMap<String,Country> l_countriesMap=l_continent.get_countries();
+                                    l_countriesMap.remove(l_Country.get_countryId());
                                     d_Logger.log(d_LogLevel, "Country " + l_CommandsArray[1] + " is successfullY removed .");
                                     d_status=true;
                                }
@@ -225,9 +223,9 @@ public class MapEditorController implements MapEditor {
                                             }
                                         }
                                         else{
-                                        Continent l_Continent = new Continent();
-                                        l_Continent.set_continent(l_CommandsArray[1]);
-                                        l_Continent.set_controlValue(l_CommandsArray[2]);
+                                        Continent l_Continent = new Continent(l_CommandsArray[1],l_CommandsArray[2]);
+                                        //l_Continent.set_continent(l_CommandsArray[1]);
+                                        //l_Continent.set_controlValue(l_CommandsArray[2]);
                                         continents.put(l_CommandsArray[1], l_Continent);
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
                                         d_status=true;
@@ -263,17 +261,12 @@ public class MapEditorController implements MapEditor {
                                         }
                                     }
                                     else{
-                                        l_continents=l_continents.remove(l_CommandsArray[1]);
-                                        Set<String> l_CountriesSet = l_continents.remove(l_CommandsArray[1])
-                                            .get_countries()
-                                            .stream().map(l_country->l_country.get_countryId())
-                                            .collect(Collectors.toSet());
-                                    for (String l_CountryName : l_CountriesSet) {
-                                        l_countries.remove(l_CountryName);
-                                    }
-                                    d_Logger.log(d_LogLevel,"All countries from continent "+l_CommandsArray[1]+" are successfulLY removed .");
-                                    d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY removed .");
-                                    d_status=true;
+                                        HashMap<String,Country> l_countriesMap=l_continents.get(l_CommandsArray[1]).get_countries();
+                                        l_countriesMap.clear();
+                                        l_continents.remove(l_CommandsArray[1]);
+                                        d_Logger.log(d_LogLevel,"All countries from continent "+l_CommandsArray[1]+" are successfulLY removed .");
+                                        d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY removed .");
+                                        d_status=true;
                                     }
                                 } else {
                                     try {
@@ -394,7 +387,7 @@ public class MapEditorController implements MapEditor {
                     d_Logger.log(d_LogLevel,"Commands List for different operations:");
                     d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
                     d_Logger.log(d_LogLevel,"To edit map file  : editmap filename");
-                    d_Logger.log(d_LogLevel,"-----------------------------------------------------------------------------------------");
+                    d_Logger.log(d_LogLevel,"****************************************************************************************************************************");
                     d_Logger.log(d_LogLevel,"To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID");
                     d_Logger.log(d_LogLevel,"To add or remove a country : editcountry -add countryID continentID -remove countryID");
                     d_Logger.log(d_LogLevel,"To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID");
@@ -422,7 +415,9 @@ public class MapEditorController implements MapEditor {
     public boolean validateUserInput(List<String> p_InputList) {
         if (!(p_InputList.isEmpty())) {
             String l_InputCommand = p_InputList.getFirst();
-            return d_MAP_CLI_COMMANDS.contains(l_InputCommand.toLowerCase());
+            int index= d_MAP_CLI_COMMANDS.indexOf(l_InputCommand.toLowerCase());
+            if(index!=-1)
+                return true;
         }
         return false;
     }
