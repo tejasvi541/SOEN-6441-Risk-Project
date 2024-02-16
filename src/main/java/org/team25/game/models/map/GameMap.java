@@ -3,10 +3,7 @@ package org.team25.game.models.map;
 import org.team25.game.models.game_play.Player;
 import org.team25.game.utils.validation.ValidationException;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -192,7 +189,8 @@ public class GameMap {
     public void removePlayer(String p_PlayerName) throws ValidationException {
         Player l_Player = this.getPlayer(p_PlayerName);
         if (Objects.isNull(l_Player)) {
-            throw new ValidationException("Player does not exist: " + p_PlayerName);
+            System.out.println("Player not found : " + p_PlayerName);
+            return;
         }
         this.getPlayers().remove(l_Player.getName());
         System.out.println("Successfully deleted the player: " + p_PlayerName);
@@ -218,8 +216,8 @@ public class GameMap {
     }
     public void assignCountries() {
         int playerIndex = 0;
-        List<Player> players = d_gameMap_single_instance.getPlayers().values().stream().collect(Collectors.toList());
-        List<Country> countryList = d_gameMap_single_instance.getCountries().values().stream().collect(Collectors.toList());
+        List<Player> players = d_gameMap_single_instance.getPlayers().values().stream().toList();
+        List<Country> countryList = new ArrayList<>(d_gameMap_single_instance.getCountries().values());
 
         Collections.shuffle(countryList);
 

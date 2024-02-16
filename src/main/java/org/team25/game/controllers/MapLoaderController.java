@@ -18,11 +18,14 @@ import java.util.Scanner;
  * @author Tejasvi
  * @version 1.0.0
  */
-public class MapLoaderController implements GameFlowManager {
+public class MapLoaderController {
     public static int d_mapContinentIndex =1; // Tracking Continent Index
     private GameMap d_gameMap;
     private HashMap<Integer, Country> d_countriesList;
 
+   public MapLoaderController(){
+        d_gameMap = GameMap.getInstance();
+    }
     /**
      * The main function of this file asks for the map name to load and calls a function to load it
      *
@@ -32,7 +35,7 @@ public class MapLoaderController implements GameFlowManager {
         System.out.println("Enter Map file name:");
         String l_mapName = l_sc.nextLine();
         MapLoaderController l_loadedMap = new MapLoaderController();
-        GameMap d_gameMap = l_loadedMap.readMap(l_mapName);
+        l_loadedMap.readMap(l_mapName);
         l_sc.close();
     }
 
@@ -43,7 +46,6 @@ public class MapLoaderController implements GameFlowManager {
      * @return The Populated Map object
      */
     public GameMap readMap(String p_mapName){
-        d_gameMap = new GameMap(p_mapName);
         d_countriesList = new HashMap<Integer, Country>();
 
         try{
@@ -181,16 +183,5 @@ public class MapLoaderController implements GameFlowManager {
         d_gameMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
     }
 
-    /**
-     * Starts the game controller.
-     *
-     * @param p_currentPhase The current phase of the game.
-     * @return The next phase of the game.
-     * @throws Exception If an issue occurs during execution.
-     */
-    @Override
-    public GamePhase start(GamePhase p_currentPhase) throws Exception {
-        init();
-        return null;
-    }
+
 }

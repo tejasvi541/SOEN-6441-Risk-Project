@@ -14,6 +14,8 @@ public class Continent {
     private String d_continentId;
     private int d_continentFileIndex;
     private HashMap<String, Country> d_countries;
+    private int d_AwardArmies;
+    private boolean d_Credited;
 
 
     /**
@@ -91,5 +93,24 @@ public class Continent {
      */
     public void set_continentFileIndex(String p_continentFileIndex){
         this.d_continentFileIndex = Integer.parseInt(p_continentFileIndex);
+    }
+
+    //Todo refactor
+    /**
+     * Get the Awarded armies
+     *
+     * @return d_AwardArmies  The Awarded armies assigned to the continent
+     */
+    public int getAwardArmies() {
+        return d_AwardArmies;
+    }
+
+    /**
+     * Set the Awarded armies for the continent
+     *
+     * @param p_AwardArmies Awarded armies
+     */
+    public void setAwardArmies(int p_AwardArmies) {
+        this.d_AwardArmies = p_AwardArmies;
     }
 }

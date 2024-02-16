@@ -18,7 +18,7 @@ public class ShowMapController {
      * @param d_gameMap GMap Object Parameter
      */
     public ShowMapController(GameMap d_gameMap){
-        this.d_gameMap = d_gameMap;
+        this.d_gameMap = GameMap.getInstance();
     }
 
     public void show() {

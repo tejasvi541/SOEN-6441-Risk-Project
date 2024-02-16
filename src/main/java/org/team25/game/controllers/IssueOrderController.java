@@ -20,10 +20,7 @@ public class IssueOrderController implements GameFlowManager {
      * Constructor to get the GameMap instance
      */
     public IssueOrderController() {
-
-        //Todo Get instance of game map
-        // Complete the code
-        // d_GameMap = GameMap.getInstance();
+        d_GameMap = GameMap.getInstance();
     }
 
     /**

@@ -37,9 +37,8 @@ public class ReinforcementController implements GameFlowManager {
      * Default constructor initializing the game map data member with
      * {@code GameMap} singleton object.
      */
-    public void Reinforcement() {
-        //Todo get instance
-        //  d_GameMap = GameMap.getInstance();
+    public ReinforcementController() {
+        d_GameMap = GameMap.getInstance();
     }
 
     /**
@@ -82,10 +81,12 @@ public class ReinforcementController implements GameFlowManager {
                         .stream()
                         .collect(Collectors.groupingBy(Country::get_parentContinent));
                 for (String continent : l_CountryMap.keySet()) {
-                    //Todo get continents
-                    // if (d_GameMap.get_Continent(continent).get_countries().size() == l_CountryMap.get(continent).size()) {
-                    // reinforcements += d_GameMap.get_Continent(continent).getAwardArmies();
-                    //  }
+
+                     if(d_GameMap.getContinent(continent)!=null){
+                         if (d_GameMap.getContinent(continent).get_countries().size() == l_CountryMap.get(continent).size()) {
+                             reinforcements += d_GameMap.getContinent(continent).getAwardArmies();
+                         }
+                     }
                 }
                 d_CurrentPlayer.setReinforcementArmies(Math.max(reinforcements, 3));
                 System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
