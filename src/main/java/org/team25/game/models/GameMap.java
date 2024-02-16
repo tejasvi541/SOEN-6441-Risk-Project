@@ -102,8 +102,8 @@ public class GameMap {
 
     public void flush(){
         this.d_mapName = "";
-        this.d_continents = new HashMap<>();
-        this.d_countries = new HashMap<>();
+        this.d_continents.clear();
+        this.d_countries.clear();
         this.d_isValid = false;
     }
 

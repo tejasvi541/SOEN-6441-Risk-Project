@@ -36,7 +36,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member that stores the list of commands used for editing,validating or saving a map
      */
-    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList(Constants.SHOW_MAP,Constants.EDIT_MAP,Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR,Constants.VALIDATE_MAP);
+    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList(Constants.SHOW_MAP,Constants.EDIT_MAP,Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR,Constants.VALIDATE_MAP,Constants.SAVE_MAP);
 
     /**
      * A data member that will log the data for the class
@@ -123,7 +123,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
                 // command to showcase map
                 case Constants.SHOW_MAP: {
-                    //d_GameMap.showMap();
+                    ShowMapController l_showMapController=new ShowMapController(d_GameMap);
+                    l_showMapController.show();
                     break;
                 }
 
@@ -131,7 +132,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 case Constants.EDIT_MAP: {
                     if (l_CommandsArray.length == 1) {
                         //MapLoader.readMapObject(d_GameMap);
-                        //d_GameMap.showMap();
+                        ShowMapController l_showMapController=new ShowMapController(d_GameMap);
+                        l_showMapController.show();
                         d_status=true;
                     }
                     break;
@@ -381,10 +383,22 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     break;
                 }
 
+                // command to save map
+                case Constants.SAVE_MAP: {
+                    MapValidator l_mapValidator=new MapValidator();
+                    if (l_mapValidator.ValidateMapObject(d_GameMap)) {
+                        d_Logger.log(d_LogLevel,"Map Validation successful,Saving the map");
+                        d_status=true;
+                    } else {
+                        d_Logger.log(d_LogLevel,"Map Validation failed ! check the provided inputs again.");
+                    }
+                    break;
+                }
+
                 //To exit from map editing phase
                 case Constants.EXIT: {
+                    d_GameMap.flush();
                     d_status=true;
-                    //d_GameMap.clearGameMap();
                 }
                 //list of commands for assist Player
                 default: {
@@ -435,7 +449,11 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      */
     @Override
     public GamePhase start(GamePhase currentPhase) throws Exception {
-        run();
+        boolean l_editorStatus=run();
+        if(l_editorStatus)
+            d_Logger.log(d_LogLevel,"You have successfully edited the map!");
+        else
+            d_Logger.log(d_LogLevel,"You have failed to edit map");
         return currentPhase;
     }
 }

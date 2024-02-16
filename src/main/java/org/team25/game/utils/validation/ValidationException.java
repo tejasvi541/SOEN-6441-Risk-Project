@@ -12,7 +12,7 @@ public class ValidationException extends Exception {
     String d_ErrorMessage = "Invalid input.Try again!";
 
     /**
-     * Validation Exception Constructor
+     * Default Validation Exception Constructor
      */
     public ValidationException() {
         super();

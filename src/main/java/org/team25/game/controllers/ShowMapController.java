@@ -12,21 +12,21 @@ public class ShowMapController {
 
     /**
      * Constructor to set the current GMap object to read and show the map
-     * @param p_gameMap GMap Object Parameter
+     * @param p_gameMap GameMap Object Parameter
      */
     public ShowMapController(GameMap p_gameMap){
         this.d_gameMap = p_gameMap;
     }
 
-    public void show(GameMap p_map) {
-        if(p_map==null)
+    public void show() {
+        if(d_gameMap==null)
             return;
         System.out.printf("%85s\n", "-------------------------------------------------------------------------------------------");
         System.out.printf("%25s%25s%35s\n", "Continents", "Country", "Country's neighbors");
         System.out.printf("%85s\n", "-------------------------------------------------------------------------------------------");
         boolean l_PrintContinentName = true;
         boolean l_PrintCountryName = true;
-        for(Continent l_continent : p_map.get_continents().values()) {
+        for(Continent l_continent : d_gameMap.get_continents().values()) {
             if(l_continent.get_countries().size()==0) {
                 System.out.printf("\n%25s%25s%25s\n", l_continent.get_continentId(), "", "");
             }
