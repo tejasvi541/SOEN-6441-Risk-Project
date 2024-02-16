@@ -33,7 +33,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member that stores the list of commands used for editing,validating or saving a map
      */
-    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList(Constants.SHOW_MAP, Constants.HELP, Constants.EDIT_MAP, Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR, Constants.VALIDATE_MAP);
+    private final List<String> d_MAP_CLI_COMMANDS = Arrays.asList(Constants.SHOW_MAP, Constants.HELP, Constants.EDIT_MAP, Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR, Constants.VALIDATE_MAP, Constants.SAVE_MAP);
 
     /**
      * A data member to set status of editing phase
@@ -78,7 +78,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 tempStatus = action(l_ListStream);
                 l_ListStream.clear();
             } else if (l_UserInput.startsWith("Exit") || l_UserInput.startsWith("exit")) {
-                return d_GameMap;
+                if(new MapValidator().ValidateMapObject(d_GameMap)){
+                    return d_GameMap;
+                }
             }
 
 
@@ -114,6 +116,14 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 break;
             }
 
+            // command to showcase map
+            case Constants.SAVE_MAP: {
+                if(new MapValidator().ValidateMapObject(d_GameMap)) {
+                    new SaveMapController(d_GameMap, l_CommandsArray[1]).saveMap();
+                    break;
+                }
+                break;
+            }
 
             //command to edit country in map
             case Constants.EDIT_COUNTRY: {

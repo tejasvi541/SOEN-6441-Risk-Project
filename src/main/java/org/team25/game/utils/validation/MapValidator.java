@@ -1,7 +1,6 @@
 package org.team25.game.utils.validation;
 
 import java.util.HashMap;
-//import java.util.logging.Logger;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -29,23 +28,21 @@ public class MapValidator {
     public MapValidator() {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
-//    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapValidator.class);
-//    Level d_logLevel=Level.parse("INFO");
 
 
     public boolean ValidateMapObject(GameMap p_GameMap)
     {
         Graph<Country, DefaultEdge> l_graph=generate_Graph(p_GameMap);
         if (!isConnected(l_graph)) {
-//            System.out.println("Not a connected graph");
+            System.out.println("Not a connected graph\n");
             return false;
         }
         if ( isContinentEmpty(p_GameMap)) {
-//            System.out.println("continent is empty");
+            System.out.println("A continent is empty\n");
             return false;
         }
         if (!isContinentConnected(p_GameMap)) {
-//            System.out.println("continent not connected");
+            System.out.println("continent not connected\n");
             return false;
         }
         return true;
