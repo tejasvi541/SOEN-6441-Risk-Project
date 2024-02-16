@@ -3,6 +3,7 @@ package org.team25.game.models.game_play;
 import org.team25.game.controllers.ExecuteOrderController;
 import org.team25.game.controllers.IssueOrderController;
 import org.team25.game.controllers.MapEditorController;
+import org.team25.game.controllers.ReinforcementController;
 import org.team25.game.interfaces.main_engine.GameFlowManager;
 
 import java.util.Arrays;
@@ -83,7 +84,7 @@ public enum GamePhase {
          */
         @Override
         public GameFlowManager getController() {
-            return new IssueOrderController();
+            return new ReinforcementController();
         }
     },
 

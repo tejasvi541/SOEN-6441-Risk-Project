@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.List;
 
 import org.team25.game.models.map.Country;
-import org.team25.game.models.orders.OrderCreater;
+import org.team25.game.models.orders.OrderOwner;
 
 //Todo refactor
 public class Player {
@@ -140,7 +140,7 @@ public class Player {
         }
 
         if (l_IssueCommand) {
-            Order l_Order = OrderCreater.createOrder(l_CommandArr, this);
+            Order l_Order = OrderOwner.createOrder(l_CommandArr, this);
             OrderList.add(l_Order);
             addOrder(l_Order);
             System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
