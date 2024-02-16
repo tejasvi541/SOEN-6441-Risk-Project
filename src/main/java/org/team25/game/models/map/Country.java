@@ -1,5 +1,7 @@
 package org.team25.game.models.map;
 
+import org.team25.game.models.game_play.Player;
+
 import java.util.HashMap;
 
 /**
@@ -17,6 +19,8 @@ public class Country {
     private int d_numberOfArmies;
     private int d_xCoordinate;
     private int d_yCoordinate;
+    private Player d_Player;
+    private int d_Armies;
 
     /**
      * Set Country object with default values.
@@ -57,6 +61,55 @@ public class Country {
 
     public void set_yCoordinate(int d_yCoordinate) {
         this.d_yCoordinate = d_yCoordinate;
+    }
+    /**
+     * Get the player instance for the game play
+     *
+     * @return d_Player Player instance
+     */
+    public Player getPlayer() {
+
+        return d_Player;
+    }
+
+    /**
+     * Set the player instance for the game play
+     *
+     * @param p_Player Player instance
+     */
+    public void setPlayer(Player p_Player) {
+
+        this.d_Player = p_Player;
+    }
+
+    /**
+     * Get the number of armies for the country
+     *
+     * @return d_Armies Number of armies for the country
+     */
+    public int getArmies() {
+
+        return d_Armies;
+    }
+
+    /**
+     * deploy the armies for the player
+     *
+     * @param p_armies number of armies to be deployed
+     */
+    public void deployArmies(int p_armies) {
+
+        d_Armies += p_armies;
+    }
+
+    /**
+     * Set the armies for the country
+     *
+     * @param p_Armies Number of armies for the country
+     */
+    public void setArmies(int p_Armies) {
+
+        this.d_Armies = p_Armies;
     }
 
     /**

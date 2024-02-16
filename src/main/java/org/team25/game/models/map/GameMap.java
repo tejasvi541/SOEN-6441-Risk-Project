@@ -1,8 +1,13 @@
 package org.team25.game.models.map;
 
 import org.team25.game.models.game_play.Player;
+import org.team25.game.utils.validation.ValidationException;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Map class holds the details of map in the game
@@ -130,7 +135,15 @@ public class GameMap {
      * @return d_Players List of players
      */
     public HashMap<String, Player> getPlayers() {
-        return d_Players;
+        return this.d_Players;
+    }
+
+    /**
+     * Set The HashMap of Players
+     * @param p_Players Players HashMap
+     */
+    public void setPlayers(HashMap<String, Player> p_Players){
+        this.d_Players = p_Players;
     }
 
     /**
@@ -143,8 +156,46 @@ public class GameMap {
         return d_Players.get(p_Id);
     }
 
+    /**
+     * Add Player to the Players Hashmap
+     * @param p_player Player Object to set the Player
+     */
+    public void setPlayer(Player p_player){
+        this.d_Players.put(p_player.getName().toLowerCase(), p_player);
+    }
+
     public HashMap<String, Continent> getContinents(String continent) {
         return d_continents;
+    }
+    /**
+     * Adds player to the game map.
+     *
+     * @param p_PlayerName Player name
+     * @throws ValidationException if any input/output issue
+     */
+    public void addPlayer(String p_PlayerName) throws ValidationException {
+        if (this.getPlayers().containsKey(p_PlayerName)) {
+            throw new ValidationException("Player already exists");
+        }
+        Player l_Player = new Player();
+        l_Player.setName(p_PlayerName);
+        this.getPlayers().put(p_PlayerName, l_Player);
+        System.out.println("Successfully added Player: " + p_PlayerName);
+    }
+
+    /**
+     * Removes player from game map.
+     *
+     * @param p_PlayerName Player name
+     * @throws ValidationException if any input/output issue
+     */
+    public void removePlayer(String p_PlayerName) throws ValidationException {
+        Player l_Player = this.getPlayer(p_PlayerName);
+        if (Objects.isNull(l_Player)) {
+            throw new ValidationException("Player does not exist: " + p_PlayerName);
+        }
+        this.getPlayers().remove(l_Player.getName());
+        System.out.println("Successfully deleted the player: " + p_PlayerName);
     }
 
     /**
@@ -164,5 +215,21 @@ public class GameMap {
      */
     public HashMap<String, Country> getCountries() {
         return d_countries;
+    }
+    public void assignCountries() {
+        int playerIndex = 0;
+        List<Player> players = d_gameMap_single_instance.getPlayers().values().stream().collect(Collectors.toList());
+        List<Country> countryList = d_gameMap_single_instance.getCountries().values().stream().collect(Collectors.toList());
+
+        Collections.shuffle(countryList);
+
+        for (Country country : countryList) {
+            Player player = players.get(playerIndex);
+            player.getCapturedCountries().add(country);
+            country.setPlayer(player);
+            System.out.println(country.get_countryId() + " assigned to " + player.getName());
+
+            playerIndex = (playerIndex + 1) % players.size(); // Move to the next player in a circular manner
+        }
     }
 }
