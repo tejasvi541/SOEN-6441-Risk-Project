@@ -7,9 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.team25.game.interfaces.main_engine.GameFlowManager;
 import org.team25.game.interfaces.MapEditor;
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-import org.team25.game.models.GameMap;
+import org.team25.game.models.map.Continent;
+import org.team25.game.models.map.Country;
+import org.team25.game.models.map.GameMap;
 import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.MapValidator;
@@ -71,10 +71,10 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
     /**
      * This run method of MapEditor phase handles editing on map
-     *
      */
 
-    public boolean run()  {
+   
+    public void run()  {
         d_Logger.log(d_LogLevel,"****************************** Welcome to MAP EDITOR PHASE *********************************");
         List<String> l_ListStream;
         while (true) {
@@ -111,7 +111,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 }
             }
 
-           return action(l_ListStream);
+            action(l_ListStream);
+            return;
         }
     }
 
@@ -385,6 +386,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 case Constants.EXIT: {
                     d_status=true;
                     //d_GameMap.clearGameMap();
+
                 }
                 //list of commands for assist Player
                 default: {

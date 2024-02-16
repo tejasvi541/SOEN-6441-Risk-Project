@@ -1,19 +1,15 @@
 package org.team25.game.utils.validation;
 
 import java.util.HashMap;
-import java.util.logging.Level;
 //import java.util.logging.Logger;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
-import org.team25.game.controllers.MapEditorController;
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-import org.team25.game.models.GameMap;
+import org.team25.game.models.map.Continent;
+import org.team25.game.models.map.Country;
+import org.team25.game.models.map.GameMap;
 
 
 
