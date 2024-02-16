@@ -5,7 +5,7 @@ import org.team25.game.models.game_play.Player;
 import org.team25.game.models.map.Country;
 
 //Todo refactor
-public class OrderInfo {
+public class OrderInformation {
 
     private Player d_Player;
     private Country d_Departure;

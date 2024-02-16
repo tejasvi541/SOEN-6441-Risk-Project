@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Order {
     private static Order d_Order;
     private String d_Type;
-    private OrderInfo d_OrderInfo;
+    private OrderInformation d_OrderInformation;
     private List<Order> d_OrderList = new ArrayList<Order>();
 
     /**
@@ -57,19 +57,19 @@ public class Order {
      *
      * @return the order information in an object
      */
-    public OrderInfo getOrderInfo() {
+    public OrderInformation getOrderInfo() {
 
-        return d_OrderInfo;
+        return d_OrderInformation;
     }
 
     /**
      * A function to the set Order information based on the order
      *
-     * @param p_OrderInfo Order Information contained in an object of type OrderInfo
+     * @param p_OrderInformation Order Information contained in an object of type OrderInfo
      */
-    public void setOrderInfo(OrderInfo p_OrderInfo) {
+    public void setOrderInfo(OrderInformation p_OrderInformation) {
 
-        this.d_OrderInfo = p_OrderInfo;
+        this.d_OrderInformation = p_OrderInformation;
     }
 
     /**
