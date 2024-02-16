@@ -14,12 +14,12 @@ public class Main {
         gameMap = load.readMap("Canada");
 
         ShowMapController showMapController = new ShowMapController(gameMap);
-        showMapController.show();
+        showMapController.show(gameMap);
 
         MapEditorController editor = new MapEditorController(gameMap);
         while(true) {
             editor.run();
-            showMapController.show();
+            showMapController.show(gameMap);
         }
 
     }

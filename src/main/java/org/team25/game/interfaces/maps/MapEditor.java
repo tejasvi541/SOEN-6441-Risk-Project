@@ -1,4 +1,4 @@
-package org.team25.game.interfaces;
+package org.team25.game.interfaces.maps;
 
 import java.util.List;
 

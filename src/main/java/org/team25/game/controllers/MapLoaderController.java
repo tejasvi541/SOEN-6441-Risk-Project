@@ -1,7 +1,9 @@
 package org.team25.game.controllers;
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-import org.team25.game.models.GameMap;
+import org.team25.game.interfaces.main_engine.GameFlowManager;
+import org.team25.game.models.map.Continent;
+import org.team25.game.models.map.Country;
+import org.team25.game.models.map.GameMap;
+import org.team25.game.models.game_play.GamePhase;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -16,16 +18,16 @@ import java.util.Scanner;
  * @author Tejasvi
  * @version 1.0.0
  */
-public class MapLoaderController {
+public class MapLoaderController implements GameFlowManager {
     public static int d_mapContinentIndex =1; // Tracking Continent Index
     private GameMap d_gameMap;
     private HashMap<Integer, Country> d_countriesList;
 
     /**
      * The main function of this file asks for the map name to load and calls a function to load it
-     * @param args name of the map
+     *
      */
-    public static void main(String args[]){
+    public static void init(){
         Scanner l_sc = new Scanner(System.in);
         System.out.println("Enter Map file name:");
         String l_mapName = l_sc.nextLine();
@@ -179,4 +181,16 @@ public class MapLoaderController {
         d_gameMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
     }
 
+    /**
+     * Starts the game controller.
+     *
+     * @param p_currentPhase The current phase of the game.
+     * @return The next phase of the game.
+     * @throws Exception If an issue occurs during execution.
+     */
+    @Override
+    public GamePhase start(GamePhase p_currentPhase) throws Exception {
+        init();
+        return null;
+    }
 }
