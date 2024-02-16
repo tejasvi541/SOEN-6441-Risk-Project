@@ -43,16 +43,16 @@
 //     */
 //    public static void main(String[] args) throws Exception {
 //        Scanner l_Scanner = new Scanner(System.in);
-//        System.out.println("");
-//        System.out.println("************************************");
-//        System.out.println("Welcome to Warzone Game,Let's Play !");
-//        System.out.println("************************************");
-//        System.out.println("Choose option from Main-Menu to play");
-//        System.out.println("------------------------------------");
-//        System.out.println("1. New Game to play");
-//        System.out.println("2. Load Game to continue");
-//        System.out.println("5. Exit");
-//        System.out.println("------------------------------------");
+//        d_Logger.log(d_logLevel,"");
+//        d_Logger.log(d_logLevel,"************************************");
+//        d_Logger.log(d_logLevel,"Welcome to Warzone Game,Let's Play !");
+//        d_Logger.log(d_logLevel,"************************************");
+//        d_Logger.log(d_logLevel,"Choose option from Main-Menu to play");
+//        d_Logger.log(d_logLevel,"------------------------------------");
+//        d_Logger.log(d_logLevel,"1. New Game to play");
+//        d_Logger.log(d_logLevel,"2. Load Game to continue");
+//        d_Logger.log(d_logLevel,"5. Exit");
+//        d_Logger.log(d_logLevel,"------------------------------------");
 //        try {
 //            int option = l_Scanner.nextInt();
 //            switch (option) {

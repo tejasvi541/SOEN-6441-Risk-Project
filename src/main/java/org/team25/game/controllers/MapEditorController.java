@@ -3,19 +3,19 @@ package org.team25.game.controllers;
 import java.util.*;
 
 import org.team25.game.interfaces.main_engine.GameFlowManager;
-import org.team25.game.interfaces.MapEditor;
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-import org.team25.game.models.GameMap;
+import org.team25.game.interfaces.maps.MapEditor;
+import org.team25.game.models.map.Continent;
+import org.team25.game.models.map.Country;
+import org.team25.game.models.map.GameMap;
 import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.MapValidator;
 import org.team25.game.utils.validation.ValidationException;
 
 
+
 /**
  * This class is used to create map through different commands for different operations.
- *
  * @author Bharti Chhabra
  * @version 1.0.0
  */

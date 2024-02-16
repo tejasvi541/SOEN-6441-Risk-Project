@@ -1,4 +1,6 @@
-package org.team25.game.models;
+package org.team25.game.models.map;
+
+import org.team25.game.models.game_play.Player;
 
 import java.util.HashMap;
 
@@ -14,6 +16,9 @@ public class GameMap {
     private boolean d_isValid;
     private HashMap<String, Continent> d_continents;
     private HashMap<String, Country> d_countries;
+
+    private HashMap<String, Player> d_Players = new HashMap<>();
+
 
     /**
      * Map Constructor to initialise the Class
@@ -107,4 +112,45 @@ public class GameMap {
         this.d_isValid = false;
     }
 
+    /**
+     * Get the list of players
+     *
+     * @return d_Players List of players
+     */
+    public HashMap<String, Player> getPlayers() {
+        return d_Players;
+    }
+
+    /**
+     * Get a single player
+     *
+     * @param p_Id Unique Player name
+     * @return the required Player object
+     */
+    public Player getPlayer(String p_Id) {
+        return d_Players.get(p_Id);
+    }
+
+    public HashMap<String, Continent> getContinents(String continent) {
+        return d_continents;
+    }
+
+    /**
+     * Get a single continent
+     *
+     * @param p_Id Unique Continent name
+     * @return the required Continent object
+     */
+    public Continent getContinent(String p_Id) {
+        return d_continents.get(p_Id);
+    }
+
+    /**
+     * Get the list of countries
+     *
+     * @return d_Countries List of the countries
+     */
+    public HashMap<String, Country> getCountries() {
+        return d_countries;
+    }
 }

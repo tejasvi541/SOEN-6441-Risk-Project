@@ -2,7 +2,7 @@ package org.team25.game.controllers;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.team25.game.models.GameMap;
+import org.team25.game.models.map.GameMap;
 
 
 import static org.junit.Assert.*;

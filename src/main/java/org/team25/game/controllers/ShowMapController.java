@@ -1,8 +1,8 @@
 package org.team25.game.controllers;
 
-import org.team25.game.models.Continent;
-import org.team25.game.models.Country;
-import org.team25.game.models.GameMap;
+import org.team25.game.models.map.Continent;
+import org.team25.game.models.map.Country;
+import org.team25.game.models.map.GameMap;
 
 
 /**
