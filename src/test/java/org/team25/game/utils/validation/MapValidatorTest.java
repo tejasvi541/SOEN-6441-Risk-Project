@@ -1,6 +1,7 @@
 package org.team25.game.utils.validation;
 
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.team25.game.controllers.MapLoaderController;
 import org.team25.game.models.map.GameMap;
@@ -22,5 +23,11 @@ public class MapValidatorTest {
     public void validateMapObject() {
         d_gameMap = mapLoaderController.readMap("canada");
         assertTrue(validator.ValidateMapObject(d_gameMap));
+    }
+
+    @After
+    public void tearDown() {
+        // Clean up resources or release objects
+        d_gameMap = null;
     }
 }
