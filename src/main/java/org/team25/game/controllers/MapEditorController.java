@@ -51,7 +51,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member to set status of editing phase
      */
-    boolean d_status=true;
+    boolean editStatus =false;
 
     /**
      * This is the default constructor
@@ -134,7 +134,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                         //MapLoader.readMapObject(d_GameMap);
                         ShowMapController l_showMapController=new ShowMapController(d_GameMap);
                         l_showMapController.show();
-                        d_status=true;
+                        editStatus =true;
                     }
                     break;
                 }
@@ -158,7 +158,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                     d_GameMap.get_continents().get(l_CommandsArray[2].toLowerCase()).get_countries().put(l_CommandsArray[1].toLowerCase(), l_Country);
                                     d_GameMap.get_countries().put(l_CommandsArray[1].toLowerCase(), l_Country);
                                     d_Logger.log(d_LogLevel,"Country "+l_CommandsArray[1]+" is successfullY added .");
-                                    d_status=true;
+                                    editStatus =true;
                                 }
                             } else {
                                 try {
@@ -200,7 +200,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
 
                                     d_Logger.log(d_LogLevel, "Country " + l_CommandsArray[1] + " is successfullY removed .");
-                                    d_status=true;
+                                    editStatus =true;
                                }
                             } else {
                                 try {
@@ -234,7 +234,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                         Continent l_Continent = new Continent(l_CommandsArray[1],l_CommandsArray[2], d_GameMap.get_continents().size()+1);
                                         d_GameMap.get_continents().put(l_CommandsArray[1].toLowerCase(), l_Continent);
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY added .");
-                                        d_status=true;
+                                        editStatus =true;
                                         }
                                     }
                                     else {
@@ -271,7 +271,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                         l_continents.remove(l_CommandsArray[1].toLowerCase());
                                         d_Logger.log(d_LogLevel,"All countries from continent "+l_CommandsArray[1]+" are successfulLY removed .");
                                         d_Logger.log(d_LogLevel,"Continent "+l_CommandsArray[1]+" is successfullY removed .");
-                                        d_status=true;
+                                        editStatus =true;
                                     }
                                 } else {
                                     try {
@@ -314,7 +314,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                     l_Country1.get_Neighbours().put(l_Country2.get_countryId().toLowerCase(), l_Country2);
                                     l_Country2.get_Neighbours().put(l_Country1.get_countryId().toLowerCase(), l_Country1);
                                     d_Logger.log(d_LogLevel, "Neighbour " + l_Country2 + " is successfullY added .");
-                                    d_status=true;
+                                    editStatus =true;
                                 }
                             } else {
                                 try {
@@ -349,7 +349,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                     l_Country1.get_Neighbours().remove(l_Country2.get_countryId().toLowerCase());
                                     l_Country2.get_Neighbours().remove(l_Country1.get_countryId().toLowerCase());
                                     d_Logger.log(d_LogLevel,"Neighbour "+l_Country2+" is successfullY removed .");
-                                    d_status=true;
+                                    editStatus =true;
                                 }
                                 else{
                                     try {
@@ -376,7 +376,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     MapValidator l_mapValidator=new MapValidator();
                     if (l_mapValidator.ValidateMapObject(d_GameMap)) {
                         d_Logger.log(d_LogLevel,"Map Validation successful");
-                        d_status=true;
+                        editStatus =true;
                     } else {
                         d_Logger.log(d_LogLevel,"Map Validation failed ! check the provided inputs again.");
                     }
@@ -388,7 +388,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     MapValidator l_mapValidator=new MapValidator();
                     if (l_mapValidator.ValidateMapObject(d_GameMap)) {
                         d_Logger.log(d_LogLevel,"Map Validation successful,Saving the map");
-                        d_status=true;
+                        editStatus =true;
                     } else {
                         d_Logger.log(d_LogLevel,"Map Validation failed ! check the provided inputs again.");
                     }
@@ -398,7 +398,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 //To exit from map editing phase
                 case Constants.EXIT: {
                     d_GameMap.flush();
-                    d_status=true;
+                    editStatus =true;
                 }
                 //list of commands for assist Player
                 default: {
@@ -420,7 +420,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 }
             }
         }
-        return d_status;
+        return editStatus;
     }
 
 
