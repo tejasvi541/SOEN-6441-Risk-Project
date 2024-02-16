@@ -12,12 +12,24 @@ import java.util.HashMap;
  */
 public class GameMap {
 
+    private static GameMap d_gameMap_single_instance = null;
     private String d_mapName;
     private boolean d_isValid;
     private HashMap<String, Continent> d_continents;
     private HashMap<String, Country> d_countries;
 
     private HashMap<String, Player> d_Players = new HashMap<>();
+
+    /**
+     * @return Singleton Instance of Map
+     */
+    public static synchronized GameMap getInstance()
+    {
+        if (d_gameMap_single_instance == null)
+            d_gameMap_single_instance = new GameMap();
+
+        return d_gameMap_single_instance;
+    }
 
 
     /**
