@@ -21,12 +21,8 @@ public class ShowMapController {
         this.d_gameMap = p_gameMap;
     }
 
-    /**
-     * Show Function which builds the Map Table to Display
-     * @param p_gameMap GameMap Object
-     */
-    public void show(GameMap p_gameMap) {
-        if(p_gameMap==null)
+    public void show() {
+        if(d_gameMap==null)
             return;
         System.out.printf("%100s\n", "===============================================================================================================================");
         System.out.printf("%30s%30s%60s\n", "Continents", "Country", "Country's Neighbors");
