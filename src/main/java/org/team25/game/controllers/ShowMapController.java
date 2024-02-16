@@ -5,61 +5,68 @@ import org.team25.game.models.Country;
 import org.team25.game.models.GameMap;
 
 
-
+/**
+ * This is the Controller to show the full Map in the terminal
+ * @author Tejasvi
+ */
 public class ShowMapController {
 
     private GameMap d_gameMap;
 
     /**
-     * Constructor to set the current GMap object to read and show the map
+     * Constructor to set the current GameMap object to read and show the map
      * @param p_gameMap GMap Object Parameter
      */
     public ShowMapController(GameMap p_gameMap){
         this.d_gameMap = p_gameMap;
     }
 
-    public void show(GameMap p_map) {
-        if(p_map==null)
+    /**
+     * Show Function which builds the Map Table to Display
+     * @param p_gameMap GameMap Object
+     */
+    public void show(GameMap p_gameMap) {
+        if(p_gameMap==null)
             return;
-        System.out.printf("%100s\n", "===================================================================================================");
-        System.out.printf("%30s%30s%40s\n", "Continents", "Country", "Country's neighbors");
-        System.out.printf("%100s\n", "===================================================================================================");
-        boolean l_PrintContinentName = true;
-        boolean l_PrintCountryName = true;
-        for(Continent l_continent : p_map.get_continents().values()) {
-            if(l_continent.get_countries().size()==0) {
+        System.out.printf("%100s\n", "===============================================================================================================================");
+        System.out.printf("%30s%30s%60s\n", "Continents", "Country", "Country's Neighbors");
+        System.out.printf("%100s\n", "===============================================================================================================================");
+        boolean l_isContinentPrinting = true;
+        boolean l_isCountryPrinting = true;
+        for(Continent l_continent : p_gameMap.get_continents().values()) {
+            if(l_continent.get_countries().isEmpty()) {
                 System.out.printf("\n%25s%25s%25s\n", l_continent.get_continentId(), "", "");
             }
             for(Country l_country : l_continent.get_countries().values()) {
-                if(l_country.get_Neighbours().size()==0) {
-                    if(l_PrintContinentName && l_PrintCountryName) {
-                        System.out.printf("\n%30s%30s%30s\n", l_continent.get_continentId(), l_country.get_countryId(), "");
-                        l_PrintContinentName = false;
-                        l_PrintCountryName = false;
+                if(l_country.get_Neighbours().isEmpty()) {
+                    if(l_isContinentPrinting && l_isCountryPrinting) {
+                        System.out.printf("\n%35s%35s%50s\n", l_continent.get_continentId(), l_country.get_countryId(), "");
+                        l_isContinentPrinting = false;
+                        l_isCountryPrinting = false;
                     }
-                    else if(l_PrintCountryName) {
-                        System.out.printf("\n%30s%30s%30s\n", "", l_country.get_countryId(), "");
-                        l_PrintCountryName =  false;
+                    else if(l_isCountryPrinting) {
+                        System.out.printf("\n%35s%35s%50s\n", "", l_country.get_countryId(), "");
+                        l_isCountryPrinting =  false;
                     }
                 }
                 for(Country l_neighbor : l_country.get_Neighbours().values()) {
-                    if(l_PrintContinentName && l_PrintCountryName) {
-                        System.out.printf("\n%30s%30s%30s\n", l_continent.get_continentId(), l_country.get_countryId(), l_neighbor.get_countryId());
-                        l_PrintContinentName = false;
-                        l_PrintCountryName = false;
+                    if(l_isContinentPrinting && l_isCountryPrinting) {
+                        System.out.printf("\n%35s%35s%50s\n", l_continent.get_continentId(), l_country.get_countryId(), l_neighbor.get_countryId());
+                        l_isContinentPrinting = false;
+                        l_isCountryPrinting = false;
                     }
-                    else if(l_PrintCountryName) {
-                        System.out.printf("\n%30s%30s%30s\n", "", l_country.get_countryId(), l_neighbor.get_countryId());
-                        l_PrintCountryName = false;
+                    else if(l_isCountryPrinting) {
+                        System.out.printf("\n%35s%35s%50s\n", "", l_country.get_countryId(), l_neighbor.get_countryId());
+                        l_isCountryPrinting = false;
                     }
                     else {
-                        System.out.printf("%30s%30s%30s\n", "", "", l_neighbor.get_countryId());
+                        System.out.printf("%35s%35s%50s\n", "", "", l_neighbor.get_countryId());
                     }
                 }
-                l_PrintCountryName = true;
+                l_isCountryPrinting = true;
             }
-            l_PrintContinentName = true;
-            l_PrintCountryName = true;
+            l_isContinentPrinting = true;
+            l_isCountryPrinting = true;
         }
     }
 
