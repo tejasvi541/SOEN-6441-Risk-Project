@@ -18,10 +18,4 @@ public interface MainEngine {
         System.out.println("Game started.");
     }
 
-    /**
-     * method declaration to set game phase
-     *
-     * @param p_gamePhase the game phase
-     */
-    void setGamePhase(GamePhase p_gamePhase);
 }

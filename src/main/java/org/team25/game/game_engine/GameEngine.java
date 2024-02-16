@@ -52,14 +52,4 @@ public class GameEngine implements MainEngine {
         }
 
     }
-
-    /**
-     * method declaration to set game phase
-     *
-     * @param p_gamePhase the game phase
-     */
-    @Override
-    public void setGamePhase(GamePhase p_gamePhase) {
-        //Todo set game phase
-    }
 }
