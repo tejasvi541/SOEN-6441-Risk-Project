@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.team25.game.interfaces.main_engine.GameFlowManager;
-import org.team25.game.interfaces.MapEditor;
+import org.team25.game.interfaces.maps.MapEditor;
 import org.team25.game.models.map.Continent;
 import org.team25.game.models.map.Country;
 import org.team25.game.models.map.GameMap;
