@@ -41,15 +41,15 @@ public class MapValidator {
     {
         Graph<Country, DefaultEdge> l_graph=generate_Graph(p_GameMap);
         if (!isConnected(l_graph)) {
-//            d_Logger.log(d_logLevel,"Not a connected graph");
+//            System.out.println("Not a connected graph");
             return false;
         }
         if ( isContinentEmpty(p_GameMap)) {
-//            d_Logger.log(d_logLevel,"continent is empty");
+//            System.out.println("continent is empty");
             return false;
         }
         if (!isContinentConnected(p_GameMap)) {
-//            d_Logger.log(d_logLevel,"continent not connected");
+//            System.out.println("continent not connected");
             return false;
         }
         return true;

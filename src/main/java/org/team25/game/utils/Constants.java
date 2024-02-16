@@ -17,8 +17,8 @@ public class Constants {
     public final static String SHOW_MAP="showmap";
     public final static String SAVE_MAP="savemap";
     public final static String EDIT_MAP="editmap";
-    public final static String ADD="add";
-    public final static String REMOVE="remove";
+    public final static String ADD="-add";
+    public final static String REMOVE="-remove";
 
 
 }

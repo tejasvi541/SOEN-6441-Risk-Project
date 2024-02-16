@@ -17,10 +17,8 @@ public class Main {
         showMapController.show(gameMap);
 
         MapEditorController editor = new MapEditorController(gameMap);
-        while(true) {
-            editor.run();
-            showMapController.show(gameMap);
-        }
+
+        editor.run();
 
     }
 }
