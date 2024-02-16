@@ -2,10 +2,13 @@ package org.team25.game.utils.validation;
 
 import java.util.HashMap;
 //import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.*;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
 
 import org.team25.game.models.map.Continent;
 import org.team25.game.models.map.Country;
@@ -29,23 +32,23 @@ public class MapValidator {
     public MapValidator() {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
-//    private static final Logger d_Logger = (Logger) LogManager.getLogger(MapValidator.class);
-//    Level d_logLevel=Level.parse("INFO");
+    private static final Logger d_Logger = LogManager.getLogger(MapValidator.class);
+
 
 
     public boolean ValidateMapObject(GameMap p_GameMap)
     {
         Graph<Country, DefaultEdge> l_graph=generate_Graph(p_GameMap);
         if (!isConnected(l_graph)) {
-//            d_Logger.log(d_logLevel,"Not a connected graph");
+            d_Logger.info("Not a connected graph");
             return false;
         }
         if ( isContinentEmpty(p_GameMap)) {
-//            d_Logger.log(d_logLevel,"continent is empty");
+            d_Logger.info("continent is empty");
             return false;
         }
         if (!isContinentConnected(p_GameMap)) {
-//            d_Logger.log(d_logLevel,"continent not connected");
+            d_Logger.info("continent not connected");
             return false;
         }
         return true;
