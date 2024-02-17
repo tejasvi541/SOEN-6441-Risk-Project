@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
  * @author Kapil Soni
  * @version 1.0.0
  */
-//Todo refactor
 public class StartGameController implements GameFlowManager {
 
     /**

@@ -164,7 +164,7 @@ public class Player {
         }
 
         if (l_IssueCommand) {
-            Order l_Order = OrderOwner.createOrder(l_CommandArr, this);
+            Order l_Order = OrderOwner.issueOrder(l_CommandArr, this);
             d_PlayerOrderList.add(l_Order);
             addOrder(l_Order);
             System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
