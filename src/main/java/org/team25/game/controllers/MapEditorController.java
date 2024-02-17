@@ -116,7 +116,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 }
             }
             else{
-                if(l_ListStream.get(0).equals(Constants.SHOW_MAP)|| l_ListStream.get(0).equals(Constants.VALIDATE_MAP)||l_ListStream.get(0).equals(Constants.SAVE_MAP))
+                if(l_ListStream.get(0).equals(Constants.SHOW_MAP)|| l_ListStream.get(0).equals(Constants.VALIDATE_MAP)||l_ListStream.get(0).equals(Constants.SAVE_MAP)||l_ListStream.get(0).equals(Constants.EDIT_MAP))
                     action(l_ListStream);
                 else if(l_ListStream.get(1).split(" ").length>=2){
                     String l_commandOperation=l_ListStream.get(1).split(" ")[0];
