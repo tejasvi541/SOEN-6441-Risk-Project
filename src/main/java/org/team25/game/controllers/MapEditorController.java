@@ -87,8 +87,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
             l_ListStream=fetchUserInput();
 
             // validating the input stream passed by user
-            boolean valid=validateUserInput(l_ListStream);
-            if (!valid) {
+            boolean l_valid=validateUserInput(l_ListStream);
+            if (!l_valid) {
                 if (!(l_ListStream.getFirst().startsWith("help")) && !(l_ListStream.getFirst().startsWith("exit"))) {
                     d_Log.info("Invalid Input,Try Again !");
                     run();
@@ -147,7 +147,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 // command to editmap
                 case Constants.EDIT_MAP: {
                     if (l_CommandsArray.length == 1) {
-                        //MapLoader.readMapObject(d_GameMap);
                         ShowMapController l_showMapController=new ShowMapController(d_GameMap);
                         l_showMapController.show();
                         d_editStatus =true;
@@ -189,8 +188,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                             if (l_CommandsArray.length == 2) {
 
                                 Country l_Country = d_GameMap.get_countries().get(l_CommandsArray[1].toLowerCase());
-                                ArrayList<Country> l_tempList = new ArrayList<Country>();
-
 
                                 //handling null values
                                 if (l_Country==null) {
@@ -233,10 +230,10 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     if (l_CommandsArray.length > 0) {
                         switch (l_CommandsArray[0]) {
                             case Constants.ADD: {
-                                HashMap<String, Continent> continents = d_GameMap.get_continents();
+                                HashMap<String, Continent> l_continents = d_GameMap.get_continents();
                                 if (l_CommandsArray.length == 3) {
                                     if( l_CommandsArray[1]!= null){
-                                        if (continents.containsKey(l_CommandsArray[1].toLowerCase())) {
+                                        if (l_continents.containsKey(l_CommandsArray[1].toLowerCase())) {
                                             try {
                                                 throw new ValidationException("Provided continent already exists in map,Try again with different continent !");
                                             } catch (ValidationException e) {
@@ -428,8 +425,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     public boolean validateUserInput(List<String> p_InputList) {
         if (!(p_InputList.isEmpty())) {
             String l_InputCommand = p_InputList.getFirst();
-            int index= d_MAP_CLI_COMMANDS.indexOf(l_InputCommand);
-            if(index!=-1)
+            int l_index= d_MAP_CLI_COMMANDS.indexOf(l_InputCommand);
+            if(l_index!=-1)
                 return true;
         }
         return false;
@@ -480,4 +477,5 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         MapEditorController editor = new MapEditorController(d_GameMap);
         editor.start(GamePhase.StartUp);
     }*/
+
 }
