@@ -10,6 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * This Map Saves the Current Editted/Uneditted Game Map Object to a given file name under map folder
+ * @author Tejasvi
+ */
 public class SaveMapController {
     private GameMap d_gameMap;
     private String d_fileName;

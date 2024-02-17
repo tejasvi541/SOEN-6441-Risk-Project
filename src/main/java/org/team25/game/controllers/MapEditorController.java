@@ -56,7 +56,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * This is the default constructor
      */
     public MapEditorController() {
-        this.d_GameMap = new GameMap();
+        this.d_GameMap = GameMap.getInstance();
     }
 
     /**
@@ -399,12 +399,15 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 // command to save map
                 case Constants.SAVE_MAP: {
                     MapValidator l_mapValidator=new MapValidator();
-                    if (l_mapValidator.ValidateMapObject(d_GameMap)) {
-                        //TODO: enhance validate objecct
-                        d_Log.info("Map Validation successful,Saving the map");
-                        d_editStatus =true;
-                    } else {
-                        d_Log.info("Map Validation failed ! check the provided inputs again.");
+                    if(!Objects.equals(l_CommandsArray[0], "savemap")){
+                        if (l_mapValidator.ValidateMapObject(d_GameMap)) {
+                            new SaveMapController(d_GameMap, l_CommandsArray[0]).saveMap();
+                            d_Log.info("Map Validation successful,Saving the map");
+                            d_editStatus =true;
+                            break;
+                        } else {
+                            d_Log.info("Map Validation failed ! check the provided inputs again.");
+                        }
                     }
                     break;
                 }
