@@ -4,16 +4,38 @@ package org.team25.game.models.orders;
 import org.team25.game.models.game_play.Player;
 import org.team25.game.models.map.Country;
 
-//Todo refactor
+
+/**
+ * OrderInformation model will be used by {@linkplain OrderOwner,Order}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 public class OrderInformation {
 
+    /**
+     * The player initiating the movement.
+     */
     private Player d_Player;
+
+    /**
+     * The country from which the movement begins.
+     */
     private Country d_Departure;
+
+    /**
+     * The destination country for the movement.
+     */
     private String d_Destination;
+
+    /**
+     * The number of armies being moved.
+     */
     private int d_NumberOfArmy;
 
     /**
      * A function to get the player information
+     *
      * @return the object of player
      */
     public Player getPlayer() {
@@ -23,6 +45,7 @@ public class OrderInformation {
 
     /**
      * A function to set the player information
+     *
      * @param d_Player the object of player
      */
     public void setPlayer(Player d_Player) {
@@ -32,7 +55,8 @@ public class OrderInformation {
 
     /**
      * A function to get the departure of the armies from the order
-     * @return  the departure country object
+     *
+     * @return the departure country object
      */
     public Country getDeparture() {
 
@@ -41,6 +65,7 @@ public class OrderInformation {
 
     /**
      * A function to set the departure of the armies from the order
+     *
      * @param d_Departure departure country object
      */
     public void setDeparture(Country d_Departure) {
@@ -50,6 +75,7 @@ public class OrderInformation {
 
     /**
      * A function to get where the army is going to.
+     *
      * @return the destination of armies
      */
     public String getDestination() {
@@ -59,6 +85,7 @@ public class OrderInformation {
 
     /**
      * A function to set the destination of the armies
+     *
      * @param d_Destination the destination of armies
      */
     public void setDestination(String d_Destination) {
@@ -69,6 +96,7 @@ public class OrderInformation {
 
     /**
      * A function to get the number of armies in the order
+     *
      * @return the number of armies
      */
     public int getNumberOfArmy() {
@@ -78,6 +106,7 @@ public class OrderInformation {
 
     /**
      * A function to set the number of armies in the order
+     *
      * @param d_NumberOfArmy the number of armies
      */
     public void setNumberOfArmy(int d_NumberOfArmy) {
