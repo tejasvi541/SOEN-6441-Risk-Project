@@ -104,10 +104,10 @@ public class ReinforcementController implements GameFlowManager {
                         }
                     }
                 }
-                d_CurrentPlayer.setReinforcementArmies(Math.max(l_Reinforcements, 3));
+                d_CurrentPlayer.setReinforcementArmies(Math.max(l_Reinforcements, 5));
                 System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
             } else {
-                d_CurrentPlayer.setReinforcementArmies(3);
+                d_CurrentPlayer.setReinforcementArmies(5);
                 System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
             }
         } else {

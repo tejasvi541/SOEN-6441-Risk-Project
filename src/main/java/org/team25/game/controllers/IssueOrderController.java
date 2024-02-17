@@ -23,7 +23,7 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * The d_UpcomingGamePhase is used to get next game phase.
      */
-    private final GamePhase d_UpcomingGamePhase = GamePhase.Reinforcement;
+    private final GamePhase d_UpcomingGamePhase = GamePhase.ExecuteOrder;
     /**
      * The d_GameMap is game map.
      */
@@ -87,10 +87,10 @@ public class IssueOrderController implements GameFlowManager {
      * @return command entered by the player
      */
     private String getCommandFromPlayer() {
-        String l_DeployCommand;
+        String l_DeployCommand = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
-        while (true) {
+        while (!l_DeployCommand.equals(Constants.EXIT)) {
             l_DeployCommand = d_Scanner.nextLine();
             if (Constants.DEPLOY_COMMAND.equalsIgnoreCase(l_DeployCommand.split(" ")[0])) {
                 if (checkIfCommandIsContainsDeploy(l_DeployCommand.toLowerCase())) {
@@ -100,6 +100,7 @@ public class IssueOrderController implements GameFlowManager {
                 System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
             }
         }
+        return l_DeployCommand;
     }
 
     /**

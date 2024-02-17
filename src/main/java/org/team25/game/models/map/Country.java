@@ -67,7 +67,7 @@ public class Country {
         this.d_countryId = p_countryId;
         this.d_parentContinent = p_parentContinent;
         this.d_neighbours = new HashMap<String, Country>();
-        this.d_numberOfArmies = 3;
+        this.d_numberOfArmies = 0;
     }
 
     /**
