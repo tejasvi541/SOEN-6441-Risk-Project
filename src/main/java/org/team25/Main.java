@@ -11,7 +11,7 @@ public class Main {
         GameMap gameMap = new GameMap();
         MapLoaderController load = new MapLoaderController();
 
-        gameMap = load.readMap("Canada");
+        gameMap = load.readMap("Canada ");
 
         ShowMapController showMapController = new ShowMapController(gameMap);
         showMapController.show();
