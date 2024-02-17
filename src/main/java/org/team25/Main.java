@@ -1,9 +1,11 @@
 package org.team25;
+
 import org.team25.game.game_engine.GameEngine;
 import org.team25.game.utils.Constants;
 
 /**
- * The type Main.
+ * The Main will call the GameEngine
+ * and it will start the MapEditor.
  */
 public class Main {
     /**
