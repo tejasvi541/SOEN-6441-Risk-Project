@@ -36,29 +36,53 @@ public class Country {
         this.d_countryId = p_countryId;
         this.d_parentContinent = p_parentContinent;
         this.d_neighbours = new HashMap<String, Country>();
-        this.d_numberOfArmies = 0;
+        this.d_numberOfArmies = 3;
     }
 
+    /**
+     * Set the countries file index
+     * @param d_countryFileIndex File Index
+     */
     public void set_countryFileIndex(int d_countryFileIndex) {
         this.d_countryFileIndex = d_countryFileIndex;
     }
 
+    /**
+     * Set the name of country
+     * @param d_countryId Name of country Parameter
+     */
     public void set_countryId(String d_countryId) {
         this.d_countryId = d_countryId;
     }
 
+    /**
+     * set Parent Continent of country
+     * @param d_parentContinent parent continent of country
+     */
     public void set_parentContinent(String d_parentContinent) {
         this.d_parentContinent = d_parentContinent;
     }
 
+    /**
+     * Set neighbor of the country
+     * @param d_neighbours neighbor hashmap
+     */
     public void set_neighbours(HashMap<String, Country> d_neighbours) {
         this.d_neighbours = d_neighbours;
     }
 
+    /**
+     * Set X coordinate of country
+     * @param d_xCoordinate X-Coordinate
+     */
     public void set_xCoordinate(int d_xCoordinate) {
         this.d_xCoordinate = d_xCoordinate;
     }
 
+    /**
+     * set Y coordinate of the country
+     * @param d_yCoordinate Y coordinate
+     */
     public void set_yCoordinate(int d_yCoordinate) {
         this.d_yCoordinate = d_yCoordinate;
     }

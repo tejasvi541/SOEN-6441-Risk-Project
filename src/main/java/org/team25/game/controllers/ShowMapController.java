@@ -18,9 +18,12 @@ public class ShowMapController {
      * @param d_gameMap GMap Object Parameter
      */
     public ShowMapController(GameMap d_gameMap){
-        this.d_gameMap = d_gameMap;
+        this.d_gameMap = GameMap.getInstance();
     }
 
+    /**
+     * This Function is the main logic behind displaying the Continents, then their corresponding countries and then their corresponding neighbors
+     */
     public void show() {
         if(d_gameMap==null)
             return;

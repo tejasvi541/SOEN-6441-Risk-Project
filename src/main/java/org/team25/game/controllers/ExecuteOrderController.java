@@ -20,8 +20,8 @@ public class ExecuteOrderController implements GameFlowManager {
      *
      */
     public ExecuteOrderController(){
-        //Todo get game map instance
-        // d_GameMap = GameMap.getInstance();
+
+        d_GameMap = GameMap.getInstance();
     }
     /**
      * This method starts the current game phase

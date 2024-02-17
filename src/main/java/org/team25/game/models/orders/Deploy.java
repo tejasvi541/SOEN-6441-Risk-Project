@@ -4,11 +4,11 @@ package org.team25.game.models.orders;
 import org.team25.game.models.game_play.Player;
 import org.team25.game.models.map.Country;
 //Todo refactor
-public class DeployOrder extends Order {
+public class Deploy extends Order {
     /**
      * Constructor for class DeployOrder
      */
-    public DeployOrder() {
+    public Deploy() {
         super();
         setType("deploy");
     }
