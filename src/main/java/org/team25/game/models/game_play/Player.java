@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The type Player for Game Map.
- * {@linkplain org.team25.game.models.map.GameMap}
+ * {org.team25.game.models.map.GameMap}
  *
  * @author Kapil Soni
  * @version 1.0.0

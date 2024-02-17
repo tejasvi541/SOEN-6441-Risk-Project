@@ -2,7 +2,7 @@ package org.team25.game.models.game_play;
 
 /**
  * Enum representing the commands used in the game mainly in
- * {@linkplain org.team25.game.controllers.StartGameController}
+ * {org.team25.game.controllers.StartGameController}
  *
  * @author Kapil Soni
  * @version 1.0.0

@@ -209,7 +209,6 @@ public class GameMap {
      * Adds player to the game map.
      *
      * @param p_PlayerName Player name
-     * @throws ValidationException if any input/output issue
      */
     public void addPlayer(String p_PlayerName) {
         if (this.getPlayers().containsKey(p_PlayerName)) {
@@ -226,7 +225,6 @@ public class GameMap {
      * Removes player from game map.
      *
      * @param p_PlayerName Player name
-     * @throws ValidationException if any input/output issue
      */
     public void removePlayer(String p_PlayerName) {
         Player l_Player = this.getPlayer(p_PlayerName);

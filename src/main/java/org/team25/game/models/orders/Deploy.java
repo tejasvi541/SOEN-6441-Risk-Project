@@ -6,7 +6,7 @@ import org.team25.game.models.map.Country;
 import org.team25.game.utils.Constants;
 
 /**
- * Deploy order model will be used by {@linkplain OrderOwner}
+ * Deploy order model will be used by {OrderOwner}
  *
  * @author Kapil Soni
  * @version 1.0.0

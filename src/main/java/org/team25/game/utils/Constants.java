@@ -128,7 +128,7 @@ public final class Constants {
 
     /**
      * Show Start Game Commands
-     * {@linkplain org.team25.game.controllers.StartGameController}
+     * {org.team25.game.controllers.StartGameController}
      */
     public static void showStartGameCommand(){
         System.out.println("Order of Game play commands are Listed below ::");
@@ -154,8 +154,17 @@ public final class Constants {
      * The constant SIMPLE_REMOVE.
      */
     public final static String SIMPLE_REMOVE="remove";
+    /**
+     * The constant CONTROLLERS_NOT_FOUND.
+     */
     public final static String CONTROLLERS_NOT_FOUND="No controller associated to this phase/feature found.";
+    /**
+     * The constant COUNTRIES_DOES_NOT_BELONG.
+     */
     public final static String COUNTRIES_DOES_NOT_BELONG="The country does not belong to you.";
+    /**
+     * The constant NOT_ENOUGH_REINFORCEMENTS.
+     */
     public final static String NOT_ENOUGH_REINFORCEMENTS="You do have enough Reinforcement Armies to deploy.";
 
 }

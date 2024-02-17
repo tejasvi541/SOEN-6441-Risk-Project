@@ -6,7 +6,7 @@ import org.team25.game.models.map.Country;
 
 
 /**
- * OrderInformation model will be used by {@linkplain OrderOwner,Order}
+ * OrderInformation model will be used by {OrderOwner,Order}
  *
  * @author Kapil Soni
  * @version 1.0.0

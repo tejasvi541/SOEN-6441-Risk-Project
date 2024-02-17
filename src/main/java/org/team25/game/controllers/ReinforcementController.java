@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * The Reinforcement order controller will give armies/reinforcements linked with
- * {@linkplain IssueOrderController}
+ * {IssueOrderController}
  *
  * @author Kapil Soni
  * @version 1.0.0

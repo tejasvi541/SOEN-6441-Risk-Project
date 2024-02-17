@@ -10,7 +10,7 @@ import org.team25.game.utils.Constants;
 import java.util.Scanner;
 
 /**
- * The Issue order controller will execute orders and passes to {@linkplain ExecuteOrderController}
+ * The Issue order controller will execute orders and passes to {ExecuteOrderController}
  *
  * @author Kapil Soni
  * @version 1.0.0

@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Game Engine is Entry point of the game.
  * It will connect ::
- * {@linkplain ExecuteOrderController,IssueOrderController,ReinforcementController,StartGameController,MapEditorController}
+ * {ExecuteOrderController,IssueOrderController,ReinforcementController,StartGameController,MapEditorController}
  *
  * @author Kapil Soni
  * @version 1.0.0
@@ -42,7 +42,6 @@ public class GameEngine implements MainEngine {
     /**
      * default method declaration for starting the game
      *
-     * @throws Exception if it occurs
      */
     @Override
     public void start() {

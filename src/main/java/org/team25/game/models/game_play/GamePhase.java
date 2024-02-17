@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * The enum Game phase used by controllers and GamePhase
- * {@linkplain ExecuteOrderController,ReinforcementController,MapEditorController,ReinforcementController,StartGameController}
+ * {ExecuteOrderController,ReinforcementController,MapEditorController,ReinforcementController,StartGameController}
  *
  * @author Kapil Soni
  * @version 1.0.0

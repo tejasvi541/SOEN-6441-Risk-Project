@@ -3,7 +3,12 @@ package org.team25.game.models.orders;
 import org.team25.game.models.game_play.Player;
 import org.team25.game.utils.Constants;
 
-//Todo refactor
+/**
+ * OrderOwner model will be used by {Player}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 
 public class OrderOwner {
     /**

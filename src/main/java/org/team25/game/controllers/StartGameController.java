@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * The StartGameController will perform main load game actions and associated controllers are
- * {@linkplain ExecuteOrderController,IssueOrderController,ReinforcementController,MapLoaderController,ShowMapController}
+ * {ExecuteOrderController,IssueOrderController,ReinforcementController,MapLoaderController,ShowMapController}
  *
  * @author Kapil Soni
  * @version 1.0.0

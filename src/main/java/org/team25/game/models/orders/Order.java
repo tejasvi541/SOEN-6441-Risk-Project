@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Order model will be used for order's work and
- * extended by {@linkplain Deploy}
+ * extended by {Deploy}
  *
  * @author Kapil Soni
  * @version 1.0.0

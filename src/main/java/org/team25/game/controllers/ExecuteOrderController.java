@@ -8,7 +8,7 @@ import org.team25.game.utils.Constants;
 import static org.team25.game.models.game_play.Player.d_PlayerOrderList;
 
 /**
- * TheExecute order controller will execute orders based on {@linkplain IssueOrderController}
+ * TheExecute order controller will execute orders based on {IssueOrderController}
  *
  * @author Kapil Soni
  * @version 1.0.0
