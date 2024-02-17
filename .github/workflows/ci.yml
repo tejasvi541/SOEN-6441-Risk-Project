@@ -34,6 +34,7 @@ jobs:
         echo "Risk project has complied and build successfully."
     - name: Build and run tests
       run: mvn clean test
+      if: ${{ always() }}
     - name: Javadoc Generation
       run: |
         mvn javadoc:javadoc;
