@@ -1,5 +1,6 @@
 package org.team25.game.interfaces.maps;
 
+import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.models.map.GameMap;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface MapEditor {
      * @param p_List to hold user input command
      * @return boolean: true if edit is successful
      */
-    public abstract GameMap action(List<String> p_List);
+    public abstract GamePhase action(List<String> p_List,GamePhase p_CurrentGamePhase);
 
     /**
      * To validate the user input command

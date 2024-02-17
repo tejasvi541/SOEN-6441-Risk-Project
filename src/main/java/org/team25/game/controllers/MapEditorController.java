@@ -81,7 +81,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         d_Log.info("*******************************************************************************************************");
     }
 
-    public GameMap run()  {
+    public GamePhase run(GamePhase p_CurrentPhase)  {
         List<String> l_ListStream;
         while (d_execute) {
             l_ListStream=fetchUserInput();
@@ -91,11 +91,11 @@ public class MapEditorController implements MapEditor, GameFlowManager {
             if (!l_valid) {
                 if (!(l_ListStream.getFirst().startsWith("help")) && !(l_ListStream.getFirst().startsWith("exit"))) {
                     d_Log.info("Invalid Input,Try Again !");
-                    run();
+                    run(p_CurrentPhase);
                 }
                 else if(l_ListStream.getFirst().startsWith("exit")) {
                     d_execute =false;
-                    return d_GameMap;
+                    return p_CurrentPhase.nextState(GamePhase.StartUp);
                 }
                 else if(l_ListStream.getFirst().startsWith("help")){
                     //list of commands to assist user
@@ -117,22 +117,22 @@ public class MapEditorController implements MapEditor, GameFlowManager {
             }
             else{
                 if(l_ListStream.get(0).equals(Constants.SHOW_MAP)|| l_ListStream.get(0).equals(Constants.VALIDATE_MAP)||l_ListStream.get(0).equals(Constants.SAVE_MAP)||l_ListStream.get(0).equals(Constants.EDIT_MAP))
-                    action(l_ListStream);
+                    action(l_ListStream,p_CurrentPhase);
                 else if(l_ListStream.get(1).split(" ").length>=2){
                     String l_commandOperation=l_ListStream.get(1).split(" ")[0];
                     if(l_commandOperation.equals(Constants.ADD)|| l_commandOperation.equals(Constants.REMOVE))
-                        action(l_ListStream);
+                        action(l_ListStream,p_CurrentPhase);
                 }
                 else
                     d_Log.info("Invalid Command,Check Again!");
 
             }
         }
-        return d_GameMap;
+        return p_CurrentPhase.nextState(GamePhase.StartUp);
     }
 
 
-    public GameMap action(List<String> p_ListStream) {
+    public GamePhase action(List<String> p_ListStream,GamePhase p_CurrentGamePhase) {
         for(int l_index=0;l_index<p_ListStream.size();l_index++) {
             String[] l_CommandsArray = p_ListStream.get(l_index).split(" ");
             switch (p_ListStream.getFirst().toLowerCase()) {
@@ -412,7 +412,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     break;
             }
         }
-        return d_GameMap;
+        return p_CurrentGamePhase.nextState(GamePhase.StartUp);
     }
 
 
@@ -455,27 +455,12 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * Starts the game controller.
      *
-     * @param currentPhase The current phase of the game.
+     * @param p_CurrentPhase The current phase of the game.
      * @return The next phase of the game.
-     * @throws Exception If an issue occurs during execution.
      */
     @Override
-    public GamePhase start(GamePhase currentPhase) throws Exception {
-        d_GameMap=run();
-        return currentPhase;
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
-    /*for testing
-    public static void main(String[] args)throws Exception {
-        GameMap d_GameMap = new GameMap();
-        MapLoaderController load = new MapLoaderController();
-
-        d_GameMap = load.readMap("Canada");
-
-        ShowMapController showMapController = new ShowMapController(d_GameMap);
-        showMapController.show();
-
-        MapEditorController editor = new MapEditorController(d_GameMap);
-        editor.start(GamePhase.StartUp);
-    }*/
 
 }

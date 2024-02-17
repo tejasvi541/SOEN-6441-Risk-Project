@@ -17,7 +17,7 @@ public final class Constants {
     /**
      * The constant TEAM_NAME.
      */
-    public static String TEAM_NAME = "team25";
+    public static String TEAM_NAME = "Team25";
     /**
      * The constant EDIT_COUNTRY.
      */
@@ -115,7 +115,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE.
      */
-    public final static String WELCOME_MESSAGE = TEAM_NAME + " welcomes you to warzone game" +"\n" +SEPERATER+"\n";
+    public final static String WELCOME_MESSAGE = SEPERATER+"\n"+TEAM_NAME + " welcomes you to warzone game" +"\n" +SEPERATER+"\n";
     /**
      * The constant INVALID_GAME_PHASE.
      */
@@ -131,6 +131,7 @@ public final class Constants {
      * {org.team25.game.controllers.StartGameController}
      */
     public static void showStartGameCommand(){
+        System.out.println(SEPERATER);
         System.out.println("Order of Game play commands are Listed below ::");
         System.out.println("To load the map : loadmap filename" + "  e.g. loadmap canada");
         System.out.println("To show the loaded map : showmap"+"  e.g. showmap canada");

@@ -35,7 +35,7 @@ public class GameEngine implements MainEngine {
      */
     @Override
     public void configureEngine() {
-        d_GamePhase = GamePhase.StartUp;
+        d_GamePhase = GamePhase.MapEditor;
 
     }
 
