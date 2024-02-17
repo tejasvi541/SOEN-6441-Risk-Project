@@ -25,7 +25,7 @@ public class MapLoaderControllerTest {
 
     @Test
     public void readMap() {
-        d_mapName = "Canada";
+        d_mapName = "canada";
         d_gameMap = mapLoaderController.readMap(d_mapName);
         String[] continents = {"Atlantic_Provinces", "Ontario_and_Quebec", "Western_Provinces-South", "Western_Provinces-North", "Nunavut", "Northwestern_Territories"};
         int i=0;

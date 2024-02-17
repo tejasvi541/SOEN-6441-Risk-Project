@@ -14,7 +14,7 @@ public class MapEditorControllerTest {
 
     @Before
     public void setUp() {
-        gameMap = load.readMap("Canada");
+        gameMap = load.readMap("canada");
     }
 
     @Test
