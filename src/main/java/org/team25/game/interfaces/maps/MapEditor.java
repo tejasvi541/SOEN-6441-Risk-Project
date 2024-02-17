@@ -1,7 +1,6 @@
 package org.team25.game.interfaces.maps;
 
 import org.team25.game.models.game_play.GamePhase;
-import org.team25.game.models.map.GameMap;
 
 import java.util.List;
 

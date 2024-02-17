@@ -7,7 +7,6 @@ import org.team25.game.models.map.Country;
 import org.team25.game.models.map.GameMap;
 import org.team25.game.utils.Constants;
 import org.team25.game.utils.validation.InvalidExecutionException;
-import org.team25.game.utils.validation.ValidationException;
 
 import java.util.List;
 import java.util.Map;

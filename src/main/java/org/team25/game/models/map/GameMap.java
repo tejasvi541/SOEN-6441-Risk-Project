@@ -1,7 +1,6 @@
 package org.team25.game.models.map;
 
 import org.team25.game.models.game_play.Player;
-import org.team25.game.utils.validation.ValidationException;
 
 import java.util.*;
 
