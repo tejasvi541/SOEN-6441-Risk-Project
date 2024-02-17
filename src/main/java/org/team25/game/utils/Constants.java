@@ -134,7 +134,7 @@ public final class Constants {
         System.out.println(SEPERATER);
         System.out.println("Order of Game play commands are Listed below ::");
         System.out.println("To load the map : loadmap filename" + "  e.g. loadmap canada");
-        System.out.println("To show the loaded map : showmap"+"  e.g. showmap canada");
+        System.out.println("To show the loaded map : showmap"+"  e.g. showmap");
         System.out.println("To add or remove a player : gameplayer -add playername -remove playername"+"  e.g. gameplayer -add nisha");
         System.out.println("To assign countries : assigncountries");
     }

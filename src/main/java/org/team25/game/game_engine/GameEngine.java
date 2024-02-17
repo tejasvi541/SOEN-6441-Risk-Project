@@ -53,6 +53,7 @@ public class GameEngine implements MainEngine {
                     throw new Exception(Constants.CONTROLLERS_NOT_FOUND);
                 }
                 d_GamePhase = l_GameFlowManager.start(d_GamePhase);
+                System.out.println(Constants.SEPERATER);
                 System.out.println("The current phase " + d_GamePhase + " Phase.");
                 start();
             }
