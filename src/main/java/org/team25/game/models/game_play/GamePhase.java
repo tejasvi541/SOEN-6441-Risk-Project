@@ -7,9 +7,19 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The enum Game phase used by controllers and GamePhase
+ * {@linkplain ExecuteOrderController,ReinforcementController,MapEditorController,ReinforcementController,StartGameController}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 //Todo refactor
 public enum GamePhase {
 
+    /**
+     * The Map editor.
+     */
     MapEditor {
         /**
          * Retrieves the list of allowed next states from the MapEditor phase.
@@ -174,9 +184,20 @@ public enum GamePhase {
             return this;
         }
     }
+
     ;
 
+    /**
+     * Possible states list.
+     *
+     * @return the list
+     */
     public abstract List<GamePhase> possibleStates();
 
+    /**
+     * Gets controller.
+     *
+     * @return the controller
+     */
     public abstract GameFlowManager getController();
 }

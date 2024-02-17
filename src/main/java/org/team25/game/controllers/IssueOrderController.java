@@ -5,16 +5,29 @@ import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.models.game_play.Player;
 import org.team25.game.models.map.Country;
 import org.team25.game.models.map.GameMap;
+import org.team25.game.utils.Constants;
 
 import java.util.Scanner;
 
-//Todo refactor
+/**
+ * The Issue order controller will execute orders and passes to {@linkplain ExecuteOrderController}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 public class IssueOrderController implements GameFlowManager {
-    GamePhase d_NextGamePhase = GamePhase.ExecuteOrder;
-    GamePhase d_GamePhase = GamePhase.IssueOrder;
-    GameMap d_GameMap;
-
-    private final Scanner SCANNER = new Scanner(System.in);
+    /**
+     * Scanner will scan the inputs from the user
+     */
+    private final Scanner d_Scanner = new Scanner(System.in);
+    /**
+     * The d_UpcomingGamePhase is used to get next game phase.
+     */
+    private final GamePhase d_UpcomingGamePhase = GamePhase.Reinforcement;
+    /**
+     * The d_GameMap is game map.
+     */
+    private final GameMap d_GameMap;
 
     /**
      * Constructor to get the GameMap instance
@@ -26,55 +39,63 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * A function to start the issue order phase
      *
-     * @param p_GamePhase  The current phase which is executing
-     * @return the next phase to be executed
-     * @throws Exception  when execution fails
+     * @param p_CurrentGamePhase :  The current phase which is executing
+     * @return : to return the next phase to be executed
      */
 
     @Override
-    public GamePhase start(GamePhase p_GamePhase) throws Exception {
-        d_GamePhase = p_GamePhase;
-        int l_Counter = 0;
-        while (l_Counter < d_GameMap.getPlayers().size()) {
-            for (Player l_Player : d_GameMap.getPlayers().values()) {
-                if (l_Player.getReinforcementArmies() <= 0) {
-                    l_Counter++;
-                    continue;
-                }
-                System.out.println("Player:" + l_Player.getName() + "; Armies assigned are: " + l_Player.getReinforcementArmies());
-                System.out.println("The countries to be assigned armies are: ");
-                for(Country l_Country : l_Player.getCapturedCountries() ){
-                    System.out.println(l_Country.get_countryId() + " ");
-                }
-                System.out.println("=========================================================================================");
-                String l_Commands = readFromPlayer();
-                l_Player.issueOrder(l_Commands);
-            }
-        }
-        System.out.println("You have exhausted all your armies. Moving to the next phase.");
-        System.out.println("=========================================================================================");
-        return p_GamePhase.nextState(d_NextGamePhase);
+    public GamePhase start(GamePhase p_CurrentGamePhase) {
+        return run(p_CurrentGamePhase);
     }
 
     /**
-     *  A function to read all the commands from player
+     * run is entry method of Execute Order and it will run Issue order
+     *
+     * @param p_CurrentGamePhase : Current phase of game.
+     * @return : It will return game phase to go next
+     */
+    private GamePhase run(GamePhase p_CurrentGamePhase) {
+        /**
+         * The d_CurrentGamePhase is used to know current game phase.
+         */
+        int l_PlayerCounts = 0;
+        while (l_PlayerCounts < d_GameMap.getPlayers().size()) {
+            for (Player l_Player : d_GameMap.getPlayers().values()) {
+                if (l_Player.getReinforcementArmies() <= 0) {
+                    l_PlayerCounts++;
+                    continue;
+                }
+                System.out.println("Player:" + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
+                System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
+                for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
+                    System.out.println(l_CapturedCountry.get_countryId() + " ");
+                }
+                System.out.println(Constants.SEPERATER);
+                String l_DeployCommands = getCommandFromPlayer();
+                l_Player.issueOrder(l_DeployCommands);
+            }
+        }
+        System.out.println(Constants.ARMY_DEPLETED);
+        System.out.println(Constants.SEPERATER);
+        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+    }
+
+    /**
+     * A function to read all the commands from player
      *
      * @return command entered by the player
      */
-    private String readFromPlayer() {
-        String l_Command;
-        System.out.println("To issue your orders: ");
-        System.out.println("1. Enter help to view the set of command");
-        while(true){
-            l_Command = SCANNER.nextLine();
-            if ("deploy".equalsIgnoreCase(l_Command.split(" ")[0])) {
-                if (checkIfCommandIsDeploy(l_Command.toLowerCase())) {
-                    return l_Command;
+    private String getCommandFromPlayer() {
+        String l_DeployCommand;
+        System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
+        while (true) {
+            l_DeployCommand = d_Scanner.nextLine();
+            if (Constants.DEPLOY_COMMAND.equalsIgnoreCase(l_DeployCommand.split(" ")[0])) {
+                if (checkIfCommandIsContainsDeploy(l_DeployCommand.toLowerCase())) {
+                    return l_DeployCommand;
                 }
             } else {
-                System.out.println("List of game loop commands");
-                System.out.println("To deploy the armies : deploy countryID armies");
-                System.out.println("Please enter the correct command");
+                System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
             }
         }
     }
@@ -85,12 +106,11 @@ public class IssueOrderController implements GameFlowManager {
      * @param p_Command The command entered by player
      * @return true if the format is valid else false
      */
-    private boolean checkIfCommandIsDeploy(String p_Command){
-        String[] l_Commands = p_Command.split(" ");
-        if(l_Commands.length ==  3){
-            return l_Commands[0].equals("deploy");
-        }
-        else
+    private boolean checkIfCommandIsContainsDeploy(String p_Command) {
+        String[] l_CommandList = p_Command.split(" ");
+        if (l_CommandList.length == 3) {
+            return l_CommandList[0].equals(Constants.DEPLOY_COMMAND);
+        } else
             return false;
     }
 
