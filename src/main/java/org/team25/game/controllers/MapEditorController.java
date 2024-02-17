@@ -45,7 +45,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member to set continue of loop
      */
-    private static boolean execute=true;
+    private static boolean d_execute =true;
 
     /**
      * A data member to set status of editing phase
@@ -83,7 +83,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
     public GameMap run()  {
         List<String> l_ListStream;
-        while (execute) {
+        while (d_execute) {
             l_ListStream=fetchUserInput();
 
             // validating the input stream passed by user
@@ -94,7 +94,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     run();
                 }
                 else if(l_ListStream.getFirst().startsWith("exit")) {
-                    execute=false;
+                    d_execute =false;
                     return d_GameMap;
                 }
                 else if(l_ListStream.getFirst().startsWith("help")){
