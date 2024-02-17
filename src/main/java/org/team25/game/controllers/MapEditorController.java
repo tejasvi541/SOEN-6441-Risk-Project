@@ -467,7 +467,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         d_GameMap=run();
         return currentPhase;
     }
-    //for testing
+    /*for testing
     public static void main(String[] args)throws Exception {
         GameMap d_GameMap = new GameMap();
         MapLoaderController load = new MapLoaderController();
@@ -479,5 +479,5 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
         MapEditorController editor = new MapEditorController(d_GameMap);
         editor.start(GamePhase.StartUp);
-    }
+    }*/
 }
