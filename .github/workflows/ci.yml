@@ -9,8 +9,11 @@
 name: Java CI v0.0.1
 
 on:
-  push:
-    branches: [ 'main' ,'release/*','feature/*' ]
+   push:
+    branches:
+      - main
+      - release/*
+      - feature/*
 
 jobs:
   build:
