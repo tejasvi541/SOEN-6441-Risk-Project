@@ -1,12 +1,12 @@
-package org.team25.game.models.game_play;
+package org.team21.game.models.game_play;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.team25.game.models.map.Country;
+import org.team21.game.models.map.Country;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.team21.game.models.game_play.Player;
 import static org.junit.Assert.*;
 
 public class PlayerTest {

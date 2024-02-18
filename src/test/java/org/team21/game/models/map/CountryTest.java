@@ -1,8 +1,8 @@
-package org.team25.game.models.map;
+package org.team21.game.models.map;
 
 import org.junit.After;
 import org.junit.Test;
-import org.team25.game.models.game_play.Player;
+import org.team21.game.models.game_play.Player;
 
 import static org.junit.Assert.*;
 

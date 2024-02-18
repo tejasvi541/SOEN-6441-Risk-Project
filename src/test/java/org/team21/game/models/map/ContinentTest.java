@@ -1,4 +1,4 @@
-package org.team25.game.models.map;
+package org.team21.game.models.map;
 
 import org.junit.After;
 import org.junit.Before;
