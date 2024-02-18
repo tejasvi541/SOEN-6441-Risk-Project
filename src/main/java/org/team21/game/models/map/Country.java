@@ -45,7 +45,7 @@ public class Country {
     /**
      * Player/Owner of country
      */
-    private Player d_Player;
+    private Player d_Player = new Player();
     /**
      * Armies of country
      */
@@ -68,6 +68,7 @@ public class Country {
         this.d_parentContinent = p_parentContinent;
         this.d_neighbours = new HashMap<String, Country>();
         this.d_numberOfArmies = 0;
+        this.d_Armies = 0;
     }
 
     /**
@@ -169,7 +170,7 @@ public class Country {
      */
     public void deployArmies(int p_armies) {
 
-        d_Armies += p_armies;
+        this.d_Armies += p_armies;
     }
 
     /**
