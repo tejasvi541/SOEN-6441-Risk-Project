@@ -30,7 +30,7 @@ public class Player {
     /**
      * Player's name
      */
-    private String d_PlayerName;
+    private String d_PlayerName = "";
 
     /**
      * Captured countries by players.
