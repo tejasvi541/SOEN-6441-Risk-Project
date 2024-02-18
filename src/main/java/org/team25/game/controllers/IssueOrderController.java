@@ -7,6 +7,8 @@ import org.team25.game.models.map.Country;
 import org.team25.game.models.map.GameMap;
 import org.team25.game.utils.Constants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -59,21 +61,41 @@ public class IssueOrderController implements GameFlowManager {
          * The d_CurrentGamePhase is used to know current game phase.
          */
         int l_PlayerCounts = 0;
-        while (l_PlayerCounts < d_GameMap.getPlayers().size()) {
+        List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
+        while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
-                if (l_Player.getReinforcementArmies() <= 0) {
-                    l_PlayerCounts++;
-                    continue;
+                if(l_Player.getReinforcementArmies() != 0){
+                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
+                        l_ZeroReinforcementPlayers.add(l_Player.getName());
+                        l_PlayerCounts++;
+                        continue;
+                    }
+                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
+                        System.out.println(Constants.ARMY_DEPLETED);
+                        System.out.println(Constants.SEPERATER);
+                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                    }
+                    System.out.println(Constants.SEPERATER);
+                    System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
+                    System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
+                    for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
+                        System.out.println(l_CapturedCountry.get_countryId() + " ");
+                    }
+                    System.out.println(Constants.SEPERATER);
+                    String l_DeployCommands = getCommandFromPlayer();
+                    l_Player.issueOrder(l_DeployCommands);
+                }else{
+                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
+                        l_ZeroReinforcementPlayers.add(l_Player.getName());
+                        l_PlayerCounts++;
+                        continue;
+                    }
+                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
+                        System.out.println(Constants.ARMY_DEPLETED);
+                        System.out.println(Constants.SEPERATER);
+                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                    }
                 }
-                System.out.println(Constants.SEPERATER);
-                System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
-                System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
-                for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
-                    System.out.println(l_CapturedCountry.get_countryId() + " ");
-                }
-                System.out.println(Constants.SEPERATER);
-                String l_DeployCommands = getCommandFromPlayer();
-                l_Player.issueOrder(l_DeployCommands);
             }
         }
         System.out.println(Constants.ARMY_DEPLETED);
