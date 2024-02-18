@@ -1,0 +1,82 @@
+name CanadaTemp Map
+
+[files]
+
+[continents]
+Western_Provinces-South 3
+Asia 10
+Atlantic_Provinces 3
+Nunavut 3
+Northwestern_Territories 2
+Ontario_and_Quebec 4
+Western_Provinces-North 2
+
+[countries]
+1 Ontario-West 6 0 0
+2 Yukon_Territory 5 0 0
+3 NU-Baffin_Island 4 0 0
+4 NT-Victoria_Island-West 5 0 0
+5 Pakistan 2 0 0
+6 Ontario-North 6 0 0
+7 India 2 0 0
+8 Nova_Scotia 3 0 0
+9 Alberta-North 7 0 0
+10 NU-Northern_Islands 4 0 0
+11 Quebec-North 6 0 0
+12 Quebec-Central 6 0 0
+13 Northwest_Territories-Continental 5 0 0
+14 Quebec-South 6 0 0
+15 N&L-Newfoundland 3 0 0
+16 Prince_Edward_Island 3 0 0
+17 Ontario-South 6 0 0
+18 British_Columbia-South 1 0 0
+19 Saskatchewan-South 1 0 0
+20 NT-Northern_Islands 5 0 0
+21 Alberta-South 1 0 0
+22 New_Brunswick 3 0 0
+23 BC-Vancouver_Island 1 0 0
+24 Manitoba-South 1 0 0
+25 NU-Ellesmere_Island 4 0 0
+26 Manitoba-North 7 0 0
+27 NT-Banks_Island 5 0 0
+28 British_Columbia-North 7 0 0
+29 Saskatchewan-North 7 0 0
+30 Nunavut-Continental 4 0 0
+31 N&L-Labrador 3 0 0
+32 NU-Southern_Islands 4 0 0
+33 NU-Victoria_Island-East 4 0 0
+
+[borders]
+1 24 17 6 
+2 13 28 
+3 11 30 25 32 10 
+4 13 27 20 33 
+5 7 
+6 12 1 26 17 32 
+7 5 9 
+8 22 15 16 
+9 13 28 7 21 29 
+10 30 25 3 20 33 
+11 12 31 3 32 
+12 11 31 14 15 6 
+13 30 2 27 28 4 9 29 
+14 22 12 17 
+15 12 31 8 
+16 22 8 
+17 1 14 6 
+18 23 28 21 
+19 24 29 21 
+20 27 4 10 
+21 18 19 9 
+22 14 16 8 
+23 18 
+24 1 26 19 
+25 3 10 
+26 30 24 6 29 
+27 13 4 20 
+28 13 2 18 9 
+29 13 26 19 9 
+30 13 26 3 32 33 10 
+31 12 11 15 
+32 11 30 3 6 
+33 30 4 10 
