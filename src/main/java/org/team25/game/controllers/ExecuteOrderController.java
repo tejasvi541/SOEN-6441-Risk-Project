@@ -19,7 +19,7 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * The d_UpcomingGamePhase is used to get next game phase.
      */
-    private final GamePhase d_UpcomingGamePhase = GamePhase.Reinforcement;
+    private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
 
     /**
      * This is the default constructor for this constructor to get
