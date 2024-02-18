@@ -25,7 +25,9 @@ public class MapEditorControllerTest {
     public void validateInput() {
         MapEditorController editor = new MapEditorController(gameMap);
         List<String> input = Arrays.asList("showmap");
+        List<String> input_false = Arrays.asList("Watchmap");
         assertTrue(editor.validateUserInput(input));
+        assertFalse(editor.validateUserInput(input_false));
     }
 
     @Test

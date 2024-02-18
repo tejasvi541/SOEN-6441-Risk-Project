@@ -47,4 +47,16 @@ public class StartGameControllerTest {
         assertEquals(GamePhase.Reinforcement, startGame.start(gamePhase.StartUp));
     }
 
+    @Test
+    public void falseTestRun() throws ValidationException {
+        // Prepare test input
+        String input = "exit"; // Simulate user input "exit"
+        testIn = new ByteArrayInputStream(input.getBytes());
+        System.setIn(testIn);
+
+        // Call the method under test
+        StartGameController startGame = new StartGameController();
+        assertNotEquals(GamePhase.IssueOrder, startGame.start(gamePhase.StartUp));
+    }
+
 }
