@@ -1,7 +1,5 @@
 package org.team21.game.controllers;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.team21.game.models.game_play.GamePhase;
 
