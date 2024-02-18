@@ -1,11 +1,11 @@
-package org.team25.game.controllers;
+package org.team21.game.controllers;
 
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.team25.game.models.game_play.GamePhase;
-import org.team25.game.utils.validation.ValidationException;
+import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.utils.validation.ValidationException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

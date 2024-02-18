@@ -1,9 +1,9 @@
-package org.team25.game.controllers;
+package org.team21.game.controllers;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.team25.game.models.game_play.GamePhase;
+import org.team21.game.models.game_play.GamePhase;
 
 import java.util.List;
 import static org.junit.Assert.*;
@@ -11,10 +11,6 @@ import static org.junit.Assert.*;
 public class ExecuteOrderControllerTest {
 
     GamePhase gamePhase;
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void start() {
@@ -23,10 +19,10 @@ public class ExecuteOrderControllerTest {
         List<GamePhase> possibleStates = run.possibleStates();
         if (possibleStates != null) {
             // Assert that ExitGame is contained in possibleStates
-            assertTrue(possibleStates.contains(GamePhase.ExitGame));
+            assertTrue(possibleStates.contains(gamePhase.ExitGame));
 
             // Assert that nextState() returns ExitGame
-            assertEquals(GamePhase.ExitGame, run.nextState(GamePhase.ExitGame));
+            assertEquals(GamePhase.ExitGame, run.nextState(gamePhase.ExitGame));
         } else {
             assertNull(possibleStates);
         }

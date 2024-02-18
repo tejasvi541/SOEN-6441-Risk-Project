@@ -1,4 +1,4 @@
-package org.team25.game.controllers;
+package org.team21.game.controllers;
 
 import static org.junit.Assert.*;
 import org.junit.After;
@@ -7,8 +7,8 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Arrays;
 
-import org.team25.game.models.game_play.GamePhase;
-import org.team25.game.models.map.GameMap;
+import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.models.map.GameMap;
 
 public class MapEditorControllerTest {
 
