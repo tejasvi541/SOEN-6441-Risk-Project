@@ -36,6 +36,11 @@ jobs:
       run: |
         mvn javadoc:javadoc;
         echo "Javadocs has been generated successfully."
+    - name: Publish Javadoc
+      uses: actions/upload-artifact@v2
+      with:
+       name: javadoc
+       path: target/site/apidocs
     - name: Build and run tests
       run: mvn clean test
       if: ${{ always() }}
