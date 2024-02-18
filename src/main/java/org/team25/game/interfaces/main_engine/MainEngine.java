@@ -1,9 +1,13 @@
 package org.team25.game.interfaces.main_engine;
 
-import org.team25.game.models.game_play.GamePhase;
-
+/**
+ * The interface Main engine.
+ */
 public interface MainEngine {
 
+    /**
+     * Configure engine.
+     */
     default void configureEngine(){
         System.out.println("Engine configured.");
     }

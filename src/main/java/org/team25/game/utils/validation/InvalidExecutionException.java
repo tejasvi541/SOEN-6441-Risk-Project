@@ -1,6 +1,11 @@
 package org.team25.game.utils.validation;
 
-//Todo refactor
+/**
+ * The Invalid execution exception
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 public class InvalidExecutionException extends Exception {
     /**
      * initialising a string to hold message
@@ -15,7 +20,8 @@ public class InvalidExecutionException extends Exception {
     }
 
     /**
-     *Exception Message
+     * Exception Message
+     *
      * @param message exception message
      */
     public InvalidExecutionException(String message) {
@@ -24,6 +30,7 @@ public class InvalidExecutionException extends Exception {
 
     /**
      * Get the message and check for exception
+     *
      * @return message
      */
     @Override
