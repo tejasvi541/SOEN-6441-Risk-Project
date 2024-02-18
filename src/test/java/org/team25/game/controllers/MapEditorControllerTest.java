@@ -6,9 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.List;
 import java.util.Arrays;
+
+import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.models.map.GameMap;
 
 public class MapEditorControllerTest {
+
+    GamePhase gamePhase;
     GameMap gameMap = new GameMap();
     MapLoaderController load = new MapLoaderController();
 
@@ -28,7 +32,7 @@ public class MapEditorControllerTest {
     public void applyActionMap(){
         MapEditorController editor = new MapEditorController(gameMap);
         List<String> input = Arrays.asList("showmap");
-        assertNotNull(editor.action(input));
+        assertNotNull(editor.action(input, gamePhase.MapEditor));
     }
 
     @After
