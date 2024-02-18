@@ -1,14 +1,34 @@
 package org.team25.game.models.orders;
 
+import org.team25.game.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//Todo refactor
+/**
+ * Order model will be used for order's work and
+ * extended by {Deploy}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 public class Order {
+    /**
+     * Order's object
+     */
     private static Order d_Order;
+    /**
+     * Order type
+     */
     private String d_Type;
-    private OrderInfo d_OrderInfo;
+    /**
+     * Order information
+     */
+    private OrderInformation d_OrderInformation;
+    /**
+     * List of Orders
+     */
     private List<Order> d_OrderList = new ArrayList<Order>();
 
     /**
@@ -57,19 +77,19 @@ public class Order {
      *
      * @return the order information in an object
      */
-    public OrderInfo getOrderInfo() {
+    public OrderInformation getOrderInfo() {
 
-        return d_OrderInfo;
+        return d_OrderInformation;
     }
 
     /**
      * A function to the set Order information based on the order
      *
-     * @param p_OrderInfo Order Information contained in an object of type OrderInfo
+     * @param p_OrderInformation Order Information contained in an object of type OrderInfo
      */
-    public void setOrderInfo(OrderInfo p_OrderInfo) {
+    public void setOrderInfo(OrderInformation p_OrderInformation) {
 
-        this.d_OrderInfo = p_OrderInfo;
+        this.d_OrderInformation = p_OrderInformation;
     }
 
     /**
@@ -98,7 +118,7 @@ public class Order {
      * @return false as there is not order to be executed
      */
     public boolean execute() {
-        System.out.println("Void order is not able to execute");
+        System.out.println(Constants.INVALID_COMMAND);
         return false;
     }
 

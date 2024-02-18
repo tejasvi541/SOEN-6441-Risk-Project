@@ -1,17 +1,25 @@
 package org.team25.game.models.game_play;
 
-import org.team25.game.controllers.ExecuteOrderController;
-import org.team25.game.controllers.IssueOrderController;
-import org.team25.game.controllers.MapEditorController;
+import org.team25.game.controllers.*;
 import org.team25.game.interfaces.main_engine.GameFlowManager;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//Todo refactor
+/**
+ * The enum Game phase used by controllers and GamePhase
+ * {ExecuteOrderController,ReinforcementController,MapEditorController,ReinforcementController,StartGameController}
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
+
 public enum GamePhase {
 
+    /**
+     * The Map editor.
+     */
     MapEditor {
         /**
          * Retrieves the list of allowed next states from the MapEditor phase.
@@ -57,7 +65,7 @@ public enum GamePhase {
          */
         @Override
         public GameFlowManager getController() {
-            return new IssueOrderController();
+            return new StartGameController();
         }
     },
 
@@ -83,7 +91,7 @@ public enum GamePhase {
          */
         @Override
         public GameFlowManager getController() {
-            return new IssueOrderController();
+            return new ReinforcementController();
         }
     },
 
@@ -176,9 +184,20 @@ public enum GamePhase {
             return this;
         }
     }
+
     ;
 
+    /**
+     * Possible states list.
+     *
+     * @return the list
+     */
     public abstract List<GamePhase> possibleStates();
 
+    /**
+     * Gets controller.
+     *
+     * @return the controller
+     */
     public abstract GameFlowManager getController();
 }
