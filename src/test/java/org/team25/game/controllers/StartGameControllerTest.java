@@ -8,6 +8,7 @@ import org.team25.game.models.game_play.GamePhase;
 import org.team25.game.utils.validation.ValidationException;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -18,13 +19,13 @@ public class StartGameControllerTest {
     private final InputStream originalSystemIn = System.in;
     private final PrintStream originalSystemOut = System.out;
     private ByteArrayInputStream testIn;
-    private PrintStream testOut;
+    private ByteArrayOutputStream testOut;
 
     @Before
     public void setUp() {
         // Redirect System.out to a different PrintStream
-        testOut = new PrintStream(System.out);
-        System.setOut(testOut);
+        testOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(testOut));
     }
 
     @After
@@ -34,14 +35,16 @@ public class StartGameControllerTest {
         System.setIn(originalSystemIn);
     }
 
-//    @Test
-//    public void startGame() throws ValidationException {
-//        StartGameController startGame = new StartGameController();
-//        // Prepare test input
-//        String input = "exit\n"; // Simulate user input "exit"
-//        testIn = new ByteArrayInputStream(input.getBytes());
-//        System.setIn(testIn);
-//        assertNotNull(startGame.start(gamePhase.MapEditor));
-//    }
+    @Test
+    public void testRun() throws ValidationException {
+        // Prepare test input
+        String input = "exit"; // Simulate user input "exit"
+        testIn = new ByteArrayInputStream(input.getBytes());
+        System.setIn(testIn);
+
+        // Call the method under test
+        StartGameController startGame = new StartGameController();
+        assertEquals(GamePhase.Reinforcement, startGame.start(gamePhase.StartUp));
+    }
 
 }
