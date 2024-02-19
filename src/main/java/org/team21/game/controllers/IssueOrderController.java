@@ -56,7 +56,7 @@ public class IssueOrderController implements GameFlowManager {
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
         /**
-         * The d_CurrentGamePhase is used to know current game phase.
+         * The p_CurrentGamePhase is used to know current game phase.
          */
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
