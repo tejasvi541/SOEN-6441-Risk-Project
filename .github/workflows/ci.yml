@@ -38,6 +38,5 @@ jobs:
         echo "Javadocs has been generated successfully."
     - name: Build and run tests
       run: mvn clean test
-      if: ${{ always() }}
 
   
