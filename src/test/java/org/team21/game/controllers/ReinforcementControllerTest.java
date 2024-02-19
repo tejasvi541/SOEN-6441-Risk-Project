@@ -16,12 +16,17 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
+/**
+ * This class contains unit tests for the ReinforcementController class.
+ */
 public class ReinforcementControllerTest {
 
     private ReinforcementController reinforcementController;
     private GameMap gameMap;
 
+    /**
+     * Sets up the test environment before each test case.
+     */
     @Before
     public void setUp() {
         gameMap = GameMap.getInstance();
@@ -55,6 +60,12 @@ public class ReinforcementControllerTest {
         assertEquals(GamePhase.IssueOrder, nextPhase);
     }
 
+    /**
+     * Sets up a player with captured countries.
+     *
+     * @param playerName       The name of the player.
+     * @param capturedCountries The list of countries captured by the player.
+     */
     private void setupPlayer(String playerName, List<Country> capturedCountries) {
         Player player = new Player();
         player.setName(playerName);
@@ -62,36 +73,67 @@ public class ReinforcementControllerTest {
         gameMap.getPlayers().put(playerName, player);
     }
 
+    /**
+     * Tests the computer reinforcement logic for a player with no countries.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testComputerReinforcements_PlayerWithNoCountries() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
         assertEquals(5, gameMap.getPlayers().get("Player3").getReinforcementArmies());
     }
 
+    /**
+     * Tests the computer reinforcement logic for a player with one country.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testComputerReinforcements_PlayerWithOneCountry() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
         assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
     }
 
+    /**
+     * Tests the computer reinforcement logic for a player with a fully captured continent.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testComputerReinforcements_FullyCapturedContinent() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
         assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
     }
 
+    /**
+     * Tests the computer reinforcement logic for a player with a continent not fully captured.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testComputerReinforcements_NotFullyCapturedContinent() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
         assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
     }
 
+    /**
+     * Tests the computer reinforcement logic for multiple players in different continents.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testComputerReinforcements_MultiplePlayersInDifferentContinents() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
         assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
         assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
     }
+
+    /**
+     * Tests the assignment of reinforcement troops for a player with captured countries.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testAssignReinforcementTroops_PlayerWithCapturedCountries() throws InvalidExecutionException {
         reinforcementController.assignReinforcementTroops();
@@ -100,6 +142,11 @@ public class ReinforcementControllerTest {
         assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
     }
 
+    /**
+     * Tests the assignment of reinforcement troops for a player with no captured countries.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testAssignReinforcementTroops_PlayerWithNoCapturedCountries() throws InvalidExecutionException {
         // Assuming Player2 has captured no countries
@@ -107,6 +154,11 @@ public class ReinforcementControllerTest {
         assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
     }
 
+    /**
+     * Tests the assignment of reinforcement troops for continents not fully captured.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testAssignReinforcementTroops_NotFullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured 1 country in Continent1 (not fully captured)
@@ -114,6 +166,11 @@ public class ReinforcementControllerTest {
         assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
     }
 
+    /**
+     * Tests the assignment of reinforcement troops for fully captured continents.
+     *
+     * @throws InvalidExecutionException if an invalid execution occurs during the test.
+     */
     @Test
     public void testAssignReinforcementTroops_FullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured all countries in Continent1 (fully captured)

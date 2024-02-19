@@ -6,9 +6,21 @@ import org.team21.game.models.game_play.GamePhase;
 import java.util.List;
 import static org.junit.Assert.*;
 
+/**
+ * JUnit test class for ExecuteOrderController.
+ * This class tests the functionality of the ExecuteOrderController class.
+ */
+
 public class ExecuteOrderControllerTest {
 
     GamePhase gamePhase;
+
+    /**
+     * Test method for {@link ExecuteOrderController#start(GamePhase)}.
+     * This method tests the start method of the ExecuteOrderController class.
+     * It verifies that the start method returns the correct GamePhase object
+     * and checks if the possible states contain ExitGame and if nextState returns ExitGame.
+     */
 
     @Test
     public void start() {

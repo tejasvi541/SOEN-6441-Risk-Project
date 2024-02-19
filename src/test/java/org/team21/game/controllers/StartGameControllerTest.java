@@ -12,7 +12,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-
+/**
+ * JUnit test class for StartGameController.
+ */
 public class StartGameControllerTest {
 
     GamePhase gamePhase;
@@ -21,6 +23,10 @@ public class StartGameControllerTest {
     private ByteArrayInputStream testIn;
     private ByteArrayOutputStream testOut;
 
+    /**
+     * Sets up the test environment.
+     * Redirects System.out to a different PrintStream for testing.
+     */
     @Before
     public void setUp() {
         // Redirect System.out to a different PrintStream
@@ -28,6 +34,9 @@ public class StartGameControllerTest {
         System.setOut(new PrintStream(testOut));
     }
 
+    /**
+     * Restores the original System.out and System.in after the test.
+     */
     @After
     public void tearDown() {
         // Restore System.out and System.in after the test
@@ -35,6 +44,11 @@ public class StartGameControllerTest {
         System.setIn(originalSystemIn);
     }
 
+    /**
+     * Tests the run method of StartGameController.
+     *
+     * @throws ValidationException if validation fails
+     */
     @Test
     public void testRun() throws ValidationException {
         // Prepare test input
@@ -47,6 +61,11 @@ public class StartGameControllerTest {
         assertEquals(GamePhase.Reinforcement, startGame.start(gamePhase.StartUp));
     }
 
+    /**
+     * Tests the run method of StartGameController with a false assertion.
+     *
+     * @throws ValidationException if validation fails
+     */
     @Test
     public void falseTestRun() throws ValidationException {
         // Prepare test input

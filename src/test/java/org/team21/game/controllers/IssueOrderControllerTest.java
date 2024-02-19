@@ -15,9 +15,17 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * This class contains unit tests for the IssueOrderController class.
+ */
+
 public class IssueOrderControllerTest {
 
     private GameMap gameMap;
+
+    /**
+     * Sets up the test environment before each test case execution.
+     */
 
     @Before
     public void setUp() {
@@ -53,6 +61,9 @@ public class IssueOrderControllerTest {
         // Set up the input stream for simulating user input
     }
 
+    /**
+     * Tests the {@code run} method when all players have zero reinforcement armies.
+     */
 
     @Test
     public void testRun_AllPlayersHaveZeroReinforcementArmies() {
