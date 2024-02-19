@@ -8,8 +8,6 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -83,7 +81,7 @@ public class IssueOrderController implements GameFlowManager {
                     }
                     System.out.println(Constants.SEPERATER);
                     String l_DeployCommands = getCommandFromPlayer(l_Player);
-                    l_Player.issueOrder(l_DeployCommands);
+                    l_Player.issue_order(l_DeployCommands);
                 }else{
                     if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
                         l_ZeroReinforcementPlayers.add(l_Player.getName());
