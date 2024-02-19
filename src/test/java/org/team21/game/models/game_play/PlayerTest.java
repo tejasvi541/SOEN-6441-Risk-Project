@@ -9,10 +9,18 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * The type Player test.
+ *
+ * @author Nishith
+ */
 public class PlayerTest {
 
     private List<Player> players;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
         players = new ArrayList<>();
@@ -31,6 +39,9 @@ public class PlayerTest {
         }
     }
 
+    /**
+     * Test player attributes.
+     */
     @Test
     public void testPlayerAttributes() {
         assertEquals(4, players.size());
@@ -44,6 +55,9 @@ public class PlayerTest {
         }
     }
 
+    /**
+     * Test issue order.
+     */
     @Test
     public void testIssueOrder() {
         // Test with invalid command
@@ -59,6 +73,9 @@ public class PlayerTest {
         assertEquals(1, players.get(2).getOrders().size());
     }
 
+    /**
+     * Test check if country exists.
+     */
     @Test
     public void testCheckIfCountryExists() {
         // Test with empty captured countries
@@ -69,6 +86,9 @@ public class PlayerTest {
         assertFalse(players.getFirst().checkIfCountryExists("NonExistentCountry", players.getFirst()));
     }
 
+    /**
+     * Test deploy reinforcement armies from player.
+     */
     @Test
     public void testDeployReinforcementArmiesFromPlayer() {
         // Test with negative army count
@@ -84,6 +104,9 @@ public class PlayerTest {
         assertEquals(5, players.get(2).getReinforcementArmies());
     }
 
+    /**
+     * Test create a capture list.
+     */
     @Test
     public void testCreateACaptureList() {
         // Test with empty captured countries
