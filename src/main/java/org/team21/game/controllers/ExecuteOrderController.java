@@ -2,6 +2,7 @@ package org.team21.game.controllers;
 
 import org.team21.game.interfaces.main_engine.GameFlowManager;
 import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.models.game_play.Player;
 import org.team21.game.models.orders.Order;
 import org.team21.game.utils.Constants;
 
@@ -50,7 +51,7 @@ public class ExecuteOrderController implements GameFlowManager {
          */
 
         //Execute all orders and if it fails
-        if (ExecuteOrders()) {
+        if (executeOrders()) {
             System.out.println(Constants.EXECUTE_ORDER_SUCCESS);
         } else {
             System.out.println(Constants.EXECUTE_ORDER_FAIL);
@@ -63,9 +64,10 @@ public class ExecuteOrderController implements GameFlowManager {
      *
      * @return true if execution is successful
      */
-    private boolean ExecuteOrders() {
-        for (Order l_Order : d_PlayerOrderList) {
-            if (!l_Order.execute()) {
+    private boolean executeOrders() {
+        while (!d_PlayerOrderList.isEmpty()) {
+            Order l_PlayerOrder = Player.next_order();
+            if (!l_PlayerOrder.execute()) {
                 return false;
             }
         }
