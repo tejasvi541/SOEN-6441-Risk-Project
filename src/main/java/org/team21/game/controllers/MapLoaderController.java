@@ -65,7 +65,7 @@ public class MapLoaderController {
             l_fileReader.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("The said file is not found, please try again");
+            System.out.println("The said file is not found.");
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println("Input/Output Problem");
