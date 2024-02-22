@@ -88,7 +88,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testComputerReinforcements_PlayerWithNoCountries() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
-        assertEquals(5, gameMap.getPlayers().get("Player3").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("3").getReinforcementArmies());
     }
 
     /**
@@ -99,7 +99,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testComputerReinforcements_PlayerWithOneCountry() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
-        assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
     /**
@@ -110,7 +110,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testComputerReinforcements_FullyCapturedContinent() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
-        assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
     /**
@@ -121,7 +121,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testComputerReinforcements_NotFullyCapturedContinent() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
-        assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
     /**
@@ -132,8 +132,8 @@ public class ReinforcementControllerTest {
     @Test
     public void testComputerReinforcements_MultiplePlayersInDifferentContinents() throws InvalidExecutionException {
         reinforcementController.computerReinforcements();
-        assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
-        assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("1").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
     /**
@@ -146,7 +146,7 @@ public class ReinforcementControllerTest {
         reinforcementController.assignReinforcementTroops();
 
         // Assuming Player1 captured 2 countries in Continent1 (awarded 3 reinforcement armies)
-        assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
     /**
@@ -158,7 +158,7 @@ public class ReinforcementControllerTest {
     public void testAssignReinforcementTroops_PlayerWithNoCapturedCountries() throws InvalidExecutionException {
         // Assuming Player2 has captured no countries
         reinforcementController.assignReinforcementTroops();
-        assertEquals(5, gameMap.getPlayers().get("Player2").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
     /**
@@ -170,7 +170,7 @@ public class ReinforcementControllerTest {
     public void testAssignReinforcementTroops_NotFullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured 1 country in Continent1 (not fully captured)
         reinforcementController.assignReinforcementTroops();
-        assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
+        assertEquals(5, gameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
     /**
@@ -183,9 +183,9 @@ public class ReinforcementControllerTest {
         // Assuming Player1 captured all countries in Continent1 (fully captured)
         reinforcementController.assignReinforcementTroops();
 
-        if(gameMap.getPlayers().get("Player1").getCapturedCountries().size()==2){
+        if(gameMap.getPlayers().get("1").getCapturedCountries().size()==2){
 
-            assertEquals(5, gameMap.getPlayers().get("Player1").getReinforcementArmies());
+            assertEquals(5, gameMap.getPlayers().get("1").getReinforcementArmies());
         }
 
     }
