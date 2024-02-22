@@ -56,11 +56,11 @@ public class ReinforcementControllerTest {
         gameMap.get_countries().put("3", country3);
 
         // Setup players
-        setupPlayer("Player1", List.of(country1, country2));
-        setupPlayer("Player2", List.of(country3));
-        setupPlayer("Player3", new ArrayList<>());
-        setupPlayer("Player4", new ArrayList<>());
-        setupPlayer("Player5", new ArrayList<>());
+        setupPlayer("1", List.of(country1, country2));
+        setupPlayer("2", List.of(country3));
+        setupPlayer("3", new ArrayList<>());
+        setupPlayer("4", new ArrayList<>());
+        setupPlayer("5", new ArrayList<>());
 
         GamePhase currentPhase = GamePhase.Reinforcement;
         GamePhase nextPhase = reinforcementController.start(currentPhase);
