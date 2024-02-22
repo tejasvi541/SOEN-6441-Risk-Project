@@ -1,8 +1,10 @@
 package org.team21.game.game_engine;
 
+import org.team21.game.controllers.ShowMapController;
 import org.team21.game.interfaces.main_engine.GameFlowManager;
 import org.team21.game.interfaces.main_engine.MainEngine;
 import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
 import java.util.Objects;
@@ -53,9 +55,14 @@ public class GameEngine implements MainEngine {
                 }
                 d_GamePhase = l_GameFlowManager.start(d_GamePhase);
                 System.out.println(Constants.SEPERATER);
-                System.out.println("The current phase " + d_GamePhase + " Phase.");
+                System.out.println("************************"+"The Current phase " + d_GamePhase + " Phase"+"***********************");
+                System.out.println(Constants.SEPERATER);
+                if(d_GamePhase.equals(GamePhase.ExitGame)){
+                    new ShowMapController(GameMap.getInstance()).show();
+                }
                 start();
             }
+
         } catch (Exception p_Exception) {
             p_Exception.printStackTrace();
         }

@@ -7,9 +7,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -58,7 +56,7 @@ public class IssueOrderController implements GameFlowManager {
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
         /**
-         * The d_CurrentGamePhase is used to know current game phase.
+         * The p_CurrentGamePhase is used to know current game phase.
          */
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
@@ -82,8 +80,8 @@ public class IssueOrderController implements GameFlowManager {
                         System.out.println(l_CapturedCountry.get_countryId() + " ");
                     }
                     System.out.println(Constants.SEPERATER);
-                    String l_DeployCommands = getCommandFromPlayer();
-                    l_Player.issueOrder(l_DeployCommands);
+                    String l_DeployCommands = getCommandFromPlayer(l_Player);
+                    l_Player.issue_order(l_DeployCommands);
                 }else{
                     if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
                         l_ZeroReinforcementPlayers.add(l_Player.getName());
@@ -108,15 +106,17 @@ public class IssueOrderController implements GameFlowManager {
      *
      * @return command entered by the player
      */
-    private String getCommandFromPlayer() {
+    private String getCommandFromPlayer(Player p_CurrentPlayer) {
         String l_DeployCommand = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
         while (!l_DeployCommand.equals(Constants.EXIT)) {
             l_DeployCommand = d_Scanner.nextLine();
             if (Constants.DEPLOY_COMMAND.equalsIgnoreCase(l_DeployCommand.split(" ")[0])) {
-                if (checkIfCommandIsContainsDeploy(l_DeployCommand.toLowerCase())) {
-                    return l_DeployCommand;
+                if (checkIfCommandIsContainsDeploy(l_DeployCommand.toLowerCase(),p_CurrentPlayer)) {
+                    // Split the string based on consecutive whitespaces
+                    String[] l_StringParts = l_DeployCommand.trim().split("\\s+");
+                    return String.join(" ", l_StringParts);
                 }
             } else {
                 System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
@@ -131,10 +131,36 @@ public class IssueOrderController implements GameFlowManager {
      * @param p_Command The command entered by player
      * @return true if the format is valid else false
      */
-    private boolean checkIfCommandIsContainsDeploy(String p_Command) {
-        String[] l_CommandList = p_Command.split(" ");
+    private boolean checkIfCommandIsContainsDeploy(String p_Command,Player p_CurrentPlayer) {
+        boolean l_CapturedCountry = false;
+        String[] l_CommandList;
+        String commandString = p_Command.trim();
+
+        // Split the string based on consecutive whitespaces
+        l_CommandList = commandString.split("\\s+");
+
+
         if (l_CommandList.length == 3) {
-            return l_CommandList[0].equals(Constants.DEPLOY_COMMAND);
+            try {
+                int l_Number = Integer.parseInt(l_CommandList[2].trim());
+                if (l_Number <= 0) {
+                    System.out.println(Constants.ARMIES_NON_ZERO);
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(Constants.ARMIES_NON_ZERO);
+                return false;
+            }
+            for (Country l_Country : p_CurrentPlayer.getCapturedCountries()){
+                if(Objects.equals(l_CommandList[1].trim(), l_Country.get_countryId().toLowerCase())){
+                    l_CapturedCountry=true;
+                    break;
+                }
+            }
+            if(!l_CapturedCountry){
+                System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
+            }
+            return (l_CommandList[0].equals(Constants.DEPLOY_COMMAND) && l_CapturedCountry);
         } else
             return false;
     }

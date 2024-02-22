@@ -1,0 +1,10 @@
+org.team21
+org.team21.game.controllers
+org.team21.game.game_engine
+org.team21.game.interfaces.main_engine
+org.team21.game.interfaces.maps
+org.team21.game.models.game_play
+org.team21.game.models.map
+org.team21.game.models.orders
+org.team21.game.utils
+org.team21.game.utils.validation

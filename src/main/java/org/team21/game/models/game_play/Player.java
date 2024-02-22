@@ -30,7 +30,7 @@ public class Player {
     /**
      * Player's name
      */
-    private String d_PlayerName;
+    private String d_PlayerName = "";
 
     /**
      * Captured countries by players.
@@ -150,7 +150,7 @@ public class Player {
      *
      * @param p_Commands the type of order issued
      */
-    public void issueOrder(String p_Commands) {
+    public void issue_order(String p_Commands) {
         boolean l_IssueCommand = true;
         String[] l_CommandArr = p_Commands.split(" ");
         if (l_CommandArr.length > 2) {
@@ -217,5 +217,11 @@ public class Player {
             l_Result += l_Capture.get_countryId() + "-";
         }
         return !l_Result.isEmpty() ? l_Result.substring(0, l_Result.length() - 1) : "";
+    }
+
+    public static Order next_order() {
+        Order l_firstOrder = d_PlayerOrderList.getFirst();
+        d_PlayerOrderList.removeFirst();
+        return l_firstOrder;
     }
 }

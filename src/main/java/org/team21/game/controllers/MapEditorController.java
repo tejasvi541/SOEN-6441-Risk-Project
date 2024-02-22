@@ -107,7 +107,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     System.out.println("To add or remove a country : editcountry -add countryID continentID -remove countryID {example: editcountry -add India Asia or editcountry -remove India }");
                     System.out.println("To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID {example: editneighbor -add India Pakistan or editneighbor -remove India Pakistan}");
                     System.out.println("****************************************************************************************************************************");
-                    System.out.println("To save map file : savemap filename {example: savemap Canada.map}");
+                    System.out.println("To save map file : savemap filename {example: savemap Canada}");
                     System.out.println("****************************************************************************************************************************");
                     System.out.println("Additional map commands:");
                     System.out.println("To show the map: showmap {example: showmap}");

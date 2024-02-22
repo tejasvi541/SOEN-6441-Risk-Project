@@ -166,6 +166,10 @@ public final class Constants {
     /**
      * The constant NOT_ENOUGH_REINFORCEMENTS.
      */
-    public final static String NOT_ENOUGH_REINFORCEMENTS="You do have enough Reinforcement Armies to deploy.";
+    public final static String NOT_ENOUGH_REINFORCEMENTS="You do not have enough Reinforcement Armies to deploy.";
+    /**
+     * The constant ARMIES_NON_ZERO.
+     */
+    public final static String ARMIES_NON_ZERO="The armies should be a positive number.";
 
 }

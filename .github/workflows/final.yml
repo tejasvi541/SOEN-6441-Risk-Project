@@ -32,9 +32,11 @@ jobs:
       run: |
         mvn -B package --file pom.xml;
         echo "Risk project has complied and build successfully."
+    - name: Javadoc Generation
+      run: |
+        mvn javadoc:javadoc;
+        echo "Javadocs has been generated successfully."
     - name: Build and run tests
       run: mvn clean test
-      
-    
 
   
