@@ -9,13 +9,26 @@ import static org.junit.Assert.*;
 
 /**
  * This test class checks if the number and name of the loaded canada map is right or not
+ *
  * @author Tejasvi
  */
 public class MapLoaderControllerTest {
+    /**
+     * The D game map.
+     */
     GameMap d_gameMap;
+    /**
+     * The Map loader controller.
+     */
     MapLoaderController mapLoaderController;
+    /**
+     * The D map name.
+     */
     String d_mapName;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
         d_gameMap = new GameMap();
@@ -23,6 +36,9 @@ public class MapLoaderControllerTest {
         d_mapName = "";
     }
 
+    /**
+     * Read map.
+     */
     @Test
     public void readMap() {
         d_mapName = "canada";

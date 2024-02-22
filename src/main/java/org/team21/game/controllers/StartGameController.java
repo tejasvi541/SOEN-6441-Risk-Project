@@ -61,7 +61,6 @@ public class StartGameController implements GameFlowManager {
      *
      * @param p_UpcomingGamePhase : Upcoming Game Phase
      * @return : Next GamePhase to execute
-     * @throws ValidationException
      */
     private GamePhase run(GamePhase p_UpcomingGamePhase)  {
         while (true) {

@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI v0.0.1
+name: Java CI v0.0.2
 
 on:
    push:
@@ -32,10 +32,18 @@ jobs:
       run: |
         mvn -B package --file pom.xml;
         echo "Risk project has complied and build successfully."
+      if: ${{ always() }}
     - name: Javadoc Generation
       run: |
         mvn javadoc:javadoc;
         echo "Javadocs has been generated successfully."
+      if: ${{ always() }}
+    - name: Publish Javadoc
+      uses: actions/upload-artifact@v2
+      with:
+       name: javadoc
+       path: target/site/apidocs
+      if: ${{ always() }}
     - name: Build and run tests
       run: mvn clean test
 
