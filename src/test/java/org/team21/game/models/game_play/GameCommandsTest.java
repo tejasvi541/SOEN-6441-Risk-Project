@@ -1,11 +1,15 @@
 package org.team21.game.models.game_play;
 
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GameCommandsTest {
 
+    /**
+     * This class contains unit tests for the GameCommands class.
+     *
+     * @author Yesha
+     */
     @Test
     public void testFromString() {
         // Test valid command
@@ -14,8 +18,9 @@ public class GameCommandsTest {
         // Test valid command with different case
         assertEquals(GameCommands.LOAD_MAP, GameCommands.fromString("loadmap"));
 
-        // Test
+        // Test Ensures case sensitivity
         assertNotEquals(GameCommands.GAME_PLAYER,"gamePlayer");
+
         // Test invalid command
         assertNull(GameCommands.fromString("LoadMap"));
 
@@ -24,6 +29,7 @@ public class GameCommandsTest {
 
         // Test invalid command
         assertNull(GameCommands.fromString("Hello"));
+
         // Test null command
         assertNull(GameCommands.fromString(null));
     }
