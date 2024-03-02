@@ -34,9 +34,9 @@ public class Deploy extends Order {
         String l_Destination = getOrderInfo().getDestination();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         for (Country l_Country : l_Player.getCapturedCountries()) {
-            if (l_Country.get_countryId().equals(l_Destination)) {
+            if (l_Country.getCountryId().equals(l_Destination)) {
                 l_Country.deployArmies(l_ArmiesToDeploy);
-                System.out.println("The country " + l_Country.get_countryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
+                System.out.println("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
             }
         }
         System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination + ".");

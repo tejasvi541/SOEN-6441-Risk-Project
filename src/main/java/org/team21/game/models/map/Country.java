@@ -178,7 +178,7 @@ public class Country {
      *
      * @return returns d_index of this country in the ".map" file
      */
-    public int get_countryFileIndex() {
+    public int getCountryFileIndex() {
         return d_countryFileIndex;
     }
 
@@ -187,7 +187,7 @@ public class Country {
      *
      * @param d_countryFileIndex File Index
      */
-    public void set_countryFileIndex(int d_countryFileIndex) {
+    public void setCountryFileIndex(int d_countryFileIndex) {
         this.d_countryFileIndex = d_countryFileIndex;
     }
 
@@ -196,7 +196,7 @@ public class Country {
      *
      * @return returns d_inContinent in which this country belongs
      */
-    public String get_parentContinent() {
+    public String getParentContinent() {
         return this.d_parentContinent;
     }
 
@@ -205,7 +205,7 @@ public class Country {
      *
      * @param d_parentContinent parent continent of country
      */
-    public void set_parentContinent(String d_parentContinent) {
+    public void setParentContinent(String d_parentContinent) {
         this.d_parentContinent = d_parentContinent;
     }
 
@@ -214,7 +214,7 @@ public class Country {
      *
      * @return returns d_countryName
      */
-    public String get_countryId() {
+    public String getCountryId() {
         return d_countryId;
     }
 
@@ -223,7 +223,7 @@ public class Country {
      *
      * @param d_countryId Name of country Parameter
      */
-    public void set_countryId(String d_countryId) {
+    public void setCountryId(String d_countryId) {
         this.d_countryId = d_countryId;
     }
 
@@ -233,7 +233,7 @@ public class Country {
      *
      * @return returns d_neighbors of this country
      */
-    public HashMap<String, Country> get_Neighbours() {
+    public HashMap<String, Country> getNeighbours() {
         return this.d_neighbours;
     }
 
@@ -242,7 +242,7 @@ public class Country {
      *
      * @return returns d_numberOfArmies
      */
-    public int get_numberOfArmies() {
+    public int getNumberOfArmies() {
         return this.d_numberOfArmies;
     }
 
@@ -251,7 +251,7 @@ public class Country {
      *
      * @param p_numberOfArmies number of armies to be set in the country
      */
-    public void set_numberOfArmies(int p_numberOfArmies) {
+    public void setNumberOfArmies(int p_numberOfArmies) {
         this.d_numberOfArmies = p_numberOfArmies;
     }
 

@@ -62,7 +62,7 @@ public class MapValidator {
         }
         // Add Neighbours
         for (Country l_country : p_gameMap.getCountries().values()) {
-            for (Country l_neighbour : l_country.get_Neighbours().values()) {
+            for (Country l_neighbour : l_country.getNeighbours().values()) {
                 this.d_gMapObj.addEdge(l_country, l_neighbour);
             }
         }
@@ -77,7 +77,7 @@ public class MapValidator {
 
         for (Country l_country : p_countries.values()) {
             for (Country l_neighbour : p_countries.values()) {
-                if (p_countries.containsKey(l_neighbour.get_countryId().toLowerCase())) {
+                if (p_countries.containsKey(l_neighbour.getCountryId().toLowerCase())) {
                     p_subGraph.addEdge(l_country, l_neighbour);
                 }
             }

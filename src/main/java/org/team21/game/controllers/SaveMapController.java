@@ -69,11 +69,11 @@ public class SaveMapController {
                 l_writerPointer.write("[countries]");
                 l_writerPointer.newLine();
                 for(Country l_country : this.d_gameMap.getCountries().values()) {
-                    l_writerPointer.write(Integer.toString(l_country_idx) + " " + l_country.get_countryId() + " " + Integer.toString(this.d_gameMap.getContinents().get(l_country.get_parentContinent().toLowerCase()).getContinentFileIndex()) + " " + "0" + " " + "0");
+                    l_writerPointer.write(Integer.toString(l_country_idx) + " " + l_country.getCountryId() + " " + Integer.toString(this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex()) + " " + "0" + " " + "0");
                     l_writerPointer.newLine();
                     l_writerPointer.flush();
-                    l_indexToCountry.put(l_country_idx, l_country.get_countryId().toLowerCase());
-                    l_countryToIndex.put(l_country.get_countryId().toLowerCase(), l_country_idx);
+                    l_indexToCountry.put(l_country_idx, l_country.getCountryId().toLowerCase());
+                    l_countryToIndex.put(l_country.getCountryId().toLowerCase(), l_country_idx);
                     l_country_idx++;
                 }
                 l_writerPointer.newLine();
@@ -86,8 +86,8 @@ public class SaveMapController {
                     String l_countryId = l_indexToCountry.get(i);
                     Country l_cd = this.d_gameMap.getCountries().get(l_countryId.toLowerCase());
                     l_writerPointer.write(Integer.toString(i) + " ");
-                    for(Country l_neighbor : l_cd.get_Neighbours().values()) {
-                        l_writerPointer.write(Integer.toString(l_countryToIndex.get(l_neighbor.get_countryId().toLowerCase())) + " ");
+                    for(Country l_neighbor : l_cd.getNeighbours().values()) {
+                        l_writerPointer.write(Integer.toString(l_countryToIndex.get(l_neighbor.getCountryId().toLowerCase())) + " ");
                         l_writerPointer.flush();
                     }
                     l_writerPointer.newLine();

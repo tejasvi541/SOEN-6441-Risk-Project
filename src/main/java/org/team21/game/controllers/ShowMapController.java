@@ -39,29 +39,29 @@ public class ShowMapController {
                 System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), "", "", "", "");
             }
             for(Country l_country : l_continent.getCountries().values()) {
-                if(l_country.get_Neighbours().isEmpty()) {
+                if(l_country.getNeighbours().isEmpty()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isCountryPrinting =  false;
                     }
                 }
-                for(Country l_neighbor : l_country.get_Neighbours().values()) {
+                for(Country l_neighbor : l_country.getNeighbours().values()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.get_countryId());
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.get_countryId());
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isCountryPrinting = false;
                     }
                     else {
-                        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "", "", "", "", l_neighbor.get_countryId());
+                        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "", "", "", "", l_neighbor.getCountryId());
                     }
                 }
                 l_isCountryPrinting = true;

@@ -203,15 +203,15 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                     }
                                 }
                                 else {
-                                    Collection<Country> l_values=l_Country.get_Neighbours().values();
+                                    Collection<Country> l_values=l_Country.getNeighbours().values();
                                     Country[] l_neighbour= l_values.toArray(new Country[l_values.size()]);
                                     for(int l_position=0;l_position<l_neighbour.length;l_position++) {
-                                       if(l_neighbour[l_position].get_Neighbours().containsKey(l_Country.get_countryId().toLowerCase()) && l_Country.get_Neighbours().containsKey(l_neighbour[l_position].get_countryId().toLowerCase())) {
-                                           l_neighbour[l_position].get_Neighbours().remove(l_Country.get_countryId().toLowerCase());
-                                           l_Country.get_Neighbours().remove(l_neighbour[l_position].get_countryId().toLowerCase());
+                                       if(l_neighbour[l_position].getNeighbours().containsKey(l_Country.getCountryId().toLowerCase()) && l_Country.getNeighbours().containsKey(l_neighbour[l_position].getCountryId().toLowerCase())) {
+                                           l_neighbour[l_position].getNeighbours().remove(l_Country.getCountryId().toLowerCase());
+                                           l_Country.getNeighbours().remove(l_neighbour[l_position].getCountryId().toLowerCase());
                                     }}
                                     d_GameMap.getCountries().remove(l_CommandsArray[1].toLowerCase());
-                                    d_GameMap.getContinents().get(l_Country.get_parentContinent().toLowerCase()).getCountries().remove(l_CommandsArray[1].toLowerCase());
+                                    d_GameMap.getContinents().get(l_Country.getParentContinent().toLowerCase()).getCountries().remove(l_CommandsArray[1].toLowerCase());
 
 
                                     System.out.println( "Country " + l_CommandsArray[1] + " is successfullY removed .");
@@ -326,9 +326,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                     }
                                 }
                                 else {
-                                    l_Country1.get_Neighbours().put(l_Country2.get_countryId().toLowerCase(), l_Country2);
-                                    l_Country2.get_Neighbours().put(l_Country1.get_countryId().toLowerCase(), l_Country1);
-                                    System.out.println( l_Country1.get_countryId()+" and "+ l_Country2.get_countryId() + " are neighbors of each other now .");
+                                    l_Country1.getNeighbours().put(l_Country2.getCountryId().toLowerCase(), l_Country2);
+                                    l_Country2.getNeighbours().put(l_Country1.getCountryId().toLowerCase(), l_Country1);
+                                    System.out.println( l_Country1.getCountryId()+" and "+ l_Country2.getCountryId() + " are neighbors of each other now .");
                                     d_editStatus =true;
                                 }
                             } else {
@@ -360,10 +360,10 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                         System.out.println(e.getMessage());
                                     }
                                 }
-                                else if (l_Country1.get_Neighbours().containsKey(l_Country2.get_countryId().toLowerCase()) && l_Country2.get_Neighbours().containsKey(l_Country1.get_countryId().toLowerCase())) {
-                                    l_Country1.get_Neighbours().remove(l_Country2.get_countryId().toLowerCase());
-                                    l_Country2.get_Neighbours().remove(l_Country1.get_countryId().toLowerCase());
-                                    System.out.println("Neighbour "+l_Country2.get_countryId()+" is successfullY removed .");
+                                else if (l_Country1.getNeighbours().containsKey(l_Country2.getCountryId().toLowerCase()) && l_Country2.getNeighbours().containsKey(l_Country1.getCountryId().toLowerCase())) {
+                                    l_Country1.getNeighbours().remove(l_Country2.getCountryId().toLowerCase());
+                                    l_Country2.getNeighbours().remove(l_Country1.getCountryId().toLowerCase());
+                                    System.out.println("Neighbour "+l_Country2.getCountryId()+" is successfullY removed .");
                                     d_editStatus =true;
                                 }
                                 else{

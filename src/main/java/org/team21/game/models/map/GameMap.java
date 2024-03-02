@@ -249,7 +249,7 @@ public class GameMap {
             Player l_player = l_Players.get(playerIndex);
             l_player.getCapturedCountries().add(country);
             country.setPlayer(l_player);
-            System.out.println(country.get_countryId() + " assigned to " + l_player.getName());
+            System.out.println(country.getCountryId() + " assigned to " + l_player.getName());
 
             playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
         }

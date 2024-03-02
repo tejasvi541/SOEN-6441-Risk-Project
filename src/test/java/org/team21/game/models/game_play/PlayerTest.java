@@ -32,7 +32,7 @@ public class PlayerTest {
             // Initialize captured countries
             List<Country> capturedCountries = new ArrayList<>();
             Country country1 = new Country();
-            country1.set_countryId("Country1");
+            country1.setCountryId("Country1");
             capturedCountries.add(country1);
             player.setCapturedCountries(capturedCountries);
             players.add(player);
@@ -51,7 +51,7 @@ public class PlayerTest {
             assertEquals("TestPlayer" + i, player.getName());
             assertEquals(10, player.getReinforcementArmies());
             assertEquals(1, player.getCapturedCountries().size());
-            assertEquals("Country1", player.getCapturedCountries().get(0).get_countryId());
+            assertEquals("Country1", player.getCapturedCountries().get(0).getCountryId());
         }
     }
 
