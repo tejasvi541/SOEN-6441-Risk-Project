@@ -85,9 +85,9 @@ public class Country {
     public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, GameMap p_gameMap) {
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        for (Continent c : p_gameMap.get_continents().values()) {
-            if (c.get_continentFileIndex() == Integer.parseInt(p_parentContinent)) {
-                this.d_parentContinent = c.get_continentId();
+        for (Continent c : p_gameMap.getContinents().values()) {
+            if (c.getContinentFileIndex() == Integer.parseInt(p_parentContinent)) {
+                this.d_parentContinent = c.getContinentId();
             }
         }
         this.d_neighbours = new HashMap<String, Country>();
@@ -101,7 +101,7 @@ public class Country {
      *
      * @param d_neighbours neighbor hashmap
      */
-    public void set_neighbours(HashMap<String, Country> d_neighbours) {
+    public void setNeighbours(HashMap<String, Country> d_neighbours) {
         this.d_neighbours = d_neighbours;
     }
 
@@ -110,7 +110,7 @@ public class Country {
      *
      * @param d_xCoordinate X-Coordinate
      */
-    public void set_xCoordinate(int d_xCoordinate) {
+    public void setXCoordinate(int d_xCoordinate) {
         this.d_xCoordinate = d_xCoordinate;
     }
 
@@ -119,7 +119,7 @@ public class Country {
      *
      * @param d_yCoordinate Y coordinate
      */
-    public void set_yCoordinate(int d_yCoordinate) {
+    public void setYCoordinate(int d_yCoordinate) {
         this.d_yCoordinate = d_yCoordinate;
     }
 

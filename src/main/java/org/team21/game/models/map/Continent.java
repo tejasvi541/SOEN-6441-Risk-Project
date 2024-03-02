@@ -57,7 +57,7 @@ public class Continent {
      *
      * @return returns the Continent ID
      */
-    public String get_continentId() {
+    public String getContinentId() {
         return this.d_continentId;
     }
 
@@ -66,7 +66,7 @@ public class Continent {
      *
      * @param p_continentId Continent ID
      */
-    public void set_continent(String p_continentId) {
+    public void setContinentId(String p_continentId) {
         this.d_continentId = p_continentId;
     }
 
@@ -75,7 +75,7 @@ public class Continent {
      *
      * @return control value of the content
      */
-    public int get_controlValue() {
+    public int getControlValue() {
         return this.d_controlValue;
     }
 
@@ -84,7 +84,7 @@ public class Continent {
      *
      * @param p_controlValue Control value of Continent
      */
-    public void set_controlValue(String p_controlValue) {
+    public void setControlValue(String p_controlValue) {
         this.d_controlValue = Integer.parseInt(p_controlValue);
     }
 
@@ -93,7 +93,7 @@ public class Continent {
      *
      * @return returns the HashMap containing countries for a continent
      */
-    public HashMap<String, Country> get_countries() {
+    public HashMap<String, Country> getCountries() {
         return this.d_countries;
     }
 
@@ -102,7 +102,7 @@ public class Continent {
      *
      * @param p_countries Countries in the Continent
      */
-    public void set_Countries(HashMap<String, Country> p_countries) {
+    public void setCountries(HashMap<String, Country> p_countries) {
         this.d_countries = p_countries;
     }
 
@@ -111,7 +111,7 @@ public class Continent {
      *
      * @return The Continent's Index on the file
      */
-    public int get_continentFileIndex() {
+    public int getContinentFileIndex() {
         return this.d_continentFileIndex;
     }
 
@@ -120,7 +120,7 @@ public class Continent {
      *
      * @param p_continentFileIndex File Index of the Continent
      */
-    public void set_continentFileIndex(String p_continentFileIndex) {
+    public void setContinentFileIndex(String p_continentFileIndex) {
         this.d_continentFileIndex = Integer.parseInt(p_continentFileIndex);
     }
 

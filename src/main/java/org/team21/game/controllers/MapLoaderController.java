@@ -71,11 +71,11 @@ public class MapLoaderController {
             System.out.println("Input/Output Problem");
             System.out.println(e.getMessage());
         }
-        d_gameMap.set_mapName(p_mapName);
-        if(d_gameMap.get_continents().isEmpty()){
+        d_gameMap.setMapName(p_mapName);
+        if(d_gameMap.getContinents().isEmpty()){
             System.out.println("No Such Map Exists So Creating a New One");
         }else{
-            System.out.println("\n*********Your Map " + d_gameMap.get_mapName() + " is Loaded*********");
+            System.out.println("\n*********Your Map " + d_gameMap.getMapName() + " is Loaded*********");
         }
         return d_gameMap;
     }
@@ -121,7 +121,7 @@ public class MapLoaderController {
                 String[] l_continentString = l_lineString.split("\\s+");
 
                 if(Integer.parseInt(l_continentString[1])>=0) {
-                    d_gameMap.get_continents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
+                    d_gameMap.getContinents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
                     d_mapContinentIndex++;
                 }else{
                     System.out.println("Not Valid Map File");
@@ -182,9 +182,9 @@ public class MapLoaderController {
      * @param p_newCountry  Country Name to be added
      */
     private void addCountryToContinentMap(Country p_newCountry){
-        Continent tempContinent = d_gameMap.get_continents().get(p_newCountry.get_parentContinent().toLowerCase());
-        tempContinent.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
-        d_gameMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
+        Continent tempContinent = d_gameMap.getContinents().get(p_newCountry.get_parentContinent().toLowerCase());
+        tempContinent.getCountries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
+        d_gameMap.getCountries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
     }
 
 

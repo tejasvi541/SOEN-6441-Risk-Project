@@ -146,7 +146,7 @@ public class CountryTest {
     @Test
     public void setAndGetCoordinatesTest() {
         Country country = new Country();
-        country.set_xCoordinate(10);
-        country.set_yCoordinate(20);
+        country.setXCoordinate(10);
+        country.setYCoordinate(20);
     }
 }
