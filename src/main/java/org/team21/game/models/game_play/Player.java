@@ -184,7 +184,7 @@ public class Player {
     public boolean checkIfCountryExists(String p_Country, Player p_Player) {
         List<Country> l_ListOfCountries = p_Player.getCapturedCountries();
         for (Country l_Country : l_ListOfCountries) {
-            if (l_Country.get_countryId().equals(p_Country)) {
+            if (l_Country.getCountryId().equals(p_Country)) {
                 return true;
             }
         }
@@ -214,7 +214,7 @@ public class Player {
     public String createACaptureList(List<Country> p_Capture) {
         String l_Result = "";
         for (Country l_Capture : p_Capture) {
-            l_Result += l_Capture.get_countryId() + "-";
+            l_Result += l_Capture.getCountryId() + "-";
         }
         return !l_Result.isEmpty() ? l_Result.substring(0, l_Result.length() - 1) : "";
     }

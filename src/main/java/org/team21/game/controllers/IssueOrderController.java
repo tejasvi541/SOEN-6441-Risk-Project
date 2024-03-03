@@ -77,7 +77,7 @@ public class IssueOrderController implements GameFlowManager {
                     System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
                     System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
                     for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
-                        System.out.println(l_CapturedCountry.get_countryId() + " ");
+                        System.out.println(l_CapturedCountry.getCountryId() + " ");
                     }
                     System.out.println(Constants.SEPERATER);
                     String l_DeployCommands = getCommandFromPlayer(l_Player);
@@ -152,7 +152,7 @@ public class IssueOrderController implements GameFlowManager {
                 return false;
             }
             for (Country l_Country : p_CurrentPlayer.getCapturedCountries()){
-                if(Objects.equals(l_CommandList[1].trim(), l_Country.get_countryId().toLowerCase())){
+                if(Objects.equals(l_CommandList[1].trim(), l_Country.getCountryId().toLowerCase())){
                     l_CapturedCountry=true;
                     break;
                 }

@@ -95,11 +95,11 @@ public class ReinforcementController implements GameFlowManager {
                 int l_Reinforcements = (int) Math.floor(d_CurrentPlayer.getCapturedCountries().size() / 3f);
                 Map<String, List<Country>> l_CountryMap = d_CurrentPlayer.getCapturedCountries()
                         .stream()
-                        .collect(Collectors.groupingBy(Country::get_parentContinent));
+                        .collect(Collectors.groupingBy(Country::getParentContinent));
                 for (String l_Continent : l_CountryMap.keySet()) {
 
                     if (d_GameMap.getContinent(l_Continent) != null) {
-                        if (d_GameMap.getContinent(l_Continent).get_countries().size() == l_CountryMap.get(l_Continent).size()) {
+                        if (d_GameMap.getContinent(l_Continent).getCountries().size() == l_CountryMap.get(l_Continent).size()) {
                             l_Reinforcements += d_GameMap.getContinent(l_Continent).getAwardArmies();
                         }
                     }

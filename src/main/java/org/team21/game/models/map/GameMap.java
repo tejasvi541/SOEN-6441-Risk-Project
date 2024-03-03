@@ -80,7 +80,7 @@ public class GameMap {
      *
      * @return the name of the Map
      */
-    public String get_mapName() {
+    public String getMapName() {
         return this.d_mapName;
     }
 
@@ -89,7 +89,7 @@ public class GameMap {
      *
      * @param p_mapName function argument, means map name to be set
      */
-    public void set_mapName(String p_mapName) {
+    public void setMapName(String p_mapName) {
         this.d_mapName = p_mapName;
     }
 
@@ -98,7 +98,7 @@ public class GameMap {
      *
      * @return True /false if the map is valid or not
      */
-    public boolean get_isValid() {
+    public boolean getIsValid() {
         return this.d_isValid;
     }
 
@@ -107,7 +107,7 @@ public class GameMap {
      *
      * @param p_isValid function argument to set the d_isValid data-member
      */
-    public void set_isValid(boolean p_isValid) {
+    public void setIsValid(boolean p_isValid) {
         this.d_isValid = p_isValid;
     }
 
@@ -116,7 +116,7 @@ public class GameMap {
      *
      * @return hashmap of the continents
      */
-    public HashMap<String, Continent> get_continents() {
+    public HashMap<String, Continent> getContinents() {
         return this.d_continents;
     }
 
@@ -125,7 +125,7 @@ public class GameMap {
      *
      * @param p_continents function argument of hashmap of continents to be set
      */
-    public void set_continents(HashMap<String, Continent> p_continents) {
+    public void setContinents(HashMap<String, Continent> p_continents) {
         this.d_continents = p_continents;
     }
 
@@ -134,7 +134,7 @@ public class GameMap {
      *
      * @return return HashMap
      */
-    public HashMap<String, Country> get_countries() {
+    public HashMap<String, Country> getCountries() {
         return this.d_countries;
     }
 
@@ -143,7 +143,7 @@ public class GameMap {
      *
      * @param p_countries HashMap for d_countries
      */
-    public void set_countries(HashMap<String, Country> p_countries) {
+    public void setCountries(HashMap<String, Country> p_countries) {
         this.d_countries = p_countries;
     }
 
@@ -195,16 +195,6 @@ public class GameMap {
     }
 
     /**
-     * Gets continents.
-     *
-     * @param continent the continent
-     * @return the continents
-     */
-    public HashMap<String, Continent> getContinents(String continent) {
-        return d_continents;
-    }
-
-    /**
      * Adds player to the game map.
      *
      * @param p_PlayerName Player name
@@ -246,15 +236,6 @@ public class GameMap {
     }
 
     /**
-     * Get the list of countries
-     *
-     * @return d_Countries List of the countries
-     */
-    public HashMap<String, Country> getCountries() {
-        return d_countries;
-    }
-
-    /**
      * Assign countries.
      */
     public void assignCountries() {
@@ -268,7 +249,7 @@ public class GameMap {
             Player l_player = l_Players.get(playerIndex);
             l_player.getCapturedCountries().add(country);
             country.setPlayer(l_player);
-            System.out.println(country.get_countryId() + " assigned to " + l_player.getName());
+            System.out.println(country.getCountryId() + " assigned to " + l_player.getName());
 
             playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
         }

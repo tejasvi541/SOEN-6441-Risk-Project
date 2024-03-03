@@ -38,7 +38,7 @@ public class GameMapTest {
      */
     @Test
     public void isValidName() {
-        assertEquals("", gameMap.get_mapName());
+        assertEquals("", gameMap.getMapName());
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameMapTest {
      */
     @Test
     public void isValidNameMap() {
-        assertEquals("Canada", gameMap1.get_mapName());
+        assertEquals("Canada", gameMap1.getMapName());
     }
 
     /**

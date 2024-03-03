@@ -85,9 +85,9 @@ public class Country {
     public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, GameMap p_gameMap) {
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        for (Continent c : p_gameMap.get_continents().values()) {
-            if (c.get_continentFileIndex() == Integer.parseInt(p_parentContinent)) {
-                this.d_parentContinent = c.get_continentId();
+        for (Continent c : p_gameMap.getContinents().values()) {
+            if (c.getContinentFileIndex() == Integer.parseInt(p_parentContinent)) {
+                this.d_parentContinent = c.getContinentId();
             }
         }
         this.d_neighbours = new HashMap<String, Country>();
@@ -101,7 +101,7 @@ public class Country {
      *
      * @param d_neighbours neighbor hashmap
      */
-    public void set_neighbours(HashMap<String, Country> d_neighbours) {
+    public void setNeighbours(HashMap<String, Country> d_neighbours) {
         this.d_neighbours = d_neighbours;
     }
 
@@ -110,7 +110,7 @@ public class Country {
      *
      * @param d_xCoordinate X-Coordinate
      */
-    public void set_xCoordinate(int d_xCoordinate) {
+    public void setXCoordinate(int d_xCoordinate) {
         this.d_xCoordinate = d_xCoordinate;
     }
 
@@ -119,7 +119,7 @@ public class Country {
      *
      * @param d_yCoordinate Y coordinate
      */
-    public void set_yCoordinate(int d_yCoordinate) {
+    public void setYCoordinate(int d_yCoordinate) {
         this.d_yCoordinate = d_yCoordinate;
     }
 
@@ -178,7 +178,7 @@ public class Country {
      *
      * @return returns d_index of this country in the ".map" file
      */
-    public int get_countryFileIndex() {
+    public int getCountryFileIndex() {
         return d_countryFileIndex;
     }
 
@@ -187,7 +187,7 @@ public class Country {
      *
      * @param d_countryFileIndex File Index
      */
-    public void set_countryFileIndex(int d_countryFileIndex) {
+    public void setCountryFileIndex(int d_countryFileIndex) {
         this.d_countryFileIndex = d_countryFileIndex;
     }
 
@@ -196,7 +196,7 @@ public class Country {
      *
      * @return returns d_inContinent in which this country belongs
      */
-    public String get_parentContinent() {
+    public String getParentContinent() {
         return this.d_parentContinent;
     }
 
@@ -205,7 +205,7 @@ public class Country {
      *
      * @param d_parentContinent parent continent of country
      */
-    public void set_parentContinent(String d_parentContinent) {
+    public void setParentContinent(String d_parentContinent) {
         this.d_parentContinent = d_parentContinent;
     }
 
@@ -214,7 +214,7 @@ public class Country {
      *
      * @return returns d_countryName
      */
-    public String get_countryId() {
+    public String getCountryId() {
         return d_countryId;
     }
 
@@ -223,7 +223,7 @@ public class Country {
      *
      * @param d_countryId Name of country Parameter
      */
-    public void set_countryId(String d_countryId) {
+    public void setCountryId(String d_countryId) {
         this.d_countryId = d_countryId;
     }
 
@@ -233,7 +233,7 @@ public class Country {
      *
      * @return returns d_neighbors of this country
      */
-    public HashMap<String, Country> get_Neighbours() {
+    public HashMap<String, Country> getNeighbours() {
         return this.d_neighbours;
     }
 
@@ -242,7 +242,7 @@ public class Country {
      *
      * @return returns d_numberOfArmies
      */
-    public int get_numberOfArmies() {
+    public int getNumberOfArmies() {
         return this.d_numberOfArmies;
     }
 
@@ -251,7 +251,7 @@ public class Country {
      *
      * @param p_numberOfArmies number of armies to be set in the country
      */
-    public void set_numberOfArmies(int p_numberOfArmies) {
+    public void setNumberOfArmies(int p_numberOfArmies) {
         this.d_numberOfArmies = p_numberOfArmies;
     }
 
