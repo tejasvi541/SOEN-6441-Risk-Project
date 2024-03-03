@@ -43,7 +43,7 @@ public class MapValidatorTest {
     @Test
     public void validateMapObject() {
         d_gameMap = mapLoaderController.readMap("canada");
-        assertTrue(validator.ValidateMapObject(d_gameMap));
+        assertTrue(validator.validateMapObject(d_gameMap));
     }
 
     /**

@@ -50,16 +50,12 @@ public class MapLoaderController {
             BufferedReader l_fileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_mapName+".map"));
             String l_lineString;
             while((l_lineString=l_fileReader.readLine())!=null){
-                switch (l_lineString){
-                    case "[continents]":
-                        l_fileReader = processContinents(l_fileReader);
-                        break;
-                    case "[countries]":
-                        l_fileReader = processCountries(l_fileReader);
-                        break;
-                    case "[borders]":
-                        l_fileReader = processBorders(l_fileReader);
-                        break;
+                switch (l_lineString) {
+                    case "[continents]" -> processContinents(l_fileReader);
+                    case "[countries]" -> processCountries(l_fileReader);
+                    case "[borders]" -> processBorders(l_fileReader);
+                    default -> {
+                    }
                 }
             }
             l_fileReader.close();
@@ -71,11 +67,11 @@ public class MapLoaderController {
             System.out.println("Input/Output Problem");
             System.out.println(e.getMessage());
         }
-        d_gameMap.set_mapName(p_mapName);
-        if(d_gameMap.get_continents().isEmpty()){
+        d_gameMap.setMapName(p_mapName);
+        if(d_gameMap.getContinents().isEmpty()){
             System.out.println("No Such Map Exists So Creating a New One");
         }else{
-            System.out.println("\n*********Your Map " + d_gameMap.get_mapName() + " is Loaded*********");
+            System.out.println("\n*********Your Map " + d_gameMap.getMapName() + " is Loaded*********");
         }
         return d_gameMap;
     }
@@ -93,12 +89,12 @@ public class MapLoaderController {
                 String[] l_countryString = l_lineString.split("\\s+");
                 Country l_newCountry = new Country(l_countryString[0], l_countryString[1], l_countryString[2], l_countryString[3], l_countryString[4], d_gameMap);
                 try{
-                    if(l_newCountry.get_parentContinent()==null){
+                    if(l_newCountry.getParentContinent()==null){
                         System.out.println("Not Valid Map File");
                             System.exit(-1);
                     }
                     addCountryToContinentMap(l_newCountry);
-                    d_countriesList.put(l_newCountry.get_countryFileIndex(), l_newCountry);
+                    d_countriesList.put(l_newCountry.getCountryFileIndex(), l_newCountry);
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
@@ -121,7 +117,7 @@ public class MapLoaderController {
                 String[] l_continentString = l_lineString.split("\\s+");
 
                 if(Integer.parseInt(l_continentString[1])>=0) {
-                    d_gameMap.get_continents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
+                    d_gameMap.getContinents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
                     d_mapContinentIndex++;
                 }else{
                     System.out.println("Not Valid Map File");
@@ -154,7 +150,6 @@ public class MapLoaderController {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
         return p_fileReader;
     }
 
@@ -172,8 +167,13 @@ public class MapLoaderController {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        if(!p_tempCountry.get_Neighbours().containsKey(l_neighbourCountry.get_countryId().toLowerCase())){
-            p_tempCountry.get_Neighbours().put(l_neighbourCountry.get_countryId().toLowerCase(), l_neighbourCountry);
+        //todo Meet
+        try {
+            if (!p_tempCountry.getNeighbours().containsKey(l_neighbourCountry.getCountryId().toLowerCase())) {
+                p_tempCountry.getNeighbours().put(l_neighbourCountry.getCountryId().toLowerCase(), l_neighbourCountry);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -182,10 +182,13 @@ public class MapLoaderController {
      * @param p_newCountry  Country Name to be added
      */
     private void addCountryToContinentMap(Country p_newCountry){
-        Continent tempContinent = d_gameMap.get_continents().get(p_newCountry.get_parentContinent().toLowerCase());
-        tempContinent.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
-        d_gameMap.get_countries().put(p_newCountry.get_countryId().toLowerCase(), p_newCountry);
+        //todo Meet
+        try {
+            Continent tempContinent = d_gameMap.getContinents().get(p_newCountry.getParentContinent().toLowerCase());
+            tempContinent.getCountries().put(p_newCountry.getCountryId().toLowerCase(), p_newCountry);
+            d_gameMap.getCountries().put(p_newCountry.getCountryId().toLowerCase(), p_newCountry);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
-
-
 }

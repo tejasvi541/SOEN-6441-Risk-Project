@@ -38,7 +38,7 @@ public class IssueOrderControllerTest {
 
         // Set up continents
         Continent continent1 = new Continent("Continent1", "5", 1);
-        gameMap.get_continents().put("Continent1", continent1);
+        gameMap.getContinents().put("Continent1", continent1);
 
         // Set up countries
         Country country1 = new Country("Country1", "Continent1");
@@ -50,8 +50,8 @@ public class IssueOrderControllerTest {
         countries.add(country2);
         countries.add(country3);
         countries.add(country4);
-        gameMap.get_countries().put("1", country1);
-        gameMap.get_countries().put("2", country2);
+        gameMap.getCountries().put("1", country1);
+        gameMap.getCountries().put("2", country2);
 
         // Set up players
         HashMap<String, Player> players = new HashMap<>();

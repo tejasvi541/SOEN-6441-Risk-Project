@@ -31,21 +31,21 @@ public class MapValidator {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
 
-    public boolean ValidateMapObject(GameMap p_GameMap) {
+    public boolean validateMapObject(GameMap p_GameMap) {
         Graph<Country, DefaultEdge> l_graph = generate_Graph(p_GameMap);
+        //todo Meet
         if (!isConnected(l_graph)) {
             d_Logger.info("Not a connected graph");
             return false;
-        }
-        if (isContinentEmpty(p_GameMap)) {
+        }else if (isContinentEmpty(p_GameMap)) {
             d_Logger.info("continent is empty");
             return false;
-        }
-        if (!isContinentConnected(p_GameMap)) {
+        }else if (!isContinentConnected(p_GameMap)) {
             d_Logger.info("continent not connected");
             return false;
+        }else {
+            return true;
         }
-        return true;
     }
 
     /**
@@ -55,18 +55,16 @@ public class MapValidator {
      * @return Generated Graph
      */
     public Graph<Country, DefaultEdge> generate_Graph(GameMap p_gameMap) {
-
         // Add Vertex
-        for (Country l_country : p_gameMap.get_countries().values()) {
+        for (Country l_country : p_gameMap.getCountries().values()) {
             this.d_gMapObj.addVertex(l_country);
         }
         // Add Neighbours
-        for (Country l_country : p_gameMap.get_countries().values()) {
-            for (Country l_neighbour : l_country.get_Neighbours().values()) {
+        for (Country l_country : p_gameMap.getCountries().values()) {
+            for (Country l_neighbour : l_country.getNeighbours().values()) {
                 this.d_gMapObj.addEdge(l_country, l_neighbour);
             }
         }
-
         return this.d_gMapObj;
     }
 
@@ -77,14 +75,12 @@ public class MapValidator {
 
         for (Country l_country : p_countries.values()) {
             for (Country l_neighbour : p_countries.values()) {
-                if (p_countries.containsKey(l_neighbour.get_countryId().toLowerCase())) {
+                if (p_countries.containsKey(l_neighbour.getCountryId().toLowerCase())) {
                     p_subGraph.addEdge(l_country, l_neighbour);
                 }
             }
         }
-
         return p_subGraph;
-
     }
 
     /**
@@ -105,8 +101,8 @@ public class MapValidator {
      * @return true/false if the continent subgraph is connected or not
      */
     public boolean isContinentConnected(GameMap p_gameMap) {
-        for (Continent l_continent : p_gameMap.get_continents().values()) {
-            Graph<Country, DefaultEdge> subGraph = generate_SubGraph(new DefaultDirectedGraph<>(DefaultEdge.class), l_continent.get_countries());
+        for (Continent l_continent : p_gameMap.getContinents().values()) {
+            Graph<Country, DefaultEdge> subGraph = generate_SubGraph(new DefaultDirectedGraph<>(DefaultEdge.class), l_continent.getCountries());
             if (!isConnected(subGraph)) {
                 return false;
             }
@@ -122,7 +118,7 @@ public class MapValidator {
      * @return true/false if the continent exists or not
      */
     public boolean isContinentPresent(GameMap p_gameMap, String p_continentId) {
-        return p_gameMap.get_continents().containsKey(p_continentId.toLowerCase());
+        return p_gameMap.getContinents().containsKey(p_continentId.toLowerCase());
     }
 
     /**
@@ -133,7 +129,7 @@ public class MapValidator {
      * @return true/false if the continent exists or not
      */
     public boolean isCountryPresent(GameMap p_gameMap, String p_countryId) {
-        return p_gameMap.get_countries().containsKey(p_countryId.toLowerCase());
+        return p_gameMap.getCountries().containsKey(p_countryId.toLowerCase());
     }
 
     /**
@@ -143,8 +139,8 @@ public class MapValidator {
      * @return true/false if the continent is empty or not
      */
     public boolean isContinentEmpty(GameMap p_gameMap) {
-        for (Continent l_continent : p_gameMap.get_continents().values()) {
-            if (l_continent.get_countries().isEmpty()) {
+        for (Continent l_continent : p_gameMap.getContinents().values()) {
+            if (l_continent.getCountries().isEmpty()) {
                 return true;
             }
         }

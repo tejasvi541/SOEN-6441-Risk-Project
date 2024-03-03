@@ -31,7 +31,7 @@ public class ContinentTest {
      */
     @Test
     public void testGetContinentId() {
-        assertEquals("Africa", d_Continent.get_continentId());
+        assertEquals("Africa", d_Continent.getContinentId());
     }
 
     /**
@@ -39,8 +39,8 @@ public class ContinentTest {
      */
     @Test
     public void testSetContinentId() {
-        d_Continent.set_continent("Europe");
-        assertEquals("Europe", d_Continent.get_continentId());
+        d_Continent.setContinentId("Europe");
+        assertEquals("Europe", d_Continent.getContinentId());
     }
 
     /**
@@ -48,7 +48,7 @@ public class ContinentTest {
      */
     @Test
     public void testGetControlValue() {
-        assertEquals(5, d_Continent.get_controlValue());
+        assertEquals(5, d_Continent.getControlValue());
     }
 
     /**
@@ -56,8 +56,8 @@ public class ContinentTest {
      */
     @Test
     public void testSetControlValue() {
-        d_Continent.set_controlValue("10");
-        assertEquals(10, d_Continent.get_controlValue());
+        d_Continent.setControlValue("10");
+        assertEquals(10, d_Continent.getControlValue());
     }
 
     /**
@@ -65,7 +65,7 @@ public class ContinentTest {
      */
     @Test
     public void testGetCountries() {
-        HashMap<String, Country> countries = d_Continent.get_countries();
+        HashMap<String, Country> countries = d_Continent.getCountries();
         assertNotNull(countries);
         assertTrue(countries.isEmpty());
     }
@@ -81,8 +81,8 @@ public class ContinentTest {
         countries.put("UK", country1);
         countries.put("France", country2);
         System.out.println(countries);
-        d_Continent.set_Countries(countries);
-        assertEquals(countries, d_Continent.get_countries());
+        d_Continent.setCountries(countries);
+        assertEquals(countries, d_Continent.getCountries());
     }
 
     /**
@@ -96,8 +96,8 @@ public class ContinentTest {
         countries.put("UK", country1);
         countries.put("France", country2);
         System.out.println(countries);
-        d_Continent.set_Countries(countries);
-        assertNotEquals(countries.put("France", country2), d_Continent.get_countries());
+        d_Continent.setCountries(countries);
+        assertNotEquals(countries.put("France", country2), d_Continent.getCountries());
     }
 
     /**
@@ -105,7 +105,7 @@ public class ContinentTest {
      */
     @Test
     public void testGetContinentFileIndex() {
-        assertEquals(1, d_Continent.get_continentFileIndex());
+        assertEquals(1, d_Continent.getContinentFileIndex());
     }
 
     /**
@@ -113,8 +113,8 @@ public class ContinentTest {
      */
     @Test
     public void testSetContinentFileIndex() {
-        d_Continent.set_continentFileIndex("2");
-        assertEquals(2, d_Continent.get_continentFileIndex());
+        d_Continent.setContinentFileIndex("2");
+        assertEquals(2, d_Continent.getContinentFileIndex());
     }
 
     /**

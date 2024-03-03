@@ -27,18 +27,13 @@ public class GameEngine implements MainEngine {
     /**
      * GameEngine instance initializer
      */
-    public GameEngine() {
-        configureEngine();
-    }
+    public GameEngine() { configureEngine(); }
 
     /**
      * Config engine
      */
     @Override
-    public void configureEngine() {
-        d_GamePhase = GamePhase.MapEditor;
-
-    }
+    public void configureEngine() { d_GamePhase = GamePhase.MapEditor; }
 
     /**
      * default method declaration for starting the game
@@ -62,10 +57,8 @@ public class GameEngine implements MainEngine {
                 }
                 start();
             }
-
         } catch (Exception p_Exception) {
             p_Exception.printStackTrace();
         }
-
     }
 }
