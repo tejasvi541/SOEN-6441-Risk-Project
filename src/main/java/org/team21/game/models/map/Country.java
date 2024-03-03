@@ -85,10 +85,15 @@ public class Country {
     public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, GameMap p_gameMap) {
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        for (Continent c : p_gameMap.getContinents().values()) {
-            if (c.getContinentFileIndex() == Integer.parseInt(p_parentContinent)) {
-                this.d_parentContinent = c.getContinentId();
+        //todo Meet
+        try{
+            for (Continent c : p_gameMap.getContinents().values()) {
+                if (c.getContinentFileIndex() == Integer.parseInt(p_parentContinent)) {
+                    this.d_parentContinent = c.getContinentId();
+                }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         this.d_neighbours = new HashMap<String, Country>();
         this.d_xCoordinate = Integer.parseInt(p_xCoordinate);
@@ -101,131 +106,98 @@ public class Country {
      *
      * @param d_neighbours neighbor hashmap
      */
-    public void setNeighbours(HashMap<String, Country> d_neighbours) {
-        this.d_neighbours = d_neighbours;
-    }
+    public void setNeighbours(HashMap<String, Country> d_neighbours) { this.d_neighbours = d_neighbours; }
 
     /**
      * Set X coordinate of country
      *
      * @param d_xCoordinate X-Coordinate
      */
-    public void setXCoordinate(int d_xCoordinate) {
-        this.d_xCoordinate = d_xCoordinate;
-    }
+    public void setXCoordinate(int d_xCoordinate) { this.d_xCoordinate = d_xCoordinate; }
 
     /**
      * set Y coordinate of the country
      *
      * @param d_yCoordinate Y coordinate
      */
-    public void setYCoordinate(int d_yCoordinate) {
-        this.d_yCoordinate = d_yCoordinate;
-    }
+    public void setYCoordinate(int d_yCoordinate) { this.d_yCoordinate = d_yCoordinate; }
 
     /**
      * Get the player instance for the game play
      *
      * @return d_Player Player instance
      */
-    public Player getPlayer() {
-
-        return d_Player;
-    }
+    public Player getPlayer() { return d_Player; }
 
     /**
      * Set the player instance for the game play
      *
      * @param p_Player Player instance
      */
-    public void setPlayer(Player p_Player) {
-
-        this.d_Player = p_Player;
-    }
+    public void setPlayer(Player p_Player) { this.d_Player = p_Player; }
 
     /**
      * Get the number of armies for the country
      *
      * @return d_Armies Number of armies for the country
      */
-    public int getArmies() {
-
-        return d_Armies;
-    }
+    public int getArmies() { return d_Armies; }
 
     /**
      * Set the armies for the country
      *
      * @param p_Armies Number of armies for the country
      */
-    public void setArmies(int p_Armies) {
-
-        this.d_Armies = p_Armies;
-    }
+    public void setArmies(int p_Armies) { this.d_Armies = p_Armies; }
 
     /**
      * deploy the armies for the player
      *
      * @param p_armies number of armies to be deployed
      */
-    public void deployArmies(int p_armies) {
-
-        this.d_Armies += p_armies;
-    }
+    public void deployArmies(int p_armies) { this.d_Armies += p_armies; }
 
     /**
      * Returns the index of this country in the ".map" file
      *
      * @return returns d_index of this country in the ".map" file
      */
-    public int getCountryFileIndex() {
-        return d_countryFileIndex;
-    }
+    public int getCountryFileIndex() { return d_countryFileIndex; }
 
     /**
      * Set the countries file index
      *
      * @param d_countryFileIndex File Index
      */
-    public void setCountryFileIndex(int d_countryFileIndex) {
-        this.d_countryFileIndex = d_countryFileIndex;
-    }
+    public void setCountryFileIndex(int d_countryFileIndex) { this.d_countryFileIndex = d_countryFileIndex; }
 
     /**
      * Returns the name of the Continent in which this country belongs
      *
      * @return returns d_inContinent in which this country belongs
      */
-    public String getParentContinent() {
-        return this.d_parentContinent;
-    }
+    public String getParentContinent() { return this.d_parentContinent; }
 
     /**
      * set Parent Continent of country
      *
      * @param d_parentContinent parent continent of country
      */
-    public void setParentContinent(String d_parentContinent) {
-        this.d_parentContinent = d_parentContinent;
-    }
+    public void setParentContinent(String d_parentContinent) { this.d_parentContinent = d_parentContinent; }
 
     /**
      * Returns the name of the country
      *
      * @return returns d_countryName
      */
-    public String getCountryId() {
-        return d_countryId;
-    }
+    public String getCountryId() { return d_countryId; }
 
     /**
      * Set the name of country
      *
      * @param d_countryId Name of country Parameter
      */
-    public void setCountryId(String d_countryId) {
-        this.d_countryId = d_countryId;
-    }
+    public void setCountryId(String d_countryId) { this.d_countryId = d_countryId; }
 
     /**
      * Returns the HashMap holding all the neighbors with their names in lower case as keys and their corresponding
@@ -233,27 +205,21 @@ public class Country {
      *
      * @return returns d_neighbors of this country
      */
-    public HashMap<String, Country> getNeighbours() {
-        return this.d_neighbours;
-    }
+    public HashMap<String, Country> getNeighbours() { return this.d_neighbours; }
 
     /**
      * Getter method to get number of armies in the country.
      *
      * @return returns d_numberOfArmies
      */
-    public int getNumberOfArmies() {
-        return this.d_numberOfArmies;
-    }
+    public int getNumberOfArmies() { return this.d_numberOfArmies; }
 
     /**
      * Set number of armies in the country
      *
      * @param p_numberOfArmies number of armies to be set in the country
      */
-    public void setNumberOfArmies(int p_numberOfArmies) {
-        this.d_numberOfArmies = p_numberOfArmies;
-    }
+    public void setNumberOfArmies(int p_numberOfArmies) { this.d_numberOfArmies = p_numberOfArmies; }
 
     /**
      * Overrides the String object with countryDetails

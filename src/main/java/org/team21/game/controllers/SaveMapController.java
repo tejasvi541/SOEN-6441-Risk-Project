@@ -33,7 +33,7 @@ public class SaveMapController {
      * @return true if map got saved else false
      */
     public boolean saveMap(){
-        if(!new MapValidator().ValidateMapObject(this.d_gameMap)){
+        if(!new MapValidator().validateMapObject(this.d_gameMap)){
             System.out.println("This Map Format is not valid");
             return false;
         }else{
@@ -57,26 +57,35 @@ public class SaveMapController {
                 // Write Continents
                 l_writerPointer.write("[continents]");
                 l_writerPointer.newLine();
-                for(Continent l_continent : this.d_gameMap.getContinents().values()) {
-                    l_writerPointer.write(l_continent.getContinentId() + " " + l_continent.getControlValue());
+                //todo Meet
+                try {
+                    for (Continent l_continent : this.d_gameMap.getContinents().values()) {
+                        l_writerPointer.write(l_continent.getContinentId() + " " + l_continent.getControlValue());
+                        l_writerPointer.newLine();
+                        l_writerPointer.flush();
+                        l_continent.setContinentFileIndex(String.valueOf(l_continent_idx));
+                        l_continent_idx++;
+                    }
                     l_writerPointer.newLine();
-                    l_writerPointer.flush();
-                    l_continent.setContinentFileIndex(String.valueOf(l_continent_idx));
-                    l_continent_idx++;
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-                l_writerPointer.newLine();
                 // Write Countries
                 l_writerPointer.write("[countries]");
                 l_writerPointer.newLine();
-                for(Country l_country : this.d_gameMap.getCountries().values()) {
-                    l_writerPointer.write(Integer.toString(l_country_idx) + " " + l_country.getCountryId() + " " + Integer.toString(this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex()) + " " + "0" + " " + "0");
+                try {
+                    for (Country l_country : this.d_gameMap.getCountries().values()) {
+                        l_writerPointer.write(Integer.toString(l_country_idx) + " " + l_country.getCountryId() + " " + Integer.toString(this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex()) + " " + "0" + " " + "0");
+                        l_writerPointer.newLine();
+                        l_writerPointer.flush();
+                        l_indexToCountry.put(l_country_idx, l_country.getCountryId().toLowerCase());
+                        l_countryToIndex.put(l_country.getCountryId().toLowerCase(), l_country_idx);
+                        l_country_idx++;
+                    }
                     l_writerPointer.newLine();
-                    l_writerPointer.flush();
-                    l_indexToCountry.put(l_country_idx, l_country.getCountryId().toLowerCase());
-                    l_countryToIndex.put(l_country.getCountryId().toLowerCase(), l_country_idx);
-                    l_country_idx++;
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-                l_writerPointer.newLine();
 
                 //Write Borders
                 l_writerPointer.write("[borders]");
@@ -84,13 +93,17 @@ public class SaveMapController {
                 l_writerPointer.flush();
                 for(int i=1;i<l_country_idx;i++) {
                     String l_countryId = l_indexToCountry.get(i);
-                    Country l_cd = this.d_gameMap.getCountries().get(l_countryId.toLowerCase());
-                    l_writerPointer.write(Integer.toString(i) + " ");
-                    for(Country l_neighbor : l_cd.getNeighbours().values()) {
-                        l_writerPointer.write(Integer.toString(l_countryToIndex.get(l_neighbor.getCountryId().toLowerCase())) + " ");
-                        l_writerPointer.flush();
+                    try{
+                        Country l_cd = this.d_gameMap.getCountries().get(l_countryId.toLowerCase());
+                        l_writerPointer.write(Integer.toString(i) + " ");
+                        for (Country l_neighbor : l_cd.getNeighbours().values()) {
+                            l_writerPointer.write(Integer.toString(l_countryToIndex.get(l_neighbor.getCountryId().toLowerCase())) + " ");
+                            l_writerPointer.flush();
+                        }
+                        l_writerPointer.newLine();
+                    }catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
-                    l_writerPointer.newLine();
                 }
                 l_writerPointer.close();
             }catch (IOException e){
@@ -98,9 +111,6 @@ public class SaveMapController {
                 return false;
             }
         }
-
         return true;
-
     }
-
 }

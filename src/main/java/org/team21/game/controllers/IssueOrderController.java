@@ -32,9 +32,7 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * Constructor to get the GameMap instance
      */
-    public IssueOrderController() {
-        d_GameMap = GameMap.getInstance();
-    }
+    public IssueOrderController() { d_GameMap = GameMap.getInstance(); }
 
     /**
      * A function to start the issue order phase
@@ -44,9 +42,7 @@ public class IssueOrderController implements GameFlowManager {
      */
 
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
-    }
+    public GamePhase start(GamePhase p_CurrentGamePhase) { return run(p_CurrentGamePhase); }
 
     /**
      * run is entry method of Execute Order and it will run Issue order
@@ -139,7 +135,6 @@ public class IssueOrderController implements GameFlowManager {
         // Split the string based on consecutive whitespaces
         l_CommandList = commandString.split("\\s+");
 
-
         if (l_CommandList.length == 3) {
             try {
                 int l_Number = Integer.parseInt(l_CommandList[2].trim());
@@ -164,5 +159,4 @@ public class IssueOrderController implements GameFlowManager {
         } else
             return false;
     }
-
 }

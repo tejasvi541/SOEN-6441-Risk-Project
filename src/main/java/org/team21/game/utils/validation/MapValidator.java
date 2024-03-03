@@ -31,21 +31,21 @@ public class MapValidator {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
 
-    public boolean ValidateMapObject(GameMap p_GameMap) {
+    public boolean validateMapObject(GameMap p_GameMap) {
         Graph<Country, DefaultEdge> l_graph = generate_Graph(p_GameMap);
+        //todo Meet
         if (!isConnected(l_graph)) {
             d_Logger.info("Not a connected graph");
             return false;
-        }
-        if (isContinentEmpty(p_GameMap)) {
+        }else if (isContinentEmpty(p_GameMap)) {
             d_Logger.info("continent is empty");
             return false;
-        }
-        if (!isContinentConnected(p_GameMap)) {
+        }else if (!isContinentConnected(p_GameMap)) {
             d_Logger.info("continent not connected");
             return false;
+        }else {
+            return true;
         }
-        return true;
     }
 
     /**
@@ -55,36 +55,36 @@ public class MapValidator {
      * @return Generated Graph
      */
     public Graph<Country, DefaultEdge> generate_Graph(GameMap p_gameMap) {
-
+        //todo Meet
         // Add Vertex
-        for (Country l_country : p_gameMap.getCountries().values()) {
-            this.d_gMapObj.addVertex(l_country);
-        }
+//        for (Country l_country : p_gameMap.getCountries().values()) {
+//            this.d_gMapObj.addVertex(l_country);
+//        }
         // Add Neighbours
         for (Country l_country : p_gameMap.getCountries().values()) {
+            this.d_gMapObj.addVertex(l_country);
             for (Country l_neighbour : l_country.getNeighbours().values()) {
                 this.d_gMapObj.addEdge(l_country, l_neighbour);
             }
         }
-
         return this.d_gMapObj;
     }
 
     public Graph<Country, DefaultEdge> generate_SubGraph(Graph<Country, DefaultEdge> p_subGraph, HashMap<String, Country> p_countries) {
-        for (Country l_country : p_countries.values()) {
-            p_subGraph.addVertex(l_country);
-        }
+        //todo Meet
+//        for (Country l_country : p_countries.values()) {
+//            p_subGraph.addVertex(l_country);
+//        }
 
         for (Country l_country : p_countries.values()) {
+            p_subGraph.addVertex(l_country);
             for (Country l_neighbour : p_countries.values()) {
                 if (p_countries.containsKey(l_neighbour.getCountryId().toLowerCase())) {
                     p_subGraph.addEdge(l_country, l_neighbour);
                 }
             }
         }
-
         return p_subGraph;
-
     }
 
     /**

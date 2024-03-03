@@ -96,9 +96,7 @@ public class Player {
      *
      * @param p_CapturedCountries List of the captured countries
      */
-    public void setCapturedCountries(List<Country> p_CapturedCountries) {
-        this.d_PlayerCapturedCountries = p_CapturedCountries;
-    }
+    public void setCapturedCountries(List<Country> p_CapturedCountries) { this.d_PlayerCapturedCountries = p_CapturedCountries; }
 
     /**
      * A function to get the list of orders
@@ -163,7 +161,6 @@ public class Player {
                 System.out.println(Constants.NOT_ENOUGH_REINFORCEMENTS);
                 l_IssueCommand = false;
             }
-
             if (l_IssueCommand) {
                 Order l_Order = OrderOwner.issueOrder(l_CommandArr, this);
                 d_PlayerOrderList.add(l_Order);

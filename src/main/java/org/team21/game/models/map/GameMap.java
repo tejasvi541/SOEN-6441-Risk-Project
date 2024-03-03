@@ -241,17 +241,21 @@ public class GameMap {
     public void assignCountries() {
         int playerIndex = 0;
         List<Player> l_Players = d_gameMap_single_instance.getPlayers().values().stream().toList();
-        List<Country> l_CountryList = new ArrayList<>(d_gameMap_single_instance.getCountries().values());
+        try {
+            List<Country> l_CountryList = new ArrayList<>(d_gameMap_single_instance.getCountries().values());
 
-        Collections.shuffle(l_CountryList);
+            Collections.shuffle(l_CountryList);
 
-        for (Country country : l_CountryList) {
-            Player l_player = l_Players.get(playerIndex);
-            l_player.getCapturedCountries().add(country);
-            country.setPlayer(l_player);
-            System.out.println(country.getCountryId() + " assigned to " + l_player.getName());
+            for (Country country : l_CountryList) {
+                Player l_player = l_Players.get(playerIndex);
+                l_player.getCapturedCountries().add(country);
+                country.setPlayer(l_player);
+                System.out.println(country.getCountryId() + " assigned to " + l_player.getName());
 
-            playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
+                playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
