@@ -44,16 +44,16 @@ public class ReinforcementControllerTest {
         Continent continent2 = new Continent("Continent2", "3", 2);
         continent1.setAwardArmies(3);
         continent2.setAwardArmies(2);
-        gameMap.get_continents().put("Continent1", continent1);
-        gameMap.get_continents().put("Continent2", continent2);
+        gameMap.getContinents().put("Continent1", continent1);
+        gameMap.getContinents().put("Continent2", continent2);
 
         // Setup countries
         Country country1 = new Country("Country1", "Continent1");
         Country country2 = new Country("Country2", "Continent1");
         Country country3 = new Country("Country3", "Continent2");
-        gameMap.get_countries().put("1", country1);
-        gameMap.get_countries().put("2", country2);
-        gameMap.get_countries().put("3", country3);
+        gameMap.getCountries().put("1", country1);
+        gameMap.getCountries().put("2", country2);
+        gameMap.getCountries().put("3", country3);
 
         // Setup players
         setupPlayer("1", List.of(country1, country2));

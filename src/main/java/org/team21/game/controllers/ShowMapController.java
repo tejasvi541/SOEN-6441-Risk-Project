@@ -25,7 +25,7 @@ public class ShowMapController {
      * This Function is the main logic behind displaying the Continents, then their corresponding countries and then their corresponding neighbors
      */
     public void show() {
-        if (d_gameMap.get_mapName() == null || d_gameMap.get_continents() == null || d_gameMap.get_mapName() == "" || d_gameMap == null){
+        if (d_gameMap.getMapName() == null || d_gameMap.getContinents() == null || d_gameMap.getMapName() == "" || d_gameMap == null){
             System.out.println("Any Map is not Loaded");
             return;
         }
@@ -34,34 +34,34 @@ public class ShowMapController {
         System.out.printf("%100s\n", "===============================================================================================================================");
         boolean l_isContinentPrinting = true;
         boolean l_isCountryPrinting = true;
-        for(Continent l_continent : d_gameMap.get_continents().values()) {
-            if(l_continent.get_countries().isEmpty()) {
-                System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.get_continentId(), "", "", "", "");
+        for(Continent l_continent : d_gameMap.getContinents().values()) {
+            if(l_continent.getCountries().isEmpty()) {
+                System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), "", "", "", "");
             }
-            for(Country l_country : l_continent.get_countries().values()) {
-                if(l_country.get_Neighbours().isEmpty()) {
+            for(Country l_country : l_continent.getCountries().values()) {
+                if(l_country.getNeighbours().isEmpty()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.get_continentId(), l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isCountryPrinting =  false;
                     }
                 }
-                for(Country l_neighbor : l_country.get_Neighbours().values()) {
+                for(Country l_neighbor : l_country.getNeighbours().values()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.get_continentId(), l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.get_countryId());
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.get_countryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.get_countryId());
+                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isCountryPrinting = false;
                     }
                     else {
-                        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "", "", "", "", l_neighbor.get_countryId());
+                        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "", "", "", "", l_neighbor.getCountryId());
                     }
                 }
                 l_isCountryPrinting = true;

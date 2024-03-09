@@ -46,7 +46,7 @@ public class MapLoaderControllerTest {
         String[] continents = {"Atlantic_Provinces", "Ontario_and_Quebec", "Western_Provinces-South", "Western_Provinces-North", "Nunavut", "Northwestern_Territories"};
         int i=0;
         while(i<6){
-            assertTrue(d_gameMap.get_continents().containsKey(continents[i].toLowerCase()));
+            assertTrue(d_gameMap.getContinents().containsKey(continents[i].toLowerCase()));
             i++;
         }
     }
