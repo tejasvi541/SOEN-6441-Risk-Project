@@ -42,7 +42,7 @@ public class OrderOwner {
     private static OrderInformation createDeployOrderInfo(String[] p_Command, Player p_Player) {
         String l_CountryID = p_Command[1];
         int l_NumberOfArmy = Integer.parseInt(p_Command[2]);
-        Country l_Country = d_GameMap.getCountries().get(l_CountryID);
+        Country l_Country = d_GameMap.getCountries().get(l_CountryID.toLowerCase());
         OrderInformation l_OrderInformation = new OrderInformation();
         l_OrderInformation.setPlayer(p_Player);
         l_OrderInformation.setDestination(l_Country);
