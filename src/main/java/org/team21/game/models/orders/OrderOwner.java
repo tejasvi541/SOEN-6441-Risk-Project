@@ -1,6 +1,8 @@
 package org.team21.game.models.orders;
 
 import org.team21.game.models.game_play.Player;
+import org.team21.game.models.map.Country;
+import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
 /**
@@ -11,6 +13,8 @@ import org.team21.game.utils.Constants;
  */
 
 public class OrderOwner {
+
+    public static GameMap d_GameMap = GameMap.getInstance();
     /**
      * A function to creaate an order
      *
@@ -20,15 +24,10 @@ public class OrderOwner {
      */
     public static Order issueOrder(String[] p_commands, Player player) {
         String l_Type = p_commands[0].toLowerCase();
-        Order l_Order;
-        switch (l_Type) {
-            case Constants.DEPLOY_COMMAND:
-                l_Order = new Deploy();
-                l_Order.setOrderInfo(createDeployOrderInfo(p_commands, player));
-                break;
-            default:
-                System.out.println(Constants.INVALID_COMMAND);
-                l_Order = new Order();
+        Order l_Order = null;
+        if (l_Type.equals(Constants.DEPLOY_COMMAND)) {
+            l_Order = new Deploy();
+            l_Order.setOrderInfo(createDeployOrderInfo(p_commands, player));
         }
         return l_Order;
     }
@@ -43,10 +42,10 @@ public class OrderOwner {
     private static OrderInformation createDeployOrderInfo(String[] p_Command, Player p_Player) {
         String l_CountryID = p_Command[1];
         int l_NumberOfArmy = Integer.parseInt(p_Command[2]);
-
+        Country l_Country = d_GameMap.getCountries().get(l_CountryID);
         OrderInformation l_OrderInformation = new OrderInformation();
         l_OrderInformation.setPlayer(p_Player);
-        l_OrderInformation.setDestination(l_CountryID);
+        l_OrderInformation.setDestination(l_Country);
         l_OrderInformation.setNumberOfArmy(l_NumberOfArmy);
         return l_OrderInformation;
     }

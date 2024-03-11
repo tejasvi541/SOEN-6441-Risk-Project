@@ -11,83 +11,154 @@ import org.team21.game.models.map.Country;
  * @author Kapil Soni
  * @version 1.0.0
  */
+//Todo:Kapil soni refactor
 public class OrderInformation {
 
     /**
-     * The player initiating the movement.
+     * The player who issued this order.
      */
     private Player d_Player;
 
     /**
-     * The country from which the movement begins.
+     * A special player object representing neutral territories or actions
+     * not associated with a specific player. For example, claiming an unowned
+     * country at the start of the game would likely use the neutral player.
+     */
+    private Player d_NeutralPlayer;
+
+    /**
+     * The country from which armies will depart. This is used for movement
+     * orders (moving armies between owned territories) and attack orders.
      */
     private Country d_Departure;
 
     /**
-     * The destination country for the movement.
+     * The country where armies are moving to. Used for both movement and
+     * attack orders.
      */
-    private String d_Destination;
+    private Country d_Destination;
 
     /**
-     * The number of armies being moved.
+     * The country targeted for attack (if applicable). This will likely be
+     * null for orders that are not attacks.
+     */
+    private Country d_TargetCountry;
+
+    /**
+     * The number of armies involved in this order. Note that there might be
+     * game rules limiting how many armies can be moved or used in an attack.
      */
     private int d_NumberOfArmy;
 
-    /**
-     * A function to get the player information
-     *
-     * @return the object of player
-     */
-    public Player getPlayer() { return d_Player; }
+    // ... (Constructor goes here) ...
 
     /**
-     * A function to set the player information
+     * Returns the neutral player object. This is used for actions not
+     * directly associated with a specific player (e.g., claiming unowned
+     * territories).
      *
-     * @param d_Player the object of player
+     * @return the neutral player object
      */
-    public void setPlayer(Player d_Player) { this.d_Player = d_Player; }
+    public Player getNeutralPlayer() {
+        return d_NeutralPlayer;
+    }
 
     /**
-     * A function to get the departure of the armies from the order
+     * Sets the neutral player object.
+     *
+     * @param d_NeutralPlayer the neutral player object
+     */
+    public void setNeutralPlayer(Player d_NeutralPlayer) {
+        this.d_NeutralPlayer = d_NeutralPlayer;
+    }
+
+    /**
+     * Returns the player who issued this order.
+     *
+     * @return the player object
+     */
+    public Player getPlayer() {
+        return d_Player;
+    }
+
+    /**
+     * Sets the player who issued this order.
+     *
+     * @param p_Player the player object
+     */
+    public void setPlayer(Player p_Player) {
+        this.d_Player = p_Player;
+    }
+
+    /**
+     * Returns the country from which armies depart.
      *
      * @return the departure country object
      */
-    public Country getDeparture() { return d_Departure; }
+    public Country getDeparture() {
+        return d_Departure;
+    }
 
     /**
-     * A function to set the departure of the armies from the order
+     * Sets the country from which armies depart.
      *
-     * @param d_Departure departure country object
+     * @param p_Departure departure country object
      */
-    public void setDeparture(Country d_Departure) { this.d_Departure = d_Departure; }
+    public void setDeparture(Country p_Departure) {
+        this.d_Departure = p_Departure;
+    }
 
     /**
-     * A function to get where the army is going to.
+     * Returns the country where armies are moving to.
      *
      * @return the destination of armies
      */
-    public String getDestination() { return d_Destination; }
+    public Country getDestination() {
+        return d_Destination;
+    }
 
     /**
-     * A function to set the destination of the armies
+     * Sets the destination country of the armies.
      *
-     * @param d_Destination the destination of armies
+     * @param p_Destination the destination of armies
      */
-    public void setDestination(String d_Destination) { this.d_Destination = d_Destination; }
-
+    public void setDestination(Country p_Destination) {
+        this.d_Destination = p_Destination;
+    }
 
     /**
-     * A function to get the number of armies in the order
+     * Returns the number of armies in the order
      *
      * @return the number of armies
      */
-    public int getNumberOfArmy() { return d_NumberOfArmy; }
+    public int getNumberOfArmy() {
+        return d_NumberOfArmy;
+    }
 
     /**
-     * A function to set the number of armies in the order
+     * Sets the number of armies in the order.
      *
-     * @param d_NumberOfArmy the number of armies
+     * @param p_NumberOfArmy the number of armies
      */
-    public void setNumberOfArmy(int d_NumberOfArmy) { this.d_NumberOfArmy = d_NumberOfArmy; }
+    public void setNumberOfArmy(int p_NumberOfArmy) {
+        this.d_NumberOfArmy = p_NumberOfArmy;
+    }
 
+    /**
+     * Returns the target country of the order (relevant for attack orders).
+     *
+     * @return the target country
+     */
+    public Country getTargetCountry() {
+        return this.d_TargetCountry;
+    }
+
+    /**
+     * Sets the target country of the order (relevant for attack orders).
+     *
+     * @param p_TargetCountry the target country
+     */
+    public void setTargetCountry(Country p_TargetCountry) {
+        this.d_TargetCountry = p_TargetCountry;
+    }
 }
