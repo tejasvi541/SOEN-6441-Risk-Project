@@ -64,7 +64,7 @@ public class AirliftOrder extends Order {
         //ToDo kapil to convert string return type to Country for getDestination method in Order class
         Country l_destinationCountry = d_orderInfo.getDestination();
 
-       if (validateOrderCommand()) {
+       if (validateCommand()) {
             l_fromCountry.setArmies(l_fromCountry.getArmies() - d_armyToAirLift);
            l_destinationCountry.setArmies(l_destinationCountry.getArmies() + d_armyToAirLift);
             System.out.println("The order: " + getType() + " " + d_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
@@ -81,7 +81,7 @@ public class AirliftOrder extends Order {
      * @return true: if command is validated successfully ; else false
      */
     @Override
-    public boolean validateOrderCommand() {
+    public boolean validateCommand() {
         Country l_departureCountry = d_orderInfo.getDeparture();
         //ToDo kapil to convert string return type to Country for getDestination method in Order class
         Country l_destinationCountry = d_orderInfo.getDestination();

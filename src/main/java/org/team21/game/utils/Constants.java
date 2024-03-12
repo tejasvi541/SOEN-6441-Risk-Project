@@ -172,4 +172,6 @@ public final class Constants {
      */
     public final static String ARMIES_NON_ZERO="The armies should be a positive number.";
 
+    public final static String BOMB = "bomb";
+
 }
