@@ -13,91 +13,76 @@ import java.util.Objects;
  * @author Kapil Soni
  * @version 1.0.0
  */
-public class Order {
+
+/**
+ * An abstract class representing an order, which can be extended to create specific types of orders.
+ * This class encapsulates basic functionalities and information related to an order.
+ */
+public abstract class Order {
+
     /**
-     * Order's object
-     */
-    private static Order d_Order;
-    /**
-     * Order type
+     * The type of the order, represented as a String.
      */
     private String d_Type;
-    /**
-     * Order information
-     */
-    private OrderInformation d_OrderInformation;
-    /**
-     * List of Orders
-     */
-    private List<Order> d_OrderList = new ArrayList<Order>();
 
     /**
-     * A function to get the order list
-     *
-     * @return the list of type Order class
+     * Information related to the order, encapsulated in an object of type OrderInfo.
      */
-    public List<Order> getOrderList() { return d_OrderList; }
+    private OrderInformation d_OrderInfo;
 
     /**
-     * A function to set the order list
+     * Retrieves the order information.
      *
-     * @param p_OrderList Order List of type Order class
+     * @return An OrderInfo object containing information about the order.
      */
-    public void setOrderList(List<Order> p_OrderList) { this.d_OrderList = p_OrderList; }
-
-    /**
-     * A function to add the order to the order list
-     *
-     * @param p_Order The order to be added to the list
-     */
-    public void AddToOrderList(Order p_Order){ d_OrderList.add(p_Order); }
-
-    /**
-     * A function to get the instance of the class Order
-     *
-     * @return the instance of class Order
-     */
-    public static Order getInstance() {
-        if (Objects.isNull(d_Order)) {
-            d_Order = new Order();
-        }
-        return d_Order;
+    public OrderInformation getOrderInfo() {
+        return d_OrderInfo;
     }
-    /**
-     * A function to get order information
-     *
-     * @return the order information in an object
-     */
-    public OrderInformation getOrderInfo() { return d_OrderInformation; }
 
     /**
-     * A function to the set Order information based on the order
+     * Sets the order information based on the provided OrderInfo object.
      *
-     * @param p_OrderInformation Order Information contained in an object of type OrderInfo
+     * @param p_OrderInfo The OrderInfo object containing information to be set for the order.
      */
-    public void setOrderInfo(OrderInformation p_OrderInformation) { this.d_OrderInformation = p_OrderInformation; }
-
-    /**
-     * A function to return the type of order
-     *
-     * @return String which indicates the type of order
-     */
-    public String getType() { return d_Type; }
-
-    /**
-     * A function to set the type of order
-     *
-     * @param p_Type String which indicates the type of order
-     */
-    public void setType(String p_Type) { this.d_Type = p_Type; }
-
-    /**
-     * A function to be overridden  by the Child class
-     *
-     * @return false as there is not order to be executed
-     */
-    public boolean execute() {
-        System.out.println(Constants.INVALID_COMMAND);
-        return false;
+    public void setOrderInfo(OrderInformation p_OrderInfo) {
+        this.d_OrderInfo = p_OrderInfo;
     }
+
+    /**
+     * Retrieves the type of the order.
+     *
+     * @return A String indicating the type of the order.
+     */
+    public String getType() {
+        return d_Type;
+    }
+
+    /**
+     * Sets the type of the order.
+     *
+     * @param p_Type A String representing the type of the order.
+     */
+    public void setType(String p_Type) {
+        this.d_Type = p_Type;
+    }
+
+    /**
+     * Executes the order. This method is intended to be overridden by child classes.
+     *
+     * @return true if the order is executed successfully, false otherwise.
+     */
+    public abstract boolean execute();
+
+    /**
+     * Validates the command associated with the order. This method is intended to be overridden by child classes.
+     *
+     * @return true if the command associated with the order is valid, false otherwise.
+     */
+    public abstract boolean validateCommand();
+
+    /**
+     * Prints the command that is executed successfully. This method is intended to be overridden by child classes.
+     */
+    public abstract void printOrderCommand();
+
 }
