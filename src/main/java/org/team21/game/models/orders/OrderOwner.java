@@ -3,7 +3,6 @@ package org.team21.game.models.orders;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.Constants;
 
 /**
  * OrderOwner model will be used by {Player}
@@ -15,6 +14,7 @@ import org.team21.game.utils.Constants;
 public class OrderOwner {
 
     public static GameMap d_GameMap = GameMap.getInstance();
+
     /**
      * A function to creaate an order
      *
@@ -30,26 +30,14 @@ public class OrderOwner {
             case "deploy":
                 l_Order = new Deploy();
                 l_Order.setOrderInfo(generateDeployInfo(p_commands, player));
-
                 break;
-//            case "advance":
-//                l_Order = new AdvanceOrder();
-//                break;
-//            case "negotiate":
-//                l_Order = new NegotiateOrder();
-//                break;
-//            case "blockade":
-//                l_Order = new BlockadeOrder();
-//                break;
             case "airlift":
                 l_Order = new AirliftOrder();
                 l_Order.setOrderInfo(generateAirliftOrderInfo(p_commands, player));
-
                 break;
             case "bomb":
                 l_Order = new BombOrder();
                 l_Order.setOrderInfo(generateBombOrderInfo(p_commands, player));
-
                 break;
             default:
                 System.out.println("\nFailed to create an order due to invalid arguments");

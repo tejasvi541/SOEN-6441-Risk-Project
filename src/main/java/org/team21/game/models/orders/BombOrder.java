@@ -26,7 +26,7 @@ public class BombOrder extends Order {
     public BombOrder(){
         super();
         d_GameMap = GameMap.getInstance();
-        setType(Constants.BOMB);
+        setType(Constants.BOMB_COMMAND);
     }
 
     /**
@@ -61,8 +61,8 @@ public class BombOrder extends Order {
         if(l_Player.getNeutralPlayers().contains(l_TargetCountry.getPlayer())){
             System.err.printf("There is diplomacy between %s and %s\n", l_Player.getName(), l_TargetCountry.getPlayer().getName());
             // TODO Add Logger
-//            l_Player.getNeutralPlayers().remove(l_TargetCountry.getPlayer());
-//            l_TargetCountry.getPlayer().getNeutralPlayers().remove(l_Player);
+            l_Player.getNeutralPlayers().remove(l_TargetCountry.getPlayer());
+            l_TargetCountry.getPlayer().getNeutralPlayers().remove(l_Player);
             return false;
         }
 
