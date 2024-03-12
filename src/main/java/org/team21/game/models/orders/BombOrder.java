@@ -76,7 +76,7 @@ public class BombOrder extends Order {
                 break;
             }
         }
-        if (l_adjacentCountry){
+        if (!l_adjacentCountry){
             System.err.println("The target country is not a neighbor of player owned country");
             // TODO Add Logger
             return false;
@@ -103,6 +103,10 @@ public class BombOrder extends Order {
         }
         return false;
     }
+
+    /**
+     * This is for printing information
+     */
     @Override
     public void printOrderCommand() {
         System.out.println("Bomb order issued by player: " + getOrderInfo().getPlayer().getName()

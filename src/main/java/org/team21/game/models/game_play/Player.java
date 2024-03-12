@@ -121,7 +121,7 @@ public class Player {
      *
      * @param p_Orders the list of orders
      */
-    private void setOrders(Deque<Order> p_Orders) {
+    public void setOrders(Deque<Order> p_Orders) {
         this.d_CurrentOrders = p_Orders;
     }
 
@@ -130,7 +130,7 @@ public class Player {
      *
      * @param p_Order The order to be added
      */
-    private void addOrder(Order p_Order) {
+    public void addOrder(Order p_Order) {
         d_CurrentOrders.add(p_Order);
     }
 
