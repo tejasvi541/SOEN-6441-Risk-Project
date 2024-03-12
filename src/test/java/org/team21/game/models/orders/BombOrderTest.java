@@ -3,15 +3,12 @@ package org.team21.game.models.orders;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.team21.game.controllers.IssueOrderController;
-import org.team21.game.controllers.ShowMapController;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.Constants;
 
 import java.util.*;
 
@@ -96,7 +93,7 @@ public class BombOrderTest {
         Player l_p1 = d_GameMap.getPlayer("p1");
         l_p1.addPlayerCard(new Card(CardType.BOMB));
         String l_command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
-        Order l_order = OrderCreator.createOrder(l_command.split(" "),l_p1);
+        Order l_order = OrderOwner.issueOrder(l_command.split(" "),l_p1);
         l_p1.addOrder(l_order);
         assertTrue(l_p1.nextOrder().validateCommand());
 
@@ -110,7 +107,7 @@ public class BombOrderTest {
         Player l_p1 = d_GameMap.getPlayer("p1");
         l_p1.addPlayerCard(new Card(CardType.BOMB));
         String l_command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
-        Order l_order = OrderCreator.createOrder(l_command.split(" "),l_p1);
+        Order l_order = OrderOwner.issueOrder(l_command.split(" "),l_p1);
         l_p1.addOrder(l_order);
         assertTrue(l_p1.nextOrder().execute());
     }
