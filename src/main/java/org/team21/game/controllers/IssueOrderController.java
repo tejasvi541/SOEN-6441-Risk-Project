@@ -102,7 +102,7 @@ public class IssueOrderController implements GameFlowManager {
                     }
                     System.out.println(Constants.SEPERATER);
                     String l_Commands = getCommandFromPlayer(l_Player);
-                    l_Player.issue_order(l_Commands);
+                    l_Player.issueOrder(l_Commands);
                 } else {
                     //Todo refactor same type of code
                     if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
