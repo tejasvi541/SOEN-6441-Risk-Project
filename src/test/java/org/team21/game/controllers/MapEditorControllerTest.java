@@ -1,32 +1,38 @@
 package org.team21.game.controllers;
 
-import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
-import java.util.Arrays;
-
 import org.team21.game.models.game_play.GamePhase;
 import org.team21.game.models.map.GameMap;
 
-/**
- * JUnit test class for {@link MapEditorController}.
- */
+import java.util.Arrays;
+import java.util.List;
 
+import static org.junit.Assert.*;
+
+/**
+ * The type Map editor controller test.
+ *
+ * @author Meet
+ */
 public class MapEditorControllerTest {
 
-    /** The game phase. */
+    /**
+     * The Game phase.
+     */
     GamePhase gamePhase;
-
-    /** The game map. */
+    /**
+     * The Game map.
+     */
     GameMap gameMap = new GameMap();
-
-    /** The map loader controller. */
+    /**
+     * The Load.
+     */
     MapLoaderController load = new MapLoaderController();
 
     /**
-     * Sets up the test fixture.
+     * Sets up.
      */
     @Before
     public void setUp() {
@@ -34,7 +40,7 @@ public class MapEditorControllerTest {
     }
 
     /**
-     * Tests the {@link MapEditorController#validateUserInput(List)} method.
+     * Validate input.
      */
     @Test
     public void validateInput() {
@@ -46,17 +52,17 @@ public class MapEditorControllerTest {
     }
 
     /**
-     * Tests the {@link MapEditorController#action(List, GamePhase)} method.
+     * Apply action map.
      */
     @Test
-    public void applyActionMap(){
+    public void applyActionMap() {
         MapEditorController editor = new MapEditorController(gameMap);
         List<String> input = Arrays.asList("showmap");
         assertNotNull(editor.action(input, gamePhase.MapEditor));
     }
 
     /**
-     * Tears down the test fixture.
+     * Tear down.
      */
     @After
     public void tearDown() {

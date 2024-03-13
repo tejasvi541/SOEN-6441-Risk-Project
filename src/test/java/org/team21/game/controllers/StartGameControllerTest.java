@@ -1,6 +1,5 @@
 package org.team21.game.controllers;
 
-import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,20 +11,40 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+
 /**
- * JUnit test class for StartGameController.
+ * The type Start game controller test.
+ *
+ * @author Meet
  */
 public class StartGameControllerTest {
 
-    GamePhase gamePhase;
+    /**
+     * Original system in for cmd input
+     */
     private final InputStream originalSystemIn = System.in;
+    /**
+     * Original system out for Print stream
+     */
     private final PrintStream originalSystemOut = System.out;
+    /**
+     * The Game phase.
+     */
+    GamePhase gamePhase;
+    /**
+     * Test input
+     */
     private ByteArrayInputStream testIn;
+    /**
+     * Test output
+     */
     private ByteArrayOutputStream testOut;
 
     /**
-     * Sets up the test environment.
-     * Redirects System.out to a different PrintStream for testing.
+     * Sets up.
      */
     @Before
     public void setUp() {
@@ -35,7 +54,7 @@ public class StartGameControllerTest {
     }
 
     /**
-     * Restores the original System.out and System.in after the test.
+     * Tear down.
      */
     @After
     public void tearDown() {
@@ -45,9 +64,9 @@ public class StartGameControllerTest {
     }
 
     /**
-     * Tests the run method of StartGameController.
+     * Test run.
      *
-     * @throws ValidationException if validation fails
+     * @throws ValidationException the validation exception
      */
     @Test
     public void testRun() throws ValidationException {
@@ -62,9 +81,9 @@ public class StartGameControllerTest {
     }
 
     /**
-     * Tests the run method of StartGameController with a false assertion.
+     * False test run.
      *
-     * @throws ValidationException if validation fails
+     * @throws ValidationException the validation exception
      */
     @Test
     public void falseTestRun() throws ValidationException {

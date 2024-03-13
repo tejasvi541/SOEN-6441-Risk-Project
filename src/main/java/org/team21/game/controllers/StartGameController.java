@@ -52,9 +52,7 @@ public class StartGameController implements GameFlowManager {
      * @return The next game phase.
      * @throws ValidationException When validation fails.
      */
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException {
-        return run(p_GamePhase);
-    }
+    public GamePhase start(GamePhase p_GamePhase) throws ValidationException { return run(p_GamePhase); }
 
     /**
      * Run is entry point of the StartGameController
