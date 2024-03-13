@@ -4,6 +4,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.Constants;
 
 public class Blockade extends Order{
     private final GameMap d_GameMap;
@@ -34,15 +35,15 @@ public class Blockade extends Order{
         Player l_Player = getOrderInfo().getPlayer();
         Country l_Country = getOrderInfo().getTargetCountry();
         if(l_Player == null){
-            System.err.println("The Player is not valid.");
+            System.err.println(Constants.INVALID_PLAYER);
             return false;
         }
         if(l_Country.getPlayer() != l_Player){
-            System.err.println("The target country does not belong to the player.");
+            System.err.println(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
             return false;
         }
         if(!l_Player.checkIfCardAvailable(CardType.BLOCKADE)){
-            System.err.println("Player doesn't have Blockade Card.");
+            System.err.println(Constants.NO_BLOCKADE_CARD);
             return false;
         }
         return true;
