@@ -3,6 +3,7 @@ package org.team21.game.models.orders;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.Constants;
 
 /**
  * OrderOwner model will be used by {Player}
@@ -13,6 +14,9 @@ import org.team21.game.models.map.GameMap;
 
 public class OrderOwner {
 
+    /**
+     * Based on map it will evaluate the orders
+     */
     public static GameMap d_GameMap = GameMap.getInstance();
 
     /**
@@ -27,15 +31,15 @@ public class OrderOwner {
         Order l_Order;
 
         switch (l_OrderType) {
-            case "deploy":
+            case Constants.DEPLOY_COMMAND:
                 l_Order = new Deploy();
                 l_Order.setOrderInfo(generateDeployInfo(p_commands, player));
                 break;
-            case "airlift":
+            case Constants.AIRLIFT_COMMAND:
                 l_Order = new AirliftOrder();
                 l_Order.setOrderInfo(generateAirliftOrderInfo(p_commands, player));
                 break;
-            case "bomb":
+            case Constants.BOMB_COMMAND:
                 l_Order = new BombOrder();
                 l_Order.setOrderInfo(generateBombOrderInfo(p_commands, player));
                 break;

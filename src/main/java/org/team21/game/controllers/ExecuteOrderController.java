@@ -6,11 +6,8 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.orders.Order;
-import org.team21.game.utils.Constants;
 
 import java.util.HashMap;
-
-import static org.team21.game.models.game_play.Player.d_PlayerOrderList;
 
 /**
  * TheExecute order controller will execute orders based on {IssueOrderController}
@@ -21,13 +18,13 @@ import static org.team21.game.models.game_play.Player.d_PlayerOrderList;
 public class ExecuteOrderController implements GameFlowManager {
 
     /**
-     * GameMap instance
-     */
-    GameMap d_GameMap;
-    /**
      * The d_UpcomingGamePhase is used to get next game phase.
      */
     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
+    /**
+     * GameMap instance
+     */
+    GameMap d_GameMap;
 
     /**
      * This is the default constructor for this constructor to get
@@ -61,13 +58,11 @@ public class ExecuteOrderController implements GameFlowManager {
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
-        return checkIfPlayerWon(p_CurrentGamePhase,d_UpcomingGamePhase);
+        return checkIfPlayerWon(p_CurrentGamePhase, d_UpcomingGamePhase);
     }
 
     /**
      * This method executes each order in the order list
-     *
-     *
      */
     private void executeOrders() {
         int l_Counter = 0;
@@ -98,10 +93,11 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * Check if the player won the game after every execution phase
      *
-     * @param p_GamePhase the next phase based on the status of player
-     * @return the gamephase it has to change to based on the win
+     * @param p_CurrentGamePhase : the current phase of game command
+     * @param p_GamePhase        : the next phase based on the status of player
+     * @return : the gamephase it has to change to based on the win
      */
-    public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase,GamePhase p_GamePhase) {
+    public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase, GamePhase p_GamePhase) {
         HashMap<String, Country> l_ListOfAllCountries = d_GameMap.getCountries();
         for (Player l_Player : d_GameMap.getPlayers().values()) {
             if (l_Player.getCapturedCountries().size() == d_GameMap.getCountries().size()) {
