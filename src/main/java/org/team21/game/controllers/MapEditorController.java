@@ -74,7 +74,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         System.out.println("Type the required option for taking action on map:" + "\n" );
         System.out.println("1. Type Help :to get list of commands for different actions  " + "\n" );
         System.out.println("2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
-        System.out.println("*******************************************************************************************************");
+        //System.out.println("*******************************************************************************************************");
+        System.out.println(Constants.SEPERATER);
     }
 
     public GamePhase run(GamePhase p_CurrentPhase)  {
