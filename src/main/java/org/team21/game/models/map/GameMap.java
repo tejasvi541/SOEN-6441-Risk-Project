@@ -151,10 +151,12 @@ public class GameMap {
      * Clear map.
      */
     public void clearMap() {
-        this.d_mapName = null;
-        this.d_continents = null;
-        this.d_countries = null;
-        this.d_isValid = false;
+        this.setMapName("");
+        this.setPlayers(new HashMap<String, Player>());
+        this.setCountries(new HashMap<String, Country>());
+        this.setContinents(new HashMap<String, Continent>());
+        this.setIsValid(false);
+        this.setPlayer(new Player());
     }
 
     /**
