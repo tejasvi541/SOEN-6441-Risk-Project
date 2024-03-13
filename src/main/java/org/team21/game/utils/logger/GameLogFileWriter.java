@@ -17,14 +17,14 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Kapil Soni
  */
-public class GameLogWriter implements Observer {
+public class GameLogFileWriter implements Observer {
 
     private String logFilenamePrefix = "gamelog"; // Default prefix
 
     /**
      *  Constructor to initialize the GameLogWriter
      */
-    public GameLogWriter() {
+    public GameLogFileWriter() {
         // You could optionally add code here to load preferences
         // or customize the logFilenamePrefix from a configuration file
     }

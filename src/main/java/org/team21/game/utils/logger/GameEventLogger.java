@@ -16,13 +16,13 @@ import java.io.PrintWriter;
  */
 public class GameEventLogger implements Observable {
 
-    private GameLogWriter d_LogEntryWriter;
+    private GameLogFileWriter d_LogEntryWriter;
 
     /**
      * Initializes a new GameEventLogger instance.
      */
     public GameEventLogger() {
-        d_LogEntryWriter = new GameLogWriter();// Automatically register LogEntryWriter
+        d_LogEntryWriter = new GameLogFileWriter();// Automatically register LogEntryWriter
     }
 
     /**
