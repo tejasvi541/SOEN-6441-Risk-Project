@@ -6,6 +6,7 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class IssueOrderController implements GameFlowManager {
      * The d_GameMap is game map.
      */
     private final GameMap d_GameMap;
-
+    GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * Constructor to get the GameMap instance
      */
@@ -78,6 +79,7 @@ public class IssueOrderController implements GameFlowManager {
         /**
          * The p_CurrentGamePhase is used to know current game phase.
          */
+        d_gameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
