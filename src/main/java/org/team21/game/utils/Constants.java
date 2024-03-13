@@ -62,6 +62,7 @@ public final class Constants {
     public final static String EXIT_COMMAND = "2. Type Exit : to exit from map editor phase and continue playing game";
     public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
     public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
+    public final static String SPACE_FORMATTER = "%-30s%-30s%-10s%-10s%-50s%n\n";
     /**
      * The constant EXECUTE_ORDER_SUCCESS.
      */

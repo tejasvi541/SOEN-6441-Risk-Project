@@ -3,6 +3,7 @@ package org.team21.game.controllers;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.Constants;
 
 
 /**
@@ -30,38 +31,38 @@ public class ShowMapController {
             return;
         }
         System.out.printf("%100s\n", "===============================================================================================================================");
-        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "Continents", "Country", "Players",  "Armies", "Country's Neighbors");
+        System.out.printf(Constants.SPACE_FORMATTER, "Continents", "Country", "Players",  "Armies", "Country's Neighbors");
         System.out.printf("%100s\n", "===============================================================================================================================");
         boolean l_isContinentPrinting = true;
         boolean l_isCountryPrinting = true;
         for(Continent l_continent : d_gameMap.getContinents().values()) {
             if(l_continent.getCountries().isEmpty()) {
-                System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), "", "", "", "");
+                System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), "", "", "", "");
             }
             for(Country l_country : l_continent.getCountries().values()) {
                 if(l_country.getNeighbours().isEmpty()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        System.out.printf(Constants.SPACE_FORMATTER, "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_isCountryPrinting =  false;
                     }
                 }
                 for(Country l_neighbor : l_country.getNeighbours().values()) {
                     if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
+                        System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isContinentPrinting = false;
                         l_isCountryPrinting = false;
                     }
                     else if(l_isCountryPrinting) {
-                        System.out.printf("\n%-30s%-30s%-10s%-10s%-50s%n\n", "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
+                        System.out.printf(Constants.SPACE_FORMATTER, "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
                         l_isCountryPrinting = false;
                     }
                     else {
-                        System.out.printf("%-30s%-30s%-10s%-10s%-50s%n\n", "", "", "", "", l_neighbor.getCountryId());
+                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_neighbor.getCountryId());
                     }
                 }
                 l_isCountryPrinting = true;

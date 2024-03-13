@@ -11,6 +11,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.game_play.GamePhase;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidator;
 import org.team21.game.utils.validation.ValidationException;
 
@@ -51,7 +52,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * A data member to set status of editing phase
      */
     boolean d_editStatus =false;
-
+    GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * This is the default constructor
      */
