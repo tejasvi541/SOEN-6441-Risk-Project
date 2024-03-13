@@ -31,10 +31,10 @@ public class Deploy extends Order {
             return false;
         }
         Player l_Player = getOrderInfo().getPlayer();
-        String l_Destination = getOrderInfo().getDestination();
+        Country l_Destination = getOrderInfo().getDestination();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         for (Country l_Country : l_Player.getCapturedCountries()) {
-            if (l_Country.getCountryId().equals(l_Destination)) {
+            if (l_Country.getCountryId().equals(l_Destination.getCountryId())) {
                 l_Country.deployArmies(l_ArmiesToDeploy);
                 System.out.println("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
             }
@@ -42,6 +42,26 @@ public class Deploy extends Order {
         System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination + ".");
         System.out.println(Constants.SEPERATER);
         return true;
+    }
+
+    /**
+     * Validates the command associated with the order. This method is intended to be overridden by child classes.
+     *
+     * @return true if the command associated with the order is valid, false otherwise.
+     */
+    @Override
+    public boolean validateCommand() {
+        //Todo implement ValidateCommand
+        return false;
+    }
+
+    /**
+     * Prints the command that is executed successfully. This method is intended to be overridden by child classes.
+     */
+    @Override
+    public void printOrderCommand() {
+        //Todo implement printOrderCommand
+
     }
 
 }

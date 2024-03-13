@@ -33,7 +33,7 @@ public class MapValidator {
 
     public boolean validateMapObject(GameMap p_GameMap) {
         Graph<Country, DefaultEdge> l_graph = generate_Graph(p_GameMap);
-        //todo Meet
+        
         if (!isConnected(l_graph)) {
             d_Logger.info("Not a connected graph");
             return false;

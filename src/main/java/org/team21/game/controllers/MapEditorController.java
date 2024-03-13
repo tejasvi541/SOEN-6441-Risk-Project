@@ -19,7 +19,7 @@ import org.team21.game.utils.validation.ValidationException;
 /**
  * This class is used to create map through different commands for different operations.
  * @author Bharti Chhabra
- * @version 1.0.0
+ * @version 2.0.0
  */
 public class MapEditorController implements MapEditor, GameFlowManager {
     /**
@@ -74,7 +74,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         System.out.println("Type the required option for taking action on map:" + "\n" );
         System.out.println("1. Type Help :to get list of commands for different actions  " + "\n" );
         System.out.println("2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
-        System.out.println("*******************************************************************************************************");
+        System.out.println(Constants.SEPERATER);
     }
 
     public GamePhase run(GamePhase p_CurrentPhase)  {
@@ -96,19 +96,19 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                 else if(l_ListStream.getFirst().startsWith("help")){
                     //list of commands to assist user
                     System.out.println("Commands List for different operations:");
-                    System.out.println("****************************************************************************************************************************");
+                    System.out.println(Constants.SEPERATER);
                     System.out.println("To edit map file  : editmap filename");
-                    System.out.println("****************************************************************************************************************************");
+                    System.out.println(Constants.SEPERATER);
                     System.out.println("To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID {example: editcontinent -add Asia or editcontinent -remove Asia}");
                     System.out.println("To add or remove a country : editcountry -add countryID continentID -remove countryID {example: editcountry -add India Asia or editcountry -remove India }");
                     System.out.println("To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID {example: editneighbor -add India Pakistan or editneighbor -remove India Pakistan}");
-                    System.out.println("****************************************************************************************************************************");
+                    System.out.println(Constants.SEPERATER);
                     System.out.println("To save map file : savemap filename {example: savemap Canada}");
-                    System.out.println("****************************************************************************************************************************");
+                    System.out.println(Constants.SEPERATER);
                     System.out.println("Additional map commands:");
                     System.out.println("To show the map: showmap {example: showmap}");
                     System.out.println("To validate map: validatemap {example: validatemap}");
-                    System.out.println("****************************************************************************************************************************\n");
+                    System.out.println(Constants.SEPERATER);
                 }
             }
             else{
@@ -160,7 +160,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     HashMap<String, Country> l_countries = d_GameMap.getCountries();
                                     if (l_countries.containsKey(l_CommandsArray[1].toLowerCase())) {
@@ -190,7 +190,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                         }
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 2) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     //handling null values
@@ -236,7 +236,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     if (l_CommandsArray.length > 0) {
                         switch (l_CommandsArray[0]) {
                             case Constants.ADD: {
-                                //todo Meet
+                                
                                 try {
                                     HashMap<String, Continent> l_continents = d_GameMap.getContinents();
                                     if (l_CommandsArray.length == 3) {
@@ -275,10 +275,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                             }
                             case Constants.REMOVE: {
                                 if (l_CommandsArray.length == 2) {
-                                    //todo Meet
+                                    
                                     try {
                                         HashMap<String, Continent> l_continents = d_GameMap.getContinents();
-
                                         if (!l_continents.containsKey(l_CommandsArray[1].toLowerCase())) {
                                             try {
                                                 throw new ValidationException("Provided Continent does not exist in map.Try Again with valid continent !");
@@ -315,7 +314,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country1 = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     Country l_Country2 = d_GameMap.getCountries().get(l_CommandsArray[2].toLowerCase());
@@ -353,7 +352,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                         }
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country1 = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     Country l_Country2 = d_GameMap.getCountries().get(l_CommandsArray[2].toLowerCase());

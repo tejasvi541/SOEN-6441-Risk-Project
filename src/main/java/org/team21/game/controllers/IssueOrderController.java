@@ -7,7 +7,10 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -32,7 +35,27 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * Constructor to get the GameMap instance
      */
-    public IssueOrderController() { d_GameMap = GameMap.getInstance(); }
+    public IssueOrderController() {
+        d_GameMap = GameMap.getInstance();
+    }
+
+    /**
+     * findCommandLength will check and find the length of each command
+     *
+     * @param p_Command the command to be validated
+     * @param p_Length  required length to be validated
+     * @return : true if length is same as required command
+     */
+    private static boolean findCommandLength(String p_Command, int p_Length) {
+        if (p_Command.contains(Constants.DEPLOY_COMMAND)) {
+            return p_Length == 3;
+        } else if (p_Command.contains(Constants.BOMB_COMMAND) || p_Command.contains(Constants.BLOCKADE_COMMAND) || p_Command.contains(Constants.NEGOTIATE_COMMAND)) {
+            return (p_Length == 2);
+        } else if (p_Command.contains(Constants.AIRLIFT_COMMAND) || p_Command.contains(Constants.ADVANCE_COMMAND)) {
+            return (p_Length == 4);
+        }
+        return false;
+    }
 
     /**
      * A function to start the issue order phase
@@ -42,33 +65,33 @@ public class IssueOrderController implements GameFlowManager {
      */
 
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) { return run(p_CurrentGamePhase); }
+    public GamePhase start(GamePhase p_CurrentGamePhase) {
+        return run(p_CurrentGamePhase);
+    }
+
 
     /**
-     * run is entry method of Execute Order and it will run Issue order
+     * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Current phase of game.
-     * @return : It will return game phase to go next
+     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
+     * @return : It will return next gamephase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        /**
-         * The p_CurrentGamePhase is used to know current game phase.
-         */
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
-                if(l_Player.getReinforcementArmies() != 0){
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
+                if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
+                    l_ZeroReinforcementPlayers.add(l_Player.getName());
+                    l_PlayerCounts++;
+                    continue;
+                }
+                if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
+                    System.out.println(Constants.ARMY_DEPLETED);
+                    System.out.println(Constants.SEPERATER);
+                    return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                }
+                if (l_Player.getReinforcementArmies() != 0) {
                     System.out.println(Constants.SEPERATER);
                     System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
                     System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
@@ -76,19 +99,8 @@ public class IssueOrderController implements GameFlowManager {
                         System.out.println(l_CapturedCountry.getCountryId() + " ");
                     }
                     System.out.println(Constants.SEPERATER);
-                    String l_DeployCommands = getCommandFromPlayer(l_Player);
-                    l_Player.issue_order(l_DeployCommands);
-                }else{
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
+                    String l_Commands = getCommandFromPlayer(l_Player);
+                    l_Player.issueOrder(l_Commands);
                 }
             }
         }
@@ -98,36 +110,41 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
-     * A function to read all the commands from player
+     * It will get command from CMD
      *
-     * @return command entered by the player
+     * @param p_CurrentPlayer : Current player
+     * @return : Command
      */
     private String getCommandFromPlayer(Player p_CurrentPlayer) {
-        String l_DeployCommand = "";
+        String l_Command = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
-        System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
-        while (!l_DeployCommand.equals(Constants.EXIT)) {
-            l_DeployCommand = d_Scanner.nextLine();
-            if (Constants.DEPLOY_COMMAND.equalsIgnoreCase(l_DeployCommand.split(" ")[0])) {
-                if (checkIfCommandIsContainsDeploy(l_DeployCommand.toLowerCase(),p_CurrentPlayer)) {
+        Constants.showIssueOrderCommand();
+        while (!l_Command.equals(Constants.EXIT)) {
+            l_Command = d_Scanner.nextLine();
+            if (Constants.LIST_COMMANDS.contains(l_Command.split(" ")[0])) {
+                if (checkIfCommandIsContainsDeploy(l_Command.toLowerCase(), p_CurrentPlayer)) {
                     // Split the string based on consecutive whitespaces
-                    String[] l_StringParts = l_DeployCommand.trim().split("\\s+");
+                    String[] l_StringParts = l_Command.trim().split("\\s+");
                     return String.join(" ", l_StringParts);
+                } else {
+                    //Todo add validation of other commands
+                    return l_Command;
                 }
             } else {
                 System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
             }
         }
-        return l_DeployCommand;
+        return l_Command;
     }
 
     /**
-     * A function to validate if the command is correct
+     * Check all validation for Deploy command
      *
-     * @param p_Command The command entered by player
-     * @return true if the format is valid else false
+     * @param p_Command       : Original command
+     * @param p_CurrentPlayer : current player
+     * @return : return true if command is proper else will return false
      */
-    private boolean checkIfCommandIsContainsDeploy(String p_Command,Player p_CurrentPlayer) {
+    private boolean checkIfCommandIsContainsDeploy(String p_Command, Player p_CurrentPlayer) {
         boolean l_CapturedCountry = false;
         String[] l_CommandList;
         String commandString = p_Command.trim();
@@ -146,13 +163,13 @@ public class IssueOrderController implements GameFlowManager {
                 System.out.println(Constants.ARMIES_NON_ZERO);
                 return false;
             }
-            for (Country l_Country : p_CurrentPlayer.getCapturedCountries()){
-                if(Objects.equals(l_CommandList[1].trim(), l_Country.getCountryId().toLowerCase())){
-                    l_CapturedCountry=true;
+            for (Country l_Country : p_CurrentPlayer.getCapturedCountries()) {
+                if (Objects.equals(l_CommandList[1].trim(), l_Country.getCountryId().toLowerCase())) {
+                    l_CapturedCountry = true;
                     break;
                 }
             }
-            if(!l_CapturedCountry){
+            if (!l_CapturedCountry) {
                 System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
             }
             return (l_CommandList[0].equals(Constants.DEPLOY_COMMAND) && l_CapturedCountry);
