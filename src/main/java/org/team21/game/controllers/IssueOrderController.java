@@ -43,6 +43,7 @@ public class IssueOrderController implements GameFlowManager {
      * findCommandLength will check and find the length of each command
      *
      * @param p_Command the command to be validated
+     * @param p_Length  required length to be validated
      * @return : true if length is same as required command
      */
     private static boolean findCommandLength(String p_Command, int p_Length) {
@@ -68,16 +69,14 @@ public class IssueOrderController implements GameFlowManager {
         return run(p_CurrentGamePhase);
     }
 
+
     /**
-     * run is entry method of Execute Order and it will run Issue order
+     * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Current phase of game.
-     * @return : It will return game phase to go next
+     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
+     * @return : It will return next gamephase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        /**
-         * The p_CurrentGamePhase is used to know current game phase.
-         */
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
@@ -124,9 +123,10 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
-     * A function to read all the commands from player
+     * It will get command from CMD
      *
-     * @return command entered by the player
+     * @param p_CurrentPlayer : Current player
+     * @return : Command
      */
     private String getCommandFromPlayer(Player p_CurrentPlayer) {
         String l_Command = "";
@@ -139,7 +139,7 @@ public class IssueOrderController implements GameFlowManager {
                     // Split the string based on consecutive whitespaces
                     String[] l_StringParts = l_Command.trim().split("\\s+");
                     return String.join(" ", l_StringParts);
-                }else{
+                } else {
                     //Todo add validation of other commands
                     return l_Command;
                 }
@@ -151,10 +151,11 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
-     * A function to validate if the command is correct
+     * Check all validation for Deploy command
      *
-     * @param p_Command The command entered by player
-     * @return true if the format is valid else false
+     * @param p_Command       : Original command
+     * @param p_CurrentPlayer : current player
+     * @return : return true if command is proper else will return false
      */
     private boolean checkIfCommandIsContainsDeploy(String p_Command, Player p_CurrentPlayer) {
         boolean l_CapturedCountry = false;

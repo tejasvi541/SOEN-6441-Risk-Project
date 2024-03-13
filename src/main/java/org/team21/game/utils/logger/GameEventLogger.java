@@ -16,6 +16,9 @@ import java.io.PrintWriter;
  */
 public class GameEventLogger implements Observable {
 
+    /**
+     * Object of GameLogFileWriter
+     */
     private GameLogFileWriter d_LogEntryWriter;
 
     /**

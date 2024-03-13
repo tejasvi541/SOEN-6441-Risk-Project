@@ -4,10 +4,8 @@ import org.team21.game.interfaces.observer.Observer;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.PrintWriter;
-
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,10 +17,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class GameLogFileWriter implements Observer {
 
+    /**
+     * Log filename prefix for further usage
+     */
     private String logFilenamePrefix = "gamelog"; // Default prefix
 
     /**
-     *  Constructor to initialize the GameLogWriter
+     * Constructor to initialize the GameLogWriter
      */
     public GameLogFileWriter() {
         // You could optionally add code here to load preferences
