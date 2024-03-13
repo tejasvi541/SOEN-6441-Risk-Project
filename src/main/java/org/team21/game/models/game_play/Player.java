@@ -23,7 +23,7 @@ public class Player {
     /**
      * Initialising List to hold orders
      */
-    public static List<Order> d_PlayerOrderList = new ArrayList<>();
+    public static Deque<Order> d_PlayerOrderList = new ArrayDeque<>();
     /**
      * Player ID
      */
@@ -225,10 +225,8 @@ public class Player {
         return !l_Result.isEmpty() ? l_Result.substring(0, l_Result.length() - 1) : "";
     }
 
-    public static Order nextOrder() {
-        Order l_firstOrder = d_PlayerOrderList.getFirst();
-        d_PlayerOrderList.removeFirst();
-        return l_firstOrder;
+    public Order nextOrder() {
+       return d_CurrentOrders.poll();
     }
 
     /**

@@ -59,12 +59,9 @@ public class ExecuteOrderController implements GameFlowManager {
          */
 
         //Execute all orders and if it fails
-        if (executeOrders()) {
-            System.out.println(Constants.EXECUTE_ORDER_SUCCESS);
-        } else {
-            System.out.println(Constants.EXECUTE_ORDER_FAIL);
-        }
-        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+        executeOrders();
+        clearAllNeutralPlayers();
+        return checkIfPlayerWon(d_UpcomingGamePhase);
     }
 
     /**
@@ -72,14 +69,21 @@ public class ExecuteOrderController implements GameFlowManager {
      *
      * @return true if execution is successful
      */
-    private boolean executeOrders() {
-        while (!d_PlayerOrderList.isEmpty()) {
-            Order l_PlayerOrder = Player.nextOrder();
-            if (!l_PlayerOrder.execute()) {
-                return false;
+    private void executeOrders() {
+        int l_Counter = 0;
+        while (l_Counter < d_GameMap.getPlayers().size()) {
+            l_Counter = 0;
+            for (Player player : d_GameMap.getPlayers().values()) {
+                Order l_Order = player.nextOrder();
+                if (l_Order == null) {
+                    l_Counter++;
+                } else {
+                    if (l_Order.execute()) {
+                        l_Order.printOrderCommand();
+                    }
+                }
             }
         }
-        return true;
     }
 
     /**
