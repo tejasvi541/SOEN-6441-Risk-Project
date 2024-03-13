@@ -40,7 +40,7 @@ public class AirliftOrder extends Order {
      */
     public AirliftOrder() {
         d_GameMap = GameMap.getInstance();
-        this.setType("airlift");
+        this.setType(Constants.AIRLIFT_COMMAND);
     }
 
     /**
@@ -123,7 +123,7 @@ public class AirliftOrder extends Order {
         System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
         //ToDo Kapil to print the commands in logger file
-        System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
+//        System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }
 

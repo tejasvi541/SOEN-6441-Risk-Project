@@ -39,6 +39,10 @@ public class OrderOwner {
                 l_Order = new BombOrder();
                 l_Order.setOrderInfo(generateBombOrderInfo(p_commands, player));
                 break;
+            case "negotiate":
+                l_Order = new NegotiateOrder();
+                l_Order.setOrderInfo(generateNegotiateOrderInfo(p_commands, player));
+                break;
             default:
                 System.out.println("\nFailed to create an order due to invalid arguments");
                 return null;
@@ -105,6 +109,20 @@ public class OrderOwner {
         Country l_TargetCountry = d_GameMap.getCountries().get(l_CountryID.toLowerCase());
         l_OrderInfo.setTargetCountry(l_TargetCountry);
 
+        return l_OrderInfo;
+    }
+
+    /**
+     * A function to generate the information of Negotiate order
+     *
+     * @param p_Command the command entered
+     * @param p_Player  object parameter of type Player
+     * @return the order information of deploy
+     */
+    private static OrderInformation generateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
+        OrderInformation l_OrderInfo = new OrderInformation();
+        l_OrderInfo.setPlayer(p_Player);
+        l_OrderInfo.setNeutralPlayer(d_GameMap.getPlayer(p_Command[1]));
         return l_OrderInfo;
     }
 
