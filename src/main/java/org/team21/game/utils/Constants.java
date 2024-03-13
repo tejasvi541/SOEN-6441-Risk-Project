@@ -132,8 +132,17 @@ public final class Constants {
      * The constant COUNTRIES_DOES_NOT_BELONG.
      */
     public final static String COUNTRIES_DOES_NOT_BELONG = "The country does not belong to you.";
+    /**
+     * The constant INVALID_PLAYER.
+     */
     public final static String INVALID_PLAYER = "The Player is not valid.";
+    /**
+     * The constant TARGET_COUNTRY_DOES_NOT_BELONG.
+     */
     public final static String TARGET_COUNTRY_DOES_NOT_BELONG = "The target country does not belong to the player.";
+    /**
+     * The constant NO_BLOCKADE_CARD.
+     */
     public final static String NO_BLOCKADE_CARD = "Player doesn't have Blockade Card.";
     /**
      * The constant NOT_ENOUGH_REINFORCEMENTS.
