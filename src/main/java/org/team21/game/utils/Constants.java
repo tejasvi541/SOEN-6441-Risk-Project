@@ -56,6 +56,10 @@ public final class Constants {
      * The constant REMOVE.
      */
     public final static String REMOVE = "-remove";
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************";
+    public final static String ASK_FOR_ACTION = "Type the required option for taking action on map:";
+    public final static String HELP_COMMAND = "1. Type Help :to get list of commands for different actions  ";
+    public final static String EXIT_COMMAND = "2. Type Exit : to exit from map editor phase and continue playing game";
     /**
      * The constant EXECUTE_ORDER_SUCCESS.
      */

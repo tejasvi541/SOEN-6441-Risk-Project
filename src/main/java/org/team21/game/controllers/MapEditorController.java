@@ -70,10 +70,10 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      */
 
     static{
-        System.out.println("****************************** Welcome to MAP EDITOR PHASE *********************************");
-        System.out.println("Type the required option for taking action on map:" + "\n" );
-        System.out.println("1. Type Help :to get list of commands for different actions  " + "\n" );
-        System.out.println("2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
+        System.out.println(Constants.WELCOME_MESSAGE_MAP_EDITOR);
+        System.out.println(Constants.ASK_FOR_ACTION + "\n" );
+        System.out.println(Constants.HELP_COMMAND + "\n" );
+        System.out.println(Constants.EXIT_COMMAND + "\n");
         //System.out.println("*******************************************************************************************************");
         System.out.println(Constants.SEPERATER);
     }
