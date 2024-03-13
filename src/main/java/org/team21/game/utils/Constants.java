@@ -85,17 +85,9 @@ public final class Constants {
      */
     public final static String DEPLOY_COMMAND = "deploy";
     /**
-     * The constant HELP_COMMAND_MESSAGE.
-     */
-    public final static String HELP_COMMAND_MESSAGE = "1. Enter help to view the set of command.";
-    /**
-     * The constant EXIT_COMMAND_MESSAGE.
-     */
-    public final static String EXIT_COMMAND_MESSAGE = "2. Enter exit to end the phase.";
-    /**
      * The constant ISSUE_COMMAND_MESSAGE.
      */
-    public final static String ISSUE_COMMAND_MESSAGE = "To issue your orders: \n" + HELP_COMMAND_MESSAGE;
+    public final static String ISSUE_COMMAND_MESSAGE = "To issue your orders: \n" + HELP_COMMAND;
     /**
      * The constant ELIGIBLE_NATIONS_ARMY.
      */
