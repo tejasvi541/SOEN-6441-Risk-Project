@@ -61,7 +61,7 @@ public class ExecuteOrderController implements GameFlowManager {
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
-        return checkIfPlayerWon(d_UpcomingGamePhase);
+        return checkIfPlayerWon(p_CurrentGamePhase,d_UpcomingGamePhase);
     }
 
     /**
@@ -101,15 +101,16 @@ public class ExecuteOrderController implements GameFlowManager {
      * @param p_GamePhase the next phase based on the status of player
      * @return the gamephase it has to change to based on the win
      */
-    public GamePhase checkIfPlayerWon(GamePhase p_GamePhase) {
+    public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase,GamePhase p_GamePhase) {
         HashMap<String, Country> l_ListOfAllCountries = d_GameMap.getCountries();
         for (Player l_Player : d_GameMap.getPlayers().values()) {
             if (l_Player.getCapturedCountries().size() == d_GameMap.getCountries().size()) {
                 System.out.println("The Player " + l_Player.getName() + " won the game.");
                 System.out.println("Exiting the game...");
-                return p_GamePhase.nextState(d_UpcomingGamePhase);
+                return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
             }
         }
-        return p_GamePhase.nextState(d_UpcomingGamePhase);
+        //Todo:Kapil implement reinforcement phase
+        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
     }
 }
