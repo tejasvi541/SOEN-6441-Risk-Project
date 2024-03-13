@@ -192,6 +192,9 @@ public final class Constants {
         System.out.println("To assign countries : assigncountries");
     }
 
+    /**
+     * Show issue command for issue order
+     */
     public static void showIssueOrderCommand(){
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
