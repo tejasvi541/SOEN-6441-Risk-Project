@@ -44,6 +44,7 @@ public class IssueOrderController implements GameFlowManager {
      * findCommandLength will check and find the length of each command
      *
      * @param p_Command the command to be validated
+     * @param p_Length  required length to be validated
      * @return : true if length is same as required command
      */
     private static boolean findCommandLength(String p_Command, int p_Length) {
@@ -69,11 +70,12 @@ public class IssueOrderController implements GameFlowManager {
         return run(p_CurrentGamePhase);
     }
 
+
     /**
-     * run is entry method of Execute Order and it will run Issue order
+     * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Current phase of game.
-     * @return : It will return game phase to go next
+     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
+     * @return : It will return next gamephase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
         /**
@@ -84,18 +86,17 @@ public class IssueOrderController implements GameFlowManager {
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
+                if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
+                    l_ZeroReinforcementPlayers.add(l_Player.getName());
+                    l_PlayerCounts++;
+                    continue;
+                }
+                if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
+                    System.out.println(Constants.ARMY_DEPLETED);
+                    System.out.println(Constants.SEPERATER);
+                    return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                }
                 if (l_Player.getReinforcementArmies() != 0) {
-                    //Todo refactor same type of code
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
                     System.out.println(Constants.SEPERATER);
                     System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
                     System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
@@ -105,18 +106,6 @@ public class IssueOrderController implements GameFlowManager {
                     System.out.println(Constants.SEPERATER);
                     String l_Commands = getCommandFromPlayer(l_Player);
                     l_Player.issueOrder(l_Commands);
-                } else {
-                    //Todo refactor same type of code
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
                 }
             }
         }
@@ -126,9 +115,10 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
-     * A function to read all the commands from player
+     * It will get command from CMD
      *
-     * @return command entered by the player
+     * @param p_CurrentPlayer : Current player
+     * @return : Command
      */
     private String getCommandFromPlayer(Player p_CurrentPlayer) {
         String l_Command = "";
@@ -141,7 +131,7 @@ public class IssueOrderController implements GameFlowManager {
                     // Split the string based on consecutive whitespaces
                     String[] l_StringParts = l_Command.trim().split("\\s+");
                     return String.join(" ", l_StringParts);
-                }else{
+                } else {
                     //Todo add validation of other commands
                     return l_Command;
                 }
@@ -153,10 +143,11 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
-     * A function to validate if the command is correct
+     * Check all validation for Deploy command
      *
-     * @param p_Command The command entered by player
-     * @return true if the format is valid else false
+     * @param p_Command       : Original command
+     * @param p_CurrentPlayer : current player
+     * @return : return true if command is proper else will return false
      */
     private boolean checkIfCommandIsContainsDeploy(String p_Command, Player p_CurrentPlayer) {
         boolean l_CapturedCountry = false;

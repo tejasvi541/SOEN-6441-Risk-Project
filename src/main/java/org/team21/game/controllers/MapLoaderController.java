@@ -167,7 +167,7 @@ public class MapLoaderController {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        //todo Meet
+        
         try {
             if (!p_tempCountry.getNeighbours().containsKey(l_neighbourCountry.getCountryId().toLowerCase())) {
                 p_tempCountry.getNeighbours().put(l_neighbourCountry.getCountryId().toLowerCase(), l_neighbourCountry);
@@ -182,7 +182,7 @@ public class MapLoaderController {
      * @param p_newCountry  Country Name to be added
      */
     private void addCountryToContinentMap(Country p_newCountry){
-        //todo Meet
+        
         try {
             Continent tempContinent = d_gameMap.getContinents().get(p_newCountry.getParentContinent().toLowerCase());
             tempContinent.getCountries().put(p_newCountry.getCountryId().toLowerCase(), p_newCountry);

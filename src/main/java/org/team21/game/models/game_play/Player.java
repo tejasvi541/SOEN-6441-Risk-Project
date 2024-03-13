@@ -25,6 +25,14 @@ public class Player {
      */
     public static Deque<Order> d_PlayerOrderList = new ArrayDeque<>();
     /**
+     * A list of cards for the player
+     */
+    private final List<Card> d_PlayerCards = new ArrayList<>();
+    /**
+     * A list of neutral players
+     */
+    private final List<Player> d_NeutralPlayers = new ArrayList<>();
+    /**
      * Player ID
      */
     private int d_PlayerId;
@@ -32,7 +40,6 @@ public class Player {
      * Player's name
      */
     private String d_PlayerName = "";
-
     /**
      * Captured countries by players.
      */
@@ -41,20 +48,11 @@ public class Player {
      * Orders provided by players
      */
     private Deque<Order> d_CurrentOrders = new ArrayDeque<>();
-
     /**
      * Reinforcement armies
      */
     private int d_PlayerReinforcementArmies;
 
-    /**
-     * A list of cards for the player
-     */
-    private final List<Card> d_PlayerCards = new ArrayList<>();
-    /**
-     * A list of neutral players
-     */
-    private final List<Player> d_NeutralPlayers = new ArrayList<>();
     /**
      * A function to get the player ID
      *
@@ -105,7 +103,9 @@ public class Player {
      *
      * @param p_CapturedCountries List of the captured countries
      */
-    public void setCapturedCountries(List<Country> p_CapturedCountries) { this.d_PlayerCapturedCountries = p_CapturedCountries; }
+    public void setCapturedCountries(List<Country> p_CapturedCountries) {
+        this.d_PlayerCapturedCountries = p_CapturedCountries;
+    }
 
     /**
      * A function to get the list of orders
@@ -225,8 +225,13 @@ public class Player {
         return !l_Result.isEmpty() ? l_Result.substring(0, l_Result.length() - 1) : "";
     }
 
+    /**
+     * Next order will give first added order
+     *
+     * @return : It will return Order
+     */
     public Order nextOrder() {
-       return d_CurrentOrders.poll();
+        return d_CurrentOrders.poll();
     }
 
     /**
@@ -303,9 +308,6 @@ public class Player {
             d_NeutralPlayers.clear();
         }
     }
-
-
-
 
 
     /**

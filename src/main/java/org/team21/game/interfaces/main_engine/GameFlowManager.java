@@ -2,6 +2,12 @@ package org.team21.game.interfaces.main_engine;
 
 import org.team21.game.models.game_play.GamePhase;
 
+/**
+ * GameFlowManager will handle Phases of Games
+ *
+ * @author Kapil Soni
+ * @version 1.0.0
+ */
 public interface GameFlowManager {
     /**
      * Starts the game controller.

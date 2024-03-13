@@ -85,7 +85,7 @@ public class Country {
     public Country(String p_countryFileIndex, String p_countryId, String p_parentContinent, String p_xCoordinate, String p_yCoordinate, GameMap p_gameMap) {
         this.d_countryFileIndex = Integer.parseInt(p_countryFileIndex);
         this.d_countryId = p_countryId;
-        //todo Meet
+        
         try{
             for (Continent c : p_gameMap.getContinents().values()) {
                 if (c.getContinentFileIndex() == Integer.parseInt(p_parentContinent)) {
