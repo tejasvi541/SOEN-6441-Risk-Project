@@ -50,6 +50,6 @@ public class Blockade extends Order{
 
     @Override
     public void printOrderCommand() {
-
+        System.out.println("Blockade on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());
     }
 }
