@@ -57,7 +57,7 @@ public class SaveMapController {
                 // Write Continents
                 l_writerPointer.write("[continents]");
                 l_writerPointer.newLine();
-                //todo Meet
+                
                 try {
                     for (Continent l_continent : this.d_gameMap.getContinents().values()) {
                         l_writerPointer.write(l_continent.getContinentId() + " " + l_continent.getControlValue());

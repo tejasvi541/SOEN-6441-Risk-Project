@@ -67,7 +67,7 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * This method executes each order in the order list
      *
-     * @return true if execution is successful
+     *
      */
     private void executeOrders() {
         int l_Counter = 0;

@@ -160,7 +160,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     HashMap<String, Country> l_countries = d_GameMap.getCountries();
                                     if (l_countries.containsKey(l_CommandsArray[1].toLowerCase())) {
@@ -190,7 +190,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                         }
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 2) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     //handling null values
@@ -236,7 +236,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     if (l_CommandsArray.length > 0) {
                         switch (l_CommandsArray[0]) {
                             case Constants.ADD: {
-                                //todo Meet
+                                
                                 try {
                                     HashMap<String, Continent> l_continents = d_GameMap.getContinents();
                                     if (l_CommandsArray.length == 3) {
@@ -275,7 +275,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                             }
                             case Constants.REMOVE: {
                                 if (l_CommandsArray.length == 2) {
-                                    //todo Meet
+                                    
                                     try {
                                         HashMap<String, Continent> l_continents = d_GameMap.getContinents();
                                         if (!l_continents.containsKey(l_CommandsArray[1].toLowerCase())) {
@@ -314,7 +314,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country1 = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     Country l_Country2 = d_GameMap.getCountries().get(l_CommandsArray[2].toLowerCase());
@@ -352,7 +352,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                         }
                         case Constants.REMOVE: {
                             if (l_CommandsArray.length == 3) {
-                                //todo Meet
+                                
                                 try {
                                     Country l_Country1 = d_GameMap.getCountries().get(l_CommandsArray[1].toLowerCase());
                                     Country l_Country2 = d_GameMap.getCountries().get(l_CommandsArray[2].toLowerCase());

@@ -82,18 +82,17 @@ public class IssueOrderController implements GameFlowManager {
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
+                if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
+                    l_ZeroReinforcementPlayers.add(l_Player.getName());
+                    l_PlayerCounts++;
+                    continue;
+                }
+                if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
+                    System.out.println(Constants.ARMY_DEPLETED);
+                    System.out.println(Constants.SEPERATER);
+                    return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                }
                 if (l_Player.getReinforcementArmies() != 0) {
-                    //Todo refactor same type of code
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
                     System.out.println(Constants.SEPERATER);
                     System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
                     System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
@@ -103,18 +102,6 @@ public class IssueOrderController implements GameFlowManager {
                     System.out.println(Constants.SEPERATER);
                     String l_Commands = getCommandFromPlayer(l_Player);
                     l_Player.issueOrder(l_Commands);
-                } else {
-                    //Todo refactor same type of code
-                    if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                        l_ZeroReinforcementPlayers.add(l_Player.getName());
-                        l_PlayerCounts++;
-                        continue;
-                    }
-                    if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                        System.out.println(Constants.ARMY_DEPLETED);
-                        System.out.println(Constants.SEPERATER);
-                        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
-                    }
                 }
             }
         }
