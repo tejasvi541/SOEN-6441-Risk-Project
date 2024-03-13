@@ -157,7 +157,7 @@ public class Player {
      *
      * @param p_Commands the type of order issued
      */
-    public void issue_order(String p_Commands) {
+    public void issueOrder(String p_Commands) {
         boolean l_IssueCommand = true;
         String[] l_CommandArr = p_Commands.split(" ");
         if (l_CommandArr.length > 2) {
@@ -225,7 +225,7 @@ public class Player {
         return !l_Result.isEmpty() ? l_Result.substring(0, l_Result.length() - 1) : "";
     }
 
-    public static Order next_order() {
+    public static Order nextOrder() {
         Order l_firstOrder = d_PlayerOrderList.getFirst();
         d_PlayerOrderList.removeFirst();
         return l_firstOrder;
@@ -304,17 +304,6 @@ public class Player {
         if (!d_NeutralPlayers.isEmpty()) {
             d_NeutralPlayers.clear();
         }
-    }
-
-
-
-    /**
-     * A function to return the next order for execution
-     *
-     * @return order for executing for each player
-     */
-    public Order nextOrder() {
-        return d_CurrentOrders.poll();
     }
 
 

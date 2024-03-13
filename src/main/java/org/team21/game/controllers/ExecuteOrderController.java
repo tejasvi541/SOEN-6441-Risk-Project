@@ -74,7 +74,7 @@ public class ExecuteOrderController implements GameFlowManager {
      */
     private boolean executeOrders() {
         while (!d_PlayerOrderList.isEmpty()) {
-            Order l_PlayerOrder = Player.next_order();
+            Order l_PlayerOrder = Player.nextOrder();
             if (!l_PlayerOrder.execute()) {
                 return false;
             }
