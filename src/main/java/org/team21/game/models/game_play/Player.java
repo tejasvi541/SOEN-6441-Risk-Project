@@ -63,7 +63,7 @@ public class Player {
         return d_PlayerId;
     }
     /**
-     * Created object d_gameEventLogger of GameEventLogger.
+     * Created object d_GameEventLogger of GameEventLogger.
      */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
