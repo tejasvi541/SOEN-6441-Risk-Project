@@ -48,11 +48,11 @@ public class StartGameController implements GameFlowManager {
     /**
      * Starts the game phase and performs tasks based on the commands given.
      *
-     * @param p_GamePhase The current game phase.
+     * @param p_CurrentPhase The current game phase.
      * @return The next game phase.
      * @throws ValidationException When validation fails.
      */
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException { return run(p_GamePhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException { return run(p_CurrentPhase); }
 
     /**
      * Run is entry point of the StartGameController

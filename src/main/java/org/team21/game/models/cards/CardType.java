@@ -12,7 +12,7 @@ public enum CardType {
     BOMB,
 
     /**
-     * Blockade Card
+     * BlockadeOrder Card
      */
     BLOCKADE,
 

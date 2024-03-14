@@ -64,13 +64,13 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * A function to start the issue order phase
      *
-     * @param p_CurrentGamePhase :  The current phase which is executing
+     * @param p_CurrentPhase :  The current phase which is executing
      * @return : to return the next phase to be executed
      */
 
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
 

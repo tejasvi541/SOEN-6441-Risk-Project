@@ -42,12 +42,12 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * This method starts the current game phase
      *
-     * @param p_CurrentGamePhase the current game phase
+     * @param p_CurrentPhase the current game phase
      * @return the next game phase
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
     /**

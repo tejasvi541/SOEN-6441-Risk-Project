@@ -7,21 +7,21 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
 /**
- * The Blockade order controller will triple the number of armies of
+ * The BlockadeOrder order controller will triple the number of armies of
  * the current player’s territories and make it a neutral territory.
  * @author Nishith
  * @version 1.0.0
  */
-public class Blockade extends Order{
+public class BlockadeOrder extends Order{
     /**
      * The d_GameMap is game map.
      */
     private final GameMap d_GameMap;
 
     /**
-     * Constructor to set Blockade type and also to get the GameMap instance.
+     * Constructor to set BlockadeOrder type and also to get the GameMap instance.
      */
-    public Blockade(){
+    public BlockadeOrder(){
         super();
         setType(Constants.BLOCKADE_COMMAND);
         d_GameMap = GameMap.getInstance();
@@ -63,6 +63,6 @@ public class Blockade extends Order{
 
     @Override
     public void printOrderCommand() {
-        System.out.println("Blockade on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());
+        System.out.println("BlockadeOrder on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());
     }
 }

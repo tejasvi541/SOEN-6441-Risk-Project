@@ -167,7 +167,7 @@ public final class Constants {
     /**
      * The constant NO_BLOCKADE_CARD.
      */
-    public final static String NO_BLOCKADE_CARD = "Player doesn't have Blockade Card.";
+    public final static String NO_BLOCKADE_CARD = "Player doesn't have BlockadeOrder Card.";
     /**
      * The constant NOT_ENOUGH_REINFORCEMENTS.
      */
