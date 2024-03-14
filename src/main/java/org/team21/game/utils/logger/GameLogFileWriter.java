@@ -25,7 +25,7 @@ public class GameLogFileWriter implements Observer {
     public GameLogFileWriter() {
         // You could optionally add code here to load preferences
         // or customize the logFilenamePrefix from a configuration file
-        File makeDir = new File("C:\\Users\\Nishith Soni\\Desktop\\SOEN-6441-Risk-Project\\logFiles");
+        File makeDir = new File("C:\\Users\\DELL\\Desktop\\logFiles");
         if(!makeDir.exists()){
             makeDir.mkdirs();
         }
