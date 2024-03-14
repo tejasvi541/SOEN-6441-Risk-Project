@@ -7,6 +7,7 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.models.orders.Order;
 import org.team21.game.models.orders.OrderOwner;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -62,6 +63,7 @@ public class Player {
         return d_PlayerId;
     }
 
+    GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * A function to set the player ID
      *
@@ -324,6 +326,7 @@ public class Player {
             setReinforcementArmies(3);
         }
         System.out.println("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
+        d_gameEventLogger.logEvent("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
     }
 
     /**
