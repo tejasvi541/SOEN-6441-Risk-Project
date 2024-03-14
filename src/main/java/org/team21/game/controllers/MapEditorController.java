@@ -112,7 +112,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     System.out.println(Constants.SEPERATER);
                     System.out.println("To edit map file  : editmap filename");
                     System.out.println(Constants.SEPERATER);
-                    System.out.println("To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID {example: editcontinent -add Asia or editcontinent -remove Asia}");
+                    System.out.println("To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID {example: editcontinent -add Asia 10 or editcontinent -remove Asia}");
                     System.out.println("To add or remove a country : editcountry -add countryID continentID -remove countryID {example: editcountry -add India Asia or editcountry -remove India }");
                     System.out.println("To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID {example: editneighbor -add India Pakistan or editneighbor -remove India Pakistan}");
                     System.out.println(Constants.SEPERATER);
