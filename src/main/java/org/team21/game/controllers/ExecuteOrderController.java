@@ -26,7 +26,7 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * Created object d_gameEventLogger of GameEventLogger.
      */
-    GameEventLogger d_gameEventLogger = new GameEventLogger();
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * GameMap instance
      */
@@ -60,7 +60,7 @@ public class ExecuteOrderController implements GameFlowManager {
         /**
          * The d_CurrentGamePhase is used to know current game phase.
          */
-        d_gameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
+        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
