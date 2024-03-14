@@ -23,7 +23,7 @@ public class Blockade extends Order{
      */
     public Blockade(){
         super();
-        setType("blockade");
+        setType(Constants.BLOCKADE_COMMAND);
         d_GameMap = GameMap.getInstance();
     }
 
