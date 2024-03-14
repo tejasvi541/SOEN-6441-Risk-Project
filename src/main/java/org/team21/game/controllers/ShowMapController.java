@@ -11,22 +11,24 @@ import org.team21.game.utils.Constants;
  * @author Tejasvi
  */
 public class ShowMapController {
-
-    private GameMap d_gameMap;
+    /**
+     * The d_GameMap is game map.
+     */
+    private GameMap d_GameMap;
 
     /**
      * Constructor to set the current GameMap object to read and show the map
-     * @param d_gameMap GMap Object Parameter
+     * @param d_GameMap GMap Object Parameter
      */
-    public ShowMapController(GameMap d_gameMap){
-        this.d_gameMap = GameMap.getInstance();
+    public ShowMapController(GameMap d_GameMap){
+        this.d_GameMap = GameMap.getInstance();
     }
 
     /**
      * This Function is the main logic behind displaying the Continents, then their corresponding countries and then their corresponding neighbors
      */
     public void show() {
-        if (d_gameMap.getMapName() == null || d_gameMap.getContinents() == null || d_gameMap.getMapName() == "" || d_gameMap == null){
+        if (d_GameMap.getMapName() == null || d_GameMap.getContinents() == null || d_GameMap.getMapName() == "" || d_GameMap == null){
             System.out.println("Any Map is not Loaded");
             return;
         }
@@ -35,7 +37,7 @@ public class ShowMapController {
         System.out.printf("%100s\n", "===============================================================================================================================");
         boolean l_isContinentPrinting = true;
         boolean l_isCountryPrinting = true;
-        for(Continent l_continent : d_gameMap.getContinents().values()) {
+        for(Continent l_continent : d_GameMap.getContinents().values()) {
             if(l_continent.getCountries().isEmpty()) {
                 System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), "", "", "", "");
             }

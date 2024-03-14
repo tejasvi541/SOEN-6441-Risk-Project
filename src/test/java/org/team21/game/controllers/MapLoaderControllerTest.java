@@ -16,7 +16,7 @@ public class MapLoaderControllerTest {
     /**
      * The D game map.
      */
-    GameMap d_gameMap;
+    GameMap d_GameMap;
     /**
      * The Map loader controller.
      */
@@ -31,7 +31,7 @@ public class MapLoaderControllerTest {
      */
     @Before
     public void setUp() {
-        d_gameMap = new GameMap();
+        d_GameMap = new GameMap();
         mapLoaderController = new MapLoaderController();
         d_mapName = "";
     }
@@ -42,11 +42,11 @@ public class MapLoaderControllerTest {
     @Test
     public void readMap() {
         d_mapName = "canada";
-        d_gameMap = mapLoaderController.readMap(d_mapName);
+        d_GameMap = mapLoaderController.readMap(d_mapName);
         String[] continents = {"Atlantic_Provinces", "Ontario_and_Quebec", "Western_Provinces-South", "Western_Provinces-North", "Nunavut", "Northwestern_Territories"};
         int i=0;
         while(i<6){
-            assertTrue(d_gameMap.getContinents().containsKey(continents[i].toLowerCase()));
+            assertTrue(d_GameMap.getContinents().containsKey(continents[i].toLowerCase()));
             i++;
         }
     }
