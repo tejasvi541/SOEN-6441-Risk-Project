@@ -33,7 +33,7 @@ public class IssueOrderController implements GameFlowManager {
      */
     private final GameMap d_GameMap;
     /**
-     * Created object d_gameEventLogger of GameEventLogger.
+     * Created object d_GameEventLogger of GameEventLogger.
      */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
