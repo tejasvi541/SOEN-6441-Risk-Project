@@ -19,7 +19,7 @@ public class GameLogFileWriter implements Observer {
      */
     private String d_LogFilenamePrefix = "gamelog"; // Default prefix
 
-    public String getD_Path() {
+    public String getDirectoryPath() {
         return d_Path;
     }
 
@@ -45,12 +45,12 @@ public class GameLogFileWriter implements Observer {
      * @param p_eventMessage The event message to be logged.
      */
     private void writeLogEntry(String p_eventMessage) {
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + d_LogFilenamePrefix + ".log", true)))) {
+        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + d_LogFilenamePrefix + ".log", true)))) {
             LocalDateTime l_Now = LocalDateTime.now();
             DateTimeFormatter l_Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String timestamp = l_Now.format(l_Formatter);
+            String l_Timestamp = l_Now.format(l_Formatter);
 
-            writer.println("[" + timestamp + "] " + p_eventMessage);
+            l_Writer.println("[" + l_Timestamp + "] " + p_eventMessage);
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
         }
@@ -59,20 +59,20 @@ public class GameLogFileWriter implements Observer {
     /**
      * Sets the filename prefix for log files.
      *
-     * @param prefix The desired prefix (excluding file extension)
+     * @param p_Prefix The desired prefix (excluding file extension)
      */
-    public void setLogFilenamePrefix(String prefix) {
-        this.d_LogFilenamePrefix = prefix;
+    public void setLogFilenamePrefix(String p_Prefix) {
+        this.d_LogFilenamePrefix = p_Prefix;
     }
 
     /**
      * Function to update the message for the observer
      *
-     * @param p_s the message to be updated
+     * @param p_S the message to be updated
      */
     @Override
-    public void update(String p_s) {
-        writeLogEntry(p_s);
+    public void update(String p_S) {
+        writeLogEntry(p_S);
     }
 }
 

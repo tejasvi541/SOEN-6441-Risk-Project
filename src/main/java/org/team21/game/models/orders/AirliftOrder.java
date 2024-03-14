@@ -4,6 +4,7 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 
 /**
@@ -33,7 +34,7 @@ public class AirliftOrder extends Order {
      * A data member for storing player information
      */
     Player d_Player;
-
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Default constructor for Airlift Order
      * to set type of order as Airlift
@@ -123,7 +124,7 @@ public class AirliftOrder extends Order {
         System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
         //ToDo Kapil to print the commands in logger file
-//        System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
+        d_GameEventLogger.logEvent("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }
 
