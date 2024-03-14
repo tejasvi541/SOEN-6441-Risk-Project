@@ -44,7 +44,7 @@ public class ShowMapController {
             for(Country l_country : l_continent.getCountries().values()) {
                 if(l_country.getNeighbours().isEmpty()) {
                     if (l_IsCountryPrinting) {
-                        String continentId = l_IsContinentPrinting ? l_continent.getContinentId() : "i";
+                        String continentId = l_IsContinentPrinting ? l_continent.getContinentId() : "";
                         System.out.printf(Constants.SPACE_FORMATTER, continentId, l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
                         l_IsCountryPrinting = false;
                         l_IsContinentPrinting = false;
