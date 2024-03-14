@@ -152,9 +152,9 @@ public class GameMap {
      */
     public void clearMap() {
         this.setMapName("");
-        this.setPlayers(new HashMap<String, Player>());
-        this.setCountries(new HashMap<String, Country>());
-        this.setContinents(new HashMap<String, Continent>());
+        this.setPlayers(new HashMap<>());
+        this.setCountries(new HashMap<>());
+        this.setContinents(new HashMap<>());
         this.setIsValid(false);
         this.setPlayer(new Player());
     }

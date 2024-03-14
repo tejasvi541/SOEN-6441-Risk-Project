@@ -44,7 +44,7 @@ public class MapLoaderController {
      * @return The Populated Map object
      */
     public GameMap readMap(String p_mapName){
-        d_countriesList = new HashMap<Integer, Country>();
+        d_countriesList = new HashMap<>();
 
         try{
             BufferedReader l_fileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_mapName+".map"));

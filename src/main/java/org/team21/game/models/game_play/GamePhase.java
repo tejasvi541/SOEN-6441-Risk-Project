@@ -185,8 +185,6 @@ public enum GamePhase {
         }
     }
 
-    ;
-
     /**
      * Possible states list.
      *

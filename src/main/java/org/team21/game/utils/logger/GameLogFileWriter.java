@@ -2,10 +2,7 @@ package org.team21.game.utils.logger;
 
 import org.team21.game.interfaces.observer.Observer;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +25,10 @@ public class GameLogFileWriter implements Observer {
     public GameLogFileWriter() {
         // You could optionally add code here to load preferences
         // or customize the logFilenamePrefix from a configuration file
+        File makeDir = new File("C:\\Users\\Nishith Soni\\Desktop\\SOEN-6441-Risk-Project\\logFiles");
+        if(!makeDir.exists()){
+            makeDir.mkdirs();
+        }
     }
 
 

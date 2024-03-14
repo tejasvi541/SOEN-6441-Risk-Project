@@ -11,6 +11,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.game_play.GamePhase;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidator;
 import org.team21.game.utils.validation.ValidationException;
 
@@ -19,7 +20,7 @@ import org.team21.game.utils.validation.ValidationException;
 /**
  * This class is used to create map through different commands for different operations.
  * @author Bharti Chhabra
- * @version 2.0.0
+ * @version 1.0.0
  */
 public class MapEditorController implements MapEditor, GameFlowManager {
     /**
@@ -51,7 +52,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * A data member to set status of editing phase
      */
     boolean d_editStatus =false;
-
+    GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * This is the default constructor
      */
@@ -70,14 +71,17 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      */
 
     static{
-        System.out.println("****************************** Welcome to MAP EDITOR PHASE *********************************");
-        System.out.println("Type the required option for taking action on map:" + "\n" );
-        System.out.println("1. Type Help :to get list of commands for different actions  " + "\n" );
-        System.out.println("2. Type Exit : to exit from map editor phase and continue playing game"+ "\n");
+        System.out.println(Constants.WELCOME_MESSAGE_MAP_EDITOR);
+        System.out.println(Constants.ASK_FOR_ACTION + "\n" );
+        System.out.println(Constants.HELP_COMMAND + "\n" );
+        System.out.println(Constants.EXIT_COMMAND + "\n");
+        //System.out.println("*******************************************************************************************************");
         System.out.println(Constants.SEPERATER);
     }
 
-    public GamePhase run(GamePhase p_CurrentPhase)  {
+    public GamePhase run(GamePhase p_CurrentPhase) throws Exception{
+        d_gameEventLogger.initializeNewLog("demo");
+        d_gameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
         List<String> l_ListStream;
         while (d_execute) {
             l_ListStream=fetchUserInput();
@@ -476,6 +480,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * @return The next phase of the game.
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentPhase) { return run(p_CurrentPhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws Exception{ return run(p_CurrentPhase); }
 
 }

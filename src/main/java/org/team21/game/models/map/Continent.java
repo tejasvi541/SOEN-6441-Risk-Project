@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * Continent Class for the information storage of Continent IDs, their Control Values and Country within that continent
- * A Hashmap is used to store all the countries belonging to one Continent, Key is Country Id and the Value is its object.
+ * A Hashmap is used to store all the countries belonging to one Continent, Key is CountryId and the Value is its object.
  *
  * @author Tejasvi
  * @author Kapil
@@ -48,7 +48,7 @@ public class Continent {
     public Continent(String p_continentId, String p_controlValue, int p_continentFileIndex) {
         this.d_continentId = p_continentId;
         this.d_controlValue = Integer.parseInt(p_controlValue);
-        this.d_countries = new HashMap<String, Country>();
+        this.d_countries = new HashMap<>();
         this.d_continentFileIndex = p_continentFileIndex;
     }
 
@@ -62,7 +62,7 @@ public class Continent {
     }
 
     /**
-     * Setter function to Continent Id
+     * Setter function to ContinentId
      *
      * @param p_continentId Continent ID
      */

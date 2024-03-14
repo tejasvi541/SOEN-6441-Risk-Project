@@ -6,6 +6,8 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.orders.Order;
+import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.HashMap;
 
@@ -21,6 +23,7 @@ public class ExecuteOrderController implements GameFlowManager {
      * The d_UpcomingGamePhase is used to get next game phase.
      */
     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
+    GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * GameMap instance
      */
@@ -54,7 +57,7 @@ public class ExecuteOrderController implements GameFlowManager {
         /**
          * The d_CurrentGamePhase is used to know current game phase.
          */
-
+        d_gameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();

@@ -1,0 +1,76 @@
+Subject: [PATCH] Removed redundant code in Constants.java
+---
+Index: src/main/java/org/team21/game/controllers/ExecuteOrderController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/team21/game/controllers/ExecuteOrderController.java b/src/main/java/org/team21/game/controllers/ExecuteOrderController.java
+--- a/src/main/java/org/team21/game/controllers/ExecuteOrderController.java	(revision d786afa21a8d2d2270d4f65cc0844ea3a8e0b5de)
++++ b/src/main/java/org/team21/game/controllers/ExecuteOrderController.java	(date 1710360872285)
+@@ -7,6 +7,7 @@
+ import org.team21.game.models.map.GameMap;
+ import org.team21.game.models.orders.Order;
+ import org.team21.game.utils.Constants;
++import org.team21.game.utils.logger.GameEventLogger;
+ 
+ import java.util.HashMap;
+ 
+@@ -28,6 +29,7 @@
+      * The d_UpcomingGamePhase is used to get next game phase.
+      */
+     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
++    GameEventLogger d_gameEventLogger = new GameEventLogger();
+ 
+     /**
+      * This is the default constructor for this constructor to get
+@@ -57,7 +59,7 @@
+         /**
+          * The d_CurrentGamePhase is used to know current game phase.
+          */
+-
++        d_gameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
+         //Execute all orders and if it fails
+         executeOrders();
+         clearAllNeutralPlayers();
+Index: src/main/java/org/team21/game/controllers/IssueOrderController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/team21/game/controllers/IssueOrderController.java b/src/main/java/org/team21/game/controllers/IssueOrderController.java
+--- a/src/main/java/org/team21/game/controllers/IssueOrderController.java	(revision d786afa21a8d2d2270d4f65cc0844ea3a8e0b5de)
++++ b/src/main/java/org/team21/game/controllers/IssueOrderController.java	(date 1710361064693)
+@@ -6,6 +6,7 @@
+ import org.team21.game.models.map.Country;
+ import org.team21.game.models.map.GameMap;
+ import org.team21.game.utils.Constants;
++import org.team21.game.utils.logger.GameEventLogger;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -31,7 +32,7 @@
+      * The d_GameMap is game map.
+      */
+     private final GameMap d_GameMap;
+-
++    GameEventLogger d_gameEventLogger = new GameEventLogger();
+     /**
+      * Constructor to get the GameMap instance
+      */
+Index: src/main/java/org/team21/game/utils/Constants.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/team21/game/utils/Constants.java b/src/main/java/org/team21/game/utils/Constants.java
+--- a/src/main/java/org/team21/game/utils/Constants.java	(revision d786afa21a8d2d2270d4f65cc0844ea3a8e0b5de)
++++ b/src/main/java/org/team21/game/utils/Constants.java	(date 1710360872303)
+@@ -60,6 +60,7 @@
+     public final static String ASK_FOR_ACTION = "Type the required option for taking action on map:";
+     public final static String HELP_COMMAND = "1. Type Help :to get list of commands for different actions  ";
+     public final static String EXIT_COMMAND = "2. Type Exit : to exit from map editor phase and continue playing game";
++    public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
+     /**
+      * The constant EXECUTE_ORDER_SUCCESS.
+      */
