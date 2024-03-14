@@ -17,17 +17,17 @@ public class GameLogFileWriter implements Observer {
     /**
      * Log filename prefix for further usage
      */
-    private String logFilenamePrefix = "gamelog"; // Default prefix
+    private String d_LogFilenamePrefix = "gamelog"; // Default prefix
 
     /**
      * Constructor to initialize the GameLogWriter
      */
     public GameLogFileWriter() {
         // You could optionally add code here to load preferences
-        // or customize the logFilenamePrefix from a configuration file
-        File makeDir = new File("C:\\Users\\Nishith Soni\\Desktop\\SOEN-6441-Risk-Project\\logFiles");
-        if(!makeDir.exists()){
-            makeDir.mkdirs();
+        // or customize the d_LogFilenamePrefix from a configuration file
+        File l_MakeDir = new File("C:\\Users\\Nishith Soni\\Desktop\\SOEN-6441-Risk-Project\\logFiles");
+        if(!l_MakeDir.exists()){
+            l_MakeDir.mkdirs();
         }
     }
 
@@ -38,10 +38,10 @@ public class GameLogFileWriter implements Observer {
      * @param p_eventMessage The event message to be logged.
      */
     private void writeLogEntry(String p_eventMessage) {
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + logFilenamePrefix + ".log", true)))) {
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String timestamp = now.format(formatter);
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + d_LogFilenamePrefix + ".log", true)))) {
+            LocalDateTime l_Now = LocalDateTime.now();
+            DateTimeFormatter l_Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String timestamp = l_Now.format(l_Formatter);
 
             writer.println("[" + timestamp + "] " + p_eventMessage);
         } catch (IOException e) {
@@ -55,7 +55,7 @@ public class GameLogFileWriter implements Observer {
      * @param prefix The desired prefix (excluding file extension)
      */
     public void setLogFilenamePrefix(String prefix) {
-        this.logFilenamePrefix = prefix;
+        this.d_LogFilenamePrefix = prefix;
     }
 
     /**
