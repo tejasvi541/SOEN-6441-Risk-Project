@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * The type Player for Game Map.
- * {org.team25.game.models.map.GameMap}
+ * {org.team21.game.models.map.GameMap}
  *
  * @author Kapil Soni
  * @version 1.0.0
@@ -62,7 +62,9 @@ public class Player {
     public int getId() {
         return d_PlayerId;
     }
-
+    /**
+     * Created object d_gameEventLogger of GameEventLogger.
+     */
     GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * A function to set the player ID

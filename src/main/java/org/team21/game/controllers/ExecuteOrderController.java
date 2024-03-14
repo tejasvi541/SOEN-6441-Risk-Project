@@ -23,6 +23,9 @@ public class ExecuteOrderController implements GameFlowManager {
      * The d_UpcomingGamePhase is used to get next game phase.
      */
     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
+    /**
+     * Created object d_gameEventLogger of GameEventLogger.
+     */
     GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * GameMap instance

@@ -45,7 +45,7 @@ public class GameEventLogger implements Observable {
      * @throws IOException If there's an error preparing the log file.
      */
     public void initializeNewLog(String p_filenamePrefix) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + p_filenamePrefix + ".log", false)))) {
+        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_LogEntryWriter.getDirectoryPath() + p_filenamePrefix + ".log", false)))) {
             // File cleared on creation
         }
     }

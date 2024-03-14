@@ -52,6 +52,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * A data member to set status of editing phase
      */
     boolean d_editStatus =false;
+    /**
+     * Created object d_gameEventLogger of GameEventLogger.
+     */
     GameEventLogger d_gameEventLogger = new GameEventLogger();
     /**
      * This is the default constructor
@@ -79,6 +82,12 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         System.out.println(Constants.SEPERATER);
     }
 
+    /**
+     * Runs the game phase.
+     * @param p_CurrentPhase holds the current phase of the Game.
+     * @return : the startup phase of the Game.
+     * @throws Exception If an error occurs during the execution
+     */
     public GamePhase run(GamePhase p_CurrentPhase) throws Exception{
         d_gameEventLogger.initializeNewLog("demo");
         d_gameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
@@ -453,6 +462,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         return false;
     }
 
+    /**
+     * This method will fetch the user inserted input.
+     */
     public List<String> fetchUserInput()
     {
         String l_UserInput = d_sc.nextLine();
