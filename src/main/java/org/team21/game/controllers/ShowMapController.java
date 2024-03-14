@@ -58,13 +58,13 @@ public class ShowMapController {
                         l_isContinentPrinting = false;
                     }
                     else {
-                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_neighbor.getCountryId());
+                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_Neighbor.getCountryId());
                     }
                 }
-                l_isCountryPrinting = true;
+                l_IsCountryPrinting = true;
             }
-            l_isContinentPrinting = true;
-            l_isCountryPrinting = true;
+            l_IsContinentPrinting = true;
+            l_IsCountryPrinting = true;
         }
     }
 
