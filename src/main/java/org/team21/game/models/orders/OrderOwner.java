@@ -32,7 +32,7 @@ public class OrderOwner {
 
         switch (l_OrderType) {
             case Constants.DEPLOY_COMMAND:
-                l_Order = new Deploy();
+                l_Order = new DeployOrder();
                 l_Order.setOrderInfo(generateDeployInfo(p_commands, player));
                 break;
             case Constants.AIRLIFT_COMMAND:
@@ -43,7 +43,7 @@ public class OrderOwner {
                 l_Order = new BombOrder();
                 l_Order.setOrderInfo(generateBombOrderInfo(p_commands, player));
                 break;
-            case "negotiate":
+            case Constants.NEGOTIATE_COMMAND:
                 l_Order = new NegotiateOrder();
                 l_Order.setOrderInfo(generateNegotiateOrderInfo(p_commands, player));
                 break;
