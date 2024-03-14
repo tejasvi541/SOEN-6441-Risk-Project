@@ -162,11 +162,11 @@ public class StartGameController implements GameFlowManager {
      */
     public boolean checkCommandValidator(List<String> p_InputList) {
         if (!p_InputList.isEmpty()) {
-            String mainCommand = p_InputList.getFirst();
+            String l_MainCommand = p_InputList.getFirst();
             if (p_InputList.size() == 1) {
                 p_InputList.add(Constants.DUMMY);
             }
-            return CLI_COMMANDS.contains(GameCommands.fromString(mainCommand.toLowerCase()));
+            return CLI_COMMANDS.contains(GameCommands.fromString(l_MainCommand.toLowerCase()));
         }
         return false;
     }

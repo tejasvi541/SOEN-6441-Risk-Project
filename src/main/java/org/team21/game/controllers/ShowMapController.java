@@ -35,42 +35,42 @@ public class ShowMapController {
         System.out.printf("%100s\n", "===============================================================================================================================");
         System.out.printf(Constants.SPACE_FORMATTER, "Continents", "Country", "Players",  "Armies", "Country's Neighbors");
         System.out.printf("%100s\n", "===============================================================================================================================");
-        boolean l_isContinentPrinting = true;
-        boolean l_isCountryPrinting = true;
-        for(Continent l_continent : d_GameMap.getContinents().values()) {
-            if(l_continent.getCountries().isEmpty()) {
-                System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), "", "", "", "");
+        boolean l_IsContinentPrinting = true;
+        boolean l_IsCountryPrinting = true;
+        for(Continent l_Continent : d_GameMap.getContinents().values()) {
+            if(l_Continent.getCountries().isEmpty()) {
+                System.out.printf(Constants.SPACE_FORMATTER, l_Continent.getContinentId(), "", "", "", "");
             }
-            for(Country l_country : l_continent.getCountries().values()) {
-                if(l_country.getNeighbours().isEmpty()) {
-                    if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
-                        l_isContinentPrinting = false;
-                        l_isCountryPrinting = false;
+            for(Country l_Country : l_Continent.getCountries().values()) {
+                if(l_Country.getNeighbours().isEmpty()) {
+                    if(l_IsContinentPrinting && l_IsCountryPrinting) {
+                        System.out.printf(Constants.SPACE_FORMATTER, l_Continent.getContinentId(), l_Country.getCountryId(), l_Country.getPlayer().getName(), l_Country.getArmies(), "");
+                        l_IsContinentPrinting = false;
+                        l_IsCountryPrinting = false;
                     }
-                    else if(l_isCountryPrinting) {
-                        System.out.printf(Constants.SPACE_FORMATTER, "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
-                        l_isCountryPrinting =  false;
+                    else if(l_IsCountryPrinting) {
+                        System.out.printf(Constants.SPACE_FORMATTER, "", l_Country.getCountryId(), l_Country.getPlayer().getName(), l_Country.getArmies(), "");
+                        l_IsCountryPrinting =  false;
                     }
                 }
-                for(Country l_neighbor : l_country.getNeighbours().values()) {
-                    if(l_isContinentPrinting && l_isCountryPrinting) {
-                        System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
-                        l_isContinentPrinting = false;
-                        l_isCountryPrinting = false;
+                for(Country l_Neighbor : l_Country.getNeighbours().values()) {
+                    if(l_IsContinentPrinting && l_IsCountryPrinting) {
+                        System.out.printf(Constants.SPACE_FORMATTER, l_Continent.getContinentId(), l_Country.getCountryId(), l_Country.getPlayer().getName(), l_Country.getArmies(), l_Neighbor.getCountryId());
+                        l_IsContinentPrinting = false;
+                        l_IsCountryPrinting = false;
                     }
-                    else if(l_isCountryPrinting) {
-                        System.out.printf(Constants.SPACE_FORMATTER, "", l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_neighbor.getCountryId());
-                        l_isCountryPrinting = false;
+                    else if(l_IsCountryPrinting) {
+                        System.out.printf(Constants.SPACE_FORMATTER, "", l_Country.getCountryId(), l_Country.getPlayer().getName(), l_Country.getArmies(), l_Neighbor.getCountryId());
+                        l_IsCountryPrinting = false;
                     }
                     else {
-                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_neighbor.getCountryId());
+                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_Neighbor.getCountryId());
                     }
                 }
-                l_isCountryPrinting = true;
+                l_IsCountryPrinting = true;
             }
-            l_isContinentPrinting = true;
-            l_isCountryPrinting = true;
+            l_IsContinentPrinting = true;
+            l_IsCountryPrinting = true;
         }
     }
 
