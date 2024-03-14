@@ -15,7 +15,13 @@ import java.util.HashMap;
  * @author Tejasvi
  */
 public class SaveMapController {
-    private GameMap d_gameMap;
+    /**
+     * The d_GameMap is game map.
+     */
+    private GameMap d_GameMap;
+    /**
+     * The d_fileName is variable for file name.
+     */
     private String d_fileName;
 
     /**
@@ -24,7 +30,7 @@ public class SaveMapController {
      * @param p_fileName Name with which file is going to be stored
      */
     public SaveMapController(GameMap p_gameMap, String p_fileName){
-        this.d_gameMap = p_gameMap;
+        this.d_GameMap = p_gameMap;
         this.d_fileName = p_fileName;
     }
 
@@ -33,7 +39,7 @@ public class SaveMapController {
      * @return true if map got saved else false
      */
     public boolean saveMap(){
-        if(!new MapValidator().validateMapObject(this.d_gameMap)){
+        if(!new MapValidator().validateMapObject(this.d_GameMap)){
             System.out.println("This Map Format is not valid");
             return false;
         }else{
@@ -59,7 +65,7 @@ public class SaveMapController {
                 l_writerPointer.newLine();
                 
                 try {
-                    for (Continent l_continent : this.d_gameMap.getContinents().values()) {
+                    for (Continent l_continent : this.d_GameMap.getContinents().values()) {
                         l_writerPointer.write(l_continent.getContinentId() + " " + l_continent.getControlValue());
                         l_writerPointer.newLine();
                         l_writerPointer.flush();
@@ -74,8 +80,8 @@ public class SaveMapController {
                 l_writerPointer.write("[countries]");
                 l_writerPointer.newLine();
                 try {
-                    for (Country l_country : this.d_gameMap.getCountries().values()) {
-                        l_writerPointer.write(l_country_idx + " " + l_country.getCountryId() + " " + this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex() + " " + "0" + " " + "0");
+                    for (Country l_country : this.d_GameMap.getCountries().values()) {
+                        l_writerPointer.write(l_country_idx + " " + l_country.getCountryId() + " " + this.d_GameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex() + " " + "0" + " " + "0");
                         l_writerPointer.newLine();
                         l_writerPointer.flush();
                         l_indexToCountry.put(l_country_idx, l_country.getCountryId().toLowerCase());
@@ -94,7 +100,7 @@ public class SaveMapController {
                 for(int i=1;i<l_country_idx;i++) {
                     String l_countryId = l_indexToCountry.get(i);
                     try{
-                        Country l_cd = this.d_gameMap.getCountries().get(l_countryId.toLowerCase());
+                        Country l_cd = this.d_GameMap.getCountries().get(l_countryId.toLowerCase());
                         l_writerPointer.write(Integer.toString(i) + " ");
                         for (Country l_neighbor : l_cd.getNeighbours().values()) {
                             l_writerPointer.write(Integer.toString(l_countryToIndex.get(l_neighbor.getCountryId().toLowerCase())) + " ");
