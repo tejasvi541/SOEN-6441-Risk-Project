@@ -13,5 +13,5 @@ public interface Observable {
      *
      * @param p_s the observable
      */
-    public void notifyObservers(String p_s);
+    void notifyObservers(String p_s);
 }

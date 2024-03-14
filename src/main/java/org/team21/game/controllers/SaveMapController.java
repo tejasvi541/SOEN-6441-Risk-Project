@@ -42,8 +42,8 @@ public class SaveMapController {
                 int l_continent_idx = 1;
                 int l_country_idx = 1;
                 //These Hashmaps are for creating the border indexes
-                HashMap<Integer, String> l_indexToCountry = new HashMap<Integer, String>();
-                HashMap<String, Integer> l_countryToIndex = new HashMap<String, Integer>();
+                HashMap<Integer, String> l_indexToCountry = new HashMap<>();
+                HashMap<String, Integer> l_countryToIndex = new HashMap<>();
 
                 //write basic information
                 l_writerPointer.write("name " + this.d_fileName + " Map");
@@ -75,7 +75,7 @@ public class SaveMapController {
                 l_writerPointer.newLine();
                 try {
                     for (Country l_country : this.d_gameMap.getCountries().values()) {
-                        l_writerPointer.write(Integer.toString(l_country_idx) + " " + l_country.getCountryId() + " " + Integer.toString(this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex()) + " " + "0" + " " + "0");
+                        l_writerPointer.write(l_country_idx + " " + l_country.getCountryId() + " " + this.d_gameMap.getContinents().get(l_country.getParentContinent().toLowerCase()).getContinentFileIndex() + " " + "0" + " " + "0");
                         l_writerPointer.newLine();
                         l_writerPointer.flush();
                         l_indexToCountry.put(l_country_idx, l_country.getCountryId().toLowerCase());

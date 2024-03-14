@@ -64,7 +64,7 @@ public class StartGameController implements GameFlowManager {
         while (true) {
             System.out.println(Constants.HELP_COMMAND+"\n"+Constants.EXIT_COMMAND);
             String l_StartUpCommand = d_Scanner.nextLine();
-            List<String> l_InputList = null;
+            List<String> l_InputList;
             if (l_StartUpCommand.contains("-")) {
                 l_InputList = Arrays.stream(l_StartUpCommand.split("-"))
                         .filter(s -> !s.isEmpty())

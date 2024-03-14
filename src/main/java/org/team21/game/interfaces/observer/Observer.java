@@ -12,5 +12,5 @@ public interface Observer {
      *
      * @param p_s the message to be updated
      */
-    public void update(String p_s);
+    void update(String p_s);
 }
