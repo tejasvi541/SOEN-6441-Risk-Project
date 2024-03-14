@@ -423,7 +423,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
                 // command to save map
                 case Constants.SAVE_MAP: {
-                    MapValidator l_mapValidator=new MapValidator();
+                    MapValidator l_MapValidator=new MapValidator();
                     if(!Objects.equals(l_CommandsArray[0], "savemap")){
                         if (l_MapValidator.validateMapObject(d_GameMap)) {
                             new SaveMapController(d_GameMap, l_CommandsArray[0]).saveMap();
