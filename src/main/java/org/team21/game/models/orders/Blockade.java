@@ -7,7 +7,8 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 
 /**
- * The Blockade order controller will Block the attack.
+ * The Blockade order controller will triple the number of armies of
+ * the current player’s territories and make it a neutral territory.
  * @author Nishith
  * @version 1.0.0
  */
