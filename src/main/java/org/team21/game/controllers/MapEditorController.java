@@ -79,7 +79,9 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         System.out.println(Constants.SEPERATER);
     }
 
-    public GamePhase run(GamePhase p_CurrentPhase)  {
+    public GamePhase run(GamePhase p_CurrentPhase) throws Exception{
+        d_gameEventLogger.initializeNewLog("demo");
+        d_gameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
         List<String> l_ListStream;
         while (d_execute) {
             l_ListStream=fetchUserInput();
@@ -478,6 +480,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * @return The next phase of the game.
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentPhase) { return run(p_CurrentPhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws Exception{ return run(p_CurrentPhase); }
 
 }

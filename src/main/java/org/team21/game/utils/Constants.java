@@ -81,6 +81,10 @@ public final class Constants {
      */
     public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
     /**
+     * The constant MAP_EDITOR_PHASE.
+     */
+    public final static String MAP_EDITOR_PHASE = "\n MAP EDITOR PHASE \n";
+    /**
      * The constant SPACE_FORMATTER.
      */
     public final static String SPACE_FORMATTER = "%-30s%-30s%-10s%-10s%-50s%n\n";
