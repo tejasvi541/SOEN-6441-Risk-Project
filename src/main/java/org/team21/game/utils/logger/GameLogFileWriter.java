@@ -19,13 +19,20 @@ public class GameLogFileWriter implements Observer {
      */
     private String logFilenamePrefix = "gamelog"; // Default prefix
 
+    public String getD_Path() {
+        return d_Path;
+    }
+
+    private String d_Path = "";
+
     /**
      * Constructor to initialize the GameLogWriter
      */
     public GameLogFileWriter() {
         // You could optionally add code here to load preferences
         // or customize the logFilenamePrefix from a configuration file
-        File makeDir = new File("C:\\Users\\Nishith Soni\\Desktop\\SOEN-6441-Risk-Project\\logFiles");
+        d_Path = System.getProperty("user.dir") + File.separator + "src" + File.separator + "Logs" +File.separator;
+        File makeDir = new File(d_Path);
         if(!makeDir.exists()){
             makeDir.mkdirs();
         }
@@ -38,7 +45,7 @@ public class GameLogFileWriter implements Observer {
      * @param p_eventMessage The event message to be logged.
      */
     private void writeLogEntry(String p_eventMessage) {
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + logFilenamePrefix + ".log", true)))) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + logFilenamePrefix + ".log", true)))) {
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String timestamp = now.format(formatter);
