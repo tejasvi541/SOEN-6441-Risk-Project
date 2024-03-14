@@ -89,7 +89,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * @throws Exception If an error occurs during the execution
      */
     public GamePhase run(GamePhase p_CurrentPhase) throws Exception{
-        d_gameEventLogger.initializeNewLog("demo");
+//        d_gameEventLogger.initializeNewLog("demo");
         d_gameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
         List<String> l_ListStream;
         while (d_execute) {
