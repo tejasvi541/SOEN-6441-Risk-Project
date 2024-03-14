@@ -66,7 +66,7 @@ public class Country {
     public Country(String p_countryId, String p_parentContinent) {
         this.d_countryId = p_countryId;
         this.d_parentContinent = p_parentContinent;
-        this.d_neighbours = new HashMap<String, Country>();
+        this.d_neighbours = new HashMap<>();
         this.d_numberOfArmies = 0;
         this.d_Armies = 0;
     }
@@ -95,7 +95,7 @@ public class Country {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        this.d_neighbours = new HashMap<String, Country>();
+        this.d_neighbours = new HashMap<>();
         this.d_xCoordinate = Integer.parseInt(p_xCoordinate);
         this.d_yCoordinate = Integer.parseInt(p_yCoordinate);
         this.d_numberOfArmies = 0;

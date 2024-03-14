@@ -12,7 +12,7 @@ public class Card {
     private CardType d_CardType;
 
     /**
-     * Card class constructor, initialse the d_CardType.
+     * Card class constructor, initialise the d_CardType.
      */
     public Card(){
         d_CardType = CardType.getRandomCard();
@@ -54,14 +54,13 @@ public class Card {
 
     /**
      * This method checks if 2 cards are equal or not
-     * @param p_cardObj The object with which card is gonna be compared
+     * @param p_cardObj The object with which card is going to be compared
      * @return true/false depending on equality
      */
     @Override
     public boolean equals(Object p_cardObj){
         if(this==p_cardObj)return true;
-        if(!(p_cardObj instanceof Card)) return false;
-        Card l_Card = (Card) p_cardObj;
+        if(!(p_cardObj instanceof Card l_Card)) return false;
         return d_CardType == l_Card.d_CardType;
     }
 
