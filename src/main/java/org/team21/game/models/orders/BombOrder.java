@@ -81,7 +81,6 @@ public class BombOrder extends Order {
             // TODO Add Logger
             return false;
         }
-
         return true;
     }
 
