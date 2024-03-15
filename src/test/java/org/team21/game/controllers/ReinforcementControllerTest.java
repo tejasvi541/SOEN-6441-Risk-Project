@@ -25,7 +25,7 @@ public class ReinforcementControllerTest {
     /**
      * Reinforcement controller
      */
-    private ReinforcementController reinforcementController;
+    private ReinforcementController ReinforcementController;
     /**
      * Game map object
      */
@@ -37,7 +37,7 @@ public class ReinforcementControllerTest {
     @Before
     public void setUp() {
         d_GameMap = GameMap.getInstance();
-        reinforcementController = new ReinforcementController();
+        ReinforcementController = new ReinforcementController();
 
         // Setup continents
         Continent continent1 = new Continent("Continent1", "5", 1);
@@ -63,7 +63,7 @@ public class ReinforcementControllerTest {
         setupPlayer("5", new ArrayList<>());
 
         GamePhase currentPhase = GamePhase.Reinforcement;
-        GamePhase nextPhase = reinforcementController.start(currentPhase);
+        GamePhase nextPhase = ReinforcementController.start(currentPhase);
         assertEquals(GamePhase.IssueOrder, nextPhase);
     }
 
@@ -87,7 +87,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_PlayerWithNoCountries() throws InvalidExecutionException {
-        reinforcementController.computerReinforcements();
+        ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("3").getReinforcementArmies());
     }
 
@@ -98,7 +98,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_PlayerWithOneCountry() throws InvalidExecutionException {
-        reinforcementController.computerReinforcements();
+        ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -109,7 +109,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_FullyCapturedContinent() throws InvalidExecutionException {
-        reinforcementController.computerReinforcements();
+        ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
@@ -120,7 +120,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_NotFullyCapturedContinent() throws InvalidExecutionException {
-        reinforcementController.computerReinforcements();
+        ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -131,7 +131,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_MultiplePlayersInDifferentContinents() throws InvalidExecutionException {
-        reinforcementController.computerReinforcements();
+        ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
@@ -143,7 +143,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testAssignReinforcementTroops_PlayerWithCapturedCountries() throws InvalidExecutionException {
-        reinforcementController.assignReinforcementTroops();
+        ReinforcementController.assignReinforcementTroops();
 
         // Assuming Player1 captured 2 countries in Continent1 (awarded 3 reinforcement armies)
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
@@ -157,7 +157,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_PlayerWithNoCapturedCountries() throws InvalidExecutionException {
         // Assuming Player2 has captured no countries
-        reinforcementController.assignReinforcementTroops();
+        ReinforcementController.assignReinforcementTroops();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -169,7 +169,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_NotFullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured 1 country in Continent1 (not fully captured)
-        reinforcementController.assignReinforcementTroops();
+        ReinforcementController.assignReinforcementTroops();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
@@ -181,7 +181,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_FullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured all countries in Continent1 (fully captured)
-        reinforcementController.assignReinforcementTroops();
+        ReinforcementController.assignReinforcementTroops();
 
         if(d_GameMap.getPlayers().get("1").getCapturedCountries().size()==2){
 
