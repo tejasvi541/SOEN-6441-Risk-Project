@@ -159,6 +159,7 @@ public class StartGameController implements GameFlowManager {
         }
         else{
             System.out.println("Map File is Invalid Please Try Again");
+            // TODO Add Logger
         }
     }
 

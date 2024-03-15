@@ -5,6 +5,7 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public class BombOrder extends Order {
      * Game Map object variable
      */
     private GameMap d_GameMap;
-    // TODO Initialise Logger
+    GameEventLogger logger = new GameEventLogger();
 
     /**
      * Class constructor calls super and set GameMap object
@@ -41,26 +42,26 @@ public class BombOrder extends Order {
         // Check for valid player
         if(l_Player==null){
             System.out.println("Invalid Player");
-            // TODO Add Logger
+            logger.logEvent("The Player is invalid");
             return false;
         }
         // Check for if the player has the card
         if(!l_Player.checkIfCardAvailable(CardType.BOMB)){
             System.out.println("Invalid BOMB Card");
-            // TODO Add Logger
+            logger.logEvent("The BOMB card is invalid");
             return false;
         }
         // check if the target country belongs to the player
         if(l_Player.getCapturedCountries().contains(l_TargetCountry)){
             System.out.println("The Player cannot bomb its own country");
-            // TODO Add Logger
+            logger.logEvent("The Player cannot bomb its own country");
             return false;
         }
 
         // Check if diplomacy is there or not
         if(l_Player.getNeutralPlayers().contains(l_TargetCountry.getPlayer())){
             System.out.printf("There is diplomacy between %s and %s\n", l_Player.getName(), l_TargetCountry.getPlayer().getName());
-            // TODO Add Logger
+            logger.logEvent("There is diplomacy between the countries");
             l_Player.getNeutralPlayers().remove(l_TargetCountry.getPlayer());
             l_TargetCountry.getPlayer().getNeutralPlayers().remove(l_Player);
             return false;
@@ -78,7 +79,7 @@ public class BombOrder extends Order {
         }
         if (!l_adjacentCountry){
             System.out.println("The target country is not a neighbor of player owned country");
-            // TODO Add Logger
+            logger.logEvent("The target country is not a neighbor of player owned country");
             return false;
         }
         return true;

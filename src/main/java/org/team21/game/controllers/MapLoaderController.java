@@ -2,6 +2,7 @@ package org.team21.game.controllers;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
 
@@ -32,7 +34,12 @@ public class MapLoaderController {
      */
     private HashMap<Integer, Country> d_CountriesList;
 
-   public MapLoaderController(){
+    /**
+     * Logger Initialisation
+     */
+    GameEventLogger logger = new GameEventLogger();
+
+    public MapLoaderController(){
         d_GameMap = GameMap.getInstance();
     }
     /**
@@ -73,6 +80,7 @@ public class MapLoaderController {
         }
         catch (FileNotFoundException e) {
             System.out.println("The said file is not found.");
+            logger.logEvent("The Files is not found");
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println("Input/Output Problem");
@@ -81,8 +89,11 @@ public class MapLoaderController {
         d_GameMap.setMapName(p_MapName);
         if(d_GameMap.getContinents().isEmpty()){
             System.out.println("No Such Map Exists So Creating a New One");
+            logger.logEvent("No Such Map Exists So Creating a New One");
+
         }else{
             System.out.println("\n*********Your Map " + d_GameMap.getMapName() + " is Loaded*********");
+            logger.logEvent("\n*********Your Map " + d_GameMap.getMapName() + " is Loaded*********");
         }
         return d_GameMap;
     }
