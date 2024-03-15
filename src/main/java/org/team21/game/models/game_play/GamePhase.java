@@ -170,6 +170,8 @@ public enum GamePhase {
         }
     };
 
+    public String Commands;
+
     /**
      * Checks if the next game phase returned from the current
      * controller is present in its possible states list.
