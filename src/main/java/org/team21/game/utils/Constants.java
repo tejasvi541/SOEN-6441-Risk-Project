@@ -210,6 +210,11 @@ public final class Constants {
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
 
     /**
+     * The Constant for gamemap file
+     */
+    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
+
+    /**
      * Instantiates a new Constants.
      */
     Constants() {

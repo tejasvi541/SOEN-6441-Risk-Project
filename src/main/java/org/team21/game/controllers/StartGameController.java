@@ -7,10 +7,13 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.validation.ValidationException;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
 
 /**
  * The StartGameController will perform main load game actions and associated controllers are
@@ -151,7 +154,13 @@ public class StartGameController implements GameFlowManager {
      * @param p_Filename The map file name.
      */
     private void loadMapForStaringGame(String p_Filename) {
-        new MapLoaderController().readMap(p_Filename);
+        if(new File(MAP_FILE_DIRECTORY+p_Filename+".map").isFile()){
+            new MapLoaderController().readMap(p_Filename);
+        }
+        else{
+            System.out.println("Map File is Invalid Please Try Again");
+            // TODO Add Logger
+        }
     }
 
     /**
