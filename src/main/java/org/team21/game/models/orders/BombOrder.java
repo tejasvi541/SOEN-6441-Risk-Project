@@ -40,26 +40,26 @@ public class BombOrder extends Order {
 
         // Check for valid player
         if(l_Player==null){
-            System.err.println("Invalid Player");
+            System.out.println("Invalid Player");
             // TODO Add Logger
             return false;
         }
         // Check for if the player has the card
         if(!l_Player.checkIfCardAvailable(CardType.BOMB)){
-            System.err.println("Invalid BOMB Card");
+            System.out.println("Invalid BOMB Card");
             // TODO Add Logger
             return false;
         }
         // check if the target country belongs to the player
         if(l_Player.getCapturedCountries().contains(l_TargetCountry)){
-            System.err.println("The Player cannot bomb its own country");
+            System.out.println("The Player cannot bomb its own country");
             // TODO Add Logger
             return false;
         }
 
         // Check if diplomacy is there or not
         if(l_Player.getNeutralPlayers().contains(l_TargetCountry.getPlayer())){
-            System.err.printf("There is diplomacy between %s and %s\n", l_Player.getName(), l_TargetCountry.getPlayer().getName());
+            System.out.printf("There is diplomacy between %s and %s\n", l_Player.getName(), l_TargetCountry.getPlayer().getName());
             // TODO Add Logger
             l_Player.getNeutralPlayers().remove(l_TargetCountry.getPlayer());
             l_TargetCountry.getPlayer().getNeutralPlayers().remove(l_Player);
@@ -77,7 +77,7 @@ public class BombOrder extends Order {
             }
         }
         if (!l_adjacentCountry){
-            System.err.println("The target country is not a neighbor of player owned country");
+            System.out.println("The target country is not a neighbor of player owned country");
             // TODO Add Logger
             return false;
         }

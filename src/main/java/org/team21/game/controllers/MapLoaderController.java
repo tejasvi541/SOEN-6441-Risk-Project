@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
+
 /**
  * This is the main logic of the Map Loading here in this Map Loader class to load our maps and store in memory
  * to play or edit.
@@ -56,7 +58,7 @@ public class MapLoaderController {
         d_CountriesList = new HashMap<>();
 
         try{
-            BufferedReader l_FileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_MapName+".map"));
+            BufferedReader l_FileReader = new BufferedReader(new FileReader(MAP_FILE_DIRECTORY+p_MapName+".map"));
             String l_LineString;
             while((l_LineString=l_FileReader.readLine())!=null){
                 switch (l_LineString) {
