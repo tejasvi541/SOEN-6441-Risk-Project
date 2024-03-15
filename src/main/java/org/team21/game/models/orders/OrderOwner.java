@@ -47,6 +47,10 @@ public class OrderOwner {
                 l_Order = new NegotiateOrder();
                 l_Order.setOrderInfo(generateNegotiateOrderInfo(p_commands, player));
                 break;
+            case Constants.ADVANCE_COMMAND:
+                l_Order = new AdvanceOrder();
+                l_Order.setOrderInfo(GenerateAdvanceOrderInfo(p_commands, player));
+                break;
             default:
                 System.out.println("\nFailed to create an order due to invalid arguments");
                 return null;
@@ -130,4 +134,17 @@ public class OrderOwner {
         return l_OrderInfo;
     }
 
+    private static OrderInformation GenerateAdvanceOrderInfo(String[] p_Command, Player p_Player) {
+        String l_FromCountryID = p_Command[1];
+        Country l_FromCountry = d_GameMap.getCountries().get(l_FromCountryID.toLowerCase());
+        String l_ToCountryID = p_Command[2];
+        Country l_ToCountry = d_GameMap.getCountries().get(l_FromCountryID.toLowerCase());
+        int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
+        OrderInformation l_OrderInfo = new OrderInformation();
+        l_OrderInfo.setPlayer(p_Player);
+        l_OrderInfo.setDeparture(l_FromCountry);
+        l_OrderInfo.setDestination(l_ToCountry);
+        l_OrderInfo.setNumberOfArmy(l_NumberOfArmies);
+        return l_OrderInfo;
+    }
 }
