@@ -21,19 +21,8 @@ public class AirliftOrder extends Order {
     private final GameMap d_GameMap;
 
     /**
-     * A data member for storing number of army for airlift order
+     * A logger for storing airlift order information
      */
-    int d_armyToAirLift;
-
-    /**
-     * A data member for storing order information
-     */
-    OrderInformation d_orderInfo;
-
-    /**
-     * A data member for storing player information
-     */
-    Player d_Player;
     GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Default constructor for Airlift Order
@@ -45,32 +34,23 @@ public class AirliftOrder extends Order {
     }
 
     /**
-     * method to initialise for airlift order information
-     */
-    public void init()
-    {
-        d_orderInfo=getOrderInfo();
-        d_armyToAirLift = d_orderInfo.getNumberOfArmy();
-        d_Player = d_orderInfo.getPlayer();
-    }
-
-    /**
      * execute the Airlift Order
      *
      * @return true: if airlift order execution is successful; else false
      */
     @Override
     public boolean execute() {
-        Country l_fromCountry = d_orderInfo.getDeparture();
-        //ToDo kapil to convert string return type to Country for getDestination method in Order class
-        Country l_destinationCountry = d_orderInfo.getDestination();
+        Country l_fromCountry = getOrderInfo().getDeparture();
+        Country l_destinationCountry = getOrderInfo().getDestination();
+        Player l_Player = getOrderInfo().getPlayer();
+        int p_armyToAirLift = getOrderInfo().getNumberOfArmy();
+
 
         if (validateCommand()) {
-            l_fromCountry.setArmies(l_fromCountry.getArmies() - d_armyToAirLift);
-            l_destinationCountry.setArmies(l_destinationCountry.getArmies() + d_armyToAirLift);
-            System.out.println("The order: " + getType() + " " + d_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
-            //ToDo kapil to remove card for given player after execution is completed
-            d_Player.removeCard(CardType.AIRLIFT);
+            l_fromCountry.setArmies(l_fromCountry.getArmies() - p_armyToAirLift);
+            l_destinationCountry.setArmies(l_destinationCountry.getArmies() + p_armyToAirLift);
+            System.out.println("The order: " + getType() + " " + p_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
+            l_Player.removeCard(CardType.AIRLIFT);
             return true;
         }
         return false;
@@ -83,33 +63,34 @@ public class AirliftOrder extends Order {
      */
     @Override
     public boolean validateCommand() {
-        Country l_departureCountry = d_orderInfo.getDeparture();
-        //ToDo kapil to convert string return type to Country for getDestination method in Order class
-        Country l_destinationCountry = d_orderInfo.getDestination();
+        Country l_fromCountry = getOrderInfo().getDeparture();
+        Country l_destinationCountry = getOrderInfo().getDestination();
+        Player l_Player = getOrderInfo().getPlayer();
+        int p_armyToAirLift = getOrderInfo().getNumberOfArmy();
+
         //check if the player is valid
-        if (d_Player == null) {
+        if (l_Player == null) {
             System.out.println("Found no valid Player");
             return false;
         }
         //check if army number is more than 0
-        if (d_armyToAirLift <= 0) {
+        if (p_armyToAirLift <= 0) {
             System.out.println("Airlift army is less than 0. It should be greater than 0");
             return false;
         }
 
         //check if the player has an airlift card
-        //ToDO kapil to add method checkIfCardAvailable for validation
-        if (!d_Player.checkIfCardAvailable(CardType.AIRLIFT)) {
+        if (!l_Player.checkIfCardAvailable(CardType.AIRLIFT)) {
             System.out.println("Airlift Card not available for the player");
             return false;
         }
         //check if countries belong to the player
-        if (!d_Player.getCapturedCountries().contains(l_departureCountry) || !d_Player.getCapturedCountries().contains(l_destinationCountry)) {
+        if (!l_Player.getCapturedCountries().contains(l_fromCountry) || !l_Player.getCapturedCountries().contains(l_destinationCountry)) {
             System.out.println("Departure or Destination country do not belong to player.");
             return false;
         }
         //check if army number is more that they own
-        if (l_departureCountry.getArmies() < d_armyToAirLift) {
+        if (l_fromCountry.getArmies() < p_armyToAirLift) {
             System.out.println("Less number of army for the player in country " + getOrderInfo().getDeparture().getCountryId());
             return false;
         }
@@ -124,6 +105,6 @@ public class AirliftOrder extends Order {
         System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
         //ToDo Kapil to print the commands in logger file
-        d_GameEventLogger.logEvent("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
+        //d_GameEventLogger.logEvent("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }
