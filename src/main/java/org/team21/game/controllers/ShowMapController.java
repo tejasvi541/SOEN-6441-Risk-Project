@@ -42,19 +42,30 @@ public class ShowMapController {
                 System.out.printf(Constants.SPACE_FORMATTER, l_continent.getContinentId(), "", "", "", "");
             }
             for(Country l_country : l_continent.getCountries().values()) {
-                String continentId = l_IsContinentPrinting ? l_continent.getContinentId() : "";
                 if(l_country.getNeighbours().isEmpty()) {
-                    System.out.printf(Constants.SPACE_FORMATTER, continentId, l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
-                }else{
-                    for(Country l_Neighbor : l_country.getNeighbours().values()) {
+                    if (l_IsCountryPrinting) {
+                        String continentId = l_IsContinentPrinting ? l_continent.getContinentId() : "i";
+                        System.out.printf(Constants.SPACE_FORMATTER, continentId, l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), "");
+                        l_IsCountryPrinting = false;
+                        l_IsContinentPrinting = false;
+                    }
+                }
+                for(Country l_Neighbor : l_country.getNeighbours().values()) {
+                    if (l_IsCountryPrinting) {
+                        String continentId = l_IsContinentPrinting ? l_continent.getContinentId() : "";
                         System.out.printf(Constants.SPACE_FORMATTER, continentId, l_country.getCountryId(), l_country.getPlayer().getName(), l_country.getArmies(), l_Neighbor.getCountryId());
+                        l_IsCountryPrinting = false;
+                        l_IsContinentPrinting = false;
+                    }
+                    else {
+                        System.out.printf(Constants.SPACE_FORMATTER, "", "", "", "", l_Neighbor.getCountryId());
                     }
                 }
                 l_IsCountryPrinting = true;
-                l_IsContinentPrinting = true;
             }
             l_IsContinentPrinting = true;
             l_IsCountryPrinting = true;
         }
     }
+
 }

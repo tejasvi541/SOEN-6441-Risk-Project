@@ -97,7 +97,6 @@ public class ReinforcementController implements GameFlowManager {
                         .stream()
                         .collect(Collectors.groupingBy(Country::getParentContinent));
                 for (String l_Continent : l_CountryMap.keySet()) {
-                    
                     try {
                         if (d_GameMap.getContinent(l_Continent) != null) {
                             if (d_GameMap.getContinent(l_Continent).getCountries().size() == l_CountryMap.get(l_Continent).size()) {

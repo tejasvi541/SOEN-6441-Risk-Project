@@ -165,13 +165,11 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                     break;
                 }
 
-
                 //command to edit country in map
                 case Constants.EDIT_COUNTRY: {
                     switch (l_CommandsArray[0]) {
                         case Constants.ADD: {
                             if (l_CommandsArray.length == 3) {
-                                
                                 try {
                                     HashMap<String, Country> l_Countries = d_GameMap.getCountries();
                                     if (l_Countries.containsKey(l_CommandsArray[1].toLowerCase())) {
@@ -299,8 +297,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
                                             HashMap<String, Country> l_CountriesMap = l_Continents.get(l_CommandsArray[1].toLowerCase()).getCountries();
                                             l_CountriesMap.clear();
                                             l_Continents.remove(l_CommandsArray[1].toLowerCase());
-                                            System.out.println("All countries from continent " + l_CommandsArray[1] + " are successfulLY removed .");
-                                            System.out.println("Continent " + l_CommandsArray[1] + " is successfullY removed .");
+                                            System.out.println("All countries from continent " + l_CommandsArray[1] + " are successfully removed .");
+                                            System.out.println("Continent " + l_CommandsArray[1] + " is successfully removed .");
                                             d_EditStatus = true;
                                         }
                                     }catch (Exception e) {
