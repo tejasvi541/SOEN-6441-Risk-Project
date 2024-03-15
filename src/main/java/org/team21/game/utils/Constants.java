@@ -167,7 +167,7 @@ public final class Constants {
     /**
      * The constant NO_BLOCKADE_CARD.
      */
-    public final static String NO_BLOCKADE_CARD = "Player doesn't have Blockade Card.";
+    public final static String NO_BLOCKADE_CARD = "Player doesn't have BlockadeOrder Card.";
     /**
      * The constant NOT_ENOUGH_REINFORCEMENTS.
      */
@@ -208,6 +208,11 @@ public final class Constants {
      * The constant WELCOME_MESSAGE.
      */
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
+
+    /**
+     * The Constant for gamemap file
+     */
+    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
 
     /**
      * Instantiates a new Constants.

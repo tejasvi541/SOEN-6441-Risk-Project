@@ -7,10 +7,13 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.validation.ValidationException;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
 
 /**
  * The StartGameController will perform main load game actions and associated controllers are
@@ -48,11 +51,11 @@ public class StartGameController implements GameFlowManager {
     /**
      * Starts the game phase and performs tasks based on the commands given.
      *
-     * @param p_GamePhase The current game phase.
+     * @param p_CurrentPhase The current game phase.
      * @return The next game phase.
      * @throws ValidationException When validation fails.
      */
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException { return run(p_GamePhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException { return run(p_CurrentPhase); }
 
     /**
      * Run is entry point of the StartGameController
@@ -151,7 +154,13 @@ public class StartGameController implements GameFlowManager {
      * @param p_Filename The map file name.
      */
     private void loadMapForStaringGame(String p_Filename) {
-        new MapLoaderController().readMap(p_Filename);
+        if(new File(MAP_FILE_DIRECTORY+p_Filename+".map").isFile()){
+            new MapLoaderController().readMap(p_Filename);
+        }
+        else{
+            System.out.println("Map File is Invalid Please Try Again");
+            // TODO Add Logger
+        }
     }
 
     /**
@@ -162,11 +171,11 @@ public class StartGameController implements GameFlowManager {
      */
     public boolean checkCommandValidator(List<String> p_InputList) {
         if (!p_InputList.isEmpty()) {
-            String mainCommand = p_InputList.getFirst();
+            String l_MainCommand = p_InputList.getFirst();
             if (p_InputList.size() == 1) {
                 p_InputList.add(Constants.DUMMY);
             }
-            return CLI_COMMANDS.contains(GameCommands.fromString(mainCommand.toLowerCase()));
+            return CLI_COMMANDS.contains(GameCommands.fromString(l_MainCommand.toLowerCase()));
         }
         return false;
     }

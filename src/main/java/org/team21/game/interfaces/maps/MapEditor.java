@@ -5,7 +5,7 @@ import org.team21.game.models.game_play.GamePhase;
 import java.util.List;
 
 /**
- * This is the Interface for the Mapeditor
+ * This is the Interface for the MapEditor
  * @author Bharti
  */
 public interface MapEditor {

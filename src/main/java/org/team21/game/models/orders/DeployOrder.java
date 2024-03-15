@@ -11,11 +11,11 @@ import org.team21.game.utils.Constants;
  * @author Kapil Soni
  * @version 1.0.0
  */
-public class Deploy extends Order {
+public class DeployOrder extends Order {
     /**
      * Constructor for DeployOrder
      */
-    public Deploy() {
+    public DeployOrder() {
         super();
         setType(Constants.DEPLOY_COMMAND);
     }
@@ -63,5 +63,4 @@ public class Deploy extends Order {
         //Todo implement printOrderCommand
 
     }
-
 }

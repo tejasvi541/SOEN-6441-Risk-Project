@@ -65,11 +65,11 @@ public class AirliftOrder extends Order {
         //ToDo kapil to convert string return type to Country for getDestination method in Order class
         Country l_destinationCountry = d_orderInfo.getDestination();
 
-       if (validateCommand()) {
+        if (validateCommand()) {
             l_fromCountry.setArmies(l_fromCountry.getArmies() - d_armyToAirLift);
-           l_destinationCountry.setArmies(l_destinationCountry.getArmies() + d_armyToAirLift);
+            l_destinationCountry.setArmies(l_destinationCountry.getArmies() + d_armyToAirLift);
             System.out.println("The order: " + getType() + " " + d_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
-           //ToDo kapil to remove card for given player after execution is completed
+            //ToDo kapil to remove card for given player after execution is completed
             d_Player.removeCard(CardType.AIRLIFT);
             return true;
         }
@@ -127,4 +127,3 @@ public class AirliftOrder extends Order {
         d_GameEventLogger.logEvent("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }
-

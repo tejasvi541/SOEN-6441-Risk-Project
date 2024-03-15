@@ -63,9 +63,9 @@ public class Player {
         return d_PlayerId;
     }
     /**
-     * Created object d_gameEventLogger of GameEventLogger.
+     * Created object d_GameEventLogger of GameEventLogger.
      */
-    GameEventLogger d_gameEventLogger = new GameEventLogger();
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * A function to set the player ID
      *
@@ -317,37 +317,37 @@ public class Player {
     /**
      * Calculate the number of the armies to be assigned in reinforcement phase.
      *
-     * @param p_gameMap The game map object
+     * @param p_GameMap The game map object
      */
-    public void calculateReinforcementArmies(GameMap p_gameMap) {
+    public void calculateReinforcementArmies(GameMap p_GameMap) {
         if (getCapturedCountries().size() > 0) {
             int reinforcements = (int) Math.floor(getCapturedCountries().size() / 3f);
-            reinforcements += getBonusIfKingOfContinents(p_gameMap);
+            reinforcements += getBonusIfKingOfContinents(p_GameMap);
             setReinforcementArmies(reinforcements > 2 ? reinforcements : 3);
         } else {
             setReinforcementArmies(3);
         }
         System.out.println("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
-        d_gameEventLogger.logEvent("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
+        d_GameEventLogger.logEvent("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
     }
 
     /**
      * Add bonus armies to reinforcement armies if a player owns the continent.
      *
-     * @param p_gameMap The game map object
+     * @param p_GameMap The game map object
      * @return reinforcements armies added with bonus armies
      */
-    private int getBonusIfKingOfContinents(GameMap p_gameMap) {
-        int reinforcements = 0;
+    private int getBonusIfKingOfContinents(GameMap p_GameMap) {
+        int l_Reinforcements = 0;
         Map<String, List<Country>> l_CountryMap = getCapturedCountries()
                 .stream()
                 .collect(Collectors.groupingBy(Country::getParentContinent));
         for (String continent : l_CountryMap.keySet()) {
-            if (p_gameMap.getContinent(continent).getCountries().size() == l_CountryMap.get(continent).size()) {
-                reinforcements += p_gameMap.getContinent(continent).getAwardArmies();
+            if (p_GameMap.getContinent(continent).getCountries().size() == l_CountryMap.get(continent).size()) {
+                l_Reinforcements += p_GameMap.getContinent(continent).getAwardArmies();
             }
         }
-        return reinforcements;
+        return l_Reinforcements;
     }
 
     /**
