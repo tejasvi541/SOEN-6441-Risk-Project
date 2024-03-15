@@ -14,19 +14,19 @@ public class Continent {
     /**
      * Continent control value
      */
-    private int d_controlValue;
+    private int d_ControlValue;
     /**
      * ID of continent
      */
-    private String d_continentId;
+    private String d_ContinentId;
     /**
      * Continent File index
      */
-    private int d_continentFileIndex;
+    private int d_ContinentFileIndex;
     /**
      * Continent Countries
      */
-    private HashMap<String, Country> d_countries;
+    private HashMap<String, Country> d_Countries;
     /**
      * Armies to award to player when captured
      */
@@ -41,15 +41,15 @@ public class Continent {
      * Constructor to initialise the Continent class with the arguments passed below
      * Used during loading the map data
      *
-     * @param p_continentId        Continent ID
-     * @param p_controlValue       Control Value of Continent
-     * @param p_continentFileIndex the p continent file index
+     * @param p_ContinentId        Continent ID
+     * @param p_ControlValue       Control Value of Continent
+     * @param p_ContinentFileIndex the p continent file index
      */
-    public Continent(String p_continentId, String p_controlValue, int p_continentFileIndex) {
-        this.d_continentId = p_continentId;
-        this.d_controlValue = Integer.parseInt(p_controlValue);
-        this.d_countries = new HashMap<>();
-        this.d_continentFileIndex = p_continentFileIndex;
+    public Continent(String p_ContinentId, String p_ControlValue, int p_ContinentFileIndex) {
+        this.d_ContinentId = p_ContinentId;
+        this.d_ControlValue = Integer.parseInt(p_ControlValue);
+        this.d_Countries = new HashMap<>();
+        this.d_ContinentFileIndex = p_ContinentFileIndex;
     }
 
     /**
@@ -58,16 +58,16 @@ public class Continent {
      * @return returns the Continent ID
      */
     public String getContinentId() {
-        return this.d_continentId;
+        return this.d_ContinentId;
     }
 
     /**
      * Setter function to ContinentId
      *
-     * @param p_continentId Continent ID
+     * @param p_ContinentId Continent ID
      */
-    public void setContinentId(String p_continentId) {
-        this.d_continentId = p_continentId;
+    public void setContinentId(String p_ContinentId) {
+        this.d_ContinentId = p_ContinentId;
     }
 
     /**
@@ -76,16 +76,16 @@ public class Continent {
      * @return control value of the content
      */
     public int getControlValue() {
-        return this.d_controlValue;
+        return this.d_ControlValue;
     }
 
     /**
      * Setter function of the control value which saves it in integer from string
      *
-     * @param p_controlValue Control value of Continent
+     * @param p_ControlValue Control value of Continent
      */
-    public void setControlValue(String p_controlValue) {
-        this.d_controlValue = Integer.parseInt(p_controlValue);
+    public void setControlValue(String p_ControlValue) {
+        this.d_ControlValue = Integer.parseInt(p_ControlValue);
     }
 
     /**
@@ -94,16 +94,16 @@ public class Continent {
      * @return returns the HashMap containing countries for a continent
      */
     public HashMap<String, Country> getCountries() {
-        return this.d_countries;
+        return this.d_Countries;
     }
 
     /**
      * Setter function to the Countries Hashmap, if Needed one
      *
-     * @param p_countries Countries in the Continent
+     * @param p_Countries Countries in the Continent
      */
-    public void setCountries(HashMap<String, Country> p_countries) {
-        this.d_countries = p_countries;
+    public void setCountries(HashMap<String, Country> p_Countries) {
+        this.d_Countries = p_Countries;
     }
 
     /**
@@ -112,16 +112,16 @@ public class Continent {
      * @return The Continent's Index on the file
      */
     public int getContinentFileIndex() {
-        return this.d_continentFileIndex;
+        return this.d_ContinentFileIndex;
     }
 
     /**
      * Setter function for the Continent File Index
      *
-     * @param p_continentFileIndex File Index of the Continent
+     * @param p_ContinentFileIndex File Index of the Continent
      */
-    public void setContinentFileIndex(String p_continentFileIndex) {
-        this.d_continentFileIndex = Integer.parseInt(p_continentFileIndex);
+    public void setContinentFileIndex(String p_ContinentFileIndex) {
+        this.d_ContinentFileIndex = Integer.parseInt(p_ContinentFileIndex);
     }
 
     //Todo refactor

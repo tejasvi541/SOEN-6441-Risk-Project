@@ -26,7 +26,7 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * Created object d_gameEventLogger of GameEventLogger.
      */
-    GameEventLogger d_gameEventLogger = new GameEventLogger();
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * GameMap instance
      */
@@ -42,12 +42,12 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * This method starts the current game phase
      *
-     * @param p_CurrentGamePhase the current game phase
+     * @param p_CurrentPhase the current game phase
      * @return the next game phase
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ExecuteOrderController implements GameFlowManager {
         /**
          * The d_CurrentGamePhase is used to know current game phase.
          */
-        d_gameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
+        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
@@ -74,8 +74,8 @@ public class ExecuteOrderController implements GameFlowManager {
         int l_Counter = 0;
         while (l_Counter < d_GameMap.getPlayers().size()) {
             l_Counter = 0;
-            for (Player player : d_GameMap.getPlayers().values()) {
-                Order l_Order = player.nextOrder();
+            for (Player l_Player : d_GameMap.getPlayers().values()) {
+                Order l_Order = l_Player.nextOrder();
                 if (l_Order == null) {
                     l_Counter++;
                 } else {

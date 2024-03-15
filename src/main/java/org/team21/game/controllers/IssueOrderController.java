@@ -33,9 +33,9 @@ public class IssueOrderController implements GameFlowManager {
      */
     private final GameMap d_GameMap;
     /**
-     * Created object d_gameEventLogger of GameEventLogger.
+     * Created object d_GameEventLogger of GameEventLogger.
      */
-    GameEventLogger d_gameEventLogger = new GameEventLogger();
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Constructor to get the GameMap instance
      */
@@ -64,13 +64,13 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * A function to start the issue order phase
      *
-     * @param p_CurrentGamePhase :  The current phase which is executing
+     * @param p_CurrentPhase :  The current phase which is executing
      * @return : to return the next phase to be executed
      */
 
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
 
@@ -84,7 +84,7 @@ public class IssueOrderController implements GameFlowManager {
         /**
          * The p_CurrentGamePhase is used to know current game phase.
          */
-        d_gameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
+        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
@@ -155,10 +155,10 @@ public class IssueOrderController implements GameFlowManager {
     private boolean checkIfCommandIsContainsDeploy(String p_Command, Player p_CurrentPlayer) {
         boolean l_CapturedCountry = false;
         String[] l_CommandList;
-        String commandString = p_Command.trim();
+        String l_CommandString = p_Command.trim();
 
         // Split the string based on consecutive whitespaces
-        l_CommandList = commandString.split("\\s+");
+        l_CommandList = l_CommandString.split("\\s+");
 
         if (l_CommandList.length == 3) {
             try {

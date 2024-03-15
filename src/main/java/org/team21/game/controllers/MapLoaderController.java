@@ -20,7 +20,7 @@ public class MapLoaderController {
     /**
      * Value 1 initialized to d_mapContinentIndex.
      */
-    public static int d_mapContinentIndex =1; // Tracking Continent Index
+    public static int d_MapContinentIndex =1; // Tracking Continent Index
     /**
      * The d_GameMap is game map.
      */
@@ -28,7 +28,7 @@ public class MapLoaderController {
     /**
      * Created a Hashmap name d_countriesList.
      */
-    private HashMap<Integer, Country> d_countriesList;
+    private HashMap<Integer, Country> d_CountriesList;
 
    public MapLoaderController(){
         d_GameMap = GameMap.getInstance();
@@ -38,36 +38,36 @@ public class MapLoaderController {
      *
      */
     public static void init(){
-        Scanner l_sc = new Scanner(System.in);
+        Scanner l_Sc = new Scanner(System.in);
         System.out.println("Enter Map file name:");
-        String l_mapName = l_sc.nextLine();
-        MapLoaderController l_loadedMap = new MapLoaderController();
-        l_loadedMap.readMap(l_mapName);
-        l_sc.close();
+        String l_MapName = l_Sc.nextLine();
+        MapLoaderController l_LoadedMap = new MapLoaderController();
+        l_LoadedMap.readMap(l_MapName);
+        l_Sc.close();
     }
 
 
     /**
      * This function read the map file and process the individual section of the map
-     * @param p_mapName Name of the map to be loaded
+     * @param p_MapName Name of the map to be loaded
      * @return The Populated Map object
      */
-    public GameMap readMap(String p_mapName){
-        d_countriesList = new HashMap<>();
+    public GameMap readMap(String p_MapName){
+        d_CountriesList = new HashMap<>();
 
         try{
-            BufferedReader l_fileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_mapName+".map"));
-            String l_lineString;
-            while((l_lineString=l_fileReader.readLine())!=null){
-                switch (l_lineString) {
-                    case "[continents]" -> processContinents(l_fileReader);
-                    case "[countries]" -> processCountries(l_fileReader);
-                    case "[borders]" -> processBorders(l_fileReader);
+            BufferedReader l_FileReader = new BufferedReader(new FileReader("src/main/resources/maps/"+p_MapName+".map"));
+            String l_LineString;
+            while((l_LineString=l_FileReader.readLine())!=null){
+                switch (l_LineString) {
+                    case "[continents]" -> processContinents(l_FileReader);
+                    case "[countries]" -> processCountries(l_FileReader);
+                    case "[borders]" -> processBorders(l_FileReader);
                     default -> {
                     }
                 }
             }
-            l_fileReader.close();
+            l_FileReader.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("The said file is not found.");
@@ -76,7 +76,7 @@ public class MapLoaderController {
             System.out.println("Input/Output Problem");
             System.out.println(e.getMessage());
         }
-        d_GameMap.setMapName(p_mapName);
+        d_GameMap.setMapName(p_MapName);
         if(d_GameMap.getContinents().isEmpty()){
             System.out.println("No Such Map Exists So Creating a New One");
         }else{
@@ -88,22 +88,22 @@ public class MapLoaderController {
     /**
      * This is the main function to read and process the countries from the map file successfully, it creates a country object for
      * every new country and put them in the memory
-     * @param p_fileReader Ongoing Buffer Reader
+     * @param p_FileReader Ongoing Buffer Reader
      * @return it returns the ongoing buffer reader
      */
-    private BufferedReader processCountries(BufferedReader p_fileReader){
-        String l_lineString;
+    private BufferedReader processCountries(BufferedReader p_FileReader){
+        String l_LineString;
         try{
-            while(!((l_lineString = p_fileReader.readLine()).isEmpty())){
-                String[] l_countryString = l_lineString.split("\\s+");
-                Country l_newCountry = new Country(l_countryString[0], l_countryString[1], l_countryString[2], l_countryString[3], l_countryString[4], d_GameMap);
+            while(!((l_LineString = p_FileReader.readLine()).isEmpty())){
+                String[] l_CountryString = l_LineString.split("\\s+");
+                Country l_NewCountry = new Country(l_CountryString[0], l_CountryString[1], l_CountryString[2], l_CountryString[3], l_CountryString[4], d_GameMap);
                 try{
-                    if(l_newCountry.getParentContinent()==null){
+                    if(l_NewCountry.getParentContinent()==null){
                         System.out.println("Not Valid Map File");
                             System.exit(-1);
                     }
-                    addCountryToContinentMap(l_newCountry);
-                    d_countriesList.put(l_newCountry.getCountryFileIndex(), l_newCountry);
+                    addCountryToContinentMap(l_NewCountry);
+                    d_CountriesList.put(l_NewCountry.getCountryFileIndex(), l_NewCountry);
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
@@ -111,23 +111,23 @@ public class MapLoaderController {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return p_fileReader;
+        return p_FileReader;
     }
 
     /**
      * This function is to process the Continents and put them in Map object with desired index
-     * @param p_fileReader Ongoing Buffer Reader
+     * @param p_FileReader Ongoing Buffer Reader
      * @return Buffer Reader after the Continents to read left over file
      */
-    private BufferedReader processContinents(BufferedReader p_fileReader){
-        String l_lineString;
+    private BufferedReader processContinents(BufferedReader p_FileReader){
+        String l_LineString;
         try{
-            while(!((l_lineString=p_fileReader.readLine()).isEmpty())){ //Assign line if not empty, compound statement
-                String[] l_continentString = l_lineString.split("\\s+");
+            while(!((l_LineString=p_FileReader.readLine()).isEmpty())){ //Assign line if not empty, compound statement
+                String[] l_ContinentString = l_LineString.split("\\s+");
 
-                if(Integer.parseInt(l_continentString[1])>=0) {
-                    d_GameMap.getContinents().put(l_continentString[0].toLowerCase(), new Continent(l_continentString[0], l_continentString[1], d_mapContinentIndex));
-                    d_mapContinentIndex++;
+                if(Integer.parseInt(l_ContinentString[1])>=0) {
+                    d_GameMap.getContinents().put(l_ContinentString[0].toLowerCase(), new Continent(l_ContinentString[0], l_ContinentString[1], d_MapContinentIndex));
+                    d_MapContinentIndex++;
                 }else{
                     System.out.println("Not Valid Map File");
                     System.exit(-1);
@@ -136,50 +136,50 @@ public class MapLoaderController {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        d_mapContinentIndex =1;
-        return p_fileReader;
+        d_MapContinentIndex =1;
+        return p_FileReader;
     }
 
     /**
      * This function read the adjacency list and put neighbours of the countries in the desired data structure
-     * @param p_fileReader Ongoing Buffer Reader
+     * @param p_FileReader Ongoing Buffer Reader
      * @return Buffer Reader after the Borders which is basically null at thins point
      */
-    private BufferedReader processBorders(BufferedReader p_fileReader){
-        String l_lineString;
+    private BufferedReader processBorders(BufferedReader p_FileReader){
+        String l_LineString;
         try{
-            while(((l_lineString=p_fileReader.readLine()) !=null)){ //Assign line if not empty, compound statement
-                String[] l_borderString = l_lineString.split("\\s+");
-                Country l_tempCountry= new Country();
-                l_tempCountry = d_countriesList.get(Integer.parseInt(l_borderString[0]));
-                for(int l_neighbour=1;l_neighbour<l_borderString.length;l_neighbour++){
-                    addNeighbour(l_tempCountry, l_borderString[l_neighbour]);
+            while(((l_LineString=p_FileReader.readLine()) !=null)){ //Assign line if not empty, compound statement
+                String[] l_BorderString = l_LineString.split("\\s+");
+                Country l_TempCountry;
+                l_TempCountry = d_CountriesList.get(Integer.parseInt(l_BorderString[0]));
+                for(int l_Neighbour=1;l_Neighbour<l_BorderString.length;l_Neighbour++){
+                    addNeighbour(l_TempCountry, l_BorderString[l_Neighbour]);
                 }
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return p_fileReader;
+        return p_FileReader;
     }
 
     /**
      * This function adds the neighbours to the country using the adjacency list
      * This is the helper function to read borders
-     * @param p_tempCountry Country to which neighbour is to be added
-     * @param p_borderIndex Index of the country to be added
+     * @param p_TempCountry Country to which neighbour is to be added
+     * @param p_BorderIndex Index of the country to be added
      */
-    private void addNeighbour(Country p_tempCountry, String p_borderIndex){
-        int l_borderIndex = Integer.parseInt(p_borderIndex);
-        Country l_neighbourCountry = new Country();
+    private void addNeighbour(Country p_TempCountry, String p_BorderIndex){
+        int l_BorderIndex = Integer.parseInt(p_BorderIndex);
+        Country l_NeighbourCountry = new Country();
         try{
-            l_neighbourCountry = d_countriesList.get(l_borderIndex);
+            l_NeighbourCountry = d_CountriesList.get(l_BorderIndex);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
         
         try {
-            if (!p_tempCountry.getNeighbours().containsKey(l_neighbourCountry.getCountryId().toLowerCase())) {
-                p_tempCountry.getNeighbours().put(l_neighbourCountry.getCountryId().toLowerCase(), l_neighbourCountry);
+            if (!p_TempCountry.getNeighbours().containsKey(l_NeighbourCountry.getCountryId().toLowerCase())) {
+                p_TempCountry.getNeighbours().put(l_NeighbourCountry.getCountryId().toLowerCase(), l_NeighbourCountry);
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());
@@ -188,14 +188,14 @@ public class MapLoaderController {
 
     /**
      * This adds a country to the Continent
-     * @param p_newCountry  Country Name to be added
+     * @param p_NewCountry  Country Name to be added
      */
-    private void addCountryToContinentMap(Country p_newCountry){
+    private void addCountryToContinentMap(Country p_NewCountry){
         
         try {
-            Continent tempContinent = d_GameMap.getContinents().get(p_newCountry.getParentContinent().toLowerCase());
-            tempContinent.getCountries().put(p_newCountry.getCountryId().toLowerCase(), p_newCountry);
-            d_GameMap.getCountries().put(p_newCountry.getCountryId().toLowerCase(), p_newCountry);
+            Continent l_TempContinent = d_GameMap.getContinents().get(p_NewCountry.getParentContinent().toLowerCase());
+            l_TempContinent.getCountries().put(p_NewCountry.getCountryId().toLowerCase(), p_NewCountry);
+            d_GameMap.getCountries().put(p_NewCountry.getCountryId().toLowerCase(), p_NewCountry);
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }

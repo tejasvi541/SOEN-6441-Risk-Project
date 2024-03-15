@@ -21,10 +21,10 @@ public class Card {
     /**
      * Parameterised Constructor to populate d_CardType member with desired card
      *
-     * @param p_cardType The card type
+     * @param p_CardType The card type
      */
-    public Card(CardType p_cardType) {
-        d_CardType = p_cardType;
+    public Card(CardType p_CardType) {
+        d_CardType = p_CardType;
     }
 
     /**
@@ -54,13 +54,13 @@ public class Card {
 
     /**
      * This method checks if 2 cards are equal or not
-     * @param p_cardObj The object with which card is going to be compared
+     * @param p_CardObj The object with which card is going to be compared
      * @return true/false depending on equality
      */
     @Override
-    public boolean equals(Object p_cardObj){
-        if(this==p_cardObj)return true;
-        if(!(p_cardObj instanceof Card l_Card)) return false;
+    public boolean equals(Object p_CardObj){
+        if(this==p_CardObj)return true;
+        if(!(p_CardObj instanceof Card l_Card)) return false;
         return d_CardType == l_Card.d_CardType;
     }
 

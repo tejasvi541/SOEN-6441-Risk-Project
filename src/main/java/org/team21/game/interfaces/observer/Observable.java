@@ -11,7 +11,7 @@ public interface Observable {
     /**
      * A function to notify to Observer.
      *
-     * @param p_s the observable
+     * @param p_S the observable
      */
-    void notifyObservers(String p_s);
+    void notifyObservers(String p_S);
 }

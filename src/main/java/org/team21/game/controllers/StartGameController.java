@@ -48,11 +48,11 @@ public class StartGameController implements GameFlowManager {
     /**
      * Starts the game phase and performs tasks based on the commands given.
      *
-     * @param p_GamePhase The current game phase.
+     * @param p_CurrentPhase The current game phase.
      * @return The next game phase.
      * @throws ValidationException When validation fails.
      */
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException { return run(p_GamePhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException { return run(p_CurrentPhase); }
 
     /**
      * Run is entry point of the StartGameController
@@ -162,11 +162,11 @@ public class StartGameController implements GameFlowManager {
      */
     public boolean checkCommandValidator(List<String> p_InputList) {
         if (!p_InputList.isEmpty()) {
-            String mainCommand = p_InputList.getFirst();
+            String l_MainCommand = p_InputList.getFirst();
             if (p_InputList.size() == 1) {
                 p_InputList.add(Constants.DUMMY);
             }
-            return CLI_COMMANDS.contains(GameCommands.fromString(mainCommand.toLowerCase()));
+            return CLI_COMMANDS.contains(GameCommands.fromString(l_MainCommand.toLowerCase()));
         }
         return false;
     }
