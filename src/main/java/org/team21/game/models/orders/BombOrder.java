@@ -19,6 +19,9 @@ public class BombOrder extends Order {
      * Game Map object variable
      */
     private GameMap d_GameMap;
+    /**
+     * GameEvent Logger object.
+     */
     GameEventLogger logger = new GameEventLogger();
 
     /**
@@ -41,19 +44,19 @@ public class BombOrder extends Order {
 
         // Check for valid player
         if(l_Player==null){
-            System.out.println("Invalid Player");
+            Constants.printValidationOfValidateCommand("Invalid Player");
             logger.logEvent("The Player is invalid");
             return false;
         }
         // Check for if the player has the card
         if(!l_Player.checkIfCardAvailable(CardType.BOMB)){
-            System.out.println("Invalid BOMB Card");
+            Constants.printValidationOfValidateCommand("Invalid BOMB Card");
             logger.logEvent("The BOMB card is invalid");
             return false;
         }
         // check if the target country belongs to the player
         if(l_Player.getCapturedCountries().contains(l_TargetCountry)){
-            System.out.println("The Player cannot bomb its own country");
+            Constants.printValidationOfValidateCommand("The Player cannot bomb its own country");
             logger.logEvent("The Player cannot bomb its own country");
             return false;
         }
@@ -78,7 +81,7 @@ public class BombOrder extends Order {
             }
         }
         if (!l_adjacentCountry){
-            System.out.println("The target country is not a neighbor of player owned country");
+            Constants.printValidationOfValidateCommand("The target country is not a neighbor of player owned country");
             logger.logEvent("The target country is not a neighbor of player owned country");
             return false;
         }

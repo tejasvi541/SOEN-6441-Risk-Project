@@ -47,27 +47,20 @@ public class BlockadeOrder extends Order{
         Player l_Player = getOrderInfo().getPlayer();
         Country l_Country = getOrderInfo().getTargetCountry();
         if(l_Player == null){
-            printValidationOfValidateCommand(Constants.INVALID_PLAYER);
+            Constants.printValidationOfValidateCommand(Constants.INVALID_PLAYER);
             return false;
         }
         if(l_Country.getPlayer() != l_Player){
-            printValidationOfValidateCommand(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
+            Constants.printValidationOfValidateCommand(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
             return false;
         }
         if(!l_Player.checkIfCardAvailable(CardType.BLOCKADE)){
-            printValidationOfValidateCommand(Constants.NO_BLOCKADE_CARD);
+            Constants.printValidationOfValidateCommand(Constants.NO_BLOCKADE_CARD);
             return false;
         }
         return true;
     }
 
-    /**
-     * This method prints the validation of the command.
-     * @param p_Validation holds the string passed from the validatCcommand method.
-     */
-    private void printValidationOfValidateCommand(String p_Validation){
-        System.err.println(p_Validation);
-    }
     @Override
     public void printOrderCommand() {
         System.out.println("BlockadeOrder on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());

@@ -129,7 +129,7 @@ public class OrderOwner {
      *
      * @param p_Command the command entered
      * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
+     * @return the order information of negotiate
      */
     private static OrderInformation generateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInfo = new OrderInformation();
@@ -143,7 +143,7 @@ public class OrderOwner {
      *
      * @param p_Command the command entered
      * @param p_Player  object parameter of type Player
-     * @return
+     * @return the order information of blockade
      */
     private static OrderInformation generateBlockadeOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInfo = new OrderInformation();
@@ -159,7 +159,7 @@ public class OrderOwner {
      *
      * @param p_Command the command entered
      * @param p_Player  object parameter of type Player
-     * @return
+     * @return the order information of AdvanceOrder
      */
     private static OrderInformation generateAdvanceOrderInfo(String[] p_Command, Player p_Player) {
         String l_FromCountryID = p_Command[1];
