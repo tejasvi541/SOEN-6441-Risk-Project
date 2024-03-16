@@ -1,5 +1,6 @@
 package org.team21.game.models.game_play;
 
+import org.team21.game.controllers.IssueOrderController;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
@@ -159,30 +160,11 @@ public class Player {
     /**
      * A function to get the issue order from player and add to the order list
      *
-     * @param p_Commands the type of order issued
+     * @param p_Commands the type of order issued and more for testing
      */
     public void issueOrder(String p_Commands) {
-        boolean l_IssueCommand = true;
-        String[] l_CommandArr = p_Commands.split(" ");
-        if (l_CommandArr.length > 2) {
-            int l_ReinforcementArmies = Integer.parseInt(l_CommandArr[2]);
-            if (!checkIfCountryExists(l_CommandArr[1], this)) {
-                System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
-                l_IssueCommand = false;
-            }
-            if (!deployReinforcementArmiesFromPlayer(l_ReinforcementArmies)) {
-                System.out.println(Constants.NOT_ENOUGH_REINFORCEMENTS);
-                l_IssueCommand = false;
-            }
-            if (l_IssueCommand) {
-                Order l_Order = OrderOwner.issueOrder(l_CommandArr, this);
-                d_PlayerOrderList.add(l_Order);
-                addOrder(l_Order);
-                assert l_Order != null;
-                System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination().getCountryId() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
-                System.out.println(Constants.SEPERATER);
-            }
-        }
+        Order l_Order = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), this);
+        addOrder(l_Order);
     }
 
     /**

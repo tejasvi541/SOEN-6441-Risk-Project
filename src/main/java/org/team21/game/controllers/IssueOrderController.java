@@ -36,6 +36,11 @@ public class IssueOrderController implements GameFlowManager {
      * Created object d_GameEventLogger of GameEventLogger.
      */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
+
+    /**
+     * To check current issued order commands
+     */
+    public static String d_IssueOrderCommand = "";
     /**
      * Constructor to get the GameMap instance
      */
@@ -107,8 +112,8 @@ public class IssueOrderController implements GameFlowManager {
                         System.out.println(l_CapturedCountry.getCountryId() + " ");
                     }
                     System.out.println(Constants.SEPERATER);
-                    String l_Commands = getCommandFromPlayer();
-                    l_Player.issueOrder(l_Commands);
+                    d_IssueOrderCommand = getCommandFromPlayer();
+                    l_Player.issueOrder(d_IssueOrderCommand);
                 }
             }
         }
