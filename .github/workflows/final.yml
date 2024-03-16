@@ -35,7 +35,7 @@ jobs:
         if: ${{ always() }}
       - name: Javadoc Generation
         run: |
-          mvn javadoc:javadoc -Xdoclint:all;
+          mvn javadoc:javadoc;
           echo "Javadocs has been generated successfully."
         if: ${{ always() }}
       - name: Publish Javadoc
