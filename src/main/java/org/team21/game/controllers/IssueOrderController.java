@@ -156,12 +156,13 @@ public class IssueOrderController implements GameFlowManager {
                     continue;
                 }
                 System.out.println("Player:" + l_Player.getName() + "; Armies assigned are: " + l_Player.getReinforcementArmies());
-                System.out.println("The countries to be assigned to the player are: ");
+                System.out.println(Constants.ASSIGNED_COUNTRIES);
                 for (Country l_Country : l_Player.getCapturedCountries()) {
                     System.out.println(l_Country.getCountryId() + " ");
                 }
                 if (!l_Player.getPlayerCards().isEmpty()) {
-                    System.out.println("The Cards assigned to the Players are:");
+
+                    System.out.println(Constants.CARDS_OF_PLAYER);
                     for (Card l_Card : l_Player.getPlayerCards()) {
                         System.out.println(l_Card.getCard());
                     }
@@ -179,7 +180,8 @@ public class IssueOrderController implements GameFlowManager {
                 }
                 if (!d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
                     l_Player.issueOrder(d_IssueOrderCommand);
-                    System.out.println("The order has been had to the list of orders.");
+
+                    System.out.println(Constants.All_ORDERS_ADDED);
                     System.out.println(Constants.SEPERATER);
                 }
             }

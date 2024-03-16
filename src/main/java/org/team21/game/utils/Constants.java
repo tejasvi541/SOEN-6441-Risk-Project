@@ -205,6 +205,22 @@ public final class Constants {
      */
     public final static List<String> LIST_COMMANDS = Arrays.asList(DEPLOY_COMMAND, ADVANCE_COMMAND, BOMB_COMMAND, BLOCKADE_COMMAND, AIRLIFT_COMMAND, NEGOTIATE_COMMAND);
     /**
+     * The Constant for gamemap file
+     */
+    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
+    /**
+     * The constant All_ORDERS_ADDED.
+     */
+    public final static String All_ORDERS_ADDED = "The order has been added to the order list.";
+    /**
+     * The constant CARDS_OF_PLAYER.
+     */
+    public final static String CARDS_OF_PLAYER = "The Cards assigned to the Players are ::";
+    /**
+     * The constant ASSIGNED_COUNTRIES.
+     */
+    public final static String ASSIGNED_COUNTRIES = "The Assigned countries are :: ";
+    /**
      * The constant TEAM_NAME.
      */
     public static String TEAM_NAME = "Team21";
@@ -212,11 +228,6 @@ public final class Constants {
      * The constant WELCOME_MESSAGE.
      */
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
-
-    /**
-     * The Constant for gamemap file
-     */
-    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
 
     /**
      * Instantiates a new Constants.
@@ -240,7 +251,7 @@ public final class Constants {
     /**
      * Show issue command for issue order
      */
-    public static void showIssueOrderCommand(){
+    public static void showIssueOrderCommand() {
         System.out.println("Please remember when all the member determines their command please use pass to execute orders");
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
@@ -253,9 +264,10 @@ public final class Constants {
 
     /**
      * This method prints the validation of the command.
+     *
      * @param p_Validation holds the string passed from the validatCcommand method.
      */
-    public static void printValidationOfValidateCommand(String p_Validation){
+    public static void printValidationOfValidateCommand(String p_Validation) {
         System.err.println(p_Validation);
     }
 }
