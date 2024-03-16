@@ -229,4 +229,8 @@ public class Country {
         return "Country [countryName=" + d_CountryId + ", xCoOrdinate=" + d_XCoordinate + ", yCoOrdinate=" + d_YCoordinate
                 + ", Parent Continent=" + d_ParentContinent + "]";
     }
+
+    public boolean isNeighbor(Country lTo) {
+        return false;
+    }
 }
