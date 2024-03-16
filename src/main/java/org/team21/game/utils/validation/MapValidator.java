@@ -105,6 +105,7 @@ public class MapValidator {
     /**
      * This function tells if the graph is connected or not
      *
+     * @param p_gGraph Map Graph Parameter to test if this map is connected or not
      * @return true /false if the map is connected or not
      */
     public boolean isConnected(Graph<Country, DefaultEdge> p_gGraph) {
