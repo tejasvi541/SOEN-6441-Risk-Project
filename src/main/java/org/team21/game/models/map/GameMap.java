@@ -18,23 +18,23 @@ public class GameMap {
      * Singleton Instance of Game map which will be
      * used by all the controllers
      */
-    private static GameMap d_gameMap_single_instance = null;
+    private static GameMap d_GameMap_Single_Instance = null;
     /**
      * Map Names
      */
-    private String d_mapName;
+    private String d_MapName;
     /**
      * Is Map valid or not
      */
-    private boolean d_isValid;
+    private boolean d_IsValid;
     /**
      * Continents of map
      */
-    private HashMap<String, Continent> d_continents;
+    private HashMap<String, Continent> d_Continents;
     /**
      * Countries in map
      */
-    private HashMap<String, Country> d_countries;
+    private HashMap<String, Country> d_Countries;
     /**
      * Players in entire map
      */
@@ -44,23 +44,23 @@ public class GameMap {
      * Map Constructor to initialise the Class
      */
     public GameMap() {
-        this.d_mapName = "";
-        this.d_isValid = false;
-        this.d_continents = new HashMap<>();
-        this.d_countries = new HashMap<>();
+        this.d_MapName = "";
+        this.d_IsValid = false;
+        this.d_Continents = new HashMap<>();
+        this.d_Countries = new HashMap<>();
     }
 
 
     /**
      * Map Constructor to initialise the class
      *
-     * @param p_mapName Map name parameter
+     * @param p_MapName Map name parameter
      */
-    public GameMap(String p_mapName) {
-        this.d_mapName = p_mapName;
-        this.d_isValid = false;
-        this.d_continents = new HashMap<>();
-        this.d_countries = new HashMap<>();
+    public GameMap(String p_MapName) {
+        this.d_MapName = p_MapName;
+        this.d_IsValid = false;
+        this.d_Continents = new HashMap<>();
+        this.d_Countries = new HashMap<>();
     }
 
     /**
@@ -69,10 +69,10 @@ public class GameMap {
      * @return Singleton Instance of Map
      */
     public static synchronized GameMap getInstance() {
-        if (d_gameMap_single_instance == null)
-            d_gameMap_single_instance = new GameMap();
+        if (d_GameMap_Single_Instance == null)
+            d_GameMap_Single_Instance = new GameMap();
 
-        return d_gameMap_single_instance;
+        return d_GameMap_Single_Instance;
     }
 
     /**
@@ -81,16 +81,16 @@ public class GameMap {
      * @return the name of the Map
      */
     public String getMapName() {
-        return this.d_mapName;
+        return this.d_MapName;
     }
 
     /**
      * Setter function of the map name
      *
-     * @param p_mapName function argument, means map name to be set
+     * @param p_MapName function argument, means map name to be set
      */
-    public void setMapName(String p_mapName) {
-        this.d_mapName = p_mapName;
+    public void setMapName(String p_MapName) {
+        this.d_MapName = p_MapName;
     }
 
     /**
@@ -99,16 +99,16 @@ public class GameMap {
      * @return True /false if the map is valid or not
      */
     public boolean getIsValid() {
-        return this.d_isValid;
+        return this.d_IsValid;
     }
 
     /**
      * Setter function for if the map is valid
      *
-     * @param p_isValid function argument to set the d_isValid data-member
+     * @param p_IsValid function argument to set the d_isValid data-member
      */
-    public void setIsValid(boolean p_isValid) {
-        this.d_isValid = p_isValid;
+    public void setIsValid(boolean p_IsValid) {
+        this.d_IsValid = p_IsValid;
     }
 
     /**
@@ -117,16 +117,16 @@ public class GameMap {
      * @return hashmap of the continents
      */
     public HashMap<String, Continent> getContinents() {
-        return this.d_continents;
+        return this.d_Continents;
     }
 
     /**
      * Setter function to set the continents of the map in a hashmap
      *
-     * @param p_continents function argument of hashmap of continents to be set
+     * @param p_Continents function argument of hashmap of continents to be set
      */
-    public void setContinents(HashMap<String, Continent> p_continents) {
-        this.d_continents = p_continents;
+    public void setContinents(HashMap<String, Continent> p_Continents) {
+        this.d_Continents = p_Continents;
     }
 
     /**
@@ -135,16 +135,16 @@ public class GameMap {
      * @return return HashMap
      */
     public HashMap<String, Country> getCountries() {
-        return this.d_countries;
+        return this.d_Countries;
     }
 
     /**
      * Setter method to set the d_countries HashMap to the given HashMap parameter.
      *
-     * @param p_countries HashMap for d_countries
+     * @param p_Countries HashMap for d_countries
      */
-    public void setCountries(HashMap<String, Country> p_countries) {
-        this.d_countries = p_countries;
+    public void setCountries(HashMap<String, Country> p_Countries) {
+        this.d_Countries = p_Countries;
     }
 
     /**
@@ -152,9 +152,9 @@ public class GameMap {
      */
     public void clearMap() {
         this.setMapName("");
-        this.setPlayers(new HashMap<String, Player>());
-        this.setCountries(new HashMap<String, Country>());
-        this.setContinents(new HashMap<String, Continent>());
+        this.setPlayers(new HashMap<>());
+        this.setCountries(new HashMap<>());
+        this.setContinents(new HashMap<>());
         this.setIsValid(false);
         this.setPlayer(new Player());
     }
@@ -190,10 +190,10 @@ public class GameMap {
     /**
      * Add Player to the Players Hashmap
      *
-     * @param p_player Player Object to set the Player
+     * @param p_Player Player Object to set the Player
      */
-    public void setPlayer(Player p_player) {
-        this.d_Players.put(p_player.getName().toLowerCase(), p_player);
+    public void setPlayer(Player p_Player) {
+        this.d_Players.put(p_Player.getName().toLowerCase(), p_Player);
     }
 
     /**
@@ -234,7 +234,7 @@ public class GameMap {
      * @return the required Continent object
      */
     public Continent getContinent(String p_Id) {
-        return d_continents.get(p_Id);
+        return d_Continents.get(p_Id);
     }
 
     /**
@@ -242,17 +242,17 @@ public class GameMap {
      */
     public void assignCountries() {
         int playerIndex = 0;
-        List<Player> l_Players = d_gameMap_single_instance.getPlayers().values().stream().toList();
+        List<Player> l_Players = d_GameMap_Single_Instance.getPlayers().values().stream().toList();
         try {
-            List<Country> l_CountryList = new ArrayList<>(d_gameMap_single_instance.getCountries().values());
+            List<Country> l_CountryList = new ArrayList<>(d_GameMap_Single_Instance.getCountries().values());
 
             Collections.shuffle(l_CountryList);
 
             for (Country country : l_CountryList) {
-                Player l_player = l_Players.get(playerIndex);
-                l_player.getCapturedCountries().add(country);
-                country.setPlayer(l_player);
-                System.out.println(country.getCountryId() + " assigned to " + l_player.getName());
+                Player l_Player = l_Players.get(playerIndex);
+                l_Player.getCapturedCountries().add(country);
+                country.setPlayer(l_Player);
+                System.out.println(country.getCountryId() + " assigned to " + l_Player.getName());
 
                 playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
             }

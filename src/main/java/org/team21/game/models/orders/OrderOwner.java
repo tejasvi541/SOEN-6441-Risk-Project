@@ -20,32 +20,40 @@ public class OrderOwner {
     public static GameMap d_GameMap = GameMap.getInstance();
 
     /**
-     * A function to creaate an order
+     * A function to create an order
      *
-     * @param p_commands the command entered
-     * @param player     object parameter of type Player
+     * @param p_Commands the command entered
+     * @param p_Player   object parameter of type Player
      * @return the order
      */
-    public static Order issueOrder(String[] p_commands, Player player) {
-        String l_OrderType = p_commands[0].toLowerCase();
+    public static Order issueOrder(String[] p_Commands, Player p_Player) {
+        String l_OrderType = p_Commands[0].toLowerCase();
         Order l_Order;
 
         switch (l_OrderType) {
             case Constants.DEPLOY_COMMAND:
-                l_Order = new Deploy();
-                l_Order.setOrderInfo(generateDeployInfo(p_commands, player));
+                l_Order = new DeployOrder();
+                l_Order.setOrderInfo(generateDeployInfo(p_Commands, p_Player));
                 break;
             case Constants.AIRLIFT_COMMAND:
                 l_Order = new AirliftOrder();
-                l_Order.setOrderInfo(generateAirliftOrderInfo(p_commands, player));
+                l_Order.setOrderInfo(generateAirliftOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.BOMB_COMMAND:
                 l_Order = new BombOrder();
-                l_Order.setOrderInfo(generateBombOrderInfo(p_commands, player));
+                l_Order.setOrderInfo(generateBombOrderInfo(p_Commands, p_Player));
                 break;
-            case "negotiate":
+            case Constants.NEGOTIATE_COMMAND:
                 l_Order = new NegotiateOrder();
-                l_Order.setOrderInfo(generateNegotiateOrderInfo(p_commands, player));
+                l_Order.setOrderInfo(generateNegotiateOrderInfo(p_Commands, p_Player));
+                break;
+            case Constants.BLOCKADE_COMMAND:
+                l_Order = new BlockadeOrder();
+                l_Order.setOrderInfo(generateBlockadeOrderInfo(p_Commands, p_Player));
+                break;
+            case Constants.ADVANCE_COMMAND:
+                l_Order = new AdvanceOrder();
+                l_Order.setOrderInfo(generateAdvanceOrderInfo(p_Commands, p_Player));
                 break;
             default:
                 System.out.println("\nFailed to create an order due to invalid arguments");
@@ -121,7 +129,7 @@ public class OrderOwner {
      *
      * @param p_Command the command entered
      * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
+     * @return the order information of negotiate
      */
     private static OrderInformation generateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInfo = new OrderInformation();
@@ -130,4 +138,40 @@ public class OrderOwner {
         return l_OrderInfo;
     }
 
+    /**
+     * This function is used to create Blockade order
+     *
+     * @param p_Command the command entered
+     * @param p_Player  object parameter of type Player
+     * @return the order information of blockade
+     */
+    private static OrderInformation generateBlockadeOrderInfo(String[] p_Command, Player p_Player) {
+        OrderInformation l_OrderInfo = new OrderInformation();
+        l_OrderInfo.setPlayer(p_Player);
+        String l_CountryID = p_Command[1];
+        Country l_TargetCountry = d_GameMap.getCountries().get(l_CountryID.toLowerCase());
+        l_OrderInfo.setTargetCountry(l_TargetCountry);
+        return l_OrderInfo;
+    }
+
+    /**
+     * This function is used to create AdvanceOrder
+     *
+     * @param p_Command the command entered
+     * @param p_Player  object parameter of type Player
+     * @return the order information of AdvanceOrder
+     */
+    private static OrderInformation generateAdvanceOrderInfo(String[] p_Command, Player p_Player) {
+        String l_FromCountryID = p_Command[1];
+        Country l_FromCountry = d_GameMap.getCountries().get(l_FromCountryID.toLowerCase());
+        String l_ToCountryID = p_Command[2];
+        Country l_ToCountry = d_GameMap.getCountries().get(l_ToCountryID.toLowerCase());
+        int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
+        OrderInformation l_OrderInfo = new OrderInformation();
+        l_OrderInfo.setPlayer(p_Player);
+        l_OrderInfo.setDeparture(l_FromCountry);
+        l_OrderInfo.setDestination(l_ToCountry);
+        l_OrderInfo.setNumberOfArmy(l_NumberOfArmies);
+        return l_OrderInfo;
+    }
 }

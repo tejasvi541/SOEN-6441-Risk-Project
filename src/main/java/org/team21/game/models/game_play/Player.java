@@ -1,5 +1,6 @@
 package org.team21.game.models.game_play;
 
+import org.team21.game.controllers.IssueOrderController;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
@@ -7,13 +8,14 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.models.orders.Order;
 import org.team21.game.models.orders.OrderOwner;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * The type Player for Game Map.
- * {org.team25.game.models.map.GameMap}
+ * {org.team21.game.models.map.GameMap}
  *
  * @author Kapil Soni
  * @version 1.0.0
@@ -61,7 +63,10 @@ public class Player {
     public int getId() {
         return d_PlayerId;
     }
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * A function to set the player ID
      *
@@ -155,29 +160,18 @@ public class Player {
     /**
      * A function to get the issue order from player and add to the order list
      *
-     * @param p_Commands the type of order issued
+     * @param p_Commands the type of order issued and more for testing
      */
     public void issueOrder(String p_Commands) {
-        boolean l_IssueCommand = true;
-        String[] l_CommandArr = p_Commands.split(" ");
-        if (l_CommandArr.length > 2) {
-            int l_ReinforcementArmies = Integer.parseInt(l_CommandArr[2]);
-            if (!checkIfCountryExists(l_CommandArr[1], this)) {
-                System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
-                l_IssueCommand = false;
-            }
-            if (!deployReinforcementArmiesFromPlayer(l_ReinforcementArmies)) {
-                System.out.println(Constants.NOT_ENOUGH_REINFORCEMENTS);
-                l_IssueCommand = false;
-            }
-            if (l_IssueCommand) {
-                Order l_Order = OrderOwner.issueOrder(l_CommandArr, this);
-                d_PlayerOrderList.add(l_Order);
-                addOrder(l_Order);
-                System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
-                System.out.println(Constants.SEPERATER);
-            }
+        String l_CurrentCommand = "";
+        if(Objects.equals(IssueOrderController.d_IssueOrderCommand, "")){
+            l_CurrentCommand = p_Commands;
         }
+        else {
+            l_CurrentCommand = IssueOrderController.d_IssueOrderCommand;
+        }
+        Order l_Order = OrderOwner.issueOrder(l_CurrentCommand.split(" "), this);
+        addOrder(l_Order);
     }
 
     /**
@@ -313,36 +307,37 @@ public class Player {
     /**
      * Calculate the number of the armies to be assigned in reinforcement phase.
      *
-     * @param p_gameMap The game map object
+     * @param p_GameMap The game map object
      */
-    public void calculateReinforcementArmies(GameMap p_gameMap) {
+    public void calculateReinforcementArmies(GameMap p_GameMap) {
         if (getCapturedCountries().size() > 0) {
             int reinforcements = (int) Math.floor(getCapturedCountries().size() / 3f);
-            reinforcements += getBonusIfKingOfContinents(p_gameMap);
+            reinforcements += getBonusIfKingOfContinents(p_GameMap);
             setReinforcementArmies(reinforcements > 2 ? reinforcements : 3);
         } else {
             setReinforcementArmies(3);
         }
         System.out.println("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
+        d_GameEventLogger.logEvent("The Player:" + getName() + " is assigned with " + getReinforcementArmies() + " armies.");
     }
 
     /**
      * Add bonus armies to reinforcement armies if a player owns the continent.
      *
-     * @param p_gameMap The game map object
+     * @param p_GameMap The game map object
      * @return reinforcements armies added with bonus armies
      */
-    private int getBonusIfKingOfContinents(GameMap p_gameMap) {
-        int reinforcements = 0;
+    private int getBonusIfKingOfContinents(GameMap p_GameMap) {
+        int l_Reinforcements = 0;
         Map<String, List<Country>> l_CountryMap = getCapturedCountries()
                 .stream()
                 .collect(Collectors.groupingBy(Country::getParentContinent));
         for (String continent : l_CountryMap.keySet()) {
-            if (p_gameMap.getContinent(continent).getCountries().size() == l_CountryMap.get(continent).size()) {
-                reinforcements += p_gameMap.getContinent(continent).getAwardArmies();
+            if (p_GameMap.getContinent(continent).getCountries().size() == l_CountryMap.get(continent).size()) {
+                l_Reinforcements += p_GameMap.getContinent(continent).getAwardArmies();
             }
         }
-        return reinforcements;
+        return l_Reinforcements;
     }
 
     /**

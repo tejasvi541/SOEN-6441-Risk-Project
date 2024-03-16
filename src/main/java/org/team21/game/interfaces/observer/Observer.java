@@ -10,7 +10,7 @@ public interface Observer {
     /**
      * Function to update the message for the observer
      *
-     * @param p_s the message to be updated
+     * @param p_S the message to be updated
      */
-    public void update(String p_s);
+    void update(String p_S);
 }

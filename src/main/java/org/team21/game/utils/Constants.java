@@ -57,6 +57,38 @@ public final class Constants {
      */
     public final static String REMOVE = "-remove";
     /**
+     * The constant WELCOME_MESSAGE_MAP_EDITOR.
+     */
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************";
+    /**
+     * The constant ASK_FOR_ACTION.
+     */
+    public final static String ASK_FOR_ACTION = "Type the required option for taking action on map:";
+    /**
+     * The constant HELP_COMMAND.
+     */
+    public final static String HELP_COMMAND = "1. Type Help :to get list of commands for different actions  ";
+    /**
+     * The constant EXIT_COMMAND.
+     */
+    public final static String EXIT_COMMAND = "2. Type Exit : to exit from map editor phase and continue playing game";
+    /**
+     * The constant EXECUTE_ORDER_PHASE.
+     */
+    public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
+    /**
+     * The constant ISSUE_ORDER_PHASE.
+     */
+    public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
+    /**
+     * The constant MAP_EDITOR_PHASE.
+     */
+    public final static String MAP_EDITOR_PHASE = "\n MAP EDITOR PHASE \n";
+    /**
+     * The constant SPACE_FORMATTER.
+     */
+    public final static String SPACE_FORMATTER = "%-30s%-30s%-10s%-10s%-50s%n\n";
+    /**
      * The constant EXECUTE_ORDER_SUCCESS.
      */
     public final static String EXECUTE_ORDER_SUCCESS = "All mentioned orders have been executed successfully.";
@@ -81,17 +113,9 @@ public final class Constants {
      */
     public final static String DEPLOY_COMMAND = "deploy";
     /**
-     * The constant HELP_COMMAND_MESSAGE.
-     */
-    public final static String HELP_COMMAND_MESSAGE = "1. Enter help to view the set of command.";
-    /**
-     * The constant EXIT_COMMAND_MESSAGE.
-     */
-    public final static String EXIT_COMMAND_MESSAGE = "2. Enter exit to end the phase.";
-    /**
      * The constant ISSUE_COMMAND_MESSAGE.
      */
-    public final static String ISSUE_COMMAND_MESSAGE = "To issue your orders: \n" + HELP_COMMAND_MESSAGE;
+    public final static String ISSUE_COMMAND_MESSAGE = "To issue your orders: \n" + HELP_COMMAND;
     /**
      * The constant ELIGIBLE_NATIONS_ARMY.
      */
@@ -133,6 +157,18 @@ public final class Constants {
      */
     public final static String COUNTRIES_DOES_NOT_BELONG = "The country does not belong to you.";
     /**
+     * The constant INVALID_PLAYER.
+     */
+    public final static String INVALID_PLAYER = "The Player is not valid.";
+    /**
+     * The constant TARGET_COUNTRY_DOES_NOT_BELONG.
+     */
+    public final static String TARGET_COUNTRY_DOES_NOT_BELONG = "The target country does not belong to the player.";
+    /**
+     * The constant NO_BLOCKADE_CARD.
+     */
+    public final static String NO_BLOCKADE_CARD = "Player doesn't have BlockadeOrder Card.";
+    /**
      * The constant NOT_ENOUGH_REINFORCEMENTS.
      */
     public final static String NOT_ENOUGH_REINFORCEMENTS = "You do not have enough Reinforcement Armies to deploy.";
@@ -161,9 +197,29 @@ public final class Constants {
      */
     public final static String BLOCKADE_COMMAND = "blockade";
     /**
+     * Pass command for issue order
+     */
+    public final static String PASS_COMMAND = "pass";
+    /**
      * The List commands.
      */
     public final static List<String> LIST_COMMANDS = Arrays.asList(DEPLOY_COMMAND, ADVANCE_COMMAND, BOMB_COMMAND, BLOCKADE_COMMAND, AIRLIFT_COMMAND, NEGOTIATE_COMMAND);
+    /**
+     * The Constant for gamemap file
+     */
+    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
+    /**
+     * The constant All_ORDERS_ADDED.
+     */
+    public final static String All_ORDERS_ADDED = "The order has been added to the order list.";
+    /**
+     * The constant CARDS_OF_PLAYER.
+     */
+    public final static String CARDS_OF_PLAYER = "The Cards assigned to the Players are ::";
+    /**
+     * The constant ASSIGNED_COUNTRIES.
+     */
+    public final static String ASSIGNED_COUNTRIES = "The Assigned countries are :: ";
     /**
      * The constant TEAM_NAME.
      */
@@ -195,12 +251,23 @@ public final class Constants {
     /**
      * Show issue command for issue order
      */
-    public static void showIssueOrderCommand(){
+    public static void showIssueOrderCommand() {
+        System.out.println("Please remember when all the member determines their command please use pass to execute orders");
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
+        System.out.println("To execute game further use : pass");
+    }
+
+    /**
+     * This method prints the validation of the command.
+     *
+     * @param p_Validation holds the string passed from the validatCcommand method.
+     */
+    public static void printValidationOfValidateCommand(String p_Validation) {
+        System.err.println(p_Validation);
     }
 }
