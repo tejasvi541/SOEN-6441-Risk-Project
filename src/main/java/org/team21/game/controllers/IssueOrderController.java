@@ -107,7 +107,7 @@ public class IssueOrderController implements GameFlowManager {
                         System.out.println(l_CapturedCountry.getCountryId() + " ");
                     }
                     System.out.println(Constants.SEPERATER);
-                    String l_Commands = getCommandFromPlayer(l_Player);
+                    String l_Commands = getCommandFromPlayer();
                     l_Player.issueOrder(l_Commands);
                 }
             }
@@ -120,68 +120,21 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * It will get command from CMD
      *
-     * @param p_CurrentPlayer : Current player
      * @return : Command
      */
-    private String getCommandFromPlayer(Player p_CurrentPlayer) {
+    private String getCommandFromPlayer() {
         String l_Command = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         while (!l_Command.equals(Constants.EXIT)) {
             l_Command = d_Scanner.nextLine();
             if (Constants.LIST_COMMANDS.contains(l_Command.split(" ")[0])) {
-                if (checkIfCommandIsContainsDeploy(l_Command.toLowerCase(), p_CurrentPlayer)) {
-                    // Split the string based on consecutive whitespaces
-                    String[] l_StringParts = l_Command.trim().split("\\s+");
-                    return String.join(" ", l_StringParts);
-                } else {
-                    //Todo add validation of other commands
-                    return l_Command;
-                }
+                return l_Command;
             } else {
-                System.out.println(Constants.DEPLOY_COMMAND_MESSAGE);
+                System.out.println(Constants.INVALID_COMMAND);
             }
         }
         return l_Command;
     }
 
-    /**
-     * Check all validation for Deploy command
-     *
-     * @param p_Command       : Original command
-     * @param p_CurrentPlayer : current player
-     * @return : return true if command is proper else will return false
-     */
-    private boolean checkIfCommandIsContainsDeploy(String p_Command, Player p_CurrentPlayer) {
-        boolean l_CapturedCountry = false;
-        String[] l_CommandList;
-        String l_CommandString = p_Command.trim();
-
-        // Split the string based on consecutive whitespaces
-        l_CommandList = l_CommandString.split("\\s+");
-
-        if (l_CommandList.length == 3) {
-            try {
-                int l_Number = Integer.parseInt(l_CommandList[2].trim());
-                if (l_Number <= 0) {
-                    System.out.println(Constants.ARMIES_NON_ZERO);
-                    return false;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(Constants.ARMIES_NON_ZERO);
-                return false;
-            }
-            for (Country l_Country : p_CurrentPlayer.getCapturedCountries()) {
-                if (Objects.equals(l_CommandList[1].trim(), l_Country.getCountryId().toLowerCase())) {
-                    l_CapturedCountry = true;
-                    break;
-                }
-            }
-            if (!l_CapturedCountry) {
-                System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
-            }
-            return (l_CommandList[0].equals(Constants.DEPLOY_COMMAND) && l_CapturedCountry);
-        } else
-            return false;
-    }
 }

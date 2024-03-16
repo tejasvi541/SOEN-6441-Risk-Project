@@ -178,7 +178,8 @@ public class Player {
                 Order l_Order = OrderOwner.issueOrder(l_CommandArr, this);
                 d_PlayerOrderList.add(l_Order);
                 addOrder(l_Order);
-                System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
+                assert l_Order != null;
+                System.out.println("Your Order has been added to the list: deploy " + l_Order.getOrderInfo().getDestination().getCountryId() + " with " + l_Order.getOrderInfo().getNumberOfArmy() + " armies");
                 System.out.println(Constants.SEPERATER);
             }
         }
