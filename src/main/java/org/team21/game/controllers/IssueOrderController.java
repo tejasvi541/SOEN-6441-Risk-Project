@@ -9,10 +9,7 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -86,11 +83,11 @@ public class IssueOrderController implements GameFlowManager {
             return false;
         }
         if (!l_Commands.contains(l_CommandArr[0].toLowerCase())) {
-            System.out.println(Constants.INVALID_COMMAND);
+            Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
             return false;
         }
         if (!findCommandLength(l_CommandArr[0], l_CommandArr.length)) {
-            System.out.println(Constants.INVALID_COMMAND);
+            Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
             return false;
         }
         switch (l_CommandArr[0].toLowerCase()) {
@@ -98,19 +95,19 @@ public class IssueOrderController implements GameFlowManager {
                 try {
                     Integer.parseInt(l_CommandArr[2]);
                 } catch (NumberFormatException l_Exception) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
                 break;
             case Constants.ADVANCE_COMMAND:
                 if (l_CommandArr.length < 4) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
                 try {
                     Integer.parseInt(l_CommandArr[3]);
                 } catch (NumberFormatException l_Exception) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
 
@@ -161,7 +158,6 @@ public class IssueOrderController implements GameFlowManager {
                     System.out.println(l_Country.getCountryId() + " ");
                 }
                 if (!l_Player.getPlayerCards().isEmpty()) {
-
                     System.out.println(Constants.CARDS_OF_PLAYER);
                     for (Card l_Card : l_Player.getPlayerCards()) {
                         System.out.println(l_Card.getCard().name());
@@ -180,7 +176,6 @@ public class IssueOrderController implements GameFlowManager {
                 }
                 if (!d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
                     l_Player.issueOrder(d_IssueOrderCommand);
-
                     System.out.println(Constants.All_ORDERS_ADDED);
                     System.out.println(Constants.SEPERATER);
                 }
@@ -200,6 +195,11 @@ public class IssueOrderController implements GameFlowManager {
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         l_Command = d_Scanner.nextLine();
+        //Todo add validation
+        if(Objects.equals(l_Command.split(" ")[0], Constants.SHOW_MAP)){
+            new ShowMapController(d_GameMap).show();
+            return getCommandFromPlayer();
+        }
         //Todo add validation
         return l_Command;
     }
