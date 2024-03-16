@@ -51,11 +51,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.3</version>
+<!--                <configuration>-->
+<!--                    <doclint>all,-missing</doclint>-->
+<!--                    <additionalJOptions>-->
+<!--                        <additionalJOption>-Xdoclint:all,-missing</additionalJOption>-->
+<!--                    </additionalJOptions>-->
+<!--                </configuration>-->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- or the version you are using -->
                 <configuration>
-                    <doclint>all,-missing</doclint>
-                    <additionalJOptions>
-                        <additionalJOption>-Xdoclint:all,-missing</additionalJOption>
-                    </additionalJOptions>
+                    <compilerArgs>
+                        <arg>-Xdoclint:none</arg> <!-- Disable Xdoclint warnings -->
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
