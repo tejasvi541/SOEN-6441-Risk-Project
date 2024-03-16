@@ -5,17 +5,19 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.utils.Constants;
 
+import java.util.Objects;
+
 /**
  * Deploy order model will be used by {OrderOwner}
  *
  * @author Kapil Soni
  * @version 1.0.0
  */
-public class Deploy extends Order {
+public class DeployOrder extends Order {
     /**
      * Constructor for DeployOrder
      */
-    public Deploy() {
+    public DeployOrder() {
         super();
         setType(Constants.DEPLOY_COMMAND);
     }
@@ -39,7 +41,7 @@ public class Deploy extends Order {
                 System.out.println("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
             }
         }
-        System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination + ".");
+        System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
         return true;
     }
@@ -51,8 +53,22 @@ public class Deploy extends Order {
      */
     @Override
     public boolean validateCommand() {
-        //Todo implement ValidateCommand
-        return false;
+        Player l_Player = getOrderInfo().getPlayer();
+        Country l_Destination = getOrderInfo().getDestination();
+        int l_Reinforcements = getOrderInfo().getNumberOfArmy();
+        if (l_Player == null || l_Destination == null) {
+            System.out.println(Constants.INVALID_COMMAND);
+            return false;
+        }
+        if (!l_Player.isCaptured(l_Destination)) {
+            System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
+            return false;
+        }
+        if (!l_Player.deployReinforcementArmiesFromPlayer(l_Reinforcements)) {
+            System.out.println(Constants.NOT_ENOUGH_REINFORCEMENTS);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -60,8 +76,10 @@ public class Deploy extends Order {
      */
     @Override
     public void printOrderCommand() {
-        //Todo implement printOrderCommand
+        System.out.println("Deployed " + getOrderInfo().getNumberOfArmy() + " armies to " + getOrderInfo().getDestination().getCountryId() + ".");
+        System.out.println(Constants.SEPERATER);
+        //Todo add logger
+
 
     }
-
 }

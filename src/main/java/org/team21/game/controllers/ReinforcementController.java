@@ -48,12 +48,12 @@ public class ReinforcementController implements GameFlowManager {
     /**
      * Begins the Reinforcement phase of the game.
      *
-     * @param p_CurrentGamePhase The current game phase.
+     * @param p_CurrentPhase The current game phase.
      * @return The next game phase upon successful execution.
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
     /**
@@ -97,7 +97,6 @@ public class ReinforcementController implements GameFlowManager {
                         .stream()
                         .collect(Collectors.groupingBy(Country::getParentContinent));
                 for (String l_Continent : l_CountryMap.keySet()) {
-                    //todo Meet
                     try {
                         if (d_GameMap.getContinent(l_Continent) != null) {
                             if (d_GameMap.getContinent(l_Continent).getCountries().size() == l_CountryMap.get(l_Continent).size()) {

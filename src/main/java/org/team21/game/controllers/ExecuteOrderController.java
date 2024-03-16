@@ -6,6 +6,8 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.orders.Order;
+import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.HashMap;
 
@@ -22,6 +24,10 @@ public class ExecuteOrderController implements GameFlowManager {
      */
     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
     /**
+     * Created object d_gameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
+    /**
      * GameMap instance
      */
     GameMap d_GameMap;
@@ -36,12 +42,12 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * This method starts the current game phase
      *
-     * @param p_CurrentGamePhase the current game phase
+     * @param p_CurrentPhase the current game phase
      * @return the next game phase
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentGamePhase) {
-        return run(p_CurrentGamePhase);
+    public GamePhase start(GamePhase p_CurrentPhase) {
+        return run(p_CurrentPhase);
     }
 
     /**
@@ -54,7 +60,7 @@ public class ExecuteOrderController implements GameFlowManager {
         /**
          * The d_CurrentGamePhase is used to know current game phase.
          */
-
+        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
@@ -68,8 +74,8 @@ public class ExecuteOrderController implements GameFlowManager {
         int l_Counter = 0;
         while (l_Counter < d_GameMap.getPlayers().size()) {
             l_Counter = 0;
-            for (Player player : d_GameMap.getPlayers().values()) {
-                Order l_Order = player.nextOrder();
+            for (Player l_Player : d_GameMap.getPlayers().values()) {
+                Order l_Order = l_Player.nextOrder();
                 if (l_Order == null) {
                     l_Counter++;
                 } else {
@@ -106,7 +112,6 @@ public class ExecuteOrderController implements GameFlowManager {
                 return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
             }
         }
-        //Todo:Kapil implement reinforcement phase
-        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+        return p_CurrentGamePhase.nextState(GamePhase.Reinforcement);
     }
 }

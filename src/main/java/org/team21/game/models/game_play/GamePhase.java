@@ -170,22 +170,22 @@ public enum GamePhase {
         }
     };
 
+    public String Commands;
+
     /**
      * Checks if the next game phase returned from the current
      * controller is present in its possible states list.
      *
-     * @param p_nextPhase Next phase of the game.
+     * @param p_NextPhase Next phase of the game.
      * @return Next game phase if valid; otherwise, returns the current game phase.
      */
-    public GamePhase nextState(GamePhase p_nextPhase) {
-        if (this.possibleStates().contains(p_nextPhase)) {
-            return p_nextPhase;
+    public GamePhase nextState(GamePhase p_NextPhase) {
+        if (this.possibleStates().contains(p_NextPhase)) {
+            return p_NextPhase;
         } else {
             return this;
         }
     }
-
-    ;
 
     /**
      * Possible states list.
