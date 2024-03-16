@@ -197,6 +197,10 @@ public final class Constants {
      */
     public final static String BLOCKADE_COMMAND = "blockade";
     /**
+     * Pass command for issue order
+     */
+    public final static String PASS_COMMAND = "pass";
+    /**
      * The List commands.
      */
     public final static List<String> LIST_COMMANDS = Arrays.asList(DEPLOY_COMMAND, ADVANCE_COMMAND, BOMB_COMMAND, BLOCKADE_COMMAND, AIRLIFT_COMMAND, NEGOTIATE_COMMAND);
@@ -237,12 +241,14 @@ public final class Constants {
      * Show issue command for issue order
      */
     public static void showIssueOrderCommand(){
+        System.out.println("Please remember when all the member determines their command please use pass to execute orders");
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
+        System.out.println("To execute game further use : pass");
     }
 
     /**

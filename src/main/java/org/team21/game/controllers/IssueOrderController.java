@@ -1,6 +1,7 @@
 package org.team21.game.controllers;
 
 import org.team21.game.interfaces.main_engine.GameFlowManager;
+import org.team21.game.models.cards.Card;
 import org.team21.game.models.game_play.GamePhase;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
@@ -8,10 +9,10 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -20,6 +21,14 @@ import java.util.Scanner;
  * @version 1.0.0
  */
 public class IssueOrderController implements GameFlowManager {
+    /**
+     * To check current issued order commands
+     */
+    public static String d_IssueOrderCommand = "";
+    /**
+     * This will indicate who has skipped the list
+     */
+    private static Set<Player> d_SkippedPlayers = new HashSet<>();
     /**
      * Scanner will scan the inputs from the user
      */
@@ -37,10 +46,6 @@ public class IssueOrderController implements GameFlowManager {
      */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
 
-    /**
-     * To check current issued order commands
-     */
-    public static String d_IssueOrderCommand = "";
     /**
      * Constructor to get the GameMap instance
      */
@@ -67,6 +72,65 @@ public class IssueOrderController implements GameFlowManager {
     }
 
     /**
+     * A static function to validate the deploy command
+     *
+     * @param p_CommandArr The string entered by the user
+     * @param p_Player     the player object
+     * @return true if the command is correct else false
+     */
+    public static boolean validateCommand(String p_CommandArr, Player p_Player) {
+        List<String> l_Commands = Constants.LIST_COMMANDS;
+        String[] l_CommandArr = p_CommandArr.split(" ");
+        if (p_CommandArr.toLowerCase().contains(Constants.PASS_COMMAND)) {
+            addToSetOfPlayers(p_Player);
+            return false;
+        }
+        if (!l_Commands.contains(l_CommandArr[0].toLowerCase())) {
+            System.out.println(Constants.INVALID_COMMAND);
+            return false;
+        }
+        if (!findCommandLength(l_CommandArr[0], l_CommandArr.length)) {
+            System.out.println(Constants.INVALID_COMMAND);
+            return false;
+        }
+        switch (l_CommandArr[0].toLowerCase()) {
+            case Constants.DEPLOY_COMMAND:
+                try {
+                    Integer.parseInt(l_CommandArr[2]);
+                } catch (NumberFormatException l_Exception) {
+                    System.out.println(Constants.INVALID_COMMAND);
+                    return false;
+                }
+                break;
+            case Constants.ADVANCE_COMMAND:
+                if (l_CommandArr.length < 4) {
+                    System.out.println(Constants.INVALID_COMMAND);
+                    return false;
+                }
+                try {
+                    Integer.parseInt(l_CommandArr[3]);
+                } catch (NumberFormatException l_Exception) {
+                    System.out.println(Constants.INVALID_COMMAND);
+                    return false;
+                }
+
+            default:
+                break;
+
+        }
+        return true;
+    }
+
+    /**
+     * A function to map the players and their status for the issuing of the order
+     *
+     * @param p_Player The player who has skipped his iteration for the issuing
+     */
+    private static void addToSetOfPlayers(Player p_Player) {
+        d_SkippedPlayers.add(p_Player);
+    }
+
+    /**
      * A function to start the issue order phase
      *
      * @param p_CurrentPhase :  The current phase which is executing
@@ -78,7 +142,6 @@ public class IssueOrderController implements GameFlowManager {
         return run(p_CurrentPhase);
     }
 
-
     /**
      * Run method will execute IssueOrder logic
      *
@@ -86,39 +149,42 @@ public class IssueOrderController implements GameFlowManager {
      * @return : It will return next gamephase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        /**
-         * The p_CurrentGamePhase is used to know current game phase.
-         */
         d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
-        int l_PlayerCounts = 0;
-        List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
-        while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
+        while (!(d_SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
-                if (l_Player.getReinforcementArmies() <= 0 && !(l_ZeroReinforcementPlayers.contains(l_Player.getName()))) {
-                    l_ZeroReinforcementPlayers.add(l_Player.getName());
-                    l_PlayerCounts++;
+                if (!d_SkippedPlayers.isEmpty() && d_SkippedPlayers.contains(l_Player)) {
                     continue;
                 }
-                if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
-                    System.out.println(Constants.ARMY_DEPLETED);
-                    System.out.println(Constants.SEPERATER);
-                    return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                System.out.println("Player:" + l_Player.getName() + "; Armies assigned are: " + l_Player.getReinforcementArmies());
+                System.out.println("The countries to be assigned to the player are: ");
+                for (Country l_Country : l_Player.getCapturedCountries()) {
+                    System.out.println(l_Country.getCountryId() + " ");
                 }
-                if (l_Player.getReinforcementArmies() != 0) {
-                    System.out.println(Constants.SEPERATER);
-                    System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
-                    System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
-                    for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
-                        System.out.println(l_CapturedCountry.getCountryId() + " ");
+                if (!l_Player.getPlayerCards().isEmpty()) {
+                    System.out.println("The Cards assigned to the Players are:");
+                    for (Card l_Card : l_Player.getPlayerCards()) {
+                        System.out.println(l_Card.getCard());
                     }
-                    System.out.println(Constants.SEPERATER);
+                }
+                System.out.println(Constants.SEPERATER);
+                boolean l_IssueCommand = false;
+
+                while (!l_IssueCommand) {
                     d_IssueOrderCommand = getCommandFromPlayer();
+                    l_IssueCommand = validateCommand(d_IssueOrderCommand, l_Player);
+                    //Todo add logger
+                    if (d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
+                        break;
+                    }
+                }
+                if (!d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
                     l_Player.issueOrder(d_IssueOrderCommand);
+                    System.out.println("The order has been had to the list of orders.");
+                    System.out.println(Constants.SEPERATER);
                 }
             }
         }
-        System.out.println(Constants.ARMY_DEPLETED);
-        System.out.println(Constants.SEPERATER);
+        d_SkippedPlayers.clear();
         return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
     }
 
@@ -131,14 +197,8 @@ public class IssueOrderController implements GameFlowManager {
         String l_Command = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
-        while (!l_Command.equals(Constants.EXIT)) {
-            l_Command = d_Scanner.nextLine();
-            if (Constants.LIST_COMMANDS.contains(l_Command.split(" ")[0])) {
-                return l_Command;
-            } else {
-                System.out.println(Constants.INVALID_COMMAND);
-            }
-        }
+        l_Command = d_Scanner.nextLine();
+        //Todo add validatio
         return l_Command;
     }
 
