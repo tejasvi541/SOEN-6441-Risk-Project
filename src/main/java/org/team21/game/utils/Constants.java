@@ -244,4 +244,12 @@ public final class Constants {
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
     }
+
+    /**
+     * This method prints the validation of the command.
+     * @param p_Validation holds the string passed from the validatCcommand method.
+     */
+    public static void printValidationOfValidateCommand(String p_Validation){
+        System.err.println(p_Validation);
+    }
 }
