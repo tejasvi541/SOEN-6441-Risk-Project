@@ -25,7 +25,7 @@ public class ReinforcementControllerTest {
     /**
      * Reinforcement controller
      */
-    private ReinforcementController ReinforcementController;
+    private ReinforcementController d_ReinforcementController;
     /**
      * Game map object
      */
@@ -37,47 +37,47 @@ public class ReinforcementControllerTest {
     @Before
     public void setUp() {
         d_GameMap = GameMap.getInstance();
-        ReinforcementController = new ReinforcementController();
+        d_ReinforcementController = new ReinforcementController();
 
         // Setup continents
-        Continent continent1 = new Continent("Continent1", "5", 1);
-        Continent continent2 = new Continent("Continent2", "3", 2);
-        continent1.setAwardArmies(3);
-        continent2.setAwardArmies(2);
-        d_GameMap.getContinents().put("Continent1", continent1);
-        d_GameMap.getContinents().put("Continent2", continent2);
+        Continent l_Continent1 = new Continent("Continent1", "5", 1);
+        Continent l_Continent2 = new Continent("Continent2", "3", 2);
+        l_Continent1.setAwardArmies(3);
+        l_Continent2.setAwardArmies(2);
+        d_GameMap.getContinents().put("Continent1", l_Continent1);
+        d_GameMap.getContinents().put("Continent2", l_Continent2);
 
         // Setup countries
-        Country country1 = new Country("Country1", "Continent1");
-        Country country2 = new Country("Country2", "Continent1");
-        Country country3 = new Country("Country3", "Continent2");
-        d_GameMap.getCountries().put("1", country1);
-        d_GameMap.getCountries().put("2", country2);
-        d_GameMap.getCountries().put("3", country3);
+        Country l_Country1 = new Country("Country1", "Continent1");
+        Country l_Country2 = new Country("Country2", "Continent1");
+        Country l_Country3 = new Country("Country3", "Continent2");
+        d_GameMap.getCountries().put("1", l_Country1);
+        d_GameMap.getCountries().put("2", l_Country2);
+        d_GameMap.getCountries().put("3", l_Country3);
 
         // Setup players
-        setupPlayer("1", List.of(country1, country2));
-        setupPlayer("2", List.of(country3));
+        setupPlayer("1", List.of(l_Country1, l_Country2));
+        setupPlayer("2", List.of(l_Country3));
         setupPlayer("3", new ArrayList<>());
         setupPlayer("4", new ArrayList<>());
         setupPlayer("5", new ArrayList<>());
 
-        GamePhase currentPhase = GamePhase.Reinforcement;
-        GamePhase nextPhase = ReinforcementController.start(currentPhase);
-        assertEquals(GamePhase.IssueOrder, nextPhase);
+        GamePhase l_CurrentPhase = GamePhase.Reinforcement;
+        GamePhase l_NextPhase = d_ReinforcementController.start(l_CurrentPhase);
+        assertEquals(GamePhase.IssueOrder, l_NextPhase);
     }
 
     /**
      * Setup players
      *
-     * @param playerName
-     * @param capturedCountries
+     * @param p_PlayerName
+     * @param p_CapturedCountries
      */
-    private void setupPlayer(String playerName, List<Country> capturedCountries) {
-        Player player = new Player();
-        player.setName(playerName);
-        player.setCapturedCountries(capturedCountries);
-        d_GameMap.getPlayers().put(playerName, player);
+    private void setupPlayer(String p_PlayerName, List<Country> p_CapturedCountries) {
+        Player l_Player = new Player();
+        l_Player.setName(p_PlayerName);
+        l_Player.setCapturedCountries(p_CapturedCountries);
+        d_GameMap.getPlayers().put(p_PlayerName, l_Player);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_PlayerWithNoCountries() throws InvalidExecutionException {
-        ReinforcementController.computerReinforcements();
+        d_ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("3").getReinforcementArmies());
     }
 
@@ -98,7 +98,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_PlayerWithOneCountry() throws InvalidExecutionException {
-        ReinforcementController.computerReinforcements();
+        d_ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -109,7 +109,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_FullyCapturedContinent() throws InvalidExecutionException {
-        ReinforcementController.computerReinforcements();
+        d_ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
@@ -120,7 +120,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_NotFullyCapturedContinent() throws InvalidExecutionException {
-        ReinforcementController.computerReinforcements();
+        d_ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -131,7 +131,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testComputerReinforcements_MultiplePlayersInDifferentContinents() throws InvalidExecutionException {
-        ReinforcementController.computerReinforcements();
+        d_ReinforcementController.computerReinforcements();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
@@ -143,7 +143,7 @@ public class ReinforcementControllerTest {
      */
     @Test
     public void testAssignReinforcementTroops_PlayerWithCapturedCountries() throws InvalidExecutionException {
-        ReinforcementController.assignReinforcementTroops();
+        d_ReinforcementController.assignReinforcementTroops();
 
         // Assuming Player1 captured 2 countries in Continent1 (awarded 3 reinforcement armies)
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
@@ -157,7 +157,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_PlayerWithNoCapturedCountries() throws InvalidExecutionException {
         // Assuming Player2 has captured no countries
-        ReinforcementController.assignReinforcementTroops();
+        d_ReinforcementController.assignReinforcementTroops();
         assertEquals(5, d_GameMap.getPlayers().get("2").getReinforcementArmies());
     }
 
@@ -169,7 +169,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_NotFullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured 1 country in Continent1 (not fully captured)
-        ReinforcementController.assignReinforcementTroops();
+        d_ReinforcementController.assignReinforcementTroops();
         assertEquals(5, d_GameMap.getPlayers().get("1").getReinforcementArmies());
     }
 
@@ -181,7 +181,7 @@ public class ReinforcementControllerTest {
     @Test
     public void testAssignReinforcementTroops_FullyCapturedContinents() throws InvalidExecutionException {
         // Assuming Player1 captured all countries in Continent1 (fully captured)
-        ReinforcementController.assignReinforcementTroops();
+        d_ReinforcementController.assignReinforcementTroops();
 
         if(d_GameMap.getPlayers().get("1").getCapturedCountries().size()==2){
 

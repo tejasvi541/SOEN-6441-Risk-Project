@@ -21,22 +21,22 @@ public class MapEditorControllerTest {
     /**
      * The Game phase.
      */
-    GamePhase gamePhase;
+    GamePhase d_GamePhase;
     /**
      * The Game map.
      */
-    GameMap gameMap = new GameMap();
+    GameMap d_GameMap = new GameMap();
     /**
      * The Load.
      */
-    MapLoaderController load = new MapLoaderController();
+    MapLoaderController d_MapLoaderController = new MapLoaderController();
 
     /**
      * Sets up.
      */
     @Before
     public void setUp() {
-        gameMap = load.readMap("canada");
+        d_GameMap = d_MapLoaderController.readMap("canada");
     }
 
     /**
@@ -44,11 +44,11 @@ public class MapEditorControllerTest {
      */
     @Test
     public void validateInput() {
-        MapEditorController editor = new MapEditorController(gameMap);
-        List<String> input = Arrays.asList("showmap");
-        List<String> input_false = Arrays.asList("Watchmap");
-        assertTrue(editor.validateUserInput(input));
-        assertFalse(editor.validateUserInput(input_false));
+        MapEditorController l_MapEditorController = new MapEditorController(d_GameMap);
+        List<String> l_Input = Arrays.asList("showmap");
+        List<String> l_Input_false = Arrays.asList("Watchmap");
+        assertTrue(l_MapEditorController.validateUserInput(l_Input));
+        assertFalse(l_MapEditorController.validateUserInput(l_Input_false));
     }
 
     /**
@@ -56,9 +56,9 @@ public class MapEditorControllerTest {
      */
     @Test
     public void applyActionMap() {
-        MapEditorController editor = new MapEditorController(gameMap);
-        List<String> input = Arrays.asList("showmap");
-        assertNotNull(editor.action(input, gamePhase.MapEditor));
+        MapEditorController l_MapEditorController = new MapEditorController(d_GameMap);
+        List<String> l_Input = Arrays.asList("showmap");
+        assertNotNull(l_MapEditorController.action(l_Input, d_GamePhase.MapEditor));
     }
 
     /**
@@ -67,6 +67,6 @@ public class MapEditorControllerTest {
     @After
     public void tearDown() {
         // Clean up resources or release objects
-        gameMap = null;
+        d_GameMap = null;
     }
 }
