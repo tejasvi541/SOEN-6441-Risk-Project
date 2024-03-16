@@ -50,8 +50,8 @@ public class DiceStrategy implements GameStrategy {
                 makeMeKing(p_Player, p_To);
                 Card l_AssignedCard = new Card();
                 p_Player.addPlayerCard(l_AssignedCard);
-                System.out.println("Attacker: " + p_Player.getName() + " received a card: " + l_AssignedCard);
-                d_LogEntryBuffer.logEvent("Attacker: " + p_Player.getName() + " received a card: "+ l_AssignedCard);
+                System.out.println("Attacker: " + p_Player.getName() + " received a card: " + l_AssignedCard.getCard());
+                d_LogEntryBuffer.logEvent("Attacker: " + p_Player.getName() + " received a card: "+ l_AssignedCard.getCard());
                 System.out.println("Attacker : " + p_Player.getName() + " won.");
                 System.out.println("Remaining attacker's armies " + p_To.getArmies() + " moved from " + p_From.getCountryId() + " to " + p_To.getCountryId() + ".");
 

@@ -96,6 +96,7 @@ public class AdvanceOrder extends Order {
         int l_Armies = getOrderInfo().getNumberOfArmy();
         boolean success = true;
         String log = "Failed due to some errors\n";
+        boolean l_IsNeighbour = l_From.isNeighbor(l_To);
         if (l_Player == null || l_To == null || l_From == null) {
             System.err.println("Invalid order information.");
             return false;
@@ -104,7 +105,7 @@ public class AdvanceOrder extends Order {
             log += String.format("\t-> Country %s does not belong to player %s\n", l_From.getCountryId(), l_Player.getName());
             success = false;
         }
-        if (!l_From.isNeighbor(l_To)) {
+        if (!l_IsNeighbour) {
             log += String.format("\t-> Destination country %s is not a neighbor of %s\n", l_To.getCountryId(), l_From.getCountryId());
             success = false;
         }

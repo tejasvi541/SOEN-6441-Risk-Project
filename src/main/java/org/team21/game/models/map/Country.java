@@ -230,7 +230,7 @@ public class Country {
                 + ", Parent Continent=" + d_ParentContinent + "]";
     }
 
-    public boolean isNeighbor(Country lTo) {
-        return false;
+    public boolean isNeighbor(Country p_NeighbourCountry) {
+        return this.getNeighbours().containsKey(p_NeighbourCountry.d_CountryId.toLowerCase());
     }
 }

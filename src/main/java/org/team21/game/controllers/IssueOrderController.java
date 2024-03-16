@@ -164,7 +164,7 @@ public class IssueOrderController implements GameFlowManager {
 
                     System.out.println(Constants.CARDS_OF_PLAYER);
                     for (Card l_Card : l_Player.getPlayerCards()) {
-                        System.out.println(l_Card.getCard());
+                        System.out.println(l_Card.getCard().name());
                     }
                 }
                 System.out.println(Constants.SEPERATER);
