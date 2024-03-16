@@ -112,7 +112,6 @@ public class ExecuteOrderController implements GameFlowManager {
                 return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
             }
         }
-        //Todo:Kapil implement reinforcement phase
-        return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+        return p_CurrentGamePhase.nextState(GamePhase.Reinforcement);
     }
 }

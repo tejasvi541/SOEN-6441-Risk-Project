@@ -460,6 +460,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
 
     /**
      * This method will fetch the user inserted input.
+     * @return list of user input
      */
     public List<String> fetchUserInput()
     {

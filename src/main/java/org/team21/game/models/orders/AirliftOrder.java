@@ -70,28 +70,28 @@ public class AirliftOrder extends Order {
 
         //check if the player is valid
         if (l_Player == null) {
-            System.out.println("Found no valid Player");
+            Constants.printValidationOfValidateCommand("Found no valid Player");
             return false;
         }
         //check if army number is more than 0
         if (p_armyToAirLift <= 0) {
-            System.out.println("Airlift army is less than 0. It should be greater than 0");
+            Constants.printValidationOfValidateCommand("Airlift army is less than 0. It should be greater than 0");
             return false;
         }
 
         //check if the player has an airlift card
         if (!l_Player.checkIfCardAvailable(CardType.AIRLIFT)) {
-            System.out.println("Airlift Card not available for the player");
+            Constants.printValidationOfValidateCommand("Airlift Card not available for the player");
             return false;
         }
         //check if countries belong to the player
         if (!l_Player.getCapturedCountries().contains(l_fromCountry) || !l_Player.getCapturedCountries().contains(l_destinationCountry)) {
-            System.out.println("Departure or Destination country do not belong to player.");
+            Constants.printValidationOfValidateCommand("Departure or Destination country do not belong to player.");
             return false;
         }
         //check if army number is more that they own
         if (l_fromCountry.getArmies() < p_armyToAirLift) {
-            System.out.println("Less number of army for the player in country " + getOrderInfo().getDeparture().getCountryId());
+            Constants.printValidationOfValidateCommand("Less number of army for the player in country " + getOrderInfo().getDeparture().getCountryId());
             return false;
         }
         return true;
