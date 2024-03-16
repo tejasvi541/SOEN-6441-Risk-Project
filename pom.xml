@@ -63,9 +63,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version> <!-- or the version you are using -->
                 <configuration>
-                    <compilerArgs>
-                        <arg>-Xdoclint:none</arg> <!-- Disable Xdoclint warnings -->
+                    <compilerArgs>--enable-preview <!-- Disable Xdoclint warnings -->
                     </compilerArgs>
+                    <source>21</source>
+                    <target>21</target>
                 </configuration>
             </plugin>
         </plugins>

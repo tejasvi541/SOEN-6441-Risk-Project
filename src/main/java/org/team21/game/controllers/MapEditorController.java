@@ -1,9 +1,6 @@
 package org.team21.game.controllers;
 
 import java.util.*;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.team21.game.interfaces.main_engine.GameFlowManager;
 import org.team21.game.interfaces.maps.MapEditor;
 import org.team21.game.models.map.Continent;
@@ -41,7 +38,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
     /**
      * A data member that will log the data for the class
      */
-    private static final Logger d_Log = LogManager.getLogger(MapEditorController.class);
 
     /**
      * A data member to set continue of loop
@@ -87,7 +83,6 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * @throws Exception If an error occurs during the execution
      */
     public GamePhase run(GamePhase p_CurrentPhase) throws Exception{
-        d_GameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
         List<String> l_ListStream;
         while (d_Execute) {
             l_ListStream=fetchUserInput();
@@ -451,8 +446,7 @@ public class MapEditorController implements MapEditor, GameFlowManager {
         if (!(p_InputList.isEmpty())) {
             String l_InputCommand = p_InputList.getFirst();
             int l_Index= d_MAP_CLI_COMMANDS.indexOf(l_InputCommand);
-            if(l_Index!=-1)
-                return true;
+            return l_Index != -1;
         }
         return false;
     }
@@ -488,6 +482,8 @@ public class MapEditorController implements MapEditor, GameFlowManager {
      * @return The next phase of the game.
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentPhase) throws Exception{ return run(p_CurrentPhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws Exception{
+        d_GameEventLogger.logEvent(Constants.MAP_EDITOR_PHASE);
+        return run(p_CurrentPhase); }
 
 }

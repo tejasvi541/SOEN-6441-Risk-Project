@@ -136,6 +136,7 @@ public class IssueOrderController implements GameFlowManager {
 
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
@@ -146,7 +147,6 @@ public class IssueOrderController implements GameFlowManager {
      * @return : It will return next gamePhase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         while (!(d_SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
                 if (!d_SkippedPlayers.isEmpty() && d_SkippedPlayers.contains(l_Player)) {

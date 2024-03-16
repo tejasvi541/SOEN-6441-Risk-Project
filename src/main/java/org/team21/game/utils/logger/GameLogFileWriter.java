@@ -30,7 +30,7 @@ public class GameLogFileWriter implements Observer {
     /**
      * path of directory and file path where it will store log file
      */
-    private String d_Path = "";
+    private String d_Path;
 
     /**
      * Constructor to initialize the GameLogWriter
@@ -56,7 +56,6 @@ public class GameLogFileWriter implements Observer {
             LocalDateTime l_Now = LocalDateTime.now();
             DateTimeFormatter l_Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String l_Timestamp = l_Now.format(l_Formatter);
-
             l_Writer.println("[" + l_Timestamp + "] " + p_eventMessage);
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());

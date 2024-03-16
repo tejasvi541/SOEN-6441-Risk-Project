@@ -1,11 +1,9 @@
 package org.team21;
-
 import org.team21.game.game_engine.GameEngine;
 import org.team21.game.utils.Constants;
 
 /**
- * The Main will call the GameEngine
- * and it will start the MapEditor.
+ * The Main will call the GameEngine, and it will start the MapEditor.
  */
 public class Main {
     /**

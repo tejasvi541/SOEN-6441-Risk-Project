@@ -58,9 +58,6 @@ public class ExecuteOrderController implements GameFlowManager {
      * @return : It will return game phase to go next
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        /**
-         * The d_CurrentGamePhase is used to know current game phase.
-         */
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
@@ -101,7 +98,7 @@ public class ExecuteOrderController implements GameFlowManager {
      *
      * @param p_CurrentGamePhase : the current phase of game command
      * @param p_GamePhase        : the next phase based on the status of player
-     * @return : the gamephase it has to change to based on the win
+     * @return : the gamePhase it has to change to based on the win
      */
     public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase, GamePhase p_GamePhase) {
         HashMap<String, Country> l_ListOfAllCountries = d_GameMap.getCountries();

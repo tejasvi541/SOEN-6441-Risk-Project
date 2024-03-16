@@ -75,15 +75,23 @@ public final class Constants {
     /**
      * The constant EXECUTE_ORDER_PHASE.
      */
-    public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
+    public final static String EXECUTE_ORDER_PHASE = "EXECUTE ORDER PHASE";
     /**
      * The constant ISSUE_ORDER_PHASE.
      */
-    public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
+    public final static String ISSUE_ORDER_PHASE = "ISSUE ORDER PHASE";
     /**
      * The constant MAP_EDITOR_PHASE.
      */
-    public final static String MAP_EDITOR_PHASE = "\n MAP EDITOR PHASE \n";
+    public final static String MAP_EDITOR_PHASE = "MAP EDITOR PHASE";
+    /**
+     * The constant REINFORCEMENT_PHASE.
+     */
+    public final static String REINFORCEMENT_PHASE = "REINFORCEMENT PHASE";
+    /**
+     * The constant START_UP_PHASE.
+     */
+    public final static String START_UP_PHASE = "START UP PHASE";
     /**
      * The constant SPACE_FORMATTER.
      */
