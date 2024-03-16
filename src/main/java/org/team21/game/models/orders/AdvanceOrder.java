@@ -16,9 +16,9 @@ import java.util.Objects;
 public class AdvanceOrder extends Order {
 
     /**
-     * Event buffer object
+     * Created object d_GameEventLogger of GameEventLogger.
      */
-     GameEventLogger d_Leb = new GameEventLogger();
+     GameEventLogger d_GameEventLogger = new GameEventLogger();
 
     /**
      * Game Settings object
@@ -60,6 +60,7 @@ public class AdvanceOrder extends Order {
             int l_Armies = getOrderInfo().getNumberOfArmy();
             if (l_Player.getNeutralPlayers().contains(l_To.getPlayer())) {
                 System.out.printf("Truce between %s and %s\n", l_Player.getName(), l_To.getPlayer().getName());
+                d_GameEventLogger.logEvent("Truce between "+l_Player.getName()+" "+l_To.getPlayer().getName());
                 l_Player.getNeutralPlayers().remove(l_To.getPlayer());
                 l_To.getPlayer().getNeutralPlayers().remove(l_Player);
             } else if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
@@ -70,7 +71,7 @@ public class AdvanceOrder extends Order {
                 }
                 l_To.setPlayer(l_Player);
                 System.out.println("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
-                d_Leb.logEvent("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
+                d_GameEventLogger.logEvent("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
 
             } else if (d_GameStrategy.attack(l_Player, l_From, l_To, l_Armies)) {
             }
@@ -113,7 +114,7 @@ public class AdvanceOrder extends Order {
         }
         if (!success) {
             System.err.println(log);
-            d_Leb.logEvent(log);
+            d_GameEventLogger.logEvent(log);
         }
         return success;
     }
@@ -125,6 +126,6 @@ public class AdvanceOrder extends Order {
     public void printOrderCommand() {
         System.out.println("Advanced " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
-        d_Leb.logEvent("Advanced " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
+        d_GameEventLogger.logEvent("Advanced " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }

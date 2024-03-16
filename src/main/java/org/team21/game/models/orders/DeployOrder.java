@@ -14,7 +14,9 @@ import org.team21.game.utils.logger.GameEventLogger;
  * @version 1.0.0
  */
 public class DeployOrder extends Order {
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Constructor for DeployOrder

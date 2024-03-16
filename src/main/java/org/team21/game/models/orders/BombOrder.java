@@ -22,7 +22,7 @@ public class BombOrder extends Order {
     /**
      * GameEvent Logger object.
      */
-    GameEventLogger logger = new GameEventLogger();
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
 
     /**
      * Class constructor calls super and set GameMap object
@@ -45,26 +45,26 @@ public class BombOrder extends Order {
         // Check for valid player
         if(l_Player==null){
             Constants.printValidationOfValidateCommand("Invalid Player");
-            logger.logEvent("The Player is invalid");
+            d_GameEventLogger.logEvent("The Player is invalid");
             return false;
         }
         // Check for if the player has the card
         if(!l_Player.checkIfCardAvailable(CardType.BOMB)){
             Constants.printValidationOfValidateCommand("Invalid BOMB Card");
-            logger.logEvent("The BOMB card is invalid");
+            d_GameEventLogger.logEvent("The BOMB card is invalid");
             return false;
         }
         // check if the target country belongs to the player
         if(l_Player.getCapturedCountries().contains(l_TargetCountry)){
             Constants.printValidationOfValidateCommand("The Player cannot bomb its own country");
-            logger.logEvent("The Player cannot bomb its own country");
+            d_GameEventLogger.logEvent("The Player cannot bomb its own country");
             return false;
         }
 
         // Check if diplomacy is there or not
         if(l_Player.getNeutralPlayers().contains(l_TargetCountry.getPlayer())){
             System.out.printf("There is diplomacy between %s and %s\n", l_Player.getName(), l_TargetCountry.getPlayer().getName());
-            logger.logEvent("There is diplomacy between the countries");
+            d_GameEventLogger.logEvent("There is diplomacy between the countries");
             l_Player.getNeutralPlayers().remove(l_TargetCountry.getPlayer());
             l_TargetCountry.getPlayer().getNeutralPlayers().remove(l_Player);
             return false;
@@ -82,7 +82,7 @@ public class BombOrder extends Order {
         }
         if (!l_adjacentCountry){
             Constants.printValidationOfValidateCommand("The target country is not a neighbor of player owned country");
-            logger.logEvent("The target country is not a neighbor of player owned country");
+            d_GameEventLogger.logEvent("The target country is not a neighbor of player owned country");
             return false;
         }
         return true;
@@ -98,6 +98,7 @@ public class BombOrder extends Order {
         Country l_TargetCountry = getOrderInfo().getTargetCountry();
         if (validateCommand()) {
             System.out.println("The order is: " + getType() + " " + l_TargetCountry.getCountryId());
+            d_GameEventLogger.logEvent("The order is: " + getType() + " " + l_TargetCountry.getCountryId());
             int l_Armies = l_TargetCountry.getArmies();
             int l_NewArmies  = Math.max(0, l_Armies / 2);
             l_TargetCountry.setArmies(l_NewArmies);
@@ -114,8 +115,9 @@ public class BombOrder extends Order {
     public void printOrderCommand() {
         System.out.println("Bomb order issued by player: " + getOrderInfo().getPlayer().getName()
                 + " targeting country: " + getOrderInfo().getTargetCountry().getCountryId());
+        d_GameEventLogger.logEvent("Bomb order issued by player: " + getOrderInfo().getPlayer().getName()
+                + " targeting country: " + getOrderInfo().getTargetCountry().getCountryId());
         System.out.println(Constants.SEPERATER);
-        // TODO Add Logger
     }
 
 

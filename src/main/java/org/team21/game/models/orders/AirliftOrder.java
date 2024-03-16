@@ -50,6 +50,7 @@ public class AirliftOrder extends Order {
             l_fromCountry.setArmies(l_fromCountry.getArmies() - p_armyToAirLift);
             l_destinationCountry.setArmies(l_destinationCountry.getArmies() + p_armyToAirLift);
             System.out.println("The order: " + getType() + " " + p_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
+            d_GameEventLogger.logEvent("The order: " + getType() + " " + p_armyToAirLift + " armies from "+l_fromCountry.getCountryId()+" to "+l_destinationCountry.getCountryId());
             l_Player.removeCard(CardType.AIRLIFT);
             return true;
         }
@@ -103,6 +104,7 @@ public class AirliftOrder extends Order {
     @Override
     public void printOrderCommand() {
         System.out.println("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
+        d_GameEventLogger.logEvent("Airlifted " + getOrderInfo().getNumberOfArmy() + " armies from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
         System.out.println(Constants.SEPERATER);
     }
 }
