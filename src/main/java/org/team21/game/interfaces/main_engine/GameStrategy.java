@@ -6,7 +6,7 @@ import org.team21.game.models.game_play.Player;
 /**
  * Interface class for Game Strategy
  *
- * @author Madhuvanthi Hemanathan
+ * @author Yesha Shah
  */
 public interface GameStrategy {
 
