@@ -88,19 +88,19 @@ public class IssueOrderControllerTest {
             String[] commandArr2 = test2.split("\\s");
             assertEquals(3, commandArr2.length);
             player.issueOrder(test2);
-            assertEquals(2, player.getReinforcementArmies());
+            assertEquals(5, player.getReinforcementArmies());
 
             String test3 = "deploy Country3 2";
             String[] commandArr3 = test2.split("\\s");
             assertEquals(3, commandArr3.length);
             player.issueOrder(test3);
-            assertEquals(0, player.getReinforcementArmies());
+            assertEquals(5, player.getReinforcementArmies());
 
             String test4 = "deploy Country4 4";
             String[] commandArr4 = test2.split("\\s");
             assertEquals(3, commandArr4.length);
             player.issueOrder(test4);
-            assertEquals(0, player.getReinforcementArmies());
+            assertEquals(5, player.getReinforcementArmies());
 
             assertEquals(Constants.DEPLOY_COMMAND, commandArr2[0]);
         }

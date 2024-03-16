@@ -5,6 +5,8 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.utils.Constants;
 
+import java.util.Objects;
+
 /**
  * Deploy order model will be used by {OrderOwner}
  *
@@ -51,8 +53,22 @@ public class DeployOrder extends Order {
      */
     @Override
     public boolean validateCommand() {
-        //Todo implement ValidateCommand
-        return false;
+        Player l_Player = getOrderInfo().getPlayer();
+        Country l_Destination = getOrderInfo().getDestination();
+        int l_Reinforcements = getOrderInfo().getNumberOfArmy();
+        if (l_Player == null || l_Destination == null) {
+            System.out.println(Constants.INVALID_COMMAND);
+            return false;
+        }
+        if (!l_Player.isCaptured(l_Destination)) {
+            System.out.println(Constants.COUNTRIES_DOES_NOT_BELONG);
+            return false;
+        }
+        if (!l_Player.deployReinforcementArmiesFromPlayer(l_Reinforcements)) {
+            System.out.println(Constants.NOT_ENOUGH_REINFORCEMENTS);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -60,7 +76,10 @@ public class DeployOrder extends Order {
      */
     @Override
     public void printOrderCommand() {
-        //Todo implement printOrderCommand
+        System.out.println("Deployed " + getOrderInfo().getNumberOfArmy() + " armies to " + getOrderInfo().getDestination().getCountryId() + ".");
+        System.out.println(Constants.SEPERATER);
+        //Todo add logger
+
 
     }
 }

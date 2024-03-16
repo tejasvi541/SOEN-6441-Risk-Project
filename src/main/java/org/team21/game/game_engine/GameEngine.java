@@ -4,7 +4,9 @@ import org.team21.game.controllers.ShowMapController;
 import org.team21.game.interfaces.main_engine.GameFlowManager;
 import org.team21.game.interfaces.main_engine.MainEngine;
 import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.models.game_play.GameSettings;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.models.strategy.DiceStrategy;
 import org.team21.game.utils.Constants;
 
 import java.util.Objects;
@@ -27,17 +29,23 @@ public class GameEngine implements MainEngine {
     /**
      * GameEngine instance initializer
      */
-    public GameEngine() { configureEngine(); }
+    public GameEngine() {
+        configureEngine();
+    }
 
     /**
      * Config engine
      */
     @Override
-    public void configureEngine() { d_GamePhase = GamePhase.MapEditor; }
+    public void configureEngine() {
+        GameSettings l_Setting = GameSettings.getInstance();
+        l_Setting.setStrategy(new DiceStrategy());
+        d_GamePhase = GamePhase.MapEditor;
+
+    }
 
     /**
      * default method declaration for starting the game
-     *
      */
     @Override
     public void start() {
@@ -50,9 +58,9 @@ public class GameEngine implements MainEngine {
                 }
                 d_GamePhase = l_GameFlowManager.start(d_GamePhase);
                 System.out.println(Constants.SEPERATER);
-                System.out.println("************************"+"The Current phase " + d_GamePhase + " Phase"+"***********************");
+                System.out.println("************************" + "The Current phase " + d_GamePhase + " Phase" + "***********************");
                 System.out.println(Constants.SEPERATER);
-                if(d_GamePhase.equals(GamePhase.ExitGame)){
+                if (d_GamePhase.equals(GamePhase.ExitGame)) {
                     new ShowMapController(GameMap.getInstance()).show();
                 }
                 start();

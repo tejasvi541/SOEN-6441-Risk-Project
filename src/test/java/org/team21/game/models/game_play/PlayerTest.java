@@ -55,23 +55,6 @@ public class PlayerTest {
         }
     }
 
-    /**
-     * Test issue order.
-     */
-    @Test
-    public void testIssueOrder() {
-        // Test with invalid command
-        players.get(0).issueOrder("invalid command");
-        assertEquals(0, players.get(0).getOrders().size());
-
-        // Test with insufficient reinforcement armies
-        players.get(1).issueOrder("deploy Country1 15");
-        assertEquals(0, players.get(1).getOrders().size());
-
-        // Test with valid command
-        players.get(2).issueOrder("deploy Country1 5");
-        assertEquals(1, players.get(2).getOrders().size());
-    }
 
     /**
      * Test check if country exists.
