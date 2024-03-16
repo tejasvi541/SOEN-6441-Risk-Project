@@ -50,6 +50,7 @@ public class OrderOwner {
             case Constants.BLOCKADE_COMMAND:
                 l_Order = new BlockadeOrder();
                 l_Order.setOrderInfo(generateBlockadeOrderInfo(p_Commands, p_Player));
+                break;
             case Constants.ADVANCE_COMMAND:
                 l_Order = new AdvanceOrder();
                 l_Order.setOrderInfo(generateAdvanceOrderInfo(p_Commands, p_Player));
