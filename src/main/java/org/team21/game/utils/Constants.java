@@ -249,6 +249,7 @@ public final class Constants {
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
         System.out.println("To execute game further use : pass");
+        System.out.println("To execute game further use : pass");
     }
 
     /**
