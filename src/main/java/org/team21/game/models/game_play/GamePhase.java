@@ -170,6 +170,9 @@ public enum GamePhase {
         }
     };
 
+    /**
+     * Commands will help for assisting in test cases
+     */
     public String Commands;
 
     /**

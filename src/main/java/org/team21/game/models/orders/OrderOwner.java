@@ -165,7 +165,7 @@ public class OrderOwner {
         String l_FromCountryID = p_Command[1];
         Country l_FromCountry = d_GameMap.getCountries().get(l_FromCountryID.toLowerCase());
         String l_ToCountryID = p_Command[2];
-        Country l_ToCountry = d_GameMap.getCountries().get(l_FromCountryID.toLowerCase());
+        Country l_ToCountry = d_GameMap.getCountries().get(l_ToCountryID.toLowerCase());
         int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
         OrderInformation l_OrderInfo = new OrderInformation();
         l_OrderInfo.setPlayer(p_Player);

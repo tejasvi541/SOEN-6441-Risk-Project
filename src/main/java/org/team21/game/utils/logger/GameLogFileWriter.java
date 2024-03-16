@@ -19,10 +19,17 @@ public class GameLogFileWriter implements Observer {
      */
     private String d_LogFilenamePrefix = "gamelog"; // Default prefix
 
+    /**
+     * To get log file path
+     * @return : return file path in string where it will store log file
+     */
     public String getDirectoryPath() {
         return d_Path;
     }
 
+    /**
+     * path of directory and file path where it will store log file
+     */
     private String d_Path = "";
 
     /**

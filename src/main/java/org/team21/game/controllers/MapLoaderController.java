@@ -39,6 +39,9 @@ public class MapLoaderController {
      */
     GameEventLogger logger = new GameEventLogger();
 
+    /**
+     * It will initialise the MapLoaderController
+     */
     public MapLoaderController(){
         d_GameMap = GameMap.getInstance();
     }
