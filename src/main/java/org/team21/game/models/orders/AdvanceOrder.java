@@ -3,6 +3,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.game_play.GameSettings;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.interfaces.main_engine.GameStrategy;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.Objects;
@@ -34,7 +35,7 @@ public class AdvanceOrder extends Order {
      */
     public AdvanceOrder() {
         super();
-        setType("advance");
+        setType(Constants.ADVANCE_COMMAND);
         d_GameStrategy = d_Settings.getStrategy();
     }
 
