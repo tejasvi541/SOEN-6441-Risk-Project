@@ -228,6 +228,14 @@ public final class Constants {
      * The constant WELCOME_MESSAGE.
      */
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
+    /**
+     * The constant non exists player message.
+     */
+    public final static String NONEXISTENT_PLAYER = "The Player name does not exist.";
+    /**
+     * The constant for no negotiate card message.
+     */
+    public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
 
     /**
      * Instantiates a new Constants.
@@ -260,12 +268,13 @@ public final class Constants {
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
         System.out.println("To execute game further use : pass");
+        System.out.println("To see map : showmap");
     }
 
     /**
      * This method prints the validation of the command.
      *
-     * @param p_Validation holds the string passed from the validatCcommand method.
+     * @param p_Validation holds the string passed from the validatCommand method.
      */
     public static void printValidationOfValidateCommand(String p_Validation) {
         System.err.println(p_Validation);

@@ -130,28 +130,6 @@ public class MapValidator {
     }
 
     /**
-     * This function checks if the continent is present in the GMap Object
-     *
-     * @param p_gameMap     GMap object
-     * @param p_continentId Id of the continent to be checked
-     * @return true /false if the continent exists or not
-     */
-    public boolean isContinentPresent(GameMap p_gameMap, String p_continentId) {
-        return p_gameMap.getContinents().containsKey(p_continentId.toLowerCase());
-    }
-
-    /**
-     * This function checks if the continent is present in the GMap Object
-     *
-     * @param p_gameMap   GMap object
-     * @param p_countryId Id of the continent to be checked
-     * @return true /false if the continent exists or not
-     */
-    public boolean isCountryPresent(GameMap p_gameMap, String p_countryId) {
-        return p_gameMap.getCountries().containsKey(p_countryId.toLowerCase());
-    }
-
-    /**
      * Checks if any continent is Empty
      *
      * @param p_gameMap Current GMap Object

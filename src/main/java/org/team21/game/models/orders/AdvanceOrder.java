@@ -62,9 +62,7 @@ public class AdvanceOrder extends Order {
                 System.out.printf("Truce between %s and %s\n", l_Player.getName(), l_To.getPlayer().getName());
                 l_Player.getNeutralPlayers().remove(l_To.getPlayer());
                 l_To.getPlayer().getNeutralPlayers().remove(l_Player);
-                return true;
-            }
-            if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
+            } else if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
                 l_From.deployArmies(l_Armies);
                 l_To.deployArmies(l_Armies);
                 if (!l_Player.getCapturedCountries().contains(l_To)) {
@@ -73,12 +71,12 @@ public class AdvanceOrder extends Order {
                 l_To.setPlayer(l_Player);
                 System.out.println("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
                 d_Leb.logEvent("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
-                return true;
+
             } else if (d_GameStrategy.attack(l_Player, l_From, l_To, l_Armies)) {
-                return true;
             }
+            return true;
         }
-        System.out.println("---------------------------------------------------");
+        System.out.println(Constants.SEPERATER);
         return false;
     }
 
@@ -126,7 +124,7 @@ public class AdvanceOrder extends Order {
     @Override
     public void printOrderCommand() {
         System.out.println("Advanced " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
-        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.println(Constants.SEPERATER);
         d_Leb.logEvent("Advanced " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getCountryId() + " to " + getOrderInfo().getDestination().getCountryId() + ".");
     }
 }

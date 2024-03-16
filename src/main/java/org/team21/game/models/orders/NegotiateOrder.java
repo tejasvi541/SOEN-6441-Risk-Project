@@ -59,20 +59,20 @@ public class NegotiateOrder extends Order{
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         //check if the player has the card
         if (!l_Player.checkIfCardAvailable(CardType.DIPLOMACY)) {
-            Constants.printValidationOfValidateCommand("The player does not have the card available for use.");
+            Constants.printValidationOfValidateCommand(Constants.NO_NEGOTIATE_CARD);
 //            d_Leb.logInfo("Player doesn't have the card to be used.");
             return false;
         }
         //check if player is valid
         if (l_NeutralPlayer == null) {
-            Constants.printValidationOfValidateCommand("The Player is not valid.");
+            Constants.printValidationOfValidateCommand(Constants.INVALID_PLAYER);
 //            d_Leb.logInfo("The Player is not valid.");
             return false;
         }
         // check if the player exists
 //        d_Leb.logInfo(d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName()));
         if (!d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName())) {
-            Constants.printValidationOfValidateCommand("The Player name does not exist.");
+            Constants.printValidationOfValidateCommand(Constants.NONEXISTENT_PLAYER);
 //            d_Leb.logInfo("The Player name doesn't exist.");
             return false;
         }
