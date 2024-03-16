@@ -16,6 +16,9 @@ import org.team21.game.utils.validation.MapValidatorTest;
 
 @RunWith(Suite.class)
 
+/**
+ * Suite to test all cases
+ */
 @Suite.SuiteClasses({
         IssueOrderControllerTest.class, MapEditorControllerTest.class,
         MapLoaderControllerTest.class, ReinforcementControllerTest.class,
@@ -26,6 +29,8 @@ import org.team21.game.utils.validation.MapValidatorTest;
         BombOrderTest.class, NegotiateOrderTest.class,
         MapValidatorTest.class
 })
-
+/**
+ * Class for test suite
+ */
 public class AllTestSuite {
 }
