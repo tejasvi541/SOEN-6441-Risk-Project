@@ -47,6 +47,7 @@ public class ExecuteOrderController implements GameFlowManager {
      */
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
@@ -60,7 +61,6 @@ public class ExecuteOrderController implements GameFlowManager {
         /**
          * The d_CurrentGamePhase is used to know current game phase.
          */
-        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
@@ -108,7 +108,9 @@ public class ExecuteOrderController implements GameFlowManager {
         for (Player l_Player : d_GameMap.getPlayers().values()) {
             if (l_Player.getCapturedCountries().size() == d_GameMap.getCountries().size()) {
                 System.out.println("The Player " + l_Player.getName() + " won the game.");
+                d_GameEventLogger.logEvent("The Player " + l_Player.getName() + " won the game.");
                 System.out.println("Exiting the game...");
+                d_GameEventLogger.logEvent("Exiting the game...");
                 return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
             }
         }

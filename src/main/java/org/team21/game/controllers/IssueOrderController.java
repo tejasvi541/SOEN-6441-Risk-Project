@@ -10,7 +10,6 @@ import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -75,6 +74,7 @@ public class IssueOrderController implements GameFlowManager {
 
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
@@ -82,14 +82,13 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
-     * @return : It will return next gamephase
+     * @param p_CurrentGamePhase : Based on current gamePhase next phase will come
+     * @return : It will return next gamePhase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
         /**
          * The p_CurrentGamePhase is used to know current game phase.
          */
-        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         int l_PlayerCounts = 0;
         List<String> l_ZeroReinforcementPlayers = new ArrayList<>();
         while (l_PlayerCounts != d_GameMap.getPlayers().size()) {
@@ -101,13 +100,16 @@ public class IssueOrderController implements GameFlowManager {
                 }
                 if (l_PlayerCounts == d_GameMap.getPlayers().size()) {
                     System.out.println(Constants.ARMY_DEPLETED);
+                    d_GameEventLogger.logEvent(Constants.ARMY_DEPLETED);
                     System.out.println(Constants.SEPERATER);
                     return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
                 }
                 if (l_Player.getReinforcementArmies() != 0) {
                     System.out.println(Constants.SEPERATER);
                     System.out.println("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
+                    d_GameEventLogger.logEvent("Player: " + l_Player.getName() + "; armies assigned are: " + l_Player.getReinforcementArmies());
                     System.out.println(Constants.ELIGIBLE_NATIONS_ARMY);
+                    d_GameEventLogger.logEvent(Constants.ELIGIBLE_NATIONS_ARMY);
                     for (Country l_CapturedCountry : l_Player.getCapturedCountries()) {
                         System.out.println(l_CapturedCountry.getCountryId() + " ");
                     }
@@ -118,6 +120,7 @@ public class IssueOrderController implements GameFlowManager {
             }
         }
         System.out.println(Constants.ARMY_DEPLETED);
+        d_GameEventLogger.logEvent(Constants.ARMY_DEPLETED);
         System.out.println(Constants.SEPERATER);
         return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
     }
@@ -130,6 +133,7 @@ public class IssueOrderController implements GameFlowManager {
     private String getCommandFromPlayer() {
         String l_Command = "";
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
+        d_GameEventLogger.logEvent(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         while (!l_Command.equals(Constants.EXIT)) {
             l_Command = d_Scanner.nextLine();
@@ -137,6 +141,7 @@ public class IssueOrderController implements GameFlowManager {
                 return l_Command;
             } else {
                 System.out.println(Constants.INVALID_COMMAND);
+                d_GameEventLogger.logEvent(Constants.INVALID_COMMAND);
             }
         }
         return l_Command;
