@@ -163,7 +163,14 @@ public class Player {
      * @param p_Commands the type of order issued and more for testing
      */
     public void issueOrder(String p_Commands) {
-        Order l_Order = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), this);
+        String l_CurrentCommand = "";
+        if(Objects.equals(IssueOrderController.d_IssueOrderCommand, "")){
+            l_CurrentCommand = p_Commands;
+        }
+        else {
+            l_CurrentCommand = IssueOrderController.d_IssueOrderCommand;
+        }
+        Order l_Order = OrderOwner.issueOrder(l_CurrentCommand.split(" "), this);
         addOrder(l_Order);
     }
 
