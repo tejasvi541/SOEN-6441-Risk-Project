@@ -46,7 +46,6 @@ public class DeployOrder extends Order {
             }
         }
         System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
-        System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination + ".");
         d_GameEventLogger.logEvent("Execution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination + ".");
         System.out.println(Constants.SEPERATER);
         return true;

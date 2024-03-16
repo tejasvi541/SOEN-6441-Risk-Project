@@ -145,8 +145,8 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
-     * @return : It will return next gamephase
+     * @param p_CurrentGamePhase : Based on current gamePhase next phase will come
+     * @return : It will return next gamePhase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
         d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
@@ -196,11 +196,11 @@ public class IssueOrderController implements GameFlowManager {
      * @return : Command
      */
     private String getCommandFromPlayer() {
-        String l_Command = "";
+        String l_Command;
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         l_Command = d_Scanner.nextLine();
-        //Todo add validatio
+        //Todo add validation
         return l_Command;
     }
 
