@@ -1,6 +1,5 @@
 package org.team21.game.models.cards;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

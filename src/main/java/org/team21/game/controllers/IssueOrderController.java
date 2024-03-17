@@ -9,10 +9,7 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The Issue order controller will execute orders and passes to {ExecuteOrderController}
@@ -86,11 +83,11 @@ public class IssueOrderController implements GameFlowManager {
             return false;
         }
         if (!l_Commands.contains(l_CommandArr[0].toLowerCase())) {
-            System.out.println(Constants.INVALID_COMMAND);
+            Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
             return false;
         }
         if (!findCommandLength(l_CommandArr[0], l_CommandArr.length)) {
-            System.out.println(Constants.INVALID_COMMAND);
+            Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
             return false;
         }
         switch (l_CommandArr[0].toLowerCase()) {
@@ -98,19 +95,19 @@ public class IssueOrderController implements GameFlowManager {
                 try {
                     Integer.parseInt(l_CommandArr[2]);
                 } catch (NumberFormatException l_Exception) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
                 break;
             case Constants.ADVANCE_COMMAND:
                 if (l_CommandArr.length < 4) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
                 try {
                     Integer.parseInt(l_CommandArr[3]);
                 } catch (NumberFormatException l_Exception) {
-                    System.out.println(Constants.INVALID_COMMAND);
+                    Constants.printValidationOfValidateCommand(Constants.INVALID_COMMAND);
                     return false;
                 }
 
@@ -139,17 +136,17 @@ public class IssueOrderController implements GameFlowManager {
 
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
     /**
      * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
-     * @return : It will return next gamephase
+     * @param p_CurrentGamePhase : Based on current gamePhase next phase will come
+     * @return : It will return next gamePhase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         while (!(d_SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
                 if (!d_SkippedPlayers.isEmpty() && d_SkippedPlayers.contains(l_Player)) {
@@ -161,7 +158,6 @@ public class IssueOrderController implements GameFlowManager {
                     System.out.println(l_Country.getCountryId() + " ");
                 }
                 if (!l_Player.getPlayerCards().isEmpty()) {
-
                     System.out.println(Constants.CARDS_OF_PLAYER);
                     for (Card l_Card : l_Player.getPlayerCards()) {
                         System.out.println(l_Card.getCard().name());
@@ -173,14 +169,14 @@ public class IssueOrderController implements GameFlowManager {
                 while (!l_IssueCommand) {
                     d_IssueOrderCommand = getCommandFromPlayer();
                     l_IssueCommand = validateCommand(d_IssueOrderCommand, l_Player);
-                    //Todo add logger
+                    d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+l_IssueCommand+" "+d_IssueOrderCommand+" command");
                     if (d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
+                        d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+Constants.PASS_COMMAND+" command");
                         break;
                     }
                 }
                 if (!d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
                     l_Player.issueOrder(d_IssueOrderCommand);
-
                     System.out.println(Constants.All_ORDERS_ADDED);
                     System.out.println(Constants.SEPERATER);
                 }
@@ -196,11 +192,16 @@ public class IssueOrderController implements GameFlowManager {
      * @return : Command
      */
     private String getCommandFromPlayer() {
-        String l_Command = "";
+        String l_Command;
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         l_Command = d_Scanner.nextLine();
-        //Todo add validatio
+        //Todo add validation
+        if(Objects.equals(l_Command.split(" ")[0], Constants.SHOW_MAP)){
+            new ShowMapController(d_GameMap).show();
+            return getCommandFromPlayer();
+        }
+        //Todo add validation
         return l_Command;
     }
 

@@ -30,48 +30,48 @@ public class BombOrderTest {
     public void setUp() {
         // Initialize GameMap instance
         d_GameMap = GameMap.getInstance();
-        Continent continent1 = new Continent("Asia", "10", 1);
-        Continent continent2 = new Continent("Africa", "15", 2);
-        HashMap<String, Continent> d_continents = new HashMap<>();
-        d_continents.put("asia", continent1);
-        d_continents.put("africa", continent2);
-        d_GameMap.setContinents(d_continents);
+        Continent l_Continent1 = new Continent("Asia", "10", 1);
+        Continent l_Continent2 = new Continent("Africa", "15", 2);
+        HashMap<String, Continent> l_Continents = new HashMap<>();
+        l_Continents.put("asia", l_Continent1);
+        l_Continents.put("africa", l_Continent2);
+        d_GameMap.setContinents(l_Continents);
 
-        Country country1 = new Country("China", "Asia");
-        Country country2 = new Country("Nigeria", "Africa");
-        HashMap<String, Country> d_countries = new HashMap<>();
-        d_countries.put("china", country1);
-        d_countries.put("nigeria", country2);
+        Country l_Country1 = new Country("China", "Asia");
+        Country l_Country2 = new Country("Nigeria", "Africa");
+        HashMap<String, Country> l_countries = new HashMap<>();
+        l_countries.put("china", l_Country1);
+        l_countries.put("nigeria", l_Country2);
 
-        HashMap<String, Country> d_chinaNeighbors = new HashMap<>();
-        d_chinaNeighbors.put("nigeria", country2);
-        country1.setNeighbours(d_chinaNeighbors);
+        HashMap<String, Country> l_ChinaNeighbors = new HashMap<>();
+        l_ChinaNeighbors.put("nigeria", l_Country2);
+        l_Country1.setNeighbours(l_ChinaNeighbors);
 
-        HashMap<String, Country> d_nigeriaNeighbors = new HashMap<>();
-        d_nigeriaNeighbors.put("china", country1);
-        country2.setNeighbours(d_nigeriaNeighbors);
+        HashMap<String, Country> l_NigeriaNeighbors = new HashMap<>();
+        l_NigeriaNeighbors.put("china", l_Country1);
+        l_Country2.setNeighbours(l_NigeriaNeighbors);
 
-        d_GameMap.setCountries(d_countries);
+        d_GameMap.setCountries(l_countries);
 
-        Player player1 = new Player();
-        player1.setName("p1");
-        player1.setReinforcementArmies(5);
-        List<Country> player1Captured = new ArrayList<>();
-        player1Captured.add(country1);
-        player1.setCapturedCountries(player1Captured);
-        Deque<Order> d_CurrentOrders1 = new ArrayDeque<>();
-        player1.setOrders(d_CurrentOrders1);
-        d_GameMap.setPlayer(player1);
+        Player l_Player1 = new Player();
+        l_Player1.setName("p1");
+        l_Player1.setReinforcementArmies(5);
+        List<Country> l_Player1Captured = new ArrayList<>();
+        l_Player1Captured.add(l_Country1);
+        l_Player1.setCapturedCountries(l_Player1Captured);
+        Deque<Order> l_CurrentOrders1 = new ArrayDeque<>();
+        l_Player1.setOrders(l_CurrentOrders1);
+        d_GameMap.setPlayer(l_Player1);
 
-        Player player2 = new Player();
-        player2.setName("p2");
-        player2.setReinforcementArmies(5);
-        List<Country> player2Captured = new ArrayList<>();
-        player2Captured.add(country2);
-        player2.setCapturedCountries(player2Captured);
-        Deque<Order> d_CurrentOrders2 = new ArrayDeque<>();
-        player2.setOrders(d_CurrentOrders2);
-        d_GameMap.setPlayer(player2);
+        Player l_Player2 = new Player();
+        l_Player2.setName("p2");
+        l_Player2.setReinforcementArmies(5);
+        List<Country> l_Player2Captured = new ArrayList<>();
+        l_Player2Captured.add(l_Country2);
+        l_Player2.setCapturedCountries(l_Player2Captured);
+        Deque<Order> l_CurrentOrders2 = new ArrayDeque<>();
+        l_Player2.setOrders(l_CurrentOrders2);
+        d_GameMap.setPlayer(l_Player2);
 
     }
 
@@ -90,12 +90,12 @@ public class BombOrderTest {
      */
     @Test
     public void validateCommand() {
-        Player l_p1 = d_GameMap.getPlayer("p1");
-        l_p1.addPlayerCard(new Card(CardType.BOMB));
-        String l_command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
-        Order l_order = OrderOwner.issueOrder(l_command.split(" "),l_p1);
-        l_p1.addOrder(l_order);
-        assertTrue(l_p1.nextOrder().validateCommand());
+        Player l_P1 = d_GameMap.getPlayer("p1");
+        l_P1.addPlayerCard(new Card(CardType.BOMB));
+        String l_Command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
+        Order l_Order = OrderOwner.issueOrder(l_Command.split(" "),l_P1);
+        l_P1.addOrder(l_Order);
+        assertTrue(l_P1.nextOrder().validateCommand());
 
     }
     /**
@@ -104,12 +104,12 @@ public class BombOrderTest {
      */
     @Test
     public void execute() {
-        Player l_p1 = d_GameMap.getPlayer("p1");
-        l_p1.addPlayerCard(new Card(CardType.BOMB));
-        String l_command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
-        Order l_order = OrderOwner.issueOrder(l_command.split(" "),l_p1);
-        l_p1.addOrder(l_order);
-        assertTrue(l_p1.nextOrder().execute());
+        Player l_P1 = d_GameMap.getPlayer("p1");
+        l_P1.addPlayerCard(new Card(CardType.BOMB));
+        String l_Command = "bomb " + d_GameMap.getPlayer("p2").getCapturedCountries().get(0).getCountryId();
+        Order l_Order = OrderOwner.issueOrder(l_Command.split(" "),l_P1);
+        l_P1.addOrder(l_Order);
+        assertTrue(l_P1.nextOrder().execute());
     }
 
 }

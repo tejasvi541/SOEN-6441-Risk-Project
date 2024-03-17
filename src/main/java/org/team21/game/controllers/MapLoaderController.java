@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
 
@@ -33,12 +32,9 @@ public class MapLoaderController {
      * Created a Hashmap name d_countriesList.
      */
     private HashMap<Integer, Country> d_CountriesList;
-
     /**
-     * Logger Initialisation
+     * It will initialise the MapLoaderController
      */
-    GameEventLogger logger = new GameEventLogger();
-
     public MapLoaderController(){
         d_GameMap = GameMap.getInstance();
     }
@@ -80,7 +76,6 @@ public class MapLoaderController {
         }
         catch (FileNotFoundException e) {
             System.out.println("The said file is not found.");
-            logger.logEvent("The Files is not found");
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println("Input/Output Problem");
@@ -89,11 +84,9 @@ public class MapLoaderController {
         d_GameMap.setMapName(p_MapName);
         if(d_GameMap.getContinents().isEmpty()){
             System.out.println("No Such Map Exists So Creating a New One");
-            logger.logEvent("No Such Map Exists So Creating a New One");
 
         }else{
             System.out.println("\n*********Your Map " + d_GameMap.getMapName() + " is Loaded*********");
-            logger.logEvent("\n*********Your Map " + d_GameMap.getMapName() + " is Loaded*********");
         }
         return d_GameMap;
     }
@@ -113,7 +106,7 @@ public class MapLoaderController {
                 try{
                     if(l_NewCountry.getParentContinent()==null){
                         System.out.println("Not Valid Map File");
-                            System.exit(-1);
+                        System.exit(-1);
                     }
                     addCountryToContinentMap(l_NewCountry);
                     d_CountriesList.put(l_NewCountry.getCountryFileIndex(), l_NewCountry);

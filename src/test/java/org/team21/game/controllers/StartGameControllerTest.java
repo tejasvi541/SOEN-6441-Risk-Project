@@ -25,23 +25,23 @@ public class StartGameControllerTest {
     /**
      * Original system in for cmd input
      */
-    private final InputStream originalSystemIn = System.in;
+    private final InputStream d_OriginalSystemIn = System.in;
     /**
      * Original system out for Print stream
      */
-    private final PrintStream originalSystemOut = System.out;
+    private final PrintStream d_OriginalSystemOut = System.out;
     /**
      * The Game phase.
      */
-    GamePhase gamePhase;
+    GamePhase d_GamePhase;
     /**
      * Test input
      */
-    private ByteArrayInputStream testIn;
+    private ByteArrayInputStream d_TestIn;
     /**
      * Test output
      */
-    private ByteArrayOutputStream testOut;
+    private ByteArrayOutputStream d_TestOut;
 
     /**
      * Sets up.
@@ -49,8 +49,8 @@ public class StartGameControllerTest {
     @Before
     public void setUp() {
         // Redirect System.out to a different PrintStream
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
+        d_TestOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(d_TestOut));
     }
 
     /**
@@ -59,8 +59,8 @@ public class StartGameControllerTest {
     @After
     public void tearDown() {
         // Restore System.out and System.in after the test
-        System.setOut(originalSystemOut);
-        System.setIn(originalSystemIn);
+        System.setOut(d_OriginalSystemOut);
+        System.setIn(d_OriginalSystemIn);
     }
 
     /**
@@ -71,13 +71,13 @@ public class StartGameControllerTest {
     @Test
     public void testRun() throws ValidationException {
         // Prepare test input
-        String input = "exit"; // Simulate user input "exit"
-        testIn = new ByteArrayInputStream(input.getBytes());
-        System.setIn(testIn);
+        String l_Input = "exit"; // Simulate user input "exit"
+        d_TestIn = new ByteArrayInputStream(l_Input.getBytes());
+        System.setIn(d_TestIn);
 
         // Call the method under test
-        StartGameController startGame = new StartGameController();
-        assertEquals(GamePhase.Reinforcement, startGame.start(gamePhase.StartUp));
+        StartGameController l_StartGame = new StartGameController();
+        assertEquals(GamePhase.Reinforcement, l_StartGame.start(d_GamePhase.StartUp));
     }
 
     /**
@@ -88,13 +88,13 @@ public class StartGameControllerTest {
     @Test
     public void falseTestRun() throws ValidationException {
         // Prepare test input
-        String input = "exit"; // Simulate user input "exit"
-        testIn = new ByteArrayInputStream(input.getBytes());
-        System.setIn(testIn);
+        String l_Input = "exit"; // Simulate user input "exit"
+        d_TestIn = new ByteArrayInputStream(l_Input.getBytes());
+        System.setIn(d_TestIn);
 
         // Call the method under test
-        StartGameController startGame = new StartGameController();
-        assertNotEquals(GamePhase.IssueOrder, startGame.start(gamePhase.StartUp));
+        StartGameController L_StartGame = new StartGameController();
+        assertNotEquals(GamePhase.IssueOrder, L_StartGame.start(d_GamePhase.StartUp));
     }
 
 }

@@ -75,15 +75,23 @@ public final class Constants {
     /**
      * The constant EXECUTE_ORDER_PHASE.
      */
-    public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
+    public final static String EXECUTE_ORDER_PHASE = "EXECUTE ORDER PHASE";
     /**
      * The constant ISSUE_ORDER_PHASE.
      */
-    public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
+    public final static String ISSUE_ORDER_PHASE = "ISSUE ORDER PHASE";
     /**
      * The constant MAP_EDITOR_PHASE.
      */
-    public final static String MAP_EDITOR_PHASE = "\n MAP EDITOR PHASE \n";
+    public final static String MAP_EDITOR_PHASE = "MAP EDITOR PHASE";
+    /**
+     * The constant REINFORCEMENT_PHASE.
+     */
+    public final static String REINFORCEMENT_PHASE = "REINFORCEMENT PHASE";
+    /**
+     * The constant START_UP_PHASE.
+     */
+    public final static String START_UP_PHASE = "START UP PHASE";
     /**
      * The constant SPACE_FORMATTER.
      */
@@ -228,6 +236,14 @@ public final class Constants {
      * The constant WELCOME_MESSAGE.
      */
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
+    /**
+     * The constant non exists player message.
+     */
+    public final static String NONEXISTENT_PLAYER = "The Player name does not exist.";
+    /**
+     * The constant for no negotiate card message.
+     */
+    public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
 
     /**
      * Instantiates a new Constants.
@@ -260,12 +276,13 @@ public final class Constants {
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
         System.out.println("To execute game further use : pass");
+        System.out.println("To see map : showmap");
     }
 
     /**
      * This method prints the validation of the command.
      *
-     * @param p_Validation holds the string passed from the validatCcommand method.
+     * @param p_Validation holds the string passed from the validatCommand method.
      */
     public static void printValidationOfValidateCommand(String p_Validation) {
         System.err.println(p_Validation);

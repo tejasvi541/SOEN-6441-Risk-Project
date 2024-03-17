@@ -17,24 +17,24 @@ public class MapValidatorTest {
     /**
      * The D game map.
      */
-    GameMap d_gameMap; // Game Map Object
+    GameMap d_GameMap; // Game Map Object
     /**
      * The Map loader controller.
      */
-    MapLoaderController mapLoaderController; // MapLoader Object to Load Map
+    MapLoaderController d_MapLoaderController; // MapLoader Object to Load Map
     /**
      * The Validator.
      */
-    MapValidator validator; // Map Validator Object
+    MapValidator d_Validator; // Map Validator Object
 
     /**
      * Sets up.
      */
     @Before
     public void setUp() {
-        d_gameMap = new GameMap();
-        mapLoaderController = new MapLoaderController();
-        validator = new MapValidator();
+        d_GameMap = new GameMap();
+        d_MapLoaderController = new MapLoaderController();
+        d_Validator = new MapValidator();
     }
 
     /**
@@ -42,8 +42,8 @@ public class MapValidatorTest {
      */
     @Test
     public void validateMapObject() {
-        d_gameMap = mapLoaderController.readMap("canada");
-        assertTrue(validator.validateMapObject(d_gameMap));
+        d_GameMap = d_MapLoaderController.readMap("canada");
+        assertTrue(d_Validator.validateMapObject(d_GameMap));
     }
 
     /**
@@ -52,6 +52,6 @@ public class MapValidatorTest {
     @After
     public void tearDown() {
         // Clean up resources or release objects
-        d_gameMap = null;
+        d_GameMap = null;
     }
 }

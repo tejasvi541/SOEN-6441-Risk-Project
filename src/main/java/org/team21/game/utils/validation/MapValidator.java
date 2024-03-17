@@ -21,7 +21,13 @@ import java.util.HashMap;
  */
 public class MapValidator {
 
+    /**
+     * Logger to keep log of actions in MapValidator
+     */
     private static final Logger d_Logger = LogManager.getLogger(MapValidator.class);
+    /**
+     * Map Object
+     */
     private Graph<Country, DefaultEdge> d_gMapObj;
 
     /**
@@ -31,6 +37,12 @@ public class MapValidator {
         this.d_gMapObj = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
 
+    /**
+     * Validate map object boolean.
+     *
+     * @param p_GameMap the p game map
+     * @return the boolean
+     */
     public boolean validateMapObject(GameMap p_GameMap) {
         Graph<Country, DefaultEdge> l_graph = generate_Graph(p_GameMap);
         
@@ -51,8 +63,8 @@ public class MapValidator {
     /**
      * This function takes a current GMap object and generate a JGraphT Graph for validation and other purposes
      *
-     * @param p_gameMap Current GMap Object
-     * @return Generated Graph
+     * @param p_gameMap : Current GMap Object
+     * @return : Generated Graph
      */
     public Graph<Country, DefaultEdge> generate_Graph(GameMap p_gameMap) {
         // Add Vertex
@@ -68,6 +80,13 @@ public class MapValidator {
         return this.d_gMapObj;
     }
 
+    /**
+     * Generate sub graph graph.
+     *
+     * @param p_subGraph  the p sub graph
+     * @param p_countries the p countries
+     * @return the graph
+     */
     public Graph<Country, DefaultEdge> generate_SubGraph(Graph<Country, DefaultEdge> p_subGraph, HashMap<String, Country> p_countries) {
         for (Country l_country : p_countries.values()) {
             p_subGraph.addVertex(l_country);
@@ -87,7 +106,7 @@ public class MapValidator {
      * This function tells if the graph is connected or not
      *
      * @param p_gGraph Map Graph Parameter to test if this map is connected or not
-     * @return true/false if the map is connected or not
+     * @return true /false if the map is connected or not
      */
     public boolean isConnected(Graph<Country, DefaultEdge> p_gGraph) {
         ConnectivityInspector<Country, DefaultEdge> l_connectivityInspect = new ConnectivityInspector<>(p_gGraph);
@@ -98,7 +117,7 @@ public class MapValidator {
      * This function checks if all the continent subgraphs are connected or not using the isConnected Function
      *
      * @param p_gameMap GMap Object to obtain the continent in the current Map
-     * @return true/false if the continent subgraph is connected or not
+     * @return true /false if the continent subgraph is connected or not
      */
     public boolean isContinentConnected(GameMap p_gameMap) {
         for (Continent l_continent : p_gameMap.getContinents().values()) {
@@ -111,32 +130,10 @@ public class MapValidator {
     }
 
     /**
-     * This function checks if the continent is present in the GMap Object
-     *
-     * @param p_gameMap     GMap object
-     * @param p_continentId Id of the continent to be checked
-     * @return true/false if the continent exists or not
-     */
-    public boolean isContinentPresent(GameMap p_gameMap, String p_continentId) {
-        return p_gameMap.getContinents().containsKey(p_continentId.toLowerCase());
-    }
-
-    /**
-     * This function checks if the continent is present in the GMap Object
-     *
-     * @param p_gameMap   GMap object
-     * @param p_countryId Id of the continent to be checked
-     * @return true/false if the continent exists or not
-     */
-    public boolean isCountryPresent(GameMap p_gameMap, String p_countryId) {
-        return p_gameMap.getCountries().containsKey(p_countryId.toLowerCase());
-    }
-
-    /**
      * Checks if any continent is Empty
      *
      * @param p_gameMap Current GMap Object
-     * @return true/false if the continent is empty or not
+     * @return true /false if the continent is empty or not
      */
     public boolean isContinentEmpty(GameMap p_gameMap) {
         for (Continent l_continent : p_gameMap.getContinents().values()) {
