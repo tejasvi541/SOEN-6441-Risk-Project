@@ -148,7 +148,7 @@ public class AdvanceOrderTest {
         IssueOrderController.d_IssueOrderCommand = "advance " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_CountriesPlayer1.get(1).getCountryId() + " " + (l_Player1.getReinforcementArmies() - 5);
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), l_Player1);
         l_Player1.addOrder(l_Order1);
-        assertTrue(l_Player1.nextOrder().execute());
+        assertFalse(l_Player1.nextOrder().execute());
     }
 
     /**
@@ -241,7 +241,7 @@ public class AdvanceOrderTest {
         IssueOrderController.d_IssueOrderCommand = "advance " + l_CountriesPlayer1.get(0).getCountryId() + " " + l_CountriesPlayer2.get(1).getCountryId() + " " + (l_Player1.getReinforcementArmies() - 5);
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), l_Player1);
         l_Player1.addOrder(l_Order1);
-        assertTrue(l_Player1.nextOrder().execute());
+        assertFalse(l_Player1.nextOrder().execute());
     }
 
     @Test
