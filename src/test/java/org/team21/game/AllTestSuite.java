@@ -11,6 +11,7 @@ import org.team21.game.models.map.CountryTest;
 import org.team21.game.models.map.GameMapTest;
 import org.team21.game.models.orders.AirliftOrderTest;
 import org.team21.game.models.orders.BombOrderTest;
+import org.team21.game.models.orders.DeployOrderTest;
 import org.team21.game.models.orders.NegotiateOrderTest;
 import org.team21.game.utils.validation.MapValidatorTest;
 
@@ -27,7 +28,7 @@ import org.team21.game.utils.validation.MapValidatorTest;
         ContinentTest.class, CountryTest.class,
         GameMapTest.class, AirliftOrderTest.class,
         BombOrderTest.class, NegotiateOrderTest.class,
-        MapValidatorTest.class
+        MapValidatorTest.class, DeployOrderTest.class
 })
 /**
  * Class for test suite
