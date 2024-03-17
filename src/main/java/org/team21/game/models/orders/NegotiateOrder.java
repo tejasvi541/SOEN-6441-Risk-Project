@@ -4,7 +4,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.utils.Constants;
-//import utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 /**
  * This java class will help to prevent attacks between current player and another player
@@ -13,13 +13,14 @@ import org.team21.game.utils.Constants;
  * @version 1.0.0
  */
 public class NegotiateOrder extends Order{
-    //Todo Kapil
-//    LogEntryBuffer d_Leb = new LogEntryBuffer();
     /**
      * A gamemap object
      */
     private final GameMap d_GameMap;
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Constructor for the class Negotiate Order
      */
@@ -39,6 +40,7 @@ public class NegotiateOrder extends Order{
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         if (validateCommand()) {
             System.out.println("The order: " + getType() + " " + l_NeutralPlayer.getName());
+            d_GameEventLogger.logEvent("The order: " + getType() + " " + l_NeutralPlayer.getName());
             Player l_Player = getOrderInfo().getPlayer();
             l_Player.addNeutralPlayers(l_NeutralPlayer);
             l_NeutralPlayer.addNeutralPlayers(l_Player);
@@ -59,21 +61,20 @@ public class NegotiateOrder extends Order{
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         //check if the player has the card
         if (!l_Player.checkIfCardAvailable(CardType.DIPLOMACY)) {
-            Constants.printValidationOfValidateCommand("The player does not have the card available for use.");
-//            d_Leb.logInfo("Player doesn't have the card to be used.");
+            Constants.printValidationOfValidateCommand(Constants.NO_NEGOTIATE_CARD);
+            d_GameEventLogger.logEvent(Constants.NO_NEGOTIATE_CARD);
             return false;
         }
         //check if player is valid
         if (l_NeutralPlayer == null) {
-            Constants.printValidationOfValidateCommand("The Player is not valid.");
-//            d_Leb.logInfo("The Player is not valid.");
+            Constants.printValidationOfValidateCommand(Constants.INVALID_PLAYER);
+            d_GameEventLogger.logEvent(Constants.INVALID_PLAYER);
             return false;
         }
         // check if the player exists
-//        d_Leb.logInfo(d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName()));
         if (!d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName())) {
-            Constants.printValidationOfValidateCommand("The Player name does not exist.");
-//            d_Leb.logInfo("The Player name doesn't exist.");
+            Constants.printValidationOfValidateCommand(Constants.NONEXISTENT_PLAYER);
+            d_GameEventLogger.logEvent(Constants.NONEXISTENT_PLAYER);
             return false;
         }
         return true;
@@ -84,8 +85,8 @@ public class NegotiateOrder extends Order{
      */
     @Override
     public void printOrderCommand() {
-        System.out.println(getOrderInfo().getPlayer() + " player negotiated with " + getOrderInfo().getNeutralPlayer().getName() + " player.");
+        System.out.println(getOrderInfo().getPlayer().getName() + " player negotiated with " + getOrderInfo().getNeutralPlayer().getName() + " player.");
         System.out.println(Constants.SEPERATER);
-//        d_Leb.logInfo("Negotiated with" + getOrderInfo().getNeutralPlayer().getName() + ".");
+        d_GameEventLogger.logEvent(getOrderInfo().getPlayer().getName() + " player negotiated with " + getOrderInfo().getNeutralPlayer().getName() + " player.");
     }
 }

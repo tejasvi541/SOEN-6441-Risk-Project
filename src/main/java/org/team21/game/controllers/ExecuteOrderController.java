@@ -24,7 +24,7 @@ public class ExecuteOrderController implements GameFlowManager {
      */
     private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
     /**
-     * Created object d_gameEventLogger of GameEventLogger.
+     * Created object d_GameEventLogger of GameEventLogger.
      */
     GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
@@ -47,6 +47,7 @@ public class ExecuteOrderController implements GameFlowManager {
      */
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
@@ -57,10 +58,6 @@ public class ExecuteOrderController implements GameFlowManager {
      * @return : It will return game phase to go next
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        /**
-         * The d_CurrentGamePhase is used to know current game phase.
-         */
-        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
         //Execute all orders and if it fails
         executeOrders();
         clearAllNeutralPlayers();
@@ -101,14 +98,16 @@ public class ExecuteOrderController implements GameFlowManager {
      *
      * @param p_CurrentGamePhase : the current phase of game command
      * @param p_GamePhase        : the next phase based on the status of player
-     * @return : the gamephase it has to change to based on the win
+     * @return : the gamePhase it has to change to based on the win
      */
     public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase, GamePhase p_GamePhase) {
         HashMap<String, Country> l_ListOfAllCountries = d_GameMap.getCountries();
         for (Player l_Player : d_GameMap.getPlayers().values()) {
             if (l_Player.getCapturedCountries().size() == d_GameMap.getCountries().size()) {
                 System.out.println("The Player " + l_Player.getName() + " won the game.");
+                d_GameEventLogger.logEvent("The Player " + l_Player.getName() + " won the game.");
                 System.out.println("Exiting the game...");
+                d_GameEventLogger.logEvent("Exiting the game...");
                 return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
             }
         }

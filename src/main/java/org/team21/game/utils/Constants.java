@@ -75,15 +75,23 @@ public final class Constants {
     /**
      * The constant EXECUTE_ORDER_PHASE.
      */
-    public final static String EXECUTE_ORDER_PHASE = "\n EXECUTE ORDER PHASE \n";
+    public final static String EXECUTE_ORDER_PHASE = "EXECUTE ORDER PHASE";
     /**
      * The constant ISSUE_ORDER_PHASE.
      */
-    public final static String ISSUE_ORDER_PHASE = "\n ISSUE ORDER PHASE \n";
+    public final static String ISSUE_ORDER_PHASE = "ISSUE ORDER PHASE";
     /**
      * The constant MAP_EDITOR_PHASE.
      */
-    public final static String MAP_EDITOR_PHASE = "\n MAP EDITOR PHASE \n";
+    public final static String MAP_EDITOR_PHASE = "MAP EDITOR PHASE";
+    /**
+     * The constant REINFORCEMENT_PHASE.
+     */
+    public final static String REINFORCEMENT_PHASE = "REINFORCEMENT PHASE";
+    /**
+     * The constant START_UP_PHASE.
+     */
+    public final static String START_UP_PHASE = "START UP PHASE";
     /**
      * The constant SPACE_FORMATTER.
      */
@@ -197,9 +205,29 @@ public final class Constants {
      */
     public final static String BLOCKADE_COMMAND = "blockade";
     /**
+     * Pass command for issue order
+     */
+    public final static String PASS_COMMAND = "pass";
+    /**
      * The List commands.
      */
     public final static List<String> LIST_COMMANDS = Arrays.asList(DEPLOY_COMMAND, ADVANCE_COMMAND, BOMB_COMMAND, BLOCKADE_COMMAND, AIRLIFT_COMMAND, NEGOTIATE_COMMAND);
+    /**
+     * The Constant for gamemap file
+     */
+    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
+    /**
+     * The constant All_ORDERS_ADDED.
+     */
+    public final static String All_ORDERS_ADDED = "The order has been added to the order list.";
+    /**
+     * The constant CARDS_OF_PLAYER.
+     */
+    public final static String CARDS_OF_PLAYER = "The Cards assigned to the Players are ::";
+    /**
+     * The constant ASSIGNED_COUNTRIES.
+     */
+    public final static String ASSIGNED_COUNTRIES = "The Assigned countries are :: ";
     /**
      * The constant TEAM_NAME.
      */
@@ -208,11 +236,14 @@ public final class Constants {
      * The constant WELCOME_MESSAGE.
      */
     public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
-
     /**
-     * The Constant for gamemap file
+     * The constant non exists player message.
      */
-    public final static String MAP_FILE_DIRECTORY = "src/main/resources/maps/";
+    public final static String NONEXISTENT_PLAYER = "The Player name does not exist.";
+    /**
+     * The constant for no negotiate card message.
+     */
+    public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
 
     /**
      * Instantiates a new Constants.
@@ -236,20 +267,24 @@ public final class Constants {
     /**
      * Show issue command for issue order
      */
-    public static void showIssueOrderCommand(){
+    public static void showIssueOrderCommand() {
+        System.out.println("Please remember when all the member determines their command please use pass to execute orders");
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
+        System.out.println("To execute game further use : pass");
+        System.out.println("To see map : showmap");
     }
 
     /**
      * This method prints the validation of the command.
-     * @param p_Validation holds the string passed from the validatCcommand method.
+     *
+     * @param p_Validation holds the string passed from the validatCommand method.
      */
-    public static void printValidationOfValidateCommand(String p_Validation){
+    public static void printValidationOfValidateCommand(String p_Validation) {
         System.err.println(p_Validation);
     }
 }

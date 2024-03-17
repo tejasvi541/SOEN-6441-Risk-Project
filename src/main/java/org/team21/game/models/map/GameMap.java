@@ -1,6 +1,7 @@
 package org.team21.game.models.map;
 
 import org.team21.game.models.game_play.Player;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
@@ -39,7 +40,10 @@ public class GameMap {
      * Players in entire map
      */
     private HashMap<String, Player> d_Players = new HashMap<>();
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Map Constructor to initialise the Class
      */
@@ -210,6 +214,7 @@ public class GameMap {
         l_Player.setName(p_PlayerName);
         this.getPlayers().put(p_PlayerName, l_Player);
         System.out.println("Successfully added Player: " + p_PlayerName);
+        d_GameEventLogger.logEvent("Successfully added Player: " + p_PlayerName);
     }
 
     /**
@@ -225,6 +230,7 @@ public class GameMap {
         }
         this.getPlayers().remove(l_Player.getName());
         System.out.println("Successfully deleted the player: " + p_PlayerName);
+        d_GameEventLogger.logEvent("Successfully deleted the player: " + p_PlayerName);
     }
 
     /**
@@ -253,7 +259,7 @@ public class GameMap {
                 l_Player.getCapturedCountries().add(country);
                 country.setPlayer(l_Player);
                 System.out.println(country.getCountryId() + " assigned to " + l_Player.getName());
-
+                d_GameEventLogger.logEvent(country.getCountryId() + " assigned to " + l_Player.getName());
                 playerIndex = (playerIndex + 1) % l_Players.size(); // Move to the next player in a circular manner
             }
         }catch (Exception e) {

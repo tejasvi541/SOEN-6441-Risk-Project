@@ -65,7 +65,7 @@ public class AdvanceOrder extends Order {
                 return true;
             }
             if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
-                l_From.deleteArmies(l_Armies);
+                l_From.deployArmies(l_Armies);
                 l_To.deployArmies(l_Armies);
                 if (!l_Player.getCapturedCountries().contains(l_To)) {
                     l_Player.getCapturedCountries().add(l_To);
