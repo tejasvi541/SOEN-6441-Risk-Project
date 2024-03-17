@@ -1,15 +1,15 @@
 package org.team21.game.models.orders;
 
 
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.team21.game.controllers.IssueOrderController;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.controllers.IssueOrderController;
+
 import java.util.*;
 
 import static org.junit.Assert.assertTrue;
@@ -112,7 +112,7 @@ public class DeployOrderTest {
      * Test execute of DeployOrder class.
      */
     @Test
-    public void testExecute() {
+    public void execute() {
         IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
@@ -123,7 +123,7 @@ public class DeployOrderTest {
      * Test validate command of DeployOrder class.
      */
     @Test
-    public void testValidateCommand() {
+    public void validateCommand() {
         IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
@@ -134,7 +134,7 @@ public class DeployOrderTest {
      * Test print order command of DeployOrder class.
      */
     @Test
-    public void testPrintOrderCommand() {
+    public void printOrderCommand() {
         d_CountriesPlayer2 = d_GameMap.getPlayer("p2").getCapturedCountries();
         IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer2.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
