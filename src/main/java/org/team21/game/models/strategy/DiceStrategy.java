@@ -45,7 +45,12 @@ public class DiceStrategy implements GameStrategy {
 
             int l_ArmiesLeftAttacker = p_Armies - l_DefenderKills;
             int l_ArmiesLeftDefender = p_To.getArmies() - l_AttackerKills;
-            if (l_ArmiesLeftAttacker > 0 && l_ArmiesLeftDefender <= 0) {
+            if(l_ArmiesLeftDefender <= 0){
+                l_ArmiesLeftDefender = 0;
+            } else if (l_ArmiesLeftAttacker <= 0){
+                l_ArmiesLeftAttacker = 0;
+            }
+            if (l_ArmiesLeftAttacker > 0 && l_ArmiesLeftDefender == 0) {
                 p_To.setArmies(l_ArmiesLeftAttacker);
                 makeMeKing(p_Player, p_To);
                 Card l_AssignedCard = new Card();
