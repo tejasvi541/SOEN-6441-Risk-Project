@@ -1,14 +1,17 @@
 package org.team21.game.models.orders;
 
 
-import org.junit.*;
-import org.team21.game.controllers.IssueOrderController;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import static org.junit.Assert.*;
+import org.team21.game.controllers.IssueOrderController;
 import java.util.*;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * The type Deploy order test for testing deployment of troops.
