@@ -26,7 +26,7 @@ public class IssueOrderControllerTest {
     /**
      * Game map object
      */
-    private GameMap gameMap;
+    private GameMap d_GameMap;
 
     /**
      * Sets up the test environment before each test case execution.
@@ -34,35 +34,35 @@ public class IssueOrderControllerTest {
 
     @Before
     public void setUp() {
-        gameMap = GameMap.getInstance();
+        d_GameMap = GameMap.getInstance();
 
         // Set up continents
-        Continent continent1 = new Continent("Continent1", "5", 1);
-        gameMap.getContinents().put("Continent1", continent1);
+        Continent d_Continent1 = new Continent("Continent1", "5", 1);
+        d_GameMap.getContinents().put("Continent1", d_Continent1);
 
         // Set up countries
-        Country country1 = new Country("Country1", "Continent1");
-        Country country2 = new Country("Country2", "Continent1");
-        Country country3 = new Country("Country2", "Continent1");
-        Country country4 = new Country("Country2", "Continent1");
-        List<Country> countries = new ArrayList<>();
-        countries.add(country1);
-        countries.add(country2);
-        countries.add(country3);
-        countries.add(country4);
-        gameMap.getCountries().put("1", country1);
-        gameMap.getCountries().put("2", country2);
+        Country l_Country1 = new Country("Country1", "Continent1");
+        Country l_Country2 = new Country("Country2", "Continent1");
+        Country l_Country3 = new Country("Country2", "Continent1");
+        Country l_Country4 = new Country("Country2", "Continent1");
+        List<Country> l_Countries = new ArrayList<>();
+        l_Countries.add(l_Country1);
+        l_Countries.add(l_Country2);
+        l_Countries.add(l_Country3);
+        l_Countries.add(l_Country4);
+        d_GameMap.getCountries().put("1", l_Country1);
+        d_GameMap.getCountries().put("2", l_Country2);
 
         // Set up players
-        HashMap<String, Player> players = new HashMap<>();
+        HashMap<String, Player> l_Players = new HashMap<>();
         for (int i = 1; i <= 4; i++) {
-            Player player = new Player();
-            player.setName("Player" + i);
-            player.setReinforcementArmies(5); // Set reinforcement armies for each player
-            player.setCapturedCountries(countries); // Assuming each player has captured the same countries
-            players.put("Player" + i, player);
+            Player l_Player = new Player();
+            l_Player.setName("Player" + i);
+            l_Player.setReinforcementArmies(5); // Set reinforcement armies for each player
+            l_Player.setCapturedCountries(l_Countries); // Assuming each player has captured the same countries
+            l_Players.put("Player" + i, l_Player);
         }
-        gameMap.setPlayers(players);
+        d_GameMap.setPlayers(l_Players);
         // Set up the input stream for simulating user input
     }
 
@@ -72,37 +72,37 @@ public class IssueOrderControllerTest {
 
     @Test
     public void testRun_AllPlayersHaveZeroReinforcementArmies() {
-        int d_ReinforcmentArmy = 5;
+        int l_ReinforcmentArmy = 5;
         // Set up player's reinforcement armies to zero
-        for (Player player : gameMap.getPlayers().values()) {
-            player.setReinforcementArmies(d_ReinforcmentArmy);
+        for (Player l_Player : d_GameMap.getPlayers().values()) {
+            l_Player.setReinforcementArmies(l_ReinforcmentArmy);
 
-            String test1 = "DEPLOY Country1 21";
-            String[] commandArr1 = test1.split("\\s");
-            assertEquals(3, commandArr1.length);
-            assertNotEquals("deploy", commandArr1[0]);
-            player.issueOrder(test1);
-            assertEquals(5, player.getReinforcementArmies());
+            String l_Test1 = "DEPLOY Country1 21";
+            String[] l_CommandArr1 = l_Test1.split("\\s");
+            assertEquals(3, l_CommandArr1.length);
+            assertNotEquals("deploy", l_CommandArr1[0]);
+            l_Player.issueOrder(l_Test1);
+            assertEquals(5, l_Player.getReinforcementArmies());
 
-            String test2 = "deploy Country2 3";
-            String[] commandArr2 = test2.split("\\s");
-            assertEquals(3, commandArr2.length);
-            player.issueOrder(test2);
-            assertEquals(5, player.getReinforcementArmies());
+            String l_Test2 = "deploy Country2 3";
+            String[] l_CommandArr2 = l_Test2.split("\\s");
+            assertEquals(3, l_CommandArr2.length);
+            l_Player.issueOrder(l_Test2);
+            assertEquals(5, l_Player.getReinforcementArmies());
 
-            String test3 = "deploy Country3 2";
-            String[] commandArr3 = test2.split("\\s");
-            assertEquals(3, commandArr3.length);
-            player.issueOrder(test3);
-            assertEquals(5, player.getReinforcementArmies());
+            String l_Test3 = "deploy Country3 2";
+            String[] l_CommandArr3 = l_Test2.split("\\s");
+            assertEquals(3, l_CommandArr3.length);
+            l_Player.issueOrder(l_Test3);
+            assertEquals(5, l_Player.getReinforcementArmies());
 
-            String test4 = "deploy Country4 4";
-            String[] commandArr4 = test2.split("\\s");
-            assertEquals(3, commandArr4.length);
-            player.issueOrder(test4);
-            assertEquals(5, player.getReinforcementArmies());
+            String l_Test4 = "deploy Country4 4";
+            String[] l_CommandArr4 = l_Test2.split("\\s");
+            assertEquals(3, l_CommandArr4.length);
+            l_Player.issueOrder(l_Test4);
+            assertEquals(5, l_Player.getReinforcementArmies());
 
-            assertEquals(Constants.DEPLOY_COMMAND, commandArr2[0]);
+            assertEquals(Constants.DEPLOY_COMMAND, l_CommandArr2[0]);
         }
 
 

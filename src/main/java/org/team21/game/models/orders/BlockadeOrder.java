@@ -5,6 +5,7 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 
 /**
  * The BlockadeOrder order controller will triple the number of armies of
@@ -17,7 +18,10 @@ public class BlockadeOrder extends Order{
      * The d_GameMap is game map.
      */
     private final GameMap d_GameMap;
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Constructor to set BlockadeOrder type and also to get the GameMap instance.
      */
@@ -36,6 +40,7 @@ public class BlockadeOrder extends Order{
             l_Player.getCapturedCountries().remove(l_Country);
             l_Country.setPlayer(null);
             System.out.println("The order: " + getType() + " " + l_Country.getCountryId());
+            d_GameEventLogger.logEvent("The order: " + getType() + " " + l_Country.getCountryId());
             l_Player.removeCard(CardType.BLOCKADE);
             return true;
         }
@@ -64,5 +69,6 @@ public class BlockadeOrder extends Order{
     @Override
     public void printOrderCommand() {
         System.out.println("BlockadeOrder on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());
+        d_GameEventLogger.logEvent("BlockadeOrder on " + getOrderInfo().getTargetCountry().getCountryId() + " by " + getOrderInfo().getPlayer().getName());
     }
 }

@@ -5,6 +5,7 @@ import org.team21.game.models.game_play.GameCommands;
 import org.team21.game.models.game_play.GamePhase;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
 import java.io.File;
@@ -40,7 +41,10 @@ public class StartGameController implements GameFlowManager {
      * Scanner to scan user inputs from CMD.
      */
     private final Scanner d_Scanner = new Scanner(System.in);
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Default constructor initializing the game map.
      */
@@ -55,7 +59,10 @@ public class StartGameController implements GameFlowManager {
      * @return The next game phase.
      * @throws ValidationException When validation fails.
      */
-    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException { return run(p_CurrentPhase); }
+    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException {
+        d_GameEventLogger.logEvent(Constants.START_UP_PHASE);
+        return run(p_CurrentPhase);
+    }
 
     /**
      * Run is entry point of the StartGameController
@@ -159,7 +166,7 @@ public class StartGameController implements GameFlowManager {
         }
         else{
             System.out.println("Map File is Invalid Please Try Again");
-            // TODO Add Logger
+            d_GameEventLogger.logEvent("Invalid Map File");
         }
     }
 

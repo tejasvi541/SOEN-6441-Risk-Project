@@ -65,9 +65,9 @@ public class ContinentTest {
      */
     @Test
     public void testGetCountries() {
-        HashMap<String, Country> countries = d_Continent.getCountries();
-        assertNotNull(countries);
-        assertTrue(countries.isEmpty());
+        HashMap<String, Country> l_Countries = d_Continent.getCountries();
+        assertNotNull(l_Countries);
+        assertTrue(l_Countries.isEmpty());
     }
 
     /**
@@ -75,14 +75,14 @@ public class ContinentTest {
      */
     @Test
     public void testSetCountries() {
-        Country country1 = new Country("UK", "Europe");
-        Country country2 = new Country("France", "Europe");
-        HashMap<String, Country> countries = new HashMap<>();
-        countries.put("UK", country1);
-        countries.put("France", country2);
-        System.out.println(countries);
-        d_Continent.setCountries(countries);
-        assertEquals(countries, d_Continent.getCountries());
+        Country l_Country1 = new Country("UK", "Europe");
+        Country l_Country2 = new Country("France", "Europe");
+        HashMap<String, Country> l_Countries = new HashMap<>();
+        l_Countries.put("UK", l_Country1);
+        l_Countries.put("France", l_Country2);
+        System.out.println(l_Countries);
+        d_Continent.setCountries(l_Countries);
+        assertEquals(l_Countries, d_Continent.getCountries());
     }
 
     /**
@@ -90,14 +90,14 @@ public class ContinentTest {
      */
     @Test
     public void testFalseSetCountries() {
-        Country country1 = new Country("UK", "Europe");
-        Country country2 = new Country("France", "Europe");
-        HashMap<String, Country> countries = new HashMap<>();
-        countries.put("UK", country1);
-        countries.put("France", country2);
-        System.out.println(countries);
-        d_Continent.setCountries(countries);
-        assertNotEquals(countries.put("France", country2), d_Continent.getCountries());
+        Country l_Country1 = new Country("UK", "Europe");
+        Country l_Country2 = new Country("France", "Europe");
+        HashMap<String, Country> l_Countries = new HashMap<>();
+        l_Countries.put("UK", l_Country1);
+        l_Countries.put("France", l_Country2);
+        System.out.println(l_Countries);
+        d_Continent.setCountries(l_Countries);
+        assertNotEquals(l_Countries.put("France", l_Country2), d_Continent.getCountries());
     }
 
     /**

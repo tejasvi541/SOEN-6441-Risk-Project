@@ -18,10 +18,10 @@ public class CountryTest {
      */
     @Test
     public void countryInitializationTest() {
-        Country country = new Country("Country1", "Continent1");
-        assertNotNull(country);
-        assertEquals("Country1", country.getCountryId());
-        assertEquals("Continent1", country.getParentContinent());
+        Country l_Country = new Country("Country1", "Continent1");
+        assertNotNull(l_Country);
+        assertEquals("Country1", l_Country.getCountryId());
+        assertEquals("Continent1", l_Country.getParentContinent());
     }
 
     /**
@@ -29,11 +29,11 @@ public class CountryTest {
      */
     @Test
     public void addNeighborTest() {
-        Country country = new Country("Country1", "Continent1");
-        Country neighbor = new Country("Country2", "Continent1");
-        country.getNeighbours().put("Country2", neighbor);
-        assertTrue(country.getNeighbours().containsKey("Country2"));
-        assertEquals(neighbor, country.getNeighbours().get("Country2"));
+        Country l_Country = new Country("Country1", "Continent1");
+        Country l_Neighbor = new Country("Country2", "Continent1");
+        l_Country.getNeighbours().put("Country2", l_Neighbor);
+        assertTrue(l_Country.getNeighbours().containsKey("Country2"));
+        assertEquals(l_Neighbor, l_Country.getNeighbours().get("Country2"));
     }
 
     /**
@@ -41,11 +41,11 @@ public class CountryTest {
      */
     @Test
     public void removeNeighborTest() {
-        Country country = new Country("Country1", "Continent1");
-        Country neighbor = new Country("Country2", "Continent1");
-        country.getNeighbours().put("Country2", neighbor);
-        country.getNeighbours().remove("Country2");
-        assertFalse(country.getNeighbours().containsKey("Country2"));
+        Country l_Country = new Country("Country1", "Continent1");
+        Country l_Neighbor = new Country("Country2", "Continent1");
+        l_Country.getNeighbours().put("Country2", l_Neighbor);
+        l_Country.getNeighbours().remove("Country2");
+        assertFalse(l_Country.getNeighbours().containsKey("Country2"));
     }
 
     /**
@@ -53,10 +53,10 @@ public class CountryTest {
      */
     @Test
     public void deployArmiesTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setArmies(5);
-        country.deployArmies(3);
-        assertEquals(8, country.getArmies());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setArmies(5);
+        l_Country.deployArmies(3);
+        assertEquals(8, l_Country.getArmies());
     }
 
     /**
@@ -64,9 +64,9 @@ public class CountryTest {
      */
     @Test
     public void reduceArmiesTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setArmies(10);
-        assertEquals(10, country.getArmies());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setArmies(10);
+        assertEquals(10, l_Country.getArmies());
     }
 
     /**
@@ -74,9 +74,9 @@ public class CountryTest {
      */
     @Test
     public void reduceArmiesInsufficientTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setArmies(2);
-        assertEquals(2, country.getArmies());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setArmies(2);
+        assertEquals(2, l_Country.getArmies());
     }
 
     /**
@@ -84,9 +84,9 @@ public class CountryTest {
      */
     @Test
     public void modifyCountryIdTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setCountryId("NewCountry1");
-        assertEquals("NewCountry1", country.getCountryId());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setCountryId("NewCountry1");
+        assertEquals("NewCountry1", l_Country.getCountryId());
     }
 
     /**
@@ -94,9 +94,9 @@ public class CountryTest {
      */
     @Test
     public void modifyContinentTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setParentContinent("NewContinent1");
-        assertEquals("NewContinent1", country.getParentContinent());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setParentContinent("NewContinent1");
+        assertEquals("NewContinent1", l_Country.getParentContinent());
     }
 
     /**
@@ -104,9 +104,9 @@ public class CountryTest {
      */
     @Test
     public void modifyNumberOfArmiesTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setNumberOfArmies(15);
-        assertEquals(15, country.getNumberOfArmies());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setNumberOfArmies(15);
+        assertEquals(15, l_Country.getNumberOfArmies());
     }
 
     /**
@@ -114,10 +114,10 @@ public class CountryTest {
      */
     @Test
     public void setAndGetPlayerTest() {
-        Country country = new Country("Country1", "Continent1");
-        Player player = new Player();
-        country.setPlayer(player);
-        assertEquals(player, country.getPlayer());
+        Country l_Country = new Country("Country1", "Continent1");
+        Player l_Player = new Player();
+        l_Country.setPlayer(l_Player);
+        assertEquals(l_Player, l_Country.getPlayer());
     }
 
     /**
@@ -125,9 +125,9 @@ public class CountryTest {
      */
     @Test
     public void setAndGetArmiesTest() {
-        Country country = new Country("Country1", "Continent1");
-        country.setArmies(20);
-        assertEquals(20, country.getArmies());
+        Country l_Country = new Country("Country1", "Continent1");
+        l_Country.setArmies(20);
+        assertEquals(20, l_Country.getArmies());
     }
 
     /**
@@ -135,9 +135,9 @@ public class CountryTest {
      */
     @Test
     public void setAndGetCountryFileIndexTest() {
-        Country country = new Country();
-        country.setCountryFileIndex(5);
-        assertEquals(5, country.getCountryFileIndex());
+        Country l_Country = new Country();
+        l_Country.setCountryFileIndex(5);
+        assertEquals(5, l_Country.getCountryFileIndex());
     }
 
     /**
@@ -145,8 +145,8 @@ public class CountryTest {
      */
     @Test
     public void setAndGetCoordinatesTest() {
-        Country country = new Country();
-        country.setXCoordinate(10);
-        country.setYCoordinate(20);
+        Country l_Country = new Country();
+        l_Country.setXCoordinate(10);
+        l_Country.setYCoordinate(20);
     }
 }

@@ -136,17 +136,17 @@ public class IssueOrderController implements GameFlowManager {
 
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         return run(p_CurrentPhase);
     }
 
     /**
      * Run method will execute IssueOrder logic
      *
-     * @param p_CurrentGamePhase : Based on current gamephase next phase will come
-     * @return : It will return next gamephase
+     * @param p_CurrentGamePhase : Based on current gamePhase next phase will come
+     * @return : It will return next gamePhase
      */
     private GamePhase run(GamePhase p_CurrentGamePhase) {
-        d_GameEventLogger.logEvent(Constants.ISSUE_ORDER_PHASE);
         while (!(d_SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
                 if (!d_SkippedPlayers.isEmpty() && d_SkippedPlayers.contains(l_Player)) {
@@ -169,8 +169,9 @@ public class IssueOrderController implements GameFlowManager {
                 while (!l_IssueCommand) {
                     d_IssueOrderCommand = getCommandFromPlayer();
                     l_IssueCommand = validateCommand(d_IssueOrderCommand, l_Player);
-                    //Todo add logger
+                    d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+l_IssueCommand+" "+d_IssueOrderCommand+" command");
                     if (d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
+                        d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+Constants.PASS_COMMAND+" command");
                         break;
                     }
                 }
@@ -191,15 +192,16 @@ public class IssueOrderController implements GameFlowManager {
      * @return : Command
      */
     private String getCommandFromPlayer() {
-        String l_Command = "";
+        String l_Command;
         System.out.println(Constants.ISSUE_COMMAND_MESSAGE);
         Constants.showIssueOrderCommand();
         l_Command = d_Scanner.nextLine();
+        //Todo add validation
         if(Objects.equals(l_Command.split(" ")[0], Constants.SHOW_MAP)){
             new ShowMapController(d_GameMap).show();
             return getCommandFromPlayer();
         }
-        //Todo add validatio
+        //Todo add validation
         return l_Command;
     }
 

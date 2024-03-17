@@ -6,6 +6,7 @@ import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.InvalidExecutionException;
 
 import java.util.List;
@@ -36,7 +37,10 @@ public class ReinforcementController implements GameFlowManager {
      * The current player.
      */
     private Player d_CurrentPlayer;
-
+    /**
+     * Created object d_GameEventLogger of GameEventLogger.
+     */
+    GameEventLogger d_GameEventLogger = new GameEventLogger();
     /**
      * Default constructor initializing the game map data member with
      * {@code GameMap} singleton object.
@@ -53,6 +57,7 @@ public class ReinforcementController implements GameFlowManager {
      */
     @Override
     public GamePhase start(GamePhase p_CurrentPhase) {
+        d_GameEventLogger.logEvent(Constants.REINFORCEMENT_PHASE);
         return run(p_CurrentPhase);
     }
 
@@ -105,15 +110,19 @@ public class ReinforcementController implements GameFlowManager {
                         }
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
+                        d_GameEventLogger.logEvent("Exception: " + e.getMessage());
                     }
                 }
                 d_CurrentPlayer.setReinforcementArmies(Math.max(l_Reinforcements, 5));
                 System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
+                d_GameEventLogger.logEvent("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
             } else {
                 d_CurrentPlayer.setReinforcementArmies(5);
                 System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
+                d_GameEventLogger.logEvent("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
             }
         } else {
+            d_GameEventLogger.logEvent(Constants.INVALID_GAME_PHASE);
             throw new InvalidExecutionException(Constants.INVALID_GAME_PHASE);
         }
     }

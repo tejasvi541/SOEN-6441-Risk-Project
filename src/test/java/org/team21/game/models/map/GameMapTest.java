@@ -17,20 +17,20 @@ public class GameMapTest {
     /**
      * Game map objects
      */
-    private GameMap gameMap, gameMap1;
+    private GameMap d_GameMap, d_GameMap1;
     /**
      * Player for map objects
      */
-    private Player p1;
+    private Player d_P;
 
     /**
      * Sets up.
      */
     @Before
     public void setUp() {
-        gameMap = new GameMap();
-        gameMap1 = new GameMap("Canada");
-        p1 = new Player();
+        d_GameMap = new GameMap();
+        d_GameMap1 = new GameMap("Canada");
+        d_P = new Player();
     }
 
     /**
@@ -38,7 +38,7 @@ public class GameMapTest {
      */
     @Test
     public void isValidName() {
-        assertEquals("", gameMap.getMapName());
+        assertEquals("", d_GameMap.getMapName());
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameMapTest {
      */
     @Test
     public void isValidNameMap() {
-        assertEquals("Canada", gameMap1.getMapName());
+        assertEquals("Canada", d_GameMap1.getMapName());
     }
 
     /**
@@ -54,8 +54,8 @@ public class GameMapTest {
      */
     @Test
     public void validPlayer() {
-        gameMap.addPlayer("Player1");
-        assertEquals("Player1", gameMap.getPlayers().keySet().toArray()[0]);
+        d_GameMap.addPlayer("Player1");
+        assertEquals("Player1", d_GameMap.getPlayers().keySet().toArray()[0]);
     }
 
     /**
@@ -63,7 +63,7 @@ public class GameMapTest {
      */
     @After
     public void tearDown() {
-        gameMap = null;
-        gameMap1 = null;
+        d_GameMap = null;
+        d_GameMap1 = null;
     }
 }
