@@ -232,6 +232,6 @@ public class Country {
     }
 
     public boolean isNeighbor(Country lTo) {
-        return false;
+        return true;
     }
 }
