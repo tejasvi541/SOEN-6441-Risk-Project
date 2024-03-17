@@ -13,12 +13,10 @@ import java.time.format.DateTimeFormatter;
  * @author Kapil Soni
  */
 public class GameLogFileWriter implements Observer {
-
     /**
      * Log filename prefix for further usage
      */
-    private String d_LogFilenamePrefix = "gamelog"; // Default prefix
-
+    public static final String d_LOG_FILE_PATH = "logfile_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
     /**
      * To get log file path
      * @return : return file path in string where it will store log file
@@ -52,7 +50,7 @@ public class GameLogFileWriter implements Observer {
      * @param p_eventMessage The event message to be logged.
      */
     private void writeLogEntry(String p_eventMessage) {
-        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + d_LogFilenamePrefix + ".log", true)))) {
+        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + d_LOG_FILE_PATH + ".log", true)))) {
             LocalDateTime l_Now = LocalDateTime.now();
             DateTimeFormatter l_Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String l_Timestamp = l_Now.format(l_Formatter);
@@ -62,14 +60,6 @@ public class GameLogFileWriter implements Observer {
         }
     }
 
-    /**
-     * Sets the filename prefix for log files.
-     *
-     * @param p_Prefix The desired prefix (excluding file extension)
-     */
-    public void setLogFilenamePrefix(String p_Prefix) {
-        this.d_LogFilenamePrefix = p_Prefix;
-    }
 
     /**
      * Function to update the message for the observer

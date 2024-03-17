@@ -169,9 +169,9 @@ public class IssueOrderController implements GameFlowManager {
                 while (!l_IssueCommand) {
                     d_IssueOrderCommand = getCommandFromPlayer();
                     l_IssueCommand = validateCommand(d_IssueOrderCommand, l_Player);
-                    d_GameEventLogger.logEvent("The current player "+l_Player+" has issued "+l_IssueCommand+" "+d_IssueOrderCommand+" command");
+                    d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+l_IssueCommand+" "+d_IssueOrderCommand+" command");
                     if (d_IssueOrderCommand.equals(Constants.PASS_COMMAND)) {
-                        d_GameEventLogger.logEvent("The current player "+l_Player+" has issued "+Constants.PASS_COMMAND+" command");
+                        d_GameEventLogger.logEvent("The current player "+l_Player.getName()+" has issued "+Constants.PASS_COMMAND+" command");
                         break;
                     }
                 }
