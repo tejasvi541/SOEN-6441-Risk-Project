@@ -39,7 +39,7 @@ public class DiceStrategy implements GameStrategy {
     @Override
     public boolean attack(Player p_Player, Country p_From, Country p_To, int p_Armies) {
         try{
-            p_From.deployArmies(p_Armies);
+            p_From.depleteArmies(p_Armies);
             int l_AttackerKills = (int) IntStream.range(0, p_Armies).boxed().filter((p_integer) -> Math.random() <= SETTINGS.ATTACKER_PROBABILITY).count();
             int l_DefenderKills = (int) IntStream.range(0, p_To.getArmies()).boxed().filter(p_integer -> Math.random() <= SETTINGS.DEFENDER_PROBABILITY).count();
 

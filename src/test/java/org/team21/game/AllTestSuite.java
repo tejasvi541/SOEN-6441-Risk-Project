@@ -9,10 +9,7 @@ import org.team21.game.models.game_play.PlayerTest;
 import org.team21.game.models.map.ContinentTest;
 import org.team21.game.models.map.CountryTest;
 import org.team21.game.models.map.GameMapTest;
-import org.team21.game.models.orders.AirliftOrderTest;
-import org.team21.game.models.orders.BombOrderTest;
-import org.team21.game.models.orders.DeployOrderTest;
-import org.team21.game.models.orders.NegotiateOrderTest;
+import org.team21.game.models.orders.*;
 import org.team21.game.utils.validation.MapValidatorTest;
 
 @RunWith(Suite.class)
@@ -27,8 +24,9 @@ import org.team21.game.utils.validation.MapValidatorTest;
         GameCommandsTest.class, PlayerTest.class,
         ContinentTest.class, CountryTest.class,
         GameMapTest.class, AirliftOrderTest.class,
-        BombOrderTest.class, NegotiateOrderTest.class,
-        MapValidatorTest.class, DeployOrderTest.class
+        BlockadeOrderTest.class, BombOrderTest.class,
+        NegotiateOrderTest.class, MapValidatorTest.class,
+        DeployOrderTest.class
 })
 /**
  * Class for test suite

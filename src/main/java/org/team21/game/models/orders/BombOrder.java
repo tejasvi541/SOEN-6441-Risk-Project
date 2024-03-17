@@ -29,8 +29,8 @@ public class BombOrder extends Order {
      */
     public BombOrder(){
         super();
-        d_GameMap = GameMap.getInstance();
         setType(Constants.BOMB_COMMAND);
+        d_GameMap = GameMap.getInstance();
     }
 
     /**

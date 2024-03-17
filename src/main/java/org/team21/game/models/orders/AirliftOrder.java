@@ -29,8 +29,9 @@ public class AirliftOrder extends Order {
      * to set type of order as Airlift
      */
     public AirliftOrder() {
+        super();
+        setType(Constants.AIRLIFT_COMMAND);
         d_GameMap = GameMap.getInstance();
-        this.setType(Constants.AIRLIFT_COMMAND);
     }
 
     /**

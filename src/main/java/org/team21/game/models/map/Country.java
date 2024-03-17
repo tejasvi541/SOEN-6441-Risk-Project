@@ -163,6 +163,14 @@ public class Country {
     public void deployArmies(int p_Armies) {
         this.d_Armies += p_Armies;
     }
+    /**
+     * This method depletes the number of armies
+     *
+     * @param p_Armies the number of armies
+     */
+    public void depleteArmies(int p_Armies) {
+        d_Armies -= p_Armies;
+    }
 
     /**
      * Returns the index of this country in the ".map" file

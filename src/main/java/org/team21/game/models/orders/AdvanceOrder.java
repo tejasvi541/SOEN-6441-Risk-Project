@@ -63,8 +63,10 @@ public class AdvanceOrder extends Order {
                 d_GameEventLogger.logEvent("Truce between "+l_Player.getName()+" "+l_To.getPlayer().getName());
                 l_Player.getNeutralPlayers().remove(l_To.getPlayer());
                 l_To.getPlayer().getNeutralPlayers().remove(l_Player);
-            } else if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
-                l_From.deployArmies(l_Armies);
+                return true;
+            }
+            if (l_Player.isCaptured(l_To) || Objects.isNull(l_To.getPlayer())) {
+                l_From.depleteArmies(l_Armies);
                 l_To.deployArmies(l_Armies);
                 if (!l_Player.getCapturedCountries().contains(l_To)) {
                     l_Player.getCapturedCountries().add(l_To);
@@ -74,8 +76,8 @@ public class AdvanceOrder extends Order {
                 d_GameEventLogger.logEvent("Advanced/Moved " + l_Armies + " from " + l_From.getCountryId() + " to " + l_To.getCountryId());
 
             } else if (d_GameStrategy.attack(l_Player, l_From, l_To, l_Armies)) {
+                return true;
             }
-            return true;
         }
         System.out.println(Constants.SEPERATER);
         return false;
@@ -95,7 +97,6 @@ public class AdvanceOrder extends Order {
         int l_Armies = getOrderInfo().getNumberOfArmy();
         boolean success = true;
         String log = "Failed due to some errors\n";
-        boolean l_IsNeighbour = l_From.isNeighbor(l_To);
         if (l_Player == null || l_To == null || l_From == null) {
             System.err.println("Invalid order information.");
             return false;
@@ -104,7 +105,7 @@ public class AdvanceOrder extends Order {
             log += String.format("\t-> Country %s does not belong to player %s\n", l_From.getCountryId(), l_Player.getName());
             success = false;
         }
-        if (!l_IsNeighbour) {
+        if (!l_From.isNeighbor(l_To)) {
             log += String.format("\t-> Destination country %s is not a neighbor of %s\n", l_To.getCountryId(), l_From.getCountryId());
             success = false;
         }
