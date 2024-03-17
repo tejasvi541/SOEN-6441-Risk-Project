@@ -113,7 +113,7 @@ public class DeployOrderTest {
      */
     @Test
     public void execute() {
-        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
+        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         assertTrue(d_Player.nextOrder().execute());
@@ -124,7 +124,7 @@ public class DeployOrderTest {
      */
     @Test
     public void validateCommand() {
-        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
+        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         assertTrue(d_Player.nextOrder().validateCommand());
@@ -136,11 +136,11 @@ public class DeployOrderTest {
     @Test
     public void printOrderCommand() {
         d_CountriesPlayer2 = d_GameMap.getPlayer("p2").getCapturedCountries();
-        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer2.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
+        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         d_Player.nextOrder().printOrderCommand();
-        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} 10";
+        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
         Order l_Order2 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order2);
         d_Player.nextOrder().printOrderCommand();
