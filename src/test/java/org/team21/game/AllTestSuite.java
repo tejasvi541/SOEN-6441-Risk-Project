@@ -24,9 +24,9 @@ import org.team21.game.utils.validation.MapValidatorTest;
         GameCommandsTest.class, PlayerTest.class,
         ContinentTest.class, CountryTest.class,
         GameMapTest.class, AirliftOrderTest.class,
-        BlockadeOrderTest.class, BombOrderTest.class,
-        NegotiateOrderTest.class, MapValidatorTest.class,
-        DeployOrderTest.class
+        BombOrderTest.class, NegotiateOrderTest.class,
+        MapValidatorTest.class, DeployOrderTest.class,
+        AdvanceOrderTest.class
 })
 /**
  * Class for test suite
