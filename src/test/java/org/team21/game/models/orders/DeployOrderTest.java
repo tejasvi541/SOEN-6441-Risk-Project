@@ -1,12 +1,13 @@
 package org.team21.game.models.orders;
 
-import junit.framework.TestCase;
+
+import org.junit.*;
 import org.team21.game.controllers.IssueOrderController;
 import org.team21.game.models.game_play.Player;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-
+import static org.junit.Assert.*;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ import java.util.*;
  * @author Kapil Soni
  * @version 1.0.0
  */
-public class DeployOrderTest extends TestCase {
+public class DeployOrderTest {
     /**
      * The D game map.
      */
@@ -40,8 +41,8 @@ public class DeployOrderTest extends TestCase {
      *
      * @throws Exception : throws exception
      */
+    @Before
     public void setUp() throws Exception {
-        super.setUp();
         d_GameMap = GameMap.getInstance();
         Continent l_Continent1 = new Continent("Asia", "10", 1);
         Continent l_Continent2 = new Continent("Africa", "15", 2);
@@ -98,6 +99,7 @@ public class DeployOrderTest extends TestCase {
     /**
      * Clear GameMap once all the operation gets completed
      */
+    @After
     public void tearDown() {
         d_GameMap.clearMap();
     }
@@ -105,8 +107,9 @@ public class DeployOrderTest extends TestCase {
     /**
      * Test execute of DeployOrder class.
      */
+    @Test
     public void testExecute() {
-        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.get(0).getCountryId()} \{d_Player.getReinforcementArmies()}";
+        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         assertTrue(d_Player.nextOrder().execute());
@@ -115,8 +118,9 @@ public class DeployOrderTest extends TestCase {
     /**
      * Test validate command of DeployOrder class.
      */
+    @Test
     public void testValidateCommand() {
-        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
+        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         assertTrue(d_Player.nextOrder().validateCommand());
@@ -125,13 +129,14 @@ public class DeployOrderTest extends TestCase {
     /**
      * Test print order command of DeployOrder class.
      */
+    @Test
     public void testPrintOrderCommand() {
         d_CountriesPlayer2 = d_GameMap.getPlayer("p2").getCapturedCountries();
-        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer2.get(0).getCountryId() + " " + d_Player.getReinforcementArmies();
+        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer2.getFirst().getCountryId()} \{d_Player.getReinforcementArmies()}";
         Order l_Order1 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order1);
         d_Player.nextOrder().printOrderCommand();
-        IssueOrderController.d_IssueOrderCommand = "deploy " + d_CountriesPlayer1.get(0).getCountryId() + " 10";
+        IssueOrderController.d_IssueOrderCommand = STR."deploy \{d_CountriesPlayer1.getFirst().getCountryId()} 10";
         Order l_Order2 = OrderOwner.issueOrder(IssueOrderController.d_IssueOrderCommand.split(" "), d_Player);
         d_Player.addOrder(l_Order2);
         d_Player.nextOrder().printOrderCommand();
