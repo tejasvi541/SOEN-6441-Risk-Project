@@ -32,25 +32,32 @@ public class DeployOrder extends Order {
      * @return true if the execution was successful else return false
      */
     public boolean execute() {
-        if (getOrderInfo().getPlayer() == null || getOrderInfo().getDestination() == null) {
-            System.out.println(Constants.INVALID_COMMAND);
-            d_GameEventLogger.logEvent(Constants.INVALID_COMMAND);
+        if(validateCommand()){
+            if (getOrderInfo().getPlayer() == null || getOrderInfo().getDestination() == null) {
+                System.out.println(Constants.DEPLOY_COMMAND+" "+Constants.INVALID_COMMAND);
+                d_GameEventLogger.logEvent(Constants.DEPLOY_COMMAND+" "+Constants.INVALID_COMMAND);
+                return false;
+            }
+            Player l_Player = getOrderInfo().getPlayer();
+            Country l_Destination = getOrderInfo().getDestination();
+            int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
+            for (Country l_Country : l_Player.getCapturedCountries()) {
+                if (l_Country.getCountryId().equals(l_Destination.getCountryId())) {
+                    l_Country.deployArmies(l_ArmiesToDeploy);
+                    System.out.println("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
+                    d_GameEventLogger.logEvent("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
+                }
+            }
+            System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
+            d_GameEventLogger.logEvent("Execution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
+            System.out.println(Constants.SEPERATER);
+            return true;
+        }else{
+            System.out.println(Constants.DEPLOY_COMMAND+" "+Constants.INVALID_COMMAND);
+            d_GameEventLogger.logEvent(Constants.DEPLOY_COMMAND+" "+Constants.INVALID_COMMAND);
             return false;
         }
-        Player l_Player = getOrderInfo().getPlayer();
-        Country l_Destination = getOrderInfo().getDestination();
-        int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
-        for (Country l_Country : l_Player.getCapturedCountries()) {
-            if (l_Country.getCountryId().equals(l_Destination.getCountryId())) {
-                l_Country.deployArmies(l_ArmiesToDeploy);
-                System.out.println("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
-                d_GameEventLogger.logEvent("The country " + l_Country.getCountryId() + " has been deployed with " + l_Country.getArmies() + " armies.");
-            }
-        }
-        System.out.println("\nExecution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
-        d_GameEventLogger.logEvent("Execution is completed: deployed " + l_ArmiesToDeploy + " armies to " + l_Destination.getCountryId() + ".");
-        System.out.println(Constants.SEPERATER);
-        return true;
+
     }
 
     /**
