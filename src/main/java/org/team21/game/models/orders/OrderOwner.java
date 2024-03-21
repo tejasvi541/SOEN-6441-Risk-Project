@@ -15,6 +15,13 @@ import org.team21.game.utils.Constants;
 public class OrderOwner {
 
     /**
+     * Default constructor
+     */
+    OrderOwner(){
+
+    }
+
+    /**
      * Based on map it will evaluate the orders
      */
     public static GameMap d_GameMap = GameMap.getInstance();

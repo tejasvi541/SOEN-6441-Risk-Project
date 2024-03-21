@@ -7,6 +7,12 @@ import org.team21.game.utils.Constants;
  */
 public class Main {
     /**
+     * Default constructor
+     */
+    Main(){
+
+    }
+    /**
      * The entry point of application.
      *
      * @param args the input arguments

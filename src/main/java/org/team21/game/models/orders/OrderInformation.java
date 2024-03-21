@@ -15,6 +15,13 @@ import org.team21.game.models.map.Country;
 public class OrderInformation {
 
     /**
+     * Default constructor
+     */
+    OrderInformation(){
+
+    }
+
+    /**
      * The player who issued this order.
      */
     private Player d_Player;

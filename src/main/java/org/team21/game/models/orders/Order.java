@@ -21,6 +21,12 @@ import java.util.Objects;
 public abstract class Order {
 
     /**
+     * Default constructor
+     */
+    Order(){
+
+    }
+    /**
      * The type of the order, represented as a String.
      */
     private String d_Type;

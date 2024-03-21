@@ -23,6 +23,13 @@ import java.util.stream.Collectors;
 public class Player {
 
     /**
+     * Default constructor
+     */
+    Player(){
+
+    }
+
+    /**
      * Initialising List to hold orders
      */
     public static Deque<Order> d_PlayerOrderList = new ArrayDeque<>();
