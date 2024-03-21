@@ -17,6 +17,13 @@ import java.util.stream.IntStream;
  * @author Yesha Shah
  */
 public class DiceStrategy implements GameStrategy {
+
+    /**
+     * Default constructor
+     */
+    public DiceStrategy(){
+
+    }
     /**
      * Game settings object
      */
