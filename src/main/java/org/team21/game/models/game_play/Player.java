@@ -25,7 +25,7 @@ public class Player {
     /**
      * Default constructor
      */
-    Player(){
+    public Player(){
 
     }
 

@@ -23,7 +23,7 @@ public abstract class Order {
     /**
      * Default constructor
      */
-    Order(){
+    public Order(){
 
     }
     /**

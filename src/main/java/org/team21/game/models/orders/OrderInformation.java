@@ -17,7 +17,7 @@ public class OrderInformation {
     /**
      * Default constructor
      */
-    OrderInformation(){
+    public OrderInformation(){
 
     }
 

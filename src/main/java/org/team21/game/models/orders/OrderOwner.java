@@ -17,7 +17,7 @@ public class OrderOwner {
     /**
      * Default constructor
      */
-    OrderOwner(){
+    public OrderOwner(){
 
     }
 
