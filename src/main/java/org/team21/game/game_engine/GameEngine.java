@@ -1,72 +1,87 @@
 package org.team21.game.game_engine;
 
-import org.team21.game.controllers.ShowMapController;
-import org.team21.game.interfaces.main_engine.GameFlowManager;
-import org.team21.game.interfaces.main_engine.MainEngine;
-import org.team21.game.models.game_play.GamePhase;
-import org.team21.game.models.game_play.GameSettings;
+import org.team21.game.interfaces.Engine;
+import org.team21.game.interfaces.GameManager;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.models.strategy.DiceStrategy;
-import org.team21.game.utils.Constants;
+import org.team21.game.utils.InvalidExecutionException;
+import org.team21.game.utils.ValidationException;
+import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.util.Objects;
 
 /**
- * Game Engine is Entry point of the game.
- * It will connect ::
- * {ExecuteOrderController,IssueOrderController,ReinforcementController,StartGameController,MapEditorController}
+ * A class to start the game with the Map Editor Phase
  *
- * @author Kapil Soni
+ * @author Prathika Suvarna
+ * @author Neona Pinto
+ * @author Dhananjay Narayan
+ * @author Surya Manian
+ * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class GameEngine implements MainEngine {
+public class GameEngine implements Engine {
 
     /**
-     * Game phase instance representing the current state
+     * Game Settings for warzone game
      */
-    private GamePhase d_GamePhase;
+    private static GameSettings d_GameSettings;
 
     /**
-     * GameEngine instance initializer
+     * Creating Logger Observable
+     * Single Instance needs to be maintained (Singleton)
+     */
+    private static LogEntryBuffer d_Logger;
+
+    /**
+     * gamephase instance for the state
+     */
+    GamePhase d_GamePhase = GamePhase.MapEditor;
+
+    /**
+     * constructor for game engine
      */
     public GameEngine() {
-        configureEngine();
+        d_GameSettings = GameSettings.getInstance();
+        d_GameSettings.setStrategy("default");
+        d_Logger = LogEntryBuffer.getInstance();
+        d_Logger.clear();
     }
 
     /**
-     * Config engine
+     * The function which runs the whole game in phases
      */
-    @Override
-    public void configureEngine() {
-        GameSettings l_Setting = GameSettings.getInstance();
-        l_Setting.setStrategy(new DiceStrategy());
-        d_GamePhase = GamePhase.MapEditor;
-
-    }
-
-    /**
-     * default method declaration for starting the game
-     */
-    @Override
     public void start() {
-
         try {
             if (!d_GamePhase.equals(GamePhase.ExitGame)) {
-                GameFlowManager l_GameFlowManager = d_GamePhase.getController();
-                if (Objects.isNull(l_GameFlowManager)) {
-                    throw new Exception(Constants.CONTROLLERS_NOT_FOUND);
+                GameManager l_GameManager = d_GamePhase.getController();
+                if (Objects.isNull(l_GameManager)) {
+                    throw new Exception("No Controller found");
                 }
-                d_GamePhase = l_GameFlowManager.start(d_GamePhase);
-                System.out.println(Constants.SEPERATER);
-                System.out.println("************************" + "The Current phase " + d_GamePhase + " Phase" + "***********************");
-                System.out.println(Constants.SEPERATER);
-                if (d_GamePhase.equals(GamePhase.ExitGame)) {
-                    new ShowMapController(GameMap.getInstance()).show();
-                }
+                d_GamePhase = l_GameManager.start(d_GamePhase);
+                GameMap.getInstance().setGamePhase(d_GamePhase);
+                d_Logger.log("/*************************** You have entered the " + d_GamePhase + " Phase *************************/");
                 start();
             }
-        } catch (Exception p_Exception) {
+        } catch (ValidationException | InvalidExecutionException p_Exception) {
+            System.err.println(p_Exception.getMessage());
             p_Exception.printStackTrace();
+            start();
+        } catch (Throwable p_Exception) {
+            System.err.println(p_Exception.getMessage());
+            p_Exception.printStackTrace();
+            System.err.println("Please try again with valid data");
+            if (d_GamePhase.equals(GamePhase.MapEditor)) {
+                start();
+            }
         }
     }
+
+    /**
+     * method to set game phase
+     * @param p_GamePhase the game phase
+     */
+    public void setGamePhase(GamePhase p_GamePhase) {
+        d_GamePhase = p_GamePhase;
+    }
+
 }
