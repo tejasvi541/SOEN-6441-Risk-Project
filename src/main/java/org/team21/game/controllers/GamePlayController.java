@@ -1,7 +1,7 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GameProgress;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.GameManager;
 import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
