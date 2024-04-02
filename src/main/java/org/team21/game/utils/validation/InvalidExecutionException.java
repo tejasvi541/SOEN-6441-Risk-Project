@@ -1,4 +1,4 @@
-package org.team21.game.utils;
+package org.team21.game.utils.validation;
 
 /**
  * This class manages invalid execution of commands in the game stage

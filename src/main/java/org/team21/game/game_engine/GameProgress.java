@@ -1,7 +1,7 @@
-package org.team21.game.utils;
+package org.team21.game.game_engine;
 
 import org.team21.game.models.map.GameMap;
-import org.team21.game.game_engine.GamePhase;
+import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.io.*;

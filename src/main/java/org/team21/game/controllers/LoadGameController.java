@@ -2,7 +2,7 @@ package org.team21.game.controllers;
 
 import org.team21.game.interfaces.GameManager;
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.utils.GameProgress;
+import org.team21.game.game_engine.GameProgress;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.util.Scanner;

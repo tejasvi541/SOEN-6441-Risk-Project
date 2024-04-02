@@ -3,9 +3,9 @@ package org.team21.game.controllers;
 import org.team21.game.interfaces.GameManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.utils.MapReader;
-import org.team21.game.utils.MapValidation;
-import org.team21.game.utils.ValidationException;
+import org.team21.game.models.map.MapReader;
+import org.team21.game.utils.validation.MapValidation;
+import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.io.IOException;
