@@ -1,6 +1,6 @@
 package org.team21.game.utils.logger;
 
-import org.team21.game.interfaces.Observer;
+import org.team21.game.interfaces.observers.Observer;
 
 import java.io.*;
 

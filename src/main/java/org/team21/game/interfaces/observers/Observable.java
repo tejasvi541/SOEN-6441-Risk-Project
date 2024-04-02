@@ -1,4 +1,4 @@
-package org.team21.game.interfaces;
+package org.team21.game.interfaces.observers;
 
 /**
  * An interface for implementation of Observable with a notifyObservers function.

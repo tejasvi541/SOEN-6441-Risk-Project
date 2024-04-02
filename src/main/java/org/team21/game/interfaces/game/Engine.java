@@ -1,4 +1,4 @@
-package org.team21.game.interfaces;
+package org.team21.game.interfaces.game;
 
 import org.team21.game.game_engine.GamePhase;
 

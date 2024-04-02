@@ -1,4 +1,4 @@
-package org.team21.game.interfaces;
+package org.team21.game.interfaces.game;
 
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.Player;

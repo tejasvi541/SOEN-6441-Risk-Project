@@ -1,6 +1,6 @@
 package org.team21.game.models.strategy.game;
 
-import org.team21.game.interfaces.GameStrategy;
+import org.team21.game.interfaces.game.GameStrategy;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.map.Country;
 import org.team21.game.game_engine.GameSettings;
