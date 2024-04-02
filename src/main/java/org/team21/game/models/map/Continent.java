@@ -119,4 +119,13 @@ public class Continent implements Serializable {
         }
         return d_Countries;
     }
+
+    /**
+     * set the list of countries belonging to the continent
+     *
+     * @return void
+     */
+    public void setCountries(Set<Country> p_Countries) {
+        this.d_Countries = p_Countries;
+    }
 }
