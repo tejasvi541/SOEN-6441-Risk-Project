@@ -1,4 +1,4 @@
-package org.team21.game.utils;
+package org.team21.game.utils.adapter;
 
 import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;

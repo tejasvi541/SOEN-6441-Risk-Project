@@ -1,11 +1,12 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GameProgress;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.GameManager;
 import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.utils.*;
+import org.team21.game.utils.adapter.Adaptee;
+import org.team21.game.utils.adapter.Adapter;
 import org.team21.game.utils.logger.LogEntryBuffer;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;

@@ -1,7 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.controllers.*;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.GameManager;
 
 import java.util.Arrays;
 import java.util.Collections;

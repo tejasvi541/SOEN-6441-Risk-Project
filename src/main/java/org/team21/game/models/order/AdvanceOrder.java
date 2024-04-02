@@ -3,7 +3,7 @@ package org.team21.game.models.order;
 import org.team21.game.models.map.Country;
 import org.team21.game.game_engine.GameSettings;
 import org.team21.game.models.map.Player;
-import org.team21.game.interfaces.GameStrategy;
+import org.team21.game.interfaces.game.GameStrategy;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.io.Serializable;
