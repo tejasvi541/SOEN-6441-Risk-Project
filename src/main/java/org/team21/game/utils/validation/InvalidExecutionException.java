@@ -1,10 +1,8 @@
 package org.team21.game.utils.validation;
 
 /**
- * The Invalid execution exception
- *
- * @author Kapil Soni
- * @version 1.0.0
+ * This class manages invalid execution of commands in the game stage
+ * @author Madhuvanthi Hemanathan
  */
 public class InvalidExecutionException extends Exception {
     /**
@@ -20,17 +18,15 @@ public class InvalidExecutionException extends Exception {
     }
 
     /**
-     * Exception Message
-     *
-     * @param message exception message
+     *Exception Message
+     * @param p_Message exception message
      */
-    public InvalidExecutionException(String message) {
-        super(message);
+    public InvalidExecutionException(String p_Message) {
+        super(p_Message);
     }
 
     /**
      * Get the message and check for exception
-     *
      * @return message
      */
     @Override

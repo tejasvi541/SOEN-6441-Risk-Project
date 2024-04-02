@@ -1,39 +1,47 @@
 package org.team21.game.controllers;
 
-import org.team21.game.interfaces.main_engine.GameFlowManager;
-import org.team21.game.models.game_play.GamePhase;
-import org.team21.game.models.game_play.Player;
-import org.team21.game.models.map.Country;
+import org.team21.game.game_engine.GamePhase;
+import org.team21.game.game_engine.GameSettings;
+import org.team21.game.interfaces.GameManager;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.models.orders.Order;
-import org.team21.game.utils.Constants;
-import org.team21.game.utils.logger.GameEventLogger;
-
-import java.util.HashMap;
+import org.team21.game.models.map.Player;
+import org.team21.game.models.order.Order;
+import org.team21.game.utils.logger.LogEntryBuffer;
 
 /**
- * TheExecute order controller will execute orders based on {IssueOrderController}
+ * This is a class which contains the Execute Order phase
  *
- * @author Kapil Soni
+ * @author Prathika Suvarna
+ * @author Neona Pinto
+ * @author Dhananjay Narayan
+ * @author Surya Manian
+ * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class ExecuteOrderController implements GameFlowManager {
-
+public class ExecuteOrderController implements GameManager {
     /**
-     * The d_UpcomingGamePhase is used to get next game phase.
+     * Reinforcement Phase enum keyword
      */
-    private final GamePhase d_UpcomingGamePhase = GamePhase.ExitGame;
+    GamePhase d_ReinforcementGamePhase = GamePhase.Reinforcement;
     /**
-     * Created object d_GameEventLogger of GameEventLogger.
+     * Exit Phase enum keyword
      */
-    GameEventLogger d_GameEventLogger = new GameEventLogger();
+    GamePhase d_ExitGamePhase = GamePhase.ExitGame;
+    /**
+     * GamePhase
+     */
+    GamePhase d_GamePhase;
     /**
      * GameMap instance
      */
     GameMap d_GameMap;
+    /**
+     * Log entry Buffer Object
+     */
+    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
 
     /**
-     * This is the default constructor for this constructor to get
+     * This is the default constructor
      */
     public ExecuteOrderController() {
         d_GameMap = GameMap.getInstance();
@@ -42,30 +50,20 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * This method starts the current game phase
      *
-     * @param p_CurrentPhase the current game phase
+     * @param p_GamePhase the current game phase
      * @return the next game phase
+     * @throws Exception when execution fails
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentPhase) {
-        d_GameEventLogger.logEvent(Constants.EXECUTE_ORDER_PHASE);
-        return run(p_CurrentPhase);
-    }
-
-    /**
-     * run is entry method of Execute Order and it will run Execute order
-     *
-     * @param p_CurrentGamePhase : Current phase of game.
-     * @return : It will return game phase to go next
-     */
-    private GamePhase run(GamePhase p_CurrentGamePhase) {
-        //Execute all orders and if it fails
+    public GamePhase start(GamePhase p_GamePhase) throws Exception {
+        d_GamePhase = p_GamePhase;
         executeOrders();
         clearAllNeutralPlayers();
-        return checkIfPlayerWon(p_CurrentGamePhase, d_UpcomingGamePhase);
+        return checkIfPlayerWonOrTriesExhausted(p_GamePhase);
     }
 
     /**
-     * This method executes each order in the order list
+     * This method  executes each order in the order list
      */
     private void executeOrders() {
         int l_Counter = 0;
@@ -95,22 +93,29 @@ public class ExecuteOrderController implements GameFlowManager {
 
     /**
      * Check if the player won the game after every execution phase
+     * Or if the number of tries are exhausted
      *
-     * @param p_CurrentGamePhase : the current phase of game command
-     * @param p_GamePhase        : the next phase based on the status of player
-     * @return : the gamePhase it has to change to based on the win
+     * @param p_GamePhase the next phase based on the status of player
+     * @return the gamephase it has to change to based on the win
      */
-    public GamePhase checkIfPlayerWon(GamePhase p_CurrentGamePhase, GamePhase p_GamePhase) {
-        HashMap<String, Country> l_ListOfAllCountries = d_GameMap.getCountries();
+    public GamePhase checkIfPlayerWonOrTriesExhausted(GamePhase p_GamePhase) {
         for (Player l_Player : d_GameMap.getPlayers().values()) {
             if (l_Player.getCapturedCountries().size() == d_GameMap.getCountries().size()) {
-                System.out.println("The Player " + l_Player.getName() + " won the game.");
-                d_GameEventLogger.logEvent("The Player " + l_Player.getName() + " won the game.");
-                System.out.println("Exiting the game...");
-                d_GameEventLogger.logEvent("Exiting the game...");
-                return p_CurrentGamePhase.nextState(d_UpcomingGamePhase);
+                d_Logger.log("The Player " + l_Player.getName() + " won the game.");
+                d_Logger.log("Exiting the game...");
+                d_GameMap.setWinner(l_Player);
+                d_GameMap.setGamePhase(d_ExitGamePhase);
+                d_GameMap.setWinner(l_Player);
+                return p_GamePhase.nextState(d_ExitGamePhase);
             }
         }
-        return p_CurrentGamePhase.nextState(GamePhase.Reinforcement);
+
+        if (GameSettings.getInstance().MAX_TRIES > 0 && d_GameMap.getTries() >= GameSettings.getInstance().MAX_TRIES) {
+            d_GameMap.setGamePhase(d_ExitGamePhase);
+            return p_GamePhase.nextState(d_ExitGamePhase);
+        }
+        d_GameMap.setGamePhase(d_ReinforcementGamePhase);
+        return p_GamePhase.nextState(d_ReinforcementGamePhase);
     }
+
 }
