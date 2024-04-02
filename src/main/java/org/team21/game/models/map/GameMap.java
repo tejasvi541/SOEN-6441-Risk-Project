@@ -86,7 +86,7 @@ public class GameMap implements Serializable {
     /**
      * Default Constructor
      */
-    private GameMap() {
+    public GameMap() {
     }
 
     /**
