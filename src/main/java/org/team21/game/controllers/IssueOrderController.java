@@ -7,7 +7,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
-import org.team21.game.utils.GameProgress;
+import org.team21.game.game_engine.GameProgress;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.util.*;

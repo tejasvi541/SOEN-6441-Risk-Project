@@ -1,4 +1,4 @@
-package org.team21.game.utils;
+package org.team21.game.interfaces;
 
 /**
  * An interface for implementation of Observer with an update function

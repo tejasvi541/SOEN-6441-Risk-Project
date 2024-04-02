@@ -5,8 +5,8 @@ import org.team21.game.game_engine.GameSettings;
 import org.team21.game.interfaces.GameManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.InvalidExecutionException;
-import org.team21.game.utils.ValidationException;
+import org.team21.game.utils.validation.InvalidExecutionException;
+import org.team21.game.utils.validation.ValidationException;
 
 /**
  * Controller for {@code Reinforcement} phase of game.

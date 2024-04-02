@@ -1,7 +1,7 @@
 package org.team21.game.utils.logger;
 
-import org.team21.game.utils.Observable;
-import org.team21.game.utils.Observer;
+import org.team21.game.interfaces.Observable;
+import org.team21.game.interfaces.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;

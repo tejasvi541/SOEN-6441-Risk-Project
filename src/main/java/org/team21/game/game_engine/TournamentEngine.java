@@ -6,9 +6,9 @@ import org.team21.game.models.map.Player;
 import org.team21.game.models.strategy.player.PlayerStrategy;
 import org.team21.game.models.tournament.TournamentOptions;
 import org.team21.game.models.tournament.TournamentResult;
-import org.team21.game.utils.MapReader;
-import org.team21.game.utils.MapValidation;
-import org.team21.game.utils.ValidationException;
+import org.team21.game.models.map.MapReader;
+import org.team21.game.utils.validation.MapValidation;
+import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.LogEntryBuffer;
 
 import java.util.*;

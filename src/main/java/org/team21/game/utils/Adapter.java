@@ -1,6 +1,8 @@
 package org.team21.game.utils;
 
+import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.validation.ValidationException;
 
 import java.io.IOException;
 /**
