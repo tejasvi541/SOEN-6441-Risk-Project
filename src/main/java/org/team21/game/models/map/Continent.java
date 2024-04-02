@@ -121,9 +121,8 @@ public class Continent implements Serializable {
     }
 
     /**
-     * set the list of countries belonging to the continent
-     *
-     * @return void
+     * Set countries for the testing and adding countries in continents
+     * @param p_Countries
      */
     public void setCountries(Set<Country> p_Countries) {
         this.d_Countries = p_Countries;
