@@ -1,7 +1,7 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GameProgress;
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class GamePlayController implements GameManager {
+public class StartGameController implements GameFlowManager {
     /**
      * A data member for scanner
      */
@@ -59,7 +59,7 @@ public class GamePlayController implements GameManager {
     /**
      * This is the default constructor
      */
-    public GamePlayController() {
+    public StartGameController() {
         d_GameMap = GameMap.getInstance();
     }
 

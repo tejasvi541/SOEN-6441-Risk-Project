@@ -2,7 +2,7 @@ package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.game_engine.GameSettings;
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.utils.validation.InvalidExecutionException;
@@ -18,7 +18,7 @@ import org.team21.game.utils.validation.ValidationException;
  * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class ReinforcementController implements GameManager {
+public class ReinforcementController implements GameFlowManager {
     /**
      * Data Member holding next phase of game
      */

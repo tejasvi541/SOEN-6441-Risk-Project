@@ -10,7 +10,7 @@ import org.team21.game.game_engine.GamePhase;
  * @version 1.0
  */
 
-public interface GameManager {
+public interface GameFlowManager {
     /**
      * The start method of Game Controller
      *

@@ -1,7 +1,7 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
@@ -22,7 +22,7 @@ import java.util.*;
  * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class IssueOrderController implements GameManager {
+public class IssueOrderController implements GameFlowManager {
     /**
      * variable to keep track of players who skipped
      */
