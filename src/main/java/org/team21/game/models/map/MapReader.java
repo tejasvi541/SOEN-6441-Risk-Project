@@ -14,11 +14,6 @@ import java.util.stream.Collectors;
 /**
  * A class to handle reading data from the map
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  */
 public class MapReader {
 

@@ -11,7 +11,6 @@ import java.util.*;
  * The class is used to create the map validation to check the if the map is a map which is strongly connected
  * or not and to check if there are any continents without country or countries without any neighbors.
  *
- * @author Neona Pinto
  * @version 1.0.0
  */
 public class MapValidation {

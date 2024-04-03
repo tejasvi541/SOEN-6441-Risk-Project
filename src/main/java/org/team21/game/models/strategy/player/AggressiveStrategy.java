@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 /**
  * A class to implement the Aggressive strategy for a player
  *
- * @author Dhananjay Narayan
- * @author Madhuvanthi Hemanathan
  */
 public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     /**

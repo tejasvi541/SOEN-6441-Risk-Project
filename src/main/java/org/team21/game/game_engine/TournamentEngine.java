@@ -16,7 +16,6 @@ import java.util.*;
 /**
  * Class to implement the tournament mode game
  *
- * @author Madhuvanthi
  */
 public class TournamentEngine implements Engine {
     /**

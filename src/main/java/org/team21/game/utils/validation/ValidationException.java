@@ -2,7 +2,6 @@ package org.team21.game.utils.validation;
 
 /**
  * This class manages invalid console commands
- * @author Madhuvanthi Hemanathan
  */
 public class ValidationException extends Exception {
     /**

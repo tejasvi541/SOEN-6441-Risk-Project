@@ -6,7 +6,6 @@ import java.util.Scanner;
 /**
  * Human Strategy class, taking command inputs from human player.
  *
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class HumanStrategy extends PlayerStrategy implements Serializable {

@@ -17,11 +17,6 @@ import java.util.stream.Collectors;
 /**
  * This class is used to create map using game console commands.
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class MapEditorController implements GameFlowManager {

@@ -23,11 +23,6 @@ import java.util.stream.Collectors;
 /**
  * This class implements the Game Controller and it executes the current phases
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class StartGameController implements GameFlowManager {

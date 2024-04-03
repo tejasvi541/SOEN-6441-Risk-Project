@@ -8,11 +8,6 @@ import java.io.Serializable;
 /**
  * A class with the information of Order details
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  */
 public class OrderInformation implements Serializable {
     /**
