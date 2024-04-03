@@ -1,7 +1,7 @@
 package org.team21.game.game_engine;
 
-import org.team21.game.interfaces.Engine;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.Engine;
+import org.team21.game.interfaces.game.GameManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.validation.InvalidExecutionException;
 import org.team21.game.utils.validation.ValidationException;

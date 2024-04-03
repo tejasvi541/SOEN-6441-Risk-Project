@@ -2,7 +2,7 @@ package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.game_engine.GameSettings;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.GameManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;

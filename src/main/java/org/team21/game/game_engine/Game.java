@@ -1,6 +1,6 @@
 package org.team21.game.game_engine;
 
-import org.team21.game.interfaces.Engine;
+import org.team21.game.interfaces.game.Engine;
 import org.team21.game.utils.logger.ConsoleWriter;
 import org.team21.game.utils.logger.LogEntryBuffer;
 import org.team21.game.utils.logger.LogEntryWriter;

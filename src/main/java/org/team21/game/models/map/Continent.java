@@ -119,4 +119,12 @@ public class Continent implements Serializable {
         }
         return d_Countries;
     }
+
+    /**
+     * Set countries for the testing and adding countries in continents
+     * @param p_Countries
+     */
+    public void setCountries(Set<Country> p_Countries) {
+        this.d_Countries = p_Countries;
+    }
 }

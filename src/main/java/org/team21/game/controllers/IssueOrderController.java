@@ -1,7 +1,7 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.interfaces.GameManager;
+import org.team21.game.interfaces.game.GameManager;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
