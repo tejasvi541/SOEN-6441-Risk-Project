@@ -2,7 +2,7 @@ package org.team21.game.models.order;
 
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class DeployOrder extends Order implements Serializable {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Constructor for class DeployOrder

@@ -8,7 +8,7 @@ import java.io.*;
  * A class implementing Observer which observes LogEntryBuffer and writes to log file
  *
  */
-public class LogEntryWriter implements Observer, Serializable {
+public class GameLogFileWriter implements Observer, Serializable {
     /**
      * File name for logger
      */
@@ -17,7 +17,7 @@ public class LogEntryWriter implements Observer, Serializable {
     /**
      * log entry writer
      */
-    public LogEntryWriter() {
+    public GameLogFileWriter() {
         clearLogs();
     }
 

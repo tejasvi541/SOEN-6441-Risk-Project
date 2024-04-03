@@ -13,11 +13,11 @@ import java.util.Objects;
  * Singleton class
  *
  */
-public class LogEntryBuffer implements Observable, Serializable {
+public class GameEventLogger implements Observable, Serializable {
     /**
      * A static object of LogEntryBuffer
      */
-    private static LogEntryBuffer Logger;
+    private static GameEventLogger Logger;
     /**
      * A list of observers
      */
@@ -26,7 +26,7 @@ public class LogEntryBuffer implements Observable, Serializable {
     /**
      * A constructor for LogEntryBuffer
      */
-    private LogEntryBuffer() {
+    private GameEventLogger() {
 
     }
 
@@ -34,9 +34,9 @@ public class LogEntryBuffer implements Observable, Serializable {
      * A function to get the instance of LogEntryBuffer
      * @return LogEntryBuffer Logger
      */
-    public static LogEntryBuffer getInstance() {
+    public static GameEventLogger getInstance() {
         if (Objects.isNull(Logger)) {
-            Logger = new LogEntryBuffer();
+            Logger = new GameEventLogger();
         }
         return Logger;
     }

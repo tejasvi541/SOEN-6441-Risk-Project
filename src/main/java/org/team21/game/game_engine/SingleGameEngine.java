@@ -9,7 +9,7 @@ import org.team21.game.models.tournament.TournamentResult;
 import org.team21.game.models.map.MapReader;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class SingleGameEngine implements Engine {
     /**
      * the logger observable
      */
-    private LogEntryBuffer d_Logger;
+    private GameEventLogger d_Logger;
     /**
      * tournament options
      */
@@ -39,7 +39,7 @@ public class SingleGameEngine implements Engine {
      * constructor for single game engine
      */
     public SingleGameEngine() {
-        d_Logger = LogEntryBuffer.getInstance();
+        d_Logger = GameEventLogger.getInstance();
         d_Options = new TournamentOptions();
         init();
     }

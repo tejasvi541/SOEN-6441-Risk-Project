@@ -1,9 +1,9 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
-import org.team21.game.utils.logger.ConsoleWriter;
-import org.team21.game.utils.logger.LogEntryBuffer;
-import org.team21.game.utils.logger.LogEntryWriter;
+import org.team21.game.utils.logger.GameConsoleWriter;
+import org.team21.game.utils.logger.GameEventLogger;
+import org.team21.game.utils.logger.GameLogFileWriter;
 
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class Game {
     /**
      * logger observable
      */
-    private final LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private final GameEventLogger d_Logger = GameEventLogger.getInstance();
     /**
      * game phase
      */
@@ -28,8 +28,8 @@ public class Game {
      * Default Constructor
      */
     public Game() {
-        d_Logger.addObserver(new LogEntryWriter());
-        d_Logger.addObserver(new ConsoleWriter());
+        d_Logger.addObserver(new GameLogFileWriter());
+        d_Logger.addObserver(new GameConsoleWriter());
     }
     /**
      * method to implement main class to start game

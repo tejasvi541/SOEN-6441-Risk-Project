@@ -7,7 +7,7 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.utils.adapter.Adaptee;
 import org.team21.game.utils.adapter.Adapter;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
 
@@ -49,7 +49,7 @@ public class StartGameController implements GameFlowManager {
     /**
      * LogEntry Buffer Instance
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * This is the default constructor

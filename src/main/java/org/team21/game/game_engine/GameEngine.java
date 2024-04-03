@@ -5,7 +5,7 @@ import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.validation.InvalidExecutionException;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.Objects;
 
@@ -25,7 +25,7 @@ public class GameEngine implements Engine {
      * Creating Logger Observable
      * Single Instance needs to be maintained (Singleton)
      */
-    private static LogEntryBuffer d_Logger;
+    private static GameEventLogger d_Logger;
 
     /**
      * gamephase instance for the state
@@ -38,7 +38,7 @@ public class GameEngine implements Engine {
     public GameEngine() {
         d_GameSettings = GameSettings.getInstance();
         d_GameSettings.setStrategy("default");
-        d_Logger = LogEntryBuffer.getInstance();
+        d_Logger = GameEventLogger.getInstance();
         d_Logger.clear();
     }
 

@@ -8,12 +8,13 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
 import org.team21.game.game_engine.GameProgress;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
 /**
  * Class which is the controller for the Issue Order phase
+ *
  *
  * @version 1.0.0
  */
@@ -46,7 +47,7 @@ public class IssueOrderController implements GameFlowManager {
     /**
      * Log Entry
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Constructor to get the GameMap instance
