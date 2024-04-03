@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * This is the class to create card and assign the Card Type randomly
- *
+ * @author Kapil Soni
  * @version 1.0.0
  */
 public class Card {
