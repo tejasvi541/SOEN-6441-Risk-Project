@@ -5,9 +5,12 @@ import java.util.List;
 
 /**
  * This class handles defined constants
- *
+ * @author Meet Boghani
  * @author Bharti Chhabra
  * @author Kapil Soni
+ * @author Nishith Soni
+ * @author Yesha Shah
+ * @author Tejasvi
  * @version 1.0.1
  */
 public final class Constants {

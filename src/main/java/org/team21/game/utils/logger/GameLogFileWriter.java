@@ -6,7 +6,7 @@ import java.io.*;
 
 /**
  * A class implementing Observer which observes LogEntryBuffer and writes to log file
- *
+ * @author Nishith Soni
  */
 public class GameLogFileWriter implements Observer, Serializable {
     /**

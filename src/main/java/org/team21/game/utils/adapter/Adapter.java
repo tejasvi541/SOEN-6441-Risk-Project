@@ -7,7 +7,7 @@ import org.team21.game.utils.validation.ValidationException;
 import java.io.IOException;
 /**
  * This class is used to implement Adapter Pattern
- *
+ * @author Meet Boghani
  */
 public class Adapter extends DominationMap {
     /**

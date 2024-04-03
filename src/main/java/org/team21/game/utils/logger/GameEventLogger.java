@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * This class gets all the actions of the game. It is an Observable.
  * Singleton class
- *
+ * @author Kapil Soni
  */
 public class GameEventLogger implements Observable, Serializable {
     /**

@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 /**
  * This class is used for reading and writing map files in Conquest format
- *
+ * @author Meet Boghani
  */
 public class Adaptee {
     /**
