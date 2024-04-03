@@ -6,7 +6,7 @@ import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 /**
  * This is a class which contains the Execute Order phase
@@ -33,7 +33,7 @@ public class ExecuteOrderController implements GameFlowManager {
     /**
      * Log entry Buffer Object
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * This is the default constructor

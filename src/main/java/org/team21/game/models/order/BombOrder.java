@@ -4,7 +4,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 
@@ -21,7 +21,7 @@ public class BombOrder extends Order implements Serializable {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * This is the Constructor for Bomb Order class

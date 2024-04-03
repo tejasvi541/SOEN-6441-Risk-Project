@@ -3,7 +3,7 @@ package org.team21.game.controllers;
 import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.game_engine.GameProgress;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class LoadGameController implements GameFlowManager {
     /**
      * logger to print
      */
-    private final LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private final GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * a method to execute the phase

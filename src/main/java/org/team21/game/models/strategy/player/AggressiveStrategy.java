@@ -6,7 +6,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.order.*;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Ordered list based on number of armies

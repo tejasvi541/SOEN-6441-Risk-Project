@@ -2,7 +2,7 @@ package org.team21.game.game_engine;
 
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -22,7 +22,7 @@ public class GameProgress {
     /**
      * LogEntry Buffer Instance
      */
-    private static LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * A function to save the game progress

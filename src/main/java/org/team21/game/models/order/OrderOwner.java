@@ -3,7 +3,7 @@ package org.team21.game.models.order;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 import java.util.StringJoiner;
@@ -21,7 +21,7 @@ public class OrderOwner implements Serializable {
     /**
      * Logger Observable
      */
-    private static LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * A function to create an order

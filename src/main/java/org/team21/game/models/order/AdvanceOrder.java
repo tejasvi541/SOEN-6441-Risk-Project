@@ -4,7 +4,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.game_engine.GameSettings;
 import org.team21.game.models.map.Player;
 import org.team21.game.interfaces.game.GameStrategy;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -27,7 +27,7 @@ public class AdvanceOrder extends Order implements Serializable {
     /**
      * Log Entry Buffer Object
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Constructor for class AdvanceOrder

@@ -3,7 +3,7 @@ package org.team21.game.utils.adapter;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
 import java.io.*;
@@ -17,7 +17,7 @@ public class Adaptee {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
     /**
      * Loads a map from a given file and returns it.
      * Note that attributes not used by this game are ignored and not loaded.

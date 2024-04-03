@@ -5,7 +5,7 @@ import org.team21.game.models.cards.Card;
 import org.team21.game.models.map.Country;
 import org.team21.game.game_engine.GameSettings;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.stream.IntStream;
 
@@ -22,7 +22,7 @@ public class DiceStrategy implements GameStrategy {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Method holding the default attack logic
