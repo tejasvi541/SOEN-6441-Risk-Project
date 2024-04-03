@@ -15,11 +15,6 @@ import java.util.stream.Collectors;
 /**
  * Concrete class with the details of the player
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  * @version 1.0.0
  */
 

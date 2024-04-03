@@ -3,7 +3,6 @@ package org.team21.game.interfaces.observers;
 /**
  * An interface for implementation of Observer with an update function
  *
- * @author Dhananjay Narayan
  */
 public interface Observer {
 

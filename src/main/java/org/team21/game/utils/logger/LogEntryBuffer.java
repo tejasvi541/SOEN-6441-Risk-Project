@@ -12,9 +12,6 @@ import java.util.Objects;
  * This class gets all the actions of the game. It is an Observable.
  * Singleton class
  *
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi
  */
 public class LogEntryBuffer implements Observable, Serializable {
     /**

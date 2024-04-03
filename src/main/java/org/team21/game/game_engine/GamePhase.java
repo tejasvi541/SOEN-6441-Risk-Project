@@ -13,11 +13,6 @@ import java.util.List;
  * from current state.</p>
  * Also provides respective {@code controller object} for each state.
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public enum GamePhase {

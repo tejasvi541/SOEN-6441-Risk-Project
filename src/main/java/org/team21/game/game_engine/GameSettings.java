@@ -11,7 +11,6 @@ import java.util.Objects;
 /**
  * Class containing the different strategy settings for advance order calculation.
  *
- * @author Madhuvanthi Hemanathan
  */
 public class GameSettings {
     /**

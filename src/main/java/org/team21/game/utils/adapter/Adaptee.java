@@ -10,7 +10,6 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 /**
- * @author surya manian
  * This class is used for reading and writing map files in Conquest format
  *
  */

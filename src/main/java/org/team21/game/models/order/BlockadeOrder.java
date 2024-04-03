@@ -12,7 +12,6 @@ import java.io.Serializable;
 /**
  * This class helps in executing the Blockade Card
  *
- * @author Dhananjay
  */
 public class BlockadeOrder extends Order implements Serializable {
     /**

@@ -12,11 +12,6 @@ import java.util.Objects;
 /**
  * A class to start the game with the Map Editor Phase
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class GameEngine implements Engine {

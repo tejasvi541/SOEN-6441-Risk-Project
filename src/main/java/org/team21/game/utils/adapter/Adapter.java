@@ -6,7 +6,6 @@ import org.team21.game.utils.validation.ValidationException;
 
 import java.io.IOException;
 /**
- * @author surya manian
  * This class is used to implement Adapter Pattern
  *
  */

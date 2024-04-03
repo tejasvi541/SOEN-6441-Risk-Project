@@ -10,7 +10,6 @@ import java.util.Set;
 /**
  * Class to implement the tournament options
  *
- * @author Madhuvanthi
  */
 public class TournamentOptions {
 

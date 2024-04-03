@@ -5,7 +5,6 @@ import org.team21.game.models.map.Player;
 /**
  * Abstract class holding the different types of player.
  *
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public abstract class PlayerStrategy {

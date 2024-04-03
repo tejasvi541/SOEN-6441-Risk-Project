@@ -11,11 +11,6 @@ import org.team21.game.utils.validation.ValidationException;
 /**
  * Controller for {@code Reinforcement} phase of game.
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class ReinforcementController implements GameFlowManager {

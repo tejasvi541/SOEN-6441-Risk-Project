@@ -5,11 +5,6 @@ import java.io.Serializable;
 /**
  * Concrete Class to manage the orders of the players
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  * @version 1.0.0
  */
 public abstract class Order implements Serializable {

@@ -6,7 +6,6 @@ import org.team21.game.game_engine.GamePhase;
  * Interface containing {@code start} method for the
  * controllers of the game phases to implement
  *
- * @author Madhuvanthi Hemanathan
  * @version 1.0
  */
 

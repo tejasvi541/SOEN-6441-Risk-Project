@@ -12,7 +12,6 @@ import java.util.stream.IntStream;
 /**
  * Class holding the Dice strategy for advance logic
  *
- * @author Madhuvanthi Hemanathan
  */
 public class DiceStrategy implements GameStrategy {
     /**

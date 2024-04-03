@@ -11,11 +11,6 @@ import org.team21.game.utils.logger.LogEntryBuffer;
 /**
  * This is a class which contains the Execute Order phase
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public class ExecuteOrderController implements GameFlowManager {
