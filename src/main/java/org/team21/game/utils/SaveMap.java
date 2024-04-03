@@ -8,9 +8,6 @@ import java.io.PrintWriter;
 import java.util.Set;
 /**
  * This class is used to save map as a text file
- * @author Dhananjay Narayan
- * @author Neona
- * @author Surya
  */
 public class SaveMap {
 

@@ -1,7 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.controllers.*;
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,11 +13,6 @@ import java.util.List;
  * from current state.</p>
  * Also provides respective {@code controller object} for each state.
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
 public enum GamePhase {
@@ -43,7 +38,7 @@ public enum GamePhase {
          * @return MapEditor Object
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return new MapEditorController();
         }
     },
@@ -69,7 +64,7 @@ public enum GamePhase {
          * @return loadgame object
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return new LoadGameController();
         }
     },
@@ -97,8 +92,8 @@ public enum GamePhase {
          * @return GamePlay Object
          */
         @Override
-        public GameManager getController() {
-            return new GamePlayController();
+        public GameFlowManager getController() {
+            return new StartGameController();
         }
     },
 
@@ -125,7 +120,7 @@ public enum GamePhase {
          * @return Reinforcement Object
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return new ReinforcementController();
         }
     },
@@ -152,7 +147,7 @@ public enum GamePhase {
          * @return IssueOrder Object
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return new IssueOrderController();
         }
     },
@@ -179,7 +174,7 @@ public enum GamePhase {
          * @return ExecuteOrder Object
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return new ExecuteOrderController();
         }
     },
@@ -206,7 +201,7 @@ public enum GamePhase {
          * @return null
          */
         @Override
-        public GameManager getController() {
+        public GameFlowManager getController() {
             return null;
         }
     };
@@ -236,5 +231,5 @@ public enum GamePhase {
      *
      * @return Respective Controller object
      */
-    public abstract GameManager getController();
+    public abstract GameFlowManager getController();
 }

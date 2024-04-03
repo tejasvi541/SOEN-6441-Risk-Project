@@ -2,7 +2,6 @@ package org.team21.game.utils.validation;
 
 /**
  * This class manages invalid execution of commands in the game stage
- * @author Madhuvanthi Hemanathan
  */
 public class InvalidExecutionException extends Exception {
     /**

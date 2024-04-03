@@ -11,11 +11,6 @@ import java.util.StringJoiner;
 /**
  * A class to create Orders in the game.
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  */
 public class OrderOwner implements Serializable {
     /**

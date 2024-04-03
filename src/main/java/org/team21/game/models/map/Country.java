@@ -8,11 +8,6 @@ import java.util.Set;
 /**
  * Concrete Class to set and get all the properties of country.
  *
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
- * @author Prathika Suvarna
  */
 public class Country implements Serializable {
     /**

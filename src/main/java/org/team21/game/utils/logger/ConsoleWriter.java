@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 /**
  * A class to enable writing to console using the observer patter.
- * @author Madhuvanthi
  */
 public class ConsoleWriter implements Observer, Serializable {
 

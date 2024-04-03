@@ -1,6 +1,6 @@
 package org.team21.game.controllers;
 
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.models.map.MapReader;
@@ -17,14 +17,9 @@ import java.util.stream.Collectors;
 /**
  * This class is used to create map using game console commands.
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class MapEditorController implements GameManager {
+public class MapEditorController implements GameFlowManager {
     /**
      * A data member for scanner
      */

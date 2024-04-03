@@ -2,7 +2,7 @@ package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.game_engine.GameSettings;
-import org.team21.game.interfaces.game.GameManager;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
@@ -11,14 +11,9 @@ import org.team21.game.utils.logger.LogEntryBuffer;
 /**
  * This is a class which contains the Execute Order phase
  *
- * @author Prathika Suvarna
- * @author Neona Pinto
- * @author Dhananjay Narayan
- * @author Surya Manian
- * @author Madhuvanthi Hemanathan
  * @version 1.0.0
  */
-public class ExecuteOrderController implements GameManager {
+public class ExecuteOrderController implements GameFlowManager {
     /**
      * Reinforcement Phase enum keyword
      */
