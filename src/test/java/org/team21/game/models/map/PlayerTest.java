@@ -72,11 +72,9 @@ public class PlayerTest extends Player {
 
     /**
      * Tears down the test environment after each test method execution.
-     *
-     * @throws Exception when teardown fails
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         gameMap.getContinents().clear();
         gameMap.getCountries().clear();
         gameMap.getPlayers().clear();

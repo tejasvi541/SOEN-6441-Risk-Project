@@ -1,6 +1,5 @@
 package org.team21.game.models.map;
 
-import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.logger.LogEntryBuffer;
 import org.team21.game.utils.validation.ValidationException;
 

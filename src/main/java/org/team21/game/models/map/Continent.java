@@ -111,7 +111,7 @@ public class Continent implements Serializable {
     /**
      * Returns the list of countries belonging to the continent
      *
-     * @return list of countries
+     * @return set of countries
      */
     public Set<Country> getCountries() {
         if (d_Countries == null) {
@@ -122,7 +122,7 @@ public class Continent implements Serializable {
 
     /**
      * Set countries for the testing and adding countries in continents
-     * @param p_Countries
+     * @param p_Countries holds the set of countries
      */
     public void setCountries(Set<Country> p_Countries) {
         this.d_Countries = p_Countries;
