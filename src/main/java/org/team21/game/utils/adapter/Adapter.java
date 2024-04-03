@@ -42,9 +42,8 @@ public class Adapter extends DominationMap {
      * @param map The map to save.
      * @param fileName The name of the file to save to, including the extension.
      * @return Whether the file was successfully saved.
-     * @throws IOException files exception
      */
-    public boolean saveMap(GameMap map, String fileName)  throws IOException {
+    public boolean saveMap(GameMap map, String fileName) {
         return d_adp.saveMap(map, fileName);
     }
 

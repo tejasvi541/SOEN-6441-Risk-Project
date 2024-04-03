@@ -50,10 +50,9 @@ public class MapValidationTest {
 
     /**
      * Cleans up the test environment after each test method.
-     * @throws Exception if cleanup fails
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         gameMap.getContinents().clear();
         gameMap.getCountries().clear();
         gameMap.getPlayers().clear();

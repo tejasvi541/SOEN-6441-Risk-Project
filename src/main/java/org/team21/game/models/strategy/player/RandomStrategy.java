@@ -37,10 +37,10 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
     /**
      * Get a random player other than itself
      *
-     * @param p_Player current player
+     * @param d_Player current player
      * @return Random Player
      */
-    protected Player getRandomPlayer(Player p_Player) {
+    protected Player getRandomPlayer(Player d_Player) {
         List<Country> l_Enemies = d_Player.getCapturedCountries().stream()
                 .flatMap(country -> country.getNeighbors().stream())
                 .filter(country -> !country.getPlayer().getName().equals(d_Player.getName()))

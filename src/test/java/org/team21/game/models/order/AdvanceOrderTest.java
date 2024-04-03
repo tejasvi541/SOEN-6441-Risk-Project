@@ -33,13 +33,13 @@ public class AdvanceOrderTest {
      */
     @Before
     public void setUp() throws Exception {
-        /**
-         * Singleton game map instance
+        /*
+          Singleton game map instance
          */
         gameMap = GameMap.getInstance();
 
-        /**
-         * Singleton game settings instance
+        /*
+          Singleton game settings instance
          */
         GameSettings gameSettings = GameSettings.getInstance();
         gameSettings.setStrategy("dice");
@@ -70,11 +70,9 @@ public class AdvanceOrderTest {
 
     /**
      * Cleans up the environment after each test case runs.
-     *
-     * @throws Exception if an exception occurs during teardown.
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         gameMap.flushGameMap();
     }
 

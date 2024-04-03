@@ -1,5 +1,6 @@
 package org.team21.game.models.map;
 
+
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 

@@ -49,11 +49,9 @@ public class DeployOrderTest {
 
     /**
      * Clears the instance after each test case.
-     *
-     * @throws Exception if an exception occurs during teardown
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         gameMap.flushGameMap();
     }
 
