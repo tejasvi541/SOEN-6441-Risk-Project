@@ -52,11 +52,9 @@ public class AirliftOrderTest {
 
     /**
      * Clear the instance
-     *
-     * @throws Exception in case of any exception
      */
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         gameMap.flushGameMap();
     }
 

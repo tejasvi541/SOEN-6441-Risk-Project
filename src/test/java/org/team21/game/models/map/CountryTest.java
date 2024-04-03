@@ -17,7 +17,7 @@ public class CountryTest {
 
     /**
      * This function setups every test case
-     * @throws Exception
+     * @throws Exception if an error occurs during the setup process.
      */
     @Before
     public void setUp() throws Exception {

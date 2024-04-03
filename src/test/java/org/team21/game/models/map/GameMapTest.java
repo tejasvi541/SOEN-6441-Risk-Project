@@ -2,10 +2,8 @@ package org.team21.game.models.map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.validation.ValidationException;
 
-import java.io.IOException;
 import static org.junit.Assert.*;
 
 /**

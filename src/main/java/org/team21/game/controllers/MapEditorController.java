@@ -80,8 +80,8 @@ public class MapEditorController implements GameManager {
                 }
             }
 
-            /**
-             * Handle editcontinent command from console
+            /*
+              Handle editcontinent command from console
              */
 
             String l_MainCommand = l_InputList.get(0);
@@ -113,8 +113,8 @@ public class MapEditorController implements GameManager {
                         break;
                     }
 
-                    /**
-                     * Handle editcountry command from console
+                    /*
+                      Handle editcountry command from console
                      */
 
                     case "editcountry": {
@@ -139,8 +139,8 @@ public class MapEditorController implements GameManager {
                         break;
                     }
 
-                    /**
-                     * Handle editneighbor command from console
+                    /*
+                      Handle editneighbor command from console
                      */
 
                     case "editneighbor": {

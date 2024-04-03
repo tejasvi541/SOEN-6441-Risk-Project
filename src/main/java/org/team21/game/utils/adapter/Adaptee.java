@@ -31,9 +31,7 @@ public class Adaptee {
     public void readMap(GameMap p_GameMap, String p_FileName) throws ValidationException {
         d_Logger.clear();
         d_Logger.log("Conquest map is loaded \n");
-        /**
-         *
-         */
+
         try {
             p_GameMap.flushGameMap();
             File l_File = new File("maps/" + p_FileName);
@@ -133,11 +131,10 @@ public class Adaptee {
      * @param p_FileName name of file
      * @param p_Map parameter o GameMap class
      * @return boolean true if written
-     * @throws IOException file exception
      */
 
 
-    public boolean saveMap(GameMap p_Map, String p_FileName) throws IOException {
+    public boolean saveMap(GameMap p_Map, String p_FileName) {
         String l_MapData = "[Map]\nauthor=Anonymous\n[Continents]\\n";
         for (Continent l_Continent : p_Map.getContinents().values()) {
             l_MapData += l_Continent.getName() + "=" + l_Continent.getAwardArmies();
