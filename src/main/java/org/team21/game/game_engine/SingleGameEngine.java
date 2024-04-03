@@ -15,6 +15,7 @@ import java.util.*;
 
 /**
  * class to implement single game engine
+ * @author Bharti Chhabra
  */
 public class SingleGameEngine implements Engine {
 

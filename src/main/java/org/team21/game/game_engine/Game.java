@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Class to implement the game
+ * @author Kapil Soni
  */
 public class Game {
     /**

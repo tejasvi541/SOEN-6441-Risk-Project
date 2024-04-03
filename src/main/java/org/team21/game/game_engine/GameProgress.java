@@ -12,7 +12,7 @@ import java.nio.file.Path;
 /**
  *  A class to save and load game progress
  *  @version 1.0.0
- *
+ * @author Tejasvi
  */
 public class GameProgress {
     /**
