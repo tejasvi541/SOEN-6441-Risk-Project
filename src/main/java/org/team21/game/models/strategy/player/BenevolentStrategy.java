@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * Class that implements the Benevolent Player Strategy
- *
+ * @author Nishith Soni
  * @version 1.0.0
  */
 public class BenevolentStrategy extends PlayerStrategy implements Serializable {
