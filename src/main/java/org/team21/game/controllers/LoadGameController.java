@@ -9,6 +9,12 @@ import java.util.Scanner;
 
 /**
  * Loadgame controller
+ * @author Kapil Soni
+ * @author Meet Boghani
+ * @author Tejasvi
+ * @author Nishith Soni
+ * @author Bharti Chhabra
+ * @author Yesha Shah
  */
 public class LoadGameController implements GameFlowManager {
 
