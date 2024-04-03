@@ -269,14 +269,19 @@ public final class Constants {
      */
     public static void showIssueOrderCommand() {
         System.out.println("Please remember when all the member determines their command please use pass to execute orders");
+        System.out.println(Constants.SEPERATER);
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
+        System.out.println("To execute game further use : pass");
+        System.out.println("To see map : showmap");
+        System.out.println(Constants.SEPERATER);
+        System.out.println("Below commands can be used only if you have the desired card.");
+        System.out.println(Constants.SEPERATER);
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
-        System.out.println("To execute game further use : pass");
-        System.out.println("To see map : showmap");
+        System.out.println(Constants.SEPERATER);
     }
 
     /**

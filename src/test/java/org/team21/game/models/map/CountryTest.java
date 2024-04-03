@@ -1,152 +1,100 @@
 package org.team21.game.models.map;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.team21.game.models.game_play.Player;
+import org.team21.game.models.strategy.player.PlayerStrategy;
 
 import static org.junit.Assert.*;
 
-
 /**
- * The type Country test.
- *
- * @author Nishith
+ * Test Cases for various functions in Country class
+ * @author Tejasvi
  */
 public class CountryTest {
 
+    private Country d_Country;
+    Player l_player = new Player(PlayerStrategy.getStrategy("human"));
+
     /**
-     * Country initialization test.
+     * This function setups every test case
+     * @throws Exception if an error occurs during the setup process.
      */
-    @Test
-    public void countryInitializationTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        assertNotNull(l_Country);
-        assertEquals("Country1", l_Country.getCountryId());
-        assertEquals("Continent1", l_Country.getParentContinent());
+    @Before
+    public void setUp() throws Exception {
+        l_player.setName("Harsh");
+        d_Country = new Country();
+        d_Country.setContinent("Asia");
+        d_Country.setId("India");
+        d_Country.setArmies(10);
+        d_Country.setPlayer(l_player);
+        d_Country.setName("India");
     }
 
     /**
-     * Add neighbor test.
+     * Test getId
      */
     @Test
-    public void addNeighborTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        Country l_Neighbor = new Country("Country2", "Continent1");
-        l_Country.getNeighbours().put("Country2", l_Neighbor);
-        assertTrue(l_Country.getNeighbours().containsKey("Country2"));
-        assertEquals(l_Neighbor, l_Country.getNeighbours().get("Country2"));
+    public void getId() {
+        assertEquals("India", d_Country.getId());
     }
 
     /**
-     * Remove neighbor test.
+     * Test getName
      */
     @Test
-    public void removeNeighborTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        Country l_Neighbor = new Country("Country2", "Continent1");
-        l_Country.getNeighbours().put("Country2", l_Neighbor);
-        l_Country.getNeighbours().remove("Country2");
-        assertFalse(l_Country.getNeighbours().containsKey("Country2"));
+    public void getName() {
+        assertEquals("India", d_Country.getName());
+
     }
 
     /**
-     * Deploy armies test.
+     * Test the name of continent of country
      */
     @Test
-    public void deployArmiesTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setArmies(5);
-        l_Country.deployArmies(3);
-        assertEquals(8, l_Country.getArmies());
+    public void getContinent() {
+        assertEquals("Asia", d_Country.getContinent());
     }
 
     /**
-     * Reduce armies test.
+     * Test getting player who owns the country
      */
     @Test
-    public void reduceArmiesTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setArmies(10);
-        assertEquals(10, l_Country.getArmies());
+    public void getPlayer() {
+        assertEquals(d_Country.getPlayer(), l_player);
     }
 
     /**
-     * Reduce armies insufficient test.
+     * Test to check no. of armies
      */
     @Test
-    public void reduceArmiesInsufficientTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setArmies(2);
-        assertEquals(2, l_Country.getArmies());
+    public void getArmies() {
+        assertEquals(d_Country.getArmies(), 10);
     }
 
     /**
-     * Modify country id test.
+     * Test to add more armies
      */
     @Test
-    public void modifyCountryIdTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setCountryId("NewCountry1");
-        assertEquals("NewCountry1", l_Country.getCountryId());
+    public void deployArmies() {
+        d_Country.deployArmies(5);
+        assertEquals(d_Country.getArmies(), 15);
     }
 
     /**
-     * Modify continent test.
+     * Test to depleat armies
      */
     @Test
-    public void modifyContinentTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setParentContinent("NewContinent1");
-        assertEquals("NewContinent1", l_Country.getParentContinent());
+    public void depleteArmies() {
+        d_Country.depleteArmies(5);
+        assertEquals(d_Country.getArmies(), 5);
     }
 
     /**
-     * Modify number of armies test.
+     * Test to check the neighbor
      */
     @Test
-    public void modifyNumberOfArmiesTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setNumberOfArmies(15);
-        assertEquals(15, l_Country.getNumberOfArmies());
+    public void isNeighbor() {
+        assertEquals(d_Country.getNeighborsName().contains("Pakistant"), false);
     }
 
-    /**
-     * Sets and get player test.
-     */
-    @Test
-    public void setAndGetPlayerTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        Player l_Player = new Player();
-        l_Country.setPlayer(l_Player);
-        assertEquals(l_Player, l_Country.getPlayer());
-    }
-
-    /**
-     * Sets and get armies test.
-     */
-    @Test
-    public void setAndGetArmiesTest() {
-        Country l_Country = new Country("Country1", "Continent1");
-        l_Country.setArmies(20);
-        assertEquals(20, l_Country.getArmies());
-    }
-
-    /**
-     * Sets and get country file index test.
-     */
-    @Test
-    public void setAndGetCountryFileIndexTest() {
-        Country l_Country = new Country();
-        l_Country.setCountryFileIndex(5);
-        assertEquals(5, l_Country.getCountryFileIndex());
-    }
-
-    /**
-     * Sets and get coordinates test.
-     */
-    @Test
-    public void setAndGetCoordinatesTest() {
-        Country l_Country = new Country();
-        l_Country.setXCoordinate(10);
-        l_Country.setYCoordinate(20);
-    }
 }

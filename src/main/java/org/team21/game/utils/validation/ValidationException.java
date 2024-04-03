@@ -1,19 +1,16 @@
 package org.team21.game.utils.validation;
 
 /**
- * This class handles user-defined exceptions that are raised during the normal execution
- *
- * @author Bharti Chhabra
- * @version 1.0.0
+ * This class manages invalid console commands
  */
 public class ValidationException extends Exception {
     /**
      * initialising a string to hold message
      */
-    String d_ErrorMessage = "Invalid input.Try again!";
+    String d_Message = "Invalid command. Type help to know further";
 
     /**
-     * Default Validation Exception Constructor
+     * Validation Exception Constructor
      */
     public ValidationException() {
         super();
@@ -21,7 +18,6 @@ public class ValidationException extends Exception {
 
     /**
      * Exception message
-     *
      * @param message exception message
      */
     public ValidationException(String message) {
@@ -30,14 +26,13 @@ public class ValidationException extends Exception {
 
     /**
      * Get the message and check for exception
-     *
      * @return the message
      */
     @Override
     public String getMessage() {
-        if (super.getMessage() != null) {
+        if(super.getMessage() != null) {
             return super.getMessage();
         }
-        return d_ErrorMessage;
+        return d_Message;
     }
 }

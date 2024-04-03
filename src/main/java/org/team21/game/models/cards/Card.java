@@ -1,25 +1,27 @@
 package org.team21.game.models.cards;
+
 import java.util.Objects;
 
 /**
- * This is the Card class use to set Cards and get random cards
- * @author Tejasvi
+ * This is the class to create card and assign the Card Type randomly
+ *
+ * @version 1.0.0
  */
 public class Card {
     /**
-     * Private data member holding the card type
+     * Data member to hold cardtype
      */
     private CardType d_CardType;
 
     /**
-     * Card class constructor, initialise the d_CardType.
+     * This is a Constructor for Class Card
      */
-    public Card(){
+    public Card() {
         d_CardType = CardType.getRandomCard();
     }
 
     /**
-     * Parameterised Constructor to populate d_CardType member with desired card
+     * Constructor to create card object with specified card type
      *
      * @param p_CardType The card type
      */
@@ -27,41 +29,47 @@ public class Card {
         d_CardType = p_CardType;
     }
 
+
     /**
-     * Getter function for CarD
-     * @return current Card
+     * This method is used to get the Card Type
+     *
+     * @return the Card Type
      */
-    public CardType getCard(){
-        return this.d_CardType;
+    public CardType getCardType() {
+        return d_CardType;
     }
 
     /**
-     * Setter function of d_CardType member
-     * @param p_CardType Object
+     * Setter for Card type
+     *
+     * @param p_cardType The card type
      */
-    public void setCard(CardType p_CardType){
-        this.d_CardType = p_CardType;
+    public void setCardType(CardType p_cardType) {
+        d_CardType = p_cardType;
     }
 
     /**
-     * This method returns the hashcode of the object
+     * Method to check the object equality
+     *
+     * @param p_Obj The object which should be compared
+     * @return true if objects are equal else false
+     */
+    @Override
+    public boolean equals(Object p_Obj) {
+        if (this == p_Obj) return true;
+        if (!(p_Obj instanceof Card)) return false;
+        Card l_Card = (Card) p_Obj;
+        return d_CardType == l_Card.d_CardType;
+    }
+
+    /**
+     * Method to return the hashcode of object.
+     *
      * @return object's hash code
      */
     @Override
     public int hashCode() {
         return Objects.hash(d_CardType);
     }
-
-    /**
-     * This method checks if 2 cards are equal or not
-     * @param p_CardObj The object with which card is going to be compared
-     * @return true/false depending on equality
-     */
-    @Override
-    public boolean equals(Object p_CardObj){
-        if(this==p_CardObj)return true;
-        if(!(p_CardObj instanceof Card l_Card)) return false;
-        return d_CardType == l_Card.d_CardType;
-    }
-
 }
+
