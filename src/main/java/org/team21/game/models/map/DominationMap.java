@@ -1,9 +1,6 @@
 package org.team21.game.models.map;
 
-import org.team21.game.models.map.Continent;
-import org.team21.game.models.map.Country;
-import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
 import java.io.*;
@@ -20,7 +17,7 @@ public class DominationMap {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
     /**
      * current line
      */

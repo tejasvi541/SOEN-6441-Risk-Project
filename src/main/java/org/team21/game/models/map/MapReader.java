@@ -1,7 +1,6 @@
 package org.team21.game.models.map;
 
-import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
 import java.io.BufferedReader;
@@ -20,7 +19,7 @@ public class MapReader {
     /**
      * Logger Observable
      */
-    private static LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * This function reads the file and places the contents of the file

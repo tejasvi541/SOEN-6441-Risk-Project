@@ -3,7 +3,7 @@ package org.team21.game.utils.validation;
 import org.team21.game.models.map.Continent;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ public class MapValidation {
     /**
      * Logger Observable
      */
-    private static LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * A function to check if the continent is empty or not.

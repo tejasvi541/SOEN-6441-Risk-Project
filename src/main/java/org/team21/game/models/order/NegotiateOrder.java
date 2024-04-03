@@ -3,7 +3,7 @@ package org.team21.game.models.order;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 
@@ -18,7 +18,7 @@ public class NegotiateOrder extends Order implements Serializable {
     /**
      * Logger variable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Constructor for class Negotiate Order

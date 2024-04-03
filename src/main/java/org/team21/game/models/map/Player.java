@@ -6,7 +6,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.order.Order;
 import org.team21.game.models.order.OrderOwner;
 import org.team21.game.models.strategy.player.PlayerStrategy;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -88,7 +88,7 @@ public class Player implements Serializable {
     /**
      * LogEntry Buffer
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * A function to get the player ID

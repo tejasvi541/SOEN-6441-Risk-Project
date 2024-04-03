@@ -3,7 +3,7 @@ package org.team21.game.models.strategy.player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
-import org.team21.game.utils.logger.LogEntryBuffer;
+import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class CheaterStrategy extends PlayerStrategy implements Serializable {
     /**
      * Logger Observable
      */
-    private LogEntryBuffer d_Logger = LogEntryBuffer.getInstance();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
      * Implementation of create command
