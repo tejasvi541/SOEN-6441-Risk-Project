@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 
 /**
  * Concrete Class to set and get all the properties of the GameMap.
- *
+ * @author Tejasvi
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class GameMap implements Serializable {

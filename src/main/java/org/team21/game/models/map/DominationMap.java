@@ -11,6 +11,8 @@ import java.util.Map;
 
 /**
  * Domination class
+ * @author Tejasvi
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class DominationMap {

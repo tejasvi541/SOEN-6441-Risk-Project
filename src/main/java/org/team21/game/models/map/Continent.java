@@ -6,7 +6,8 @@ import java.util.Set;
 
 /**
  * Concrete Class to set and get all the properties of Continent.
- *
+ * @author Tejasvi
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class Continent implements Serializable {
