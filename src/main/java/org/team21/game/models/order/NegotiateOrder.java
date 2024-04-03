@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * The class is a extended from Order, and overrides the methods from Order
+ * @author Bharti Chhabra
  */
 public class NegotiateOrder extends Order implements Serializable {
     /**

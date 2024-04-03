@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * A class with the information of Order details
- *
+ * @author Kapil Soni
  */
 public class OrderInformation implements Serializable {
     /**
