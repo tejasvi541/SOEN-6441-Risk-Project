@@ -1,7 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
-import org.team21.game.utils.logger.ConsoleWriter;
+import org.team21.game.utils.logger.GameConsoleWriter;
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.logger.GameLogFileWriter;
 
@@ -29,7 +29,7 @@ public class Game {
      */
     public Game() {
         d_Logger.addObserver(new GameLogFileWriter());
-        d_Logger.addObserver(new ConsoleWriter());
+        d_Logger.addObserver(new GameConsoleWriter());
     }
     /**
      * method to implement main class to start game

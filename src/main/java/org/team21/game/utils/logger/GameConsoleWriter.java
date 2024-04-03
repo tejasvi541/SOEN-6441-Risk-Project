@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * A class to enable writing to console using the observer patter.
  */
-public class ConsoleWriter implements Observer, Serializable {
+public class GameConsoleWriter implements Observer, Serializable {
 
     /**
      * A function to update the string to observers
