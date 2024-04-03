@@ -11,6 +11,12 @@ import java.nio.file.Path;
 
 /**
  *  A class to save and load game progress
+ *  @author Kapil Soni
+ *  @author Meet Boghani
+ *  @author Tejasvi
+ *  @author Nishith Soni
+ *  @author Bharti Chhabra
+ *  @author Yesha Shah
  *  @version 1.0.0
  *
  */
