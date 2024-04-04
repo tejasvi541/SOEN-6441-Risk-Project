@@ -9,7 +9,7 @@ import org.team21.game.utils.logger.GameEventLogger;
 
 /**
  * Class holding the default strategy of the advance order.
- *
+ * @author Yesha Shah
  */
 public class DefaultStrategy implements GameStrategy {
 

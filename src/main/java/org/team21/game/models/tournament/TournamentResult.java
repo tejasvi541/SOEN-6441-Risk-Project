@@ -2,7 +2,7 @@ package org.team21.game.models.tournament;
 
 /**
  * Class to implement the tournament result
- *
+ * @author Nishith Soni
  */
 public class TournamentResult {
     /**

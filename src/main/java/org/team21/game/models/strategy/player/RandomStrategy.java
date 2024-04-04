@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
 
 /**
  * Random Strategy class, taking random commands for tournament mode.
- *
+ * @author Tejasvi
+ * @author Kapil Soni
  * @version 1.0.0
  */
 public class RandomStrategy extends PlayerStrategy implements Serializable {

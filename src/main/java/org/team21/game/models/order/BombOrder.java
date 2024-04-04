@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * This class implements the bomb order card
- *
+ * @author Tejasvi
  */
 public class BombOrder extends Order implements Serializable {
 

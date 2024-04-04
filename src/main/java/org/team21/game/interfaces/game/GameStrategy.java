@@ -5,7 +5,7 @@ import org.team21.game.models.map.Player;
 
 /**
  * Interface class for Game Strategy
- *
+ * @author Yesha Shah
  */
 public interface GameStrategy {
 

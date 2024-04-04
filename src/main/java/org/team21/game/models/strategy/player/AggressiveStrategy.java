@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * A class to implement the Aggressive strategy for a player
- *
+ * @author Meet Boghani
  */
 public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     /**

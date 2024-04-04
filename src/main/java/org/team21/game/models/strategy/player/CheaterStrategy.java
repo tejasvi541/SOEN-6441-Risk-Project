@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * A class to implement the Cheater strategy for a player
- *
+ * @author Bharti Chhabra
  */
 
 public class CheaterStrategy extends PlayerStrategy implements Serializable {

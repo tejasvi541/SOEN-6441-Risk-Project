@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 
 /**
  * Concrete class with the details of the player
- *
+ * @author Tejasvi
+ * @author Bharti Chabbra
  * @version 1.0.0
  */
 
