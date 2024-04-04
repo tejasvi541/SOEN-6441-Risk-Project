@@ -57,6 +57,7 @@ public class MapEditorTest {
         gameMap.addPlayer("Player1");
         gameMap.addPlayer("Player2");
         gameMap.assignCountries();
+        editor.d_GameMap=gameMap;
 
     }
 
@@ -73,6 +74,9 @@ public class MapEditorTest {
         assertFalse(editor.inputValidator(input_false));
     }
 
+    /**
+     * Validate Add Continent Input.
+     */
     @Test
     public void validateAddContinentInput() {
         String string="editContinent -add Japan 10";
@@ -86,17 +90,64 @@ public class MapEditorTest {
         assertTrue(string.contains("-") && l_Strings.length == 4 && editor.inputValidator(input));
     }
 
-
+    /**
+     * Validate Add Continent Action .
+     */
     @Test
     public void validateAddContinentAction() throws ValidationException {
         String l_Command="editcontinent -add Japan 10";
         String[] l_CommandArray = l_Command.split(" ");
         if (l_CommandArray.length > 0) {
             if (l_CommandArray.length == 4) {
-                gameMap.addContinent(l_CommandArray[2], l_CommandArray[3]);
+                editor.d_GameMap.addContinent(l_CommandArray[2], l_CommandArray[3]);
             }
         }
-        assertTrue(gameMap.getContinents().containsKey("Japan"));
+        assertTrue(editor.d_GameMap.getContinents().containsKey("Japan"));
+    }
+
+    /**
+     * Validate remove Continent Action .
+     */
+    @Test
+    public void validateRemoveContinentAction() throws ValidationException {
+        String l_Command="editcontinent -remove Europe";
+        String[] l_CommandArray = l_Command.split(" ");
+        if (l_CommandArray.length > 0) {
+            if (l_CommandArray.length ==3) {
+                editor.d_GameMap.removeContinent(l_CommandArray[2]);
+            }
+        }
+        assertFalse(editor.d_GameMap.getContinents().containsKey("Europe"));
+    }
+
+
+    /**
+     * Validate Add Country Action .
+     */
+    @Test
+    public void validateAddCountryAction() throws ValidationException {
+        String l_Command="editcountry -add Pakistan Asia";
+        String[] l_CommandArray = l_Command.split(" ");
+        if (l_CommandArray.length > 0) {
+            if (l_CommandArray.length == 4) {
+                editor.d_GameMap.addCountry(l_CommandArray[2], l_CommandArray[3]);
+            }
+        }
+        assertTrue(editor.d_GameMap.getCountries().containsKey("Pakistan"));
+    }
+
+
+    /**
+     * Validate Exit Action .
+     */
+    @Test
+    public void validateExitAction() throws ValidationException {
+        String l_Command="exit";
+        String[] l_CommandArray = l_Command.split(" ");
+        if (l_CommandArray.length > 0) {
+            editor.d_GameMap.setGamePhase(nextGamePhase);
+        }
+        assertTrue(editor.d_GameMap.getGamePhase()== GamePhase.StartUp);
     }
 
 
@@ -106,6 +157,6 @@ public class MapEditorTest {
     @After
     public void tearDown() {
         // Clean up resources or release objects
-        gameMap.flushGameMap();
+        editor.d_GameMap.flushGameMap();
     }
 }
