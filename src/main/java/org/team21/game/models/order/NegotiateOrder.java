@@ -3,6 +3,7 @@ package org.team21.game.models.order;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -67,8 +68,8 @@ public class NegotiateOrder extends Order implements Serializable {
         }
         //check if player is valid
         if (l_NeutralPlayer == null) {
-            System.err.println("The Player is not valid.");
-            d_Logger.log("The Player is not valid.");
+            System.err.println(Constants.INVALID_PLAYER);
+            d_Logger.log(Constants.INVALID_PLAYER);
             return false;
         }
         // check if the player exists
