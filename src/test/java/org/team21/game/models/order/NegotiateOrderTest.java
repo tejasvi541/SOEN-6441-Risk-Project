@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * @author Tejasvi
  */
 public class NegotiateOrderTest {
-    GameMap gameMap;
+    GameMap d_gameMap;
 
     /**
      * Sets up the test environment before each test case.
@@ -28,9 +28,9 @@ public class NegotiateOrderTest {
      */
     @Before
     public void setUp() throws Exception {
-        gameMap = GameMap.getInstance();
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
     }
 
     /**
@@ -38,7 +38,7 @@ public class NegotiateOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -47,12 +47,12 @@ public class NegotiateOrderTest {
      */
     @Test
     public void testExecution() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.DIPLOMACY));
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
         IssueOrderController.Commands = "negotiate Player2";
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().execute());
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertTrue(l_player.nextOrder().execute());
     }
 
     /**
@@ -61,12 +61,12 @@ public class NegotiateOrderTest {
      */
     @Test
     public void testCommandValidationForValidPlayer() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.DIPLOMACY));
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
         IssueOrderController.Commands = "negotiate Player2";
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().validateCommand());
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertTrue(l_player.nextOrder().validateCommand());
     }
 
     /**
@@ -75,11 +75,11 @@ public class NegotiateOrderTest {
      */
     @Test
     public void testInvalidPlayer() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.DIPLOMACY));
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
         IssueOrderController.Commands = "negotiate Player3";
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertFalse(player.nextOrder().validateCommand());
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertFalse(l_player.nextOrder().validateCommand());
     }
 }

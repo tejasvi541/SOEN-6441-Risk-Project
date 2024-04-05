@@ -19,19 +19,19 @@ import static org.junit.Assert.*;
  */
 public class PlayerTest extends Player {
 
-    private int playerId;
-    private String playerName;
-    private int reinforcementArmies;
-    private int validArmyCount;
-    private int invalidArmyCount;
-    private Player playerUnderTest;
-    private String validCountry;
-    private String invalidCountry;
-    private List<Country> capturedCountries = new ArrayList<>();
-    private Country country1 = new Country();
-    private Country country2 = new Country();
-    private Country country3 = new Country();
-    private GameMap gameMap = GameMap.getInstance();
+    private int d_playerId;
+    private String d_playerName;
+    private int d_reinforcementArmies;
+    private int d_validArmyCount;
+    private int d_invalidArmyCount;
+    private Player d_playerUnderTest;
+    private String d_validCountry;
+    private String d_invalidCountry;
+    private List<Country> d_capturedCountries = new ArrayList<>();
+    private Country d_country1 = new Country();
+    private Country d_country2 = new Country();
+    private Country d_country3 = new Country();
+    private GameMap d_gameMap = GameMap.getInstance();
 
     /**
      * Constructor for PlayerTest.
@@ -39,7 +39,7 @@ public class PlayerTest extends Player {
      */
     public PlayerTest() {
         super(PlayerStrategy.getStrategy("human"));
-        playerUnderTest = this;
+        d_playerUnderTest = this;
     }
 
     /**
@@ -49,25 +49,25 @@ public class PlayerTest extends Player {
      */
     @Before
     public void setUp() throws Exception {
-        playerId = 4;
-        playerUnderTest.setId(playerId);
-        playerName = "Shiro";
-        playerUnderTest.setName(playerName);
+        d_playerId = 4;
+        d_playerUnderTest.setId(d_playerId);
+        d_playerName = "Shiro";
+        d_playerUnderTest.setName(d_playerName);
 
-        reinforcementArmies = 10;
-        validArmyCount = 5;
-        invalidArmyCount = 13;
-        playerUnderTest.setReinforcementArmies(reinforcementArmies);
+        d_reinforcementArmies = 10;
+        d_validArmyCount = 5;
+        d_invalidArmyCount = 13;
+        d_playerUnderTest.setReinforcementArmies(d_reinforcementArmies);
 
-        country1.setName("India");
-        country2.setName("China");
-        country3.setName("Japan");
-        validCountry = "India";
-        invalidCountry = "Canada";
-        capturedCountries.add(country1);
-        capturedCountries.add(country2);
-        capturedCountries.add(country3);
-        playerUnderTest.setCapturedCountries(capturedCountries);
+        d_country1.setName("India");
+        d_country2.setName("China");
+        d_country3.setName("Japan");
+        d_validCountry = "India";
+        d_invalidCountry = "Canada";
+        d_capturedCountries.add(d_country1);
+        d_capturedCountries.add(d_country2);
+        d_capturedCountries.add(d_country3);
+        d_playerUnderTest.setCapturedCountries(d_capturedCountries);
     }
 
     /**
@@ -75,9 +75,9 @@ public class PlayerTest extends Player {
      */
     @After
     public void tearDown() {
-        gameMap.getContinents().clear();
-        gameMap.getCountries().clear();
-        gameMap.getPlayers().clear();
+        d_gameMap.getContinents().clear();
+        d_gameMap.getCountries().clear();
+        d_gameMap.getPlayers().clear();
     }
 
     /**
@@ -85,8 +85,8 @@ public class PlayerTest extends Player {
      */
     @Test
     public void testPlayerId() {
-        int id = playerUnderTest.getId();
-        assertEquals(playerId, id);
+        int id = d_playerUnderTest.getId();
+        assertEquals(d_playerId, id);
     }
 
     /**
@@ -94,8 +94,8 @@ public class PlayerTest extends Player {
      */
     @Test
     public void testPlayerName() {
-        String name = playerUnderTest.getName();
-        assertEquals(playerName, name);
+        String name = d_playerUnderTest.getName();
+        assertEquals(d_playerName, name);
     }
 
     /**
@@ -103,7 +103,7 @@ public class PlayerTest extends Player {
      */
     @Test
     public void testValidDeployReinforcementArmiesFromPlayer() {
-        assertTrue(playerUnderTest.deployReinforcementArmiesFromPlayer(validArmyCount));
+        assertTrue(d_playerUnderTest.deployReinforcementArmiesFromPlayer(d_validArmyCount));
     }
 
     /**
@@ -111,6 +111,6 @@ public class PlayerTest extends Player {
      */
     @Test
     public void testInvalidDeployReinforcementArmiesFromPlayer() {
-        assertFalse(playerUnderTest.deployReinforcementArmiesFromPlayer(invalidArmyCount));
+        assertFalse(d_playerUnderTest.deployReinforcementArmiesFromPlayer(d_invalidArmyCount));
     }
 }

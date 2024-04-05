@@ -24,15 +24,15 @@ public class ReinforcementTest extends Player {
     /**
      * The next game phase.
      */
-    GamePhase nextGamePhase = GamePhase.IssueOrder;
+    GamePhase d_nextGamePhase = GamePhase.IssueOrder;
     /**
      * The game map instance.
      */
-    GameMap gameMap;
+    GameMap d_gameMap;
     /**
      * Reinforcement object.
      */
-    ReinforcementController reinforcement;
+    ReinforcementController d_reinforcement;
 
     /**
      * Constructor for Reinforcement Test class.
@@ -49,17 +49,17 @@ public class ReinforcementTest extends Player {
      */
     @Before
     public void setUp() throws Exception {
-        gameMap = GameMap.getInstance();
-        gameMap.addContinent("Asia", "4");
-        gameMap.addContinent("Europe", "3");
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("China", "Asia");
-        gameMap.addCountry("France", "Europe");
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
-        gameMap.assignCountries();
-        reinforcement = new ReinforcementController();
-        reinforcement.d_GamePhase = GamePhase.Reinforcement;
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.addContinent("Asia", "4");
+        d_gameMap.addContinent("Europe", "3");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("China", "Asia");
+        d_gameMap.addCountry("France", "Europe");
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
+        d_gameMap.assignCountries();
+        d_reinforcement = new ReinforcementController();
+        d_reinforcement.d_GamePhase = GamePhase.Reinforcement;
     }
 
     /**
@@ -69,7 +69,7 @@ public class ReinforcementTest extends Player {
      */
     @After
     public void tearDown() throws Exception {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -80,8 +80,8 @@ public class ReinforcementTest extends Player {
      */
     @Test
     public void testStartShouldReturnNextPhase() throws ValidationException, InvalidExecutionException {
-        GamePhase nextPhase = reinforcement.start(GamePhase.Reinforcement);
-        assertEquals(nextGamePhase, nextPhase);
+        GamePhase nextPhase = d_reinforcement.start(GamePhase.Reinforcement);
+        assertEquals(d_nextGamePhase, nextPhase);
     }
 
     /**
@@ -92,8 +92,8 @@ public class ReinforcementTest extends Player {
      */
     @Test
     public void testCheckReinforcementsSetOrNot() throws ValidationException, InvalidExecutionException {
-        reinforcement.d_CurrentPlayer = gameMap.getPlayer("Player2");
-        reinforcement.setReinforcementTroops();
-        assertTrue(reinforcement.d_CurrentPlayer.getReinforcementArmies() >= 3);
+        d_reinforcement.d_CurrentPlayer = d_gameMap.getPlayer("Player2");
+        d_reinforcement.setReinforcementTroops();
+        assertTrue(d_reinforcement.d_CurrentPlayer.getReinforcementArmies() >= 3);
     }
 }
