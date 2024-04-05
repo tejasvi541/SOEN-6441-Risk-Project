@@ -4,6 +4,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -67,8 +68,8 @@ public class BombOrder extends Order implements Serializable {
         Country l_TargetCountry = getOrderInfo().getTargetCountry();
 
         if (l_Player == null) {
-            System.err.println("The Player is not valid.");
-            d_Logger.log("The Player is not valid.");
+            System.err.println(Constants.INVALID_PLAYER);
+            d_Logger.log(Constants.INVALID_PLAYER);
             return false;
         }
         // validate that the player has the bomb card
