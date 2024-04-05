@@ -42,12 +42,12 @@ public class AirliftOrder extends Order implements Serializable {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_fromCountry = getOrderInfo().getDeparture();
         Country l_toCountry = getOrderInfo().getDestination();
-        int p_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
+        int l_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
         d_Logger.log("---------------------------------------------------------------------------------------------");
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
-            l_fromCountry.setArmies(l_fromCountry.getArmies() - p_armyNumberToAirLift);
-            l_toCountry.setArmies(l_toCountry.getArmies() + p_armyNumberToAirLift);
+            l_fromCountry.setArmies(l_fromCountry.getArmies() - l_armyNumberToAirLift);
+            l_toCountry.setArmies(l_toCountry.getArmies() + l_armyNumberToAirLift);
             l_Player.removeCard(CardType.AIRLIFT);
             return true;
         }
@@ -64,7 +64,7 @@ public class AirliftOrder extends Order implements Serializable {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_fromCountry = getOrderInfo().getDeparture();
         Country l_toCountry = getOrderInfo().getDestination();
-        int p_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
+        int l_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
 
         //check if the player is valid
         if (l_Player == null) {
@@ -83,12 +83,12 @@ public class AirliftOrder extends Order implements Serializable {
 
         }
         //check if army number is more than 0
-        if (p_armyNumberToAirLift <= 0) {
+        if (l_armyNumberToAirLift <= 0) {
             d_Logger.log("The number of airlift army should be greater than 0");
             return false;
         }
         //check if army number is more that they own
-        if (l_fromCountry.getArmies() < p_armyNumberToAirLift) {
+        if (l_fromCountry.getArmies() < l_armyNumberToAirLift) {
             d_Logger.log("Player has less no. of army in country " + getOrderInfo().getDeparture().getName());
             return false;
         }

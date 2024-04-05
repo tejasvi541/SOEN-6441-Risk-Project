@@ -40,7 +40,7 @@ public class OrderOwner implements Serializable {
                 break;
             case "advance":
                 l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(GenerateAdvanceOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
             case "negotiate":
                 l_Order = new NegotiateOrder();
@@ -52,7 +52,7 @@ public class OrderOwner implements Serializable {
                 break;
             case "airlift":
                 l_Order = new AirliftOrder();
-                l_Order.setOrderInfo(GenerateAirliftOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
             case "bomb":
                 l_Order = new BombOrder();
@@ -94,7 +94,7 @@ public class OrderOwner implements Serializable {
      * @param p_Player  the player who issued the order
      * @return the order information of advance/attack
      */
-    public static OrderInformation GenerateAdvanceOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation GenerateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
         String l_FromCountryID = p_Command[1];
         Country l_FromCountry = d_GameMap.getCountry(l_FromCountryID);
         String l_ToCountryID = p_Command[2];
@@ -142,27 +142,27 @@ public class OrderOwner implements Serializable {
         return l_OrderInformation;
     }
 
-    /**
-     * function to generate information about Airlift Order
-     *
-     * @param p_Command the command entered
-     * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
-     */
-    public static OrderInformation GenerateAirliftOrderInfo(String[] p_Command, Player p_Player) {
-        String l_FromCountryID = p_Command[1];
-        Country l_FromCountry = d_GameMap.getCountry(l_FromCountryID);
-        String l_ToCountryID = p_Command[2];
-        Country l_ToCountry = d_GameMap.getCountry(l_ToCountryID);
-        int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
-        OrderInformation l_OrderInformation = new OrderInformation();
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
-        l_OrderInformation.setPlayer(p_Player);
-        l_OrderInformation.setDeparture(l_FromCountry);
-        l_OrderInformation.setDestination(l_ToCountry);
-        l_OrderInformation.setNumberOfArmy(l_NumberOfArmies);
-        return l_OrderInformation;
-    }
+//    /**
+//     * function to generate information about Airlift Order
+//     *
+//     * @param p_Command the command entered
+//     * @param p_Player  object parameter of type Player
+//     * @return the order information of deploy
+//     */
+//    public static OrderInformation GenerateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
+//        String l_FromCountryID = p_Command[1];
+//        Country l_FromCountry = d_GameMap.getCountry(l_FromCountryID);
+//        String l_ToCountryID = p_Command[2];
+//        Country l_ToCountry = d_GameMap.getCountry(l_ToCountryID);
+//        int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
+//        OrderInformation l_OrderInformation = new OrderInformation();
+//        l_OrderInformation.setCommand(ConvertToString(p_Command));
+//        l_OrderInformation.setPlayer(p_Player);
+//        l_OrderInformation.setDeparture(l_FromCountry);
+//        l_OrderInformation.setDestination(l_ToCountry);
+//        l_OrderInformation.setNumberOfArmy(l_NumberOfArmies);
+//        return l_OrderInformation;
+//    }
 
     /**
      * function to generate information about Bomb Order

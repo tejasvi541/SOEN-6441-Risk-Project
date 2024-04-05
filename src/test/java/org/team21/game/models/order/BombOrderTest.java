@@ -69,8 +69,8 @@ public class BombOrderTest {
     public void testExecution() {
         Player l_player = d_gameMap.getPlayer("Player2");
         l_player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + d_player1Countries.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "bomb " + d_player1Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertTrue(l_player.nextOrder().execute());
     }
@@ -83,8 +83,8 @@ public class BombOrderTest {
     public void testCommandValidationForValidTargetCountry() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + d_player2Countries.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "bomb " + d_player2Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertTrue(l_player.nextOrder().validateCommand());
     }
@@ -97,8 +97,8 @@ public class BombOrderTest {
     public void testNoBombCard() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "bomb " + d_player2Countries.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "bomb " + d_player2Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertFalse(l_player.nextOrder().validateCommand());
     }
@@ -111,8 +111,8 @@ public class BombOrderTest {
     public void testInvalidTargetCountry() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + d_player1Countries.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "bomb " + d_player1Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertFalse(l_player.nextOrder().validateCommand());
     }

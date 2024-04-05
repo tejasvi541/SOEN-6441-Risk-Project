@@ -49,8 +49,8 @@ public class NegotiateOrderTest {
     public void testExecution() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
-        IssueOrderController.Commands = "negotiate Player2";
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "negotiate Player2";
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertTrue(l_player.nextOrder().execute());
     }
@@ -63,8 +63,8 @@ public class NegotiateOrderTest {
     public void testCommandValidationForValidPlayer() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
-        IssueOrderController.Commands = "negotiate Player2";
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "negotiate Player2";
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertTrue(l_player.nextOrder().validateCommand());
     }
@@ -77,8 +77,8 @@ public class NegotiateOrderTest {
     public void testInvalidPlayer() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.DIPLOMACY));
-        IssueOrderController.Commands = "negotiate Player3";
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "negotiate Player3";
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertFalse(l_player.nextOrder().validateCommand());
     }

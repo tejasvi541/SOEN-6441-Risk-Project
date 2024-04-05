@@ -93,8 +93,8 @@ public class AdvanceOrder extends Order implements Serializable {
         Country l_From = getOrderInfo().getDeparture();
         Country l_To = getOrderInfo().getDestination();
         int l_Armies = getOrderInfo().getNumberOfArmy();
-        boolean success = true;
-        String log = "Failed due to some errors\n";
+        boolean l_success = true;
+        String l_log = "Failed due to some errors\n";
         if (l_Player == null || l_To == null || l_From == null) {
             System.out.println("Invalid order information.");
             return false;
@@ -102,23 +102,23 @@ public class AdvanceOrder extends Order implements Serializable {
         if (!l_Player.isCaptured(l_From)) {
             System.out.format("Failed due to this error-\n");
             System.out.format("\t-> Country %s does not belong to player %s\n", l_From.getName(), l_Player.getName());
-            success = false;
+            l_success = false;
         }
         if (!l_From.isNeighbor(l_To)) {
             System.out.println("Failed due to this error-\n");
             System.out.format("\t-> Destination country %s is not a neighbor of %s\n", l_To.getName(), l_From.getName());
-            success = false;
+            l_success = false;
         }
         if (l_Armies > l_From.getArmies()) {
             System.out.println("Failed due to this error-\n");
             System.out.format("\t-> Attacking troop count %d is greater than available troops %d", l_Armies, l_From.getArmies());
 
-            success = false;
+            l_success = false;
         }
-        if (!success) {
-            d_Logger.log(log);
+        if (!l_success) {
+            d_Logger.log(l_log);
         }
-        return success;
+        return l_success;
     }
 
     /**

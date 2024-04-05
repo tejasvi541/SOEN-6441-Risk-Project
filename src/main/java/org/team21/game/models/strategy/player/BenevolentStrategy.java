@@ -81,8 +81,8 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
         l_CommandsArr = l_Commands.toArray(new String[0]);
         l_Order = new DeployOrder();
         l_Order.setOrderInfo(OrderOwner.GenerateDeployOrderInfo(l_CommandsArr, d_Player));
-        IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+        IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
         d_Player.issueOrder();
 
         //if Player has a diplomacy card,then use it
@@ -97,8 +97,8 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                         l_CommandsArr = l_Commands.toArray(new String[0]);
                         l_Order = new NegotiateOrder();
                         l_Order.setOrderInfo(OrderOwner.GenerateNegotiateOrderInfo(l_CommandsArr, d_Player));
-                        IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-                        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+                        IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+                        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                         d_Player.issueOrder();
                         return "pass";
                     }
@@ -116,10 +116,10 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(3, String.valueOf(l_Country.getArmies()));
                 l_CommandsArr = l_Commands.toArray(new String[0]);
                 l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderInfo(l_CommandsArr, d_Player));
-                IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
+                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+                IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                 d_Player.issueOrder();
-                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                 l_WeakestCountry = l_Country;
             }
         }

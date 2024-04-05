@@ -268,7 +268,7 @@ public class Player implements Serializable {
      * A function to get the issue order from player and add to the order list
      */
     public void issueOrder() {
-        Order l_Order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), this);
+        Order l_Order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), this);
         addOrder(l_Order);
     }
 
@@ -328,9 +328,9 @@ public class Player implements Serializable {
      */
     public void calculateReinforcementArmies(GameMap p_gameMap) {
         if (getCapturedCountries().size() > 0) {
-            int reinforcements = (int) Math.floor(getCapturedCountries().size() / 3f);
-            reinforcements += getBonusIfKingOfContinents(p_gameMap);
-            setReinforcementArmies(reinforcements > 2 ? reinforcements : 3);
+            int l_reinforcements = (int) Math.floor(getCapturedCountries().size() / 3f);
+            l_reinforcements += getBonusIfKingOfContinents(p_gameMap);
+            setReinforcementArmies(l_reinforcements > 2 ? l_reinforcements : 3);
         } else {
             setReinforcementArmies(3);
         }
@@ -345,16 +345,16 @@ public class Player implements Serializable {
      * @return reinforcements armies added with bonus armies
      */
     private int getBonusIfKingOfContinents(GameMap p_gameMap) {
-        int reinforcements = 0;
+        int l_reinforcements = 0;
         Map<String, List<Country>> l_CountryMap = getCapturedCountries()
                 .stream()
                 .collect(Collectors.groupingBy(Country::getContinent));
-        for (String continent : l_CountryMap.keySet()) {
-            if (p_gameMap.getContinent(continent).getCountries().size() == l_CountryMap.get(continent).size()) {
-                reinforcements += p_gameMap.getContinent(continent).getAwardArmies();
+        for (String l_continent : l_CountryMap.keySet()) {
+            if (p_gameMap.getContinent(l_continent).getCountries().size() == l_CountryMap.get(l_continent).size()) {
+                l_reinforcements += p_gameMap.getContinent(l_continent).getAwardArmies();
             }
         }
-        return reinforcements;
+        return l_reinforcements;
     }
 
     /**

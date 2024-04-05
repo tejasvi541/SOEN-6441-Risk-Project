@@ -212,8 +212,7 @@ public class MapValidation {
         private void dfsTraversal(int p_Node, Boolean[] p_Visited) {
             p_Visited[p_Node] = true;
             for (Integer l_Integer : (Iterable<Integer>) d_Edges[p_Node]) {
-                int l_NextNode;
-                l_NextNode = l_Integer;
+                int l_NextNode = l_Integer;
                 if (!p_Visited[l_NextNode]) {
                     dfsTraversal(l_NextNode, p_Visited);
                 }
@@ -334,10 +333,6 @@ public class MapValidation {
      * @return true if the graph is connected else false
      */
     private static boolean checkMapConnectivity(ConnectedGraph p_Graph) {
-        if (p_Graph.checkIfStronglyConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+        return p_Graph.checkIfStronglyConnected();
     }
 }

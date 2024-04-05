@@ -68,8 +68,8 @@ public class BlockadeOrderTest {
     public void testExecution() {
         Player player = d_gameMap.getPlayer("Player1");
         player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + d_countryList1.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
+        IssueOrderController.d_Commands = "blockade " + d_countryList1.get(0).getName();
+        Order order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player);
         player.addOrder(order);
         assertTrue(player.nextOrder().execute());
     }
@@ -82,8 +82,8 @@ public class BlockadeOrderTest {
     public void testCommandValidationForSamePlayer() {
         Player l_player = d_gameMap.getPlayer("Player1");
         l_player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + d_countryList1.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player);
+        IssueOrderController.d_Commands = "blockade " + d_countryList1.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order);
         assertTrue(l_player.nextOrder().validateCommand());
     }
@@ -97,8 +97,8 @@ public class BlockadeOrderTest {
     public void testCommandValidationForDifferentPlayer() {
         Player l_player1 = d_gameMap.getPlayer("Player1");
         l_player1.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + d_countryList2.get(0).getName();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), l_player1);
+        IssueOrderController.d_Commands = "blockade " + d_countryList2.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
         l_player1.addOrder(l_order);
         assertFalse(l_player1.nextOrder().validateCommand());
     }

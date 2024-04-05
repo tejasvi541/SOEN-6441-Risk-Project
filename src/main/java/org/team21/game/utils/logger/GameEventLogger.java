@@ -35,9 +35,7 @@ public class GameEventLogger implements Observable, Serializable {
      * @return LogEntryBuffer Logger
      */
     public static GameEventLogger getInstance() {
-        if (Objects.isNull(Logger)) {
-            Logger = new GameEventLogger();
-        }
+        Logger = Objects.isNull(Logger) ? new GameEventLogger(): Logger;
         return Logger;
     }
 

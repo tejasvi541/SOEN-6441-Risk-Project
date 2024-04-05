@@ -61,8 +61,8 @@ public class DeployOrderTest {
      */
     @Test
     public void testExecution() {
-        IssueOrderController.Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), d_player);
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
         d_player.addOrder(l_order);
         assertTrue(d_player.nextOrder().execute());
     }
@@ -73,8 +73,8 @@ public class DeployOrderTest {
      */
     @Test
     public void testCommandValidationForValidCountry() {
-        IssueOrderController.Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), d_player);
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
         d_player.addOrder(l_order);
         assertTrue(d_player.nextOrder().validateCommand());
     }
@@ -86,8 +86,8 @@ public class DeployOrderTest {
     @Test
     public void testInvalidCountry() {
         d_player2Countries = d_gameMap.getPlayer("Player2").getCapturedCountries();
-        IssueOrderController.Commands = "deploy " + d_player2Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), d_player);
+        IssueOrderController.d_Commands = "deploy " + d_player2Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
         d_player.addOrder(l_order);
         assertFalse(d_player.nextOrder().validateCommand());
     }
@@ -98,8 +98,8 @@ public class DeployOrderTest {
      */
     @Test
     public void testInvalidArmies() {
-        IssueOrderController.Commands = "deploy " + d_player1Countries.get(0).getName() + " 10";
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), d_player);
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " 10";
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
         d_player.addOrder(l_order);
         assertFalse(d_player.nextOrder().validateCommand());
     }

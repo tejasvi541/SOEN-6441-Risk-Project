@@ -51,10 +51,10 @@ public class OrderInformation implements Serializable {
     /**
      * function to set the Neutral Player
      *
-     * @param d_NeutralPlayer the Neutral player
+     * @param p_NeutralPlayer the Neutral player
      */
-    public void setNeutralPlayer(Player d_NeutralPlayer) {
-        this.d_NeutralPlayer = d_NeutralPlayer;
+    public void setNeutralPlayer(Player p_NeutralPlayer) {
+        this.d_NeutralPlayer = p_NeutralPlayer;
     }
 
     /**

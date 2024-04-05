@@ -24,7 +24,7 @@ public class GameMap implements Serializable {
     /**
      * Serial ID
      */
-    private static final long serialVersionUID = 45443434343L;
+    private static final long d_serialVersionUID = 45443434343L;
     /**
      * An object of the gamemap
      */
@@ -110,10 +110,10 @@ public class GameMap implements Serializable {
     /**
      * Set the current phase
      *
-     * @param d_GamePhase gamephase instance
+     * @param p_GamePhase gamephase instance
      */
-    public void setGamePhase(GamePhase d_GamePhase) {
-        this.d_GamePhase = d_GamePhase;
+    public void setGamePhase(GamePhase p_GamePhase) {
+        this.d_GamePhase = p_GamePhase;
     }
 
     /**
@@ -224,10 +224,10 @@ public class GameMap implements Serializable {
     /**
      * Set the current Player
      *
-     * @param d_CurrentPlayer player
+     * @param p_CurrentPlayer player
      */
-    public void setCurrentPlayer(Player d_CurrentPlayer) {
-        this.d_CurrentPlayer = d_CurrentPlayer;
+    public void setCurrentPlayer(Player p_CurrentPlayer) {
+        this.d_CurrentPlayer = p_CurrentPlayer;
     }
 
     /**
@@ -242,10 +242,10 @@ public class GameMap implements Serializable {
     /**
      * set the game loaded status
      *
-     * @param d_GameLoaded loaded status
+     * @param p_GameLoaded loaded status
      */
-    public void setGameLoaded(Boolean d_GameLoaded) {
-        this.d_GameLoaded = d_GameLoaded;
+    public void setGameLoaded(Boolean p_GameLoaded) {
+        this.d_GameLoaded = p_GameLoaded;
     }
 
     /**
