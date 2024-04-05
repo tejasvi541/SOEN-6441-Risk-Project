@@ -52,6 +52,10 @@ public final class Constants {
      */
     public final static String EDIT_MAP = "editmap";
     /**
+     * The constant LOAD_MAP.
+     */
+    public final static String LOAD_MAP = "loadmap";
+    /**
      * The constant ADD.
      */
     public final static String ADD = "-add";

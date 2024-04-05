@@ -8,6 +8,7 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
 import org.team21.game.game_engine.GameProgress;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
@@ -96,7 +97,7 @@ public class IssueOrderController implements GameFlowManager {
                         return d_MapEditorPhase;
                     }
                 }
-                if (!d_Commands.equals("pass")) {
+                if (!d_Commands.equals(Constants.PASS_COMMAND)) {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
                     d_Logger.log("The order has been added to the list of orders.");
@@ -118,7 +119,7 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if the command is correct else false
      */
     public boolean validateCommand(String p_CommandArr, Player p_Player) {
-        List<String> l_Commands = Arrays.asList("deploy", "advance", "bomb", "blockade", "airlift", "negotiate", "savegame");
+        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, "savegame");
         String[] l_CommandArr = p_CommandArr.split(" ");
         if (p_CommandArr.toLowerCase().contains("pass")) {
             AddToSetOfPlayers(p_Player);
@@ -186,11 +187,11 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if length is correct else false
      */
     private static boolean CheckLengthOfCommand(String p_Command, int p_Length) {
-        if (p_Command.contains("deploy")) {
+        if (p_Command.contains(Constants.DEPLOY_COMMAND)) {
             return p_Length == 3;
-        } else if (p_Command.contains("bomb") || p_Command.contains("blockade") || p_Command.contains("negotiate") || p_Command.contains("savegame")) {
+        } else if (p_Command.contains(Constants.BOMB_COMMAND) || p_Command.contains(Constants.BLOCKADE_COMMAND) || p_Command.contains(Constants.NEGOTIATE_COMMAND) || p_Command.contains("savegame")) {
             return (p_Length == 2);
-        } else if (p_Command.contains("airlift") || p_Command.contains("advance")) {
+        } else if (p_Command.contains(Constants.AIRLIFT_COMMAND) || p_Command.contains(Constants.ADVANCE_COMMAND)) {
             return (p_Length == 4);
         }
         return false;
