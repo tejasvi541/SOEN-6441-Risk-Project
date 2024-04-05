@@ -5,6 +5,7 @@ import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.adapter.Adaptee;
 import org.team21.game.utils.adapter.Adapter;
 import org.team21.game.utils.logger.GameEventLogger;
@@ -84,12 +85,12 @@ public class StartGameController implements GameFlowManager {
             }
 
             if (!inputValidator(l_InputList)) {
-                if (l_Input.startsWith("exit")) {
-                    l_InputList.add(0, "exit");
+                if (l_Input.startsWith(Constants.EXIT)) {
+                    l_InputList.add(0, Constants.EXIT);
                 } else {
                     l_InputList.clear();
                     // if not available in command list forcing to call help
-                    l_InputList.add("help");
+                    l_InputList.add(Constants.HELP);
                     l_InputList.add("dummy");
                 }
             }
@@ -98,7 +99,7 @@ public class StartGameController implements GameFlowManager {
             for (String l_Command : l_InputList) {
                 String[] l_CommandArray = l_Command.split(" ");
                 switch (l_MainCommand.toLowerCase()) {
-                    case "loadmap": {
+                    case Constants.LOAD_MAP: {
                         if (l_CommandArray.length == 1) {
                             loadMap(l_CommandArray[0]);
                         }
@@ -139,7 +140,7 @@ public class StartGameController implements GameFlowManager {
                         break;
                     }
                     //Handle showmap command from console
-                    case "showmap": {
+                    case Constants.SHOW_MAP: {
                         d_GameMap.showMap();
                         break;
                     }
@@ -160,7 +161,7 @@ public class StartGameController implements GameFlowManager {
                         }
                         break;
                     }
-                    case "exit": {
+                    case Constants.EXIT: {
                         d_GameMap.setGamePhase(d_ReinforcementPhase);
                         return p_GamePhase.nextState(d_ReinforcementPhase);
                     }
