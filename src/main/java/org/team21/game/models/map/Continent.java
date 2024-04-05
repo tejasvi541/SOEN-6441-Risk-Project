@@ -62,10 +62,10 @@ public class Continent implements Serializable {
     /**
      * Set the continent name
      *
-     * @param p_name Continent name
+     * @param p_Name Continent name
      */
-    public void setName(String p_name) {
-        this.d_Name = p_name;
+    public void setName(String p_Name) {
+        this.d_Name = p_Name;
     }
 
     /**

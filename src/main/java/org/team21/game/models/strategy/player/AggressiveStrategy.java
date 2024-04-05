@@ -76,8 +76,8 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
         String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
         Order l_Order = new DeployOrder();
         l_Order.setOrderInfo(OrderOwner.GenerateDeployOrderInfo(l_CommandsArr, d_Player));
-        IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+        IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+        d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
         d_Player.issueOrder();
         return true;
     }
@@ -108,8 +108,8 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
                 String[] l_CommandsArr = l_Commands.toArray(new String[0]);
                 Order l_Order = new BombOrder();
                 l_Order.setOrderInfo(OrderOwner.GenerateBombOrderInfo(l_CommandsArr, d_Player));
-                IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+                IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                 d_Player.issueOrder();
                 return true;
             }
@@ -132,9 +132,9 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(3, String.valueOf(l_FromCountry.getArmies()));
                 String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
                 Order l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderInfo(l_CommandsArr, d_Player));
-                IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+                IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+                d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                 d_Player.issueOrder();
                 flag = true;
             }
@@ -166,9 +166,9 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
             l_Commands.add(3, String.valueOf(fromCountry.getArmies()));
             String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
             Order l_Order = new AdvanceOrder();
-            l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderInfo(l_CommandsArr, d_Player));
-            IssueOrderController.Commands = l_Order.getOrderInfo().getCommand();
-            d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.Commands));
+            l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+            IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
+            d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
             d_Player.issueOrder();
             return true;
         }

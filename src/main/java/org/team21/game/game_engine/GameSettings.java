@@ -16,7 +16,7 @@ public class GameSettings {
     /**
      * Game settings object
      */
-    private static GameSettings Settings;
+    private static GameSettings d_Settings;
     /**
      * Game strategy object
      */
@@ -47,10 +47,10 @@ public class GameSettings {
      * @return game settings object
      */
     public static GameSettings getInstance() {
-        if (Objects.isNull(Settings)) {
-            Settings = new GameSettings();
+        if (Objects.isNull(d_Settings)) {
+            d_Settings = new GameSettings();
         }
-        return Settings;
+        return d_Settings;
     }
 
     /**
