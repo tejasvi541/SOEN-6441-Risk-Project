@@ -5,12 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
-import org.team21.game.utils.validation.InvalidExecutionException;
 import org.team21.game.utils.validation.ValidationException;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,39 +22,39 @@ public class MapEditorTest {
     /**
      * The Game phase.
      */
-    GamePhase gamePhase;
+    GamePhase d_gamePhase;
 
     /**
      * The game map instance.
      */
-    GameMap gameMap;
+    GameMap d_gameMap;
 
     /**
      * Editor object.
      */
-    MapEditorController editor;
+    MapEditorController d_editor;
 
     /**
      * The next game phase.
      */
-    GamePhase nextGamePhase = GamePhase.StartUp;
+    GamePhase d_nextGamePhase = GamePhase.StartUp;
 
     /**
      * Sets up.
      */
     @Before
     public void setUp() throws Exception{
-        editor = new MapEditorController();
-        gameMap = GameMap.getInstance();
-        gameMap.addContinent("Asia", "4");
-        gameMap.addContinent("Europe", "3");
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("China", "Asia");
-        gameMap.addCountry("France", "Europe");
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
-        gameMap.assignCountries();
-        editor.d_GameMap=gameMap;
+        d_editor = new MapEditorController();
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.addContinent("Asia", "4");
+        d_gameMap.addContinent("Europe", "3");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("China", "Asia");
+        d_gameMap.addCountry("France", "Europe");
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
+        d_gameMap.assignCountries();
+        d_editor.d_GameMap= d_gameMap;
 
     }
 
@@ -70,8 +67,8 @@ public class MapEditorTest {
         input.add("showmap");
         List<String> input_false =  new ArrayList<>();
         input_false.add("watchmap");
-        assertTrue(editor.inputValidator(input));
-        assertFalse(editor.inputValidator(input_false));
+        assertTrue(d_editor.inputValidator(input));
+        assertFalse(d_editor.inputValidator(input_false));
     }
 
     /**
@@ -87,7 +84,7 @@ public class MapEditorTest {
              input.add(l_Strings[l_Pos].trim());
            }
             }
-        assertTrue(string.contains("-") && l_Strings.length == 4 && editor.inputValidator(input));
+        assertTrue(string.contains("-") && l_Strings.length == 4 && d_editor.inputValidator(input));
     }
 
     /**
@@ -99,10 +96,10 @@ public class MapEditorTest {
         String[] l_CommandArray = l_Command.split(" ");
         if (l_CommandArray.length > 0) {
             if (l_CommandArray.length == 4) {
-                editor.d_GameMap.addContinent(l_CommandArray[2], l_CommandArray[3]);
+                d_editor.d_GameMap.addContinent(l_CommandArray[2], l_CommandArray[3]);
             }
         }
-        assertTrue(editor.d_GameMap.getContinents().containsKey("Japan"));
+        assertTrue(d_editor.d_GameMap.getContinents().containsKey("Japan"));
     }
 
     /**
@@ -114,10 +111,10 @@ public class MapEditorTest {
         String[] l_CommandArray = l_Command.split(" ");
         if (l_CommandArray.length > 0) {
             if (l_CommandArray.length ==3) {
-                editor.d_GameMap.removeContinent(l_CommandArray[2]);
+                d_editor.d_GameMap.removeContinent(l_CommandArray[2]);
             }
         }
-        assertFalse(editor.d_GameMap.getContinents().containsKey("Europe"));
+        assertFalse(d_editor.d_GameMap.getContinents().containsKey("Europe"));
     }
 
 
@@ -130,10 +127,10 @@ public class MapEditorTest {
         String[] l_CommandArray = l_Command.split(" ");
         if (l_CommandArray.length > 0) {
             if (l_CommandArray.length == 4) {
-                editor.d_GameMap.addCountry(l_CommandArray[2], l_CommandArray[3]);
+                d_editor.d_GameMap.addCountry(l_CommandArray[2], l_CommandArray[3]);
             }
         }
-        assertTrue(editor.d_GameMap.getCountries().containsKey("Pakistan"));
+        assertTrue(d_editor.d_GameMap.getCountries().containsKey("Pakistan"));
     }
 
 
@@ -145,9 +142,9 @@ public class MapEditorTest {
         String l_Command="exit";
         String[] l_CommandArray = l_Command.split(" ");
         if (l_CommandArray.length > 0) {
-            editor.d_GameMap.setGamePhase(nextGamePhase);
+            d_editor.d_GameMap.setGamePhase(d_nextGamePhase);
         }
-        assertTrue(editor.d_GameMap.getGamePhase()== GamePhase.StartUp);
+        assertTrue(d_editor.d_GameMap.getGamePhase()== GamePhase.StartUp);
     }
 
 
@@ -157,6 +154,6 @@ public class MapEditorTest {
     @After
     public void tearDown() {
         // Clean up resources or release objects
-        editor.d_GameMap.flushGameMap();
+        d_editor.d_GameMap.flushGameMap();
     }
 }
