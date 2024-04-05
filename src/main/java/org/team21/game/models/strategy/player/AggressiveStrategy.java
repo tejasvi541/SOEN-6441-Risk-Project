@@ -6,6 +6,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.order.*;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -70,7 +71,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
         Country l_StrongCountry = orderedList.get(0);
         int l_armiesReinforce = d_Player.getReinforcementArmies();
         // Deploy armies to strongestCountry
-        l_Commands.add(0, "deploy");
+        l_Commands.add(0, Constants.DEPLOY_COMMAND);
         l_Commands.add(1, l_StrongCountry.getName());
         l_Commands.add(2, String.valueOf((l_armiesReinforce)));
         String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
@@ -103,7 +104,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
                     .orElse(null);
             if (Objects.nonNull(l_EnemyWithHighTroops)) {
                 List<String> l_Commands = new ArrayList<>();
-                l_Commands.add(0, "bomb");
+                l_Commands.add(0, Constants.BOMB_COMMAND);
                 l_Commands.add(1, l_EnemyWithHighTroops.getName());
                 String[] l_CommandsArr = l_Commands.toArray(new String[0]);
                 Order l_Order = new BombOrder();
@@ -126,7 +127,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
             l_ToCountry = l_EnemyCountry;
             if (Objects.nonNull(l_EnemyCountry) && l_FromCountry.getArmies() > 0) {
                 List<String> l_Commands = new ArrayList<>();
-                l_Commands.add(0, "advance");
+                l_Commands.add(0, Constants.ADVANCE_COMMAND);
                 l_Commands.add(1, l_FromCountry.getName());
                 l_Commands.add(2, l_ToCountry.getName());
                 l_Commands.add(3, String.valueOf(l_FromCountry.getArmies()));
@@ -160,7 +161,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
         Country toCountry = l_NeighborsWithEnemies.stream().max(Comparator.comparingInt(Country::getArmies)).orElse(null);
         if (Objects.nonNull(fromCountry) && Objects.nonNull(toCountry)) {
             List<String> l_Commands = new ArrayList<>();
-            l_Commands.add(0, "advance");
+            l_Commands.add(0, Constants.ADVANCE_COMMAND);
             l_Commands.add(1, fromCountry.getName());
             l_Commands.add(2, toCountry.getName());
             l_Commands.add(3, String.valueOf(fromCountry.getArmies()));
