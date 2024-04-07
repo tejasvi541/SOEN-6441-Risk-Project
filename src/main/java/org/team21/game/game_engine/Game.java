@@ -40,6 +40,7 @@ public class Game {
      * @throws Exception if it occurs
      */
     public static void main(String[] args) throws Exception {
+        System.out.println(Constants.WELCOME_MESSAGE);
         new Game().start();
     }
 
@@ -50,10 +51,6 @@ public class Game {
      */
     public void start() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log("");
-        d_Logger.log("==================================");
-        d_Logger.log("\t\t\t Warzone");
-        d_Logger.log("==================================");
         d_Logger.log("\t\t\t Main Menu");
         d_Logger.log("\t=======================");
         d_Logger.log("\t\t 1. New Game");

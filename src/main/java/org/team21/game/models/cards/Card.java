@@ -3,25 +3,26 @@ package org.team21.game.models.cards;
 import java.util.Objects;
 
 /**
- * This is the class to create card and assign the Card Type randomly
+ * This is the Card class use to set Cards and get random cards
+ *
  * @author Kapil Soni
  * @version 1.0.0
  */
 public class Card {
     /**
-     * Data member to hold cardtype
+     * Private data member to hold the card type.
      */
     private CardType d_CardType;
 
     /**
-     * This is a Constructor for Class Card
+     * Constructor of card class, initialise the d_CardType.
      */
     public Card() {
         d_CardType = CardType.getRandomCard();
     }
 
     /**
-     * Constructor to create card object with specified card type
+     * Parameterized Card constructor to populate d_CardType with desired card type.
      *
      * @param p_CardType The card type
      */
@@ -31,7 +32,7 @@ public class Card {
 
 
     /**
-     * This method is used to get the Card Type
+     * Getter method for card type.
      *
      * @return the Card Type
      */
@@ -40,7 +41,7 @@ public class Card {
     }
 
     /**
-     * Setter for Card type
+     * Setter method for Card type
      *
      * @param p_cardType The card type
      */
@@ -49,10 +50,10 @@ public class Card {
     }
 
     /**
-     * Method to check the object equality
+     * Method to check 2 cards are equal or not.
      *
-     * @param p_Obj The object which should be compared
-     * @return true if objects are equal else false
+     * @param p_Obj The object which will get compared with  the card
+     * @return true if cards are equal else false
      */
     @Override
     public boolean equals(Object p_Obj) {
@@ -63,9 +64,9 @@ public class Card {
     }
 
     /**
-     * Method to return the hashcode of object.
+     * Method to generate hash code for card type and return..
      *
-     * @return object's hash code
+     * @return hash code object
      */
     @Override
     public int hashCode() {

@@ -241,6 +241,14 @@ public final class Constants {
      */
     public final static String ASSIGNED_COUNTRIES = "The Assigned countries are :: ";
     /**
+     * The constant TEAM_NAME.
+     */
+    public static String TEAM_NAME = "Team21";
+    /**
+     * The constant WELCOME_MESSAGE.
+     */
+    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER;
+    /**
      * The constant non exists player message.
      */
     public final static String NONEXISTENT_PLAYER = "The Player name does not exist.";
@@ -288,15 +296,6 @@ public final class Constants {
      * The constant TOURNAMENT.
      */
     public static final String TOURNAMENT = "tournament";
-    /**
-     * The constant TEAM_NAME.
-     */
-    public static String TEAM_NAME = "Team21";
-    /**
-     * The constant WELCOME_MESSAGE.
-     */
-    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
-
     /**
      * Instantiates a new Constants.
      */

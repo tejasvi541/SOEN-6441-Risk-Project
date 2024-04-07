@@ -2,24 +2,26 @@ package org.team21.game.models.tournament;
 
 /**
  * Class to implement the tournament result
+ *
  * @author Nishith Soni
  */
 public class TournamentResult {
     /**
-     * string for map
+     * private data member to hold map
      */
     private String d_Map;
     /**
-     * game number
+     * data member to hold number of games
      */
     private int d_Game;
     /**
-     * string for winner of the game
+     * data member to hold winner of the game
      */
     private String d_Winner;
 
     /**
-     * method to get map
+     * get the map
+     *
      * @return the map
      */
     public String getMap() {
@@ -27,39 +29,41 @@ public class TournamentResult {
     }
 
     /**
-     * method to set map
+     * set the map
      *
-     * @param p_Map the map
+     * @param p_Map hold the map
      */
     public void setMap(String p_Map) {
         d_Map = p_Map;
     }
     /**
-     * method to get game
+     * get the game
+     *
      * @return the game
      */
     public int getGame() {
         return d_Game;
     }
     /**
-     * method to set game
+     * set the game
      *
-     * @param p_Game the game
+     * @param p_Game hold the game
      */
     public void setGame(int p_Game) {
         d_Game = p_Game;
     }
     /**
-     * method to get game winner
-     * @return the winner
+     * To get winner of the game
+     *
+     * @return winner of the game
      */
     public String getWinner() {
         return d_Winner;
     }
     /**
-     * method to set winner
+     * set winner of the game
      *
-     * @param p_Winner the winner
+     * @param p_Winner hold the winner
      */
     public void setWinner(String p_Winner) {
         d_Winner = p_Winner;
