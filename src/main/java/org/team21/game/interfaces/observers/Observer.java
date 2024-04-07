@@ -1,20 +1,24 @@
 package org.team21.game.interfaces.observers;
 
 /**
- * An interface for implementation of Observer with an update function
+ * The Observer interface defines the contract for implementing observer objects.
+ * Observers are notified of changes in the subject and provide functionality to update their state.
+ * This interface includes methods for updating the observer with a message and clearing all logs.
+ *
  * @author Nishith Soni
+ * @version 1.0.0
  */
 public interface Observer {
 
     /**
-     * Function to update the message for the observer
+     * Updates the observer with the provided message.
      *
-     * @param p_S the message to be updated
+     * @param p_S The message to be updated.
      */
     void update(String p_S);
 
     /**
-     * clear all logs
+     * Clears all logs associated with the observer.
      */
-    void clearLogs();
+    void clearGameLogs();
 }

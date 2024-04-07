@@ -1,6 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameConsoleWriter;
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.logger.GameLogFileWriter;
@@ -80,7 +81,7 @@ public class Game {
                     break;
                 }
                 case 4: {
-                    d_Engine = new TournamentEngine();
+                    d_Engine = new TournamentGameEngine();
                     break;
                 }
                 case 5: {
@@ -92,10 +93,10 @@ public class Game {
                 }
             }
         } catch (Exception p_Exception) {
-            d_Logger.log("\nPlease choose the correct option number");
+            d_Logger.log("\n"+ Constants.INVALID_COMMAND);
             start();
         }
         d_Engine.setGamePhase(d_GamePhase);
-        d_Engine.start();
+        d_Engine.startEngine();
     }
 }
