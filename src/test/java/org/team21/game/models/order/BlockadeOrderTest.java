@@ -35,22 +35,24 @@ public class BlockadeOrderTest {
      */
     @Before
     public void setUp() throws Exception {
+
         d_gameMap = GameMap.getInstance();
         d_gameMap.flushGameMap();
-
-        d_gameMap.addPlayer("Player1");
-        d_gameMap.addPlayer("Player2");
-        d_gameMap.addContinent("Asia", "5");
-        d_gameMap.addCountry("India", "Asia");
-        d_gameMap.addCountry("Pakistan", "Asia");
-        d_gameMap.addCountry("SriLanka", "Asia");
-        d_gameMap.addCountry("Afganisthan", "Asia");
-        d_gameMap.addCountry("Bangladesh", "Asia");
-        d_gameMap.addCountry("Myanmar", "Asia");
-        d_gameMap.addCountry("China", "Asia");
-        d_gameMap.assignCountries();
-        d_countryList1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
-        d_countryList2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
+        gameMap = GameMap.getInstance();
+        gameMap.flushGameMap();
+        gameMap.addPlayer("Player1");
+        gameMap.addPlayer("Player2");
+        gameMap.addContinent("Asia", "5");
+        gameMap.addCountry("India", "Asia");
+        gameMap.addCountry("Pakistan", "Asia");
+        gameMap.addCountry("SriLanka", "Asia");
+        gameMap.addCountry("Afganisthan", "Asia");
+        gameMap.addCountry("Bangladesh", "Asia");
+        gameMap.addCountry("Myanmar", "Asia");
+        gameMap.addCountry("China", "Asia");
+        gameMap.assignCountries();
+        countryList1 = gameMap.getPlayer("Player1").getCapturedCountries();
+        countryList2 = gameMap.getPlayer("Player2").getCapturedCountries();
     }
 
     /**
