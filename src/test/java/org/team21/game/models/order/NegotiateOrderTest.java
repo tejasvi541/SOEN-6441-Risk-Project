@@ -32,7 +32,7 @@ public class NegotiateOrderTest {
         d_gameMap.flushGameMap();
 
         d_gameMap.addPlayer("Player1");
-        d_gameMap.addPlayer("Player2")
+        d_gameMap.addPlayer("Player2");
     }
 
     /**
