@@ -1,49 +1,45 @@
 package org.team21.game.controllers;
 
-import org.team21.game.interfaces.main_engine.GameFlowManager;
-import org.team21.game.models.game_play.GamePhase;
-import org.team21.game.models.game_play.Player;
-import org.team21.game.models.map.Country;
+import org.team21.game.game_engine.GamePhase;
+import org.team21.game.game_engine.GameSettings;
+import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.Constants;
-import org.team21.game.utils.logger.GameEventLogger;
+import org.team21.game.models.map.Player;
 import org.team21.game.utils.validation.InvalidExecutionException;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import org.team21.game.utils.validation.ValidationException;
 
 /**
- * The Reinforcement order controller will give armies/reinforcements linked with
- * {IssueOrderController}
+ * This class represents the controller responsible for managing the Reinforcement phase of the game.
+ * It implements the {@code GameFlowManager} interface.
+ * This controller handles the calculation and distribution of reinforcement armies to players based on the number of countries they control.
  *
- * @author Kapil Soni
- * @version 1.0.0
+ * @author : Yesha Shah
+ * @version : 1.0.0
  */
 public class ReinforcementController implements GameFlowManager {
+
     /**
-     * The next phase of the game.
+     * Data member holding the next phase of the game.
      */
-    private final GamePhase d_UpcomingGamePhase = GamePhase.IssueOrder;
+    GamePhase d_NextGamePhase = GamePhase.IssueOrder;
+
     /**
-     * The game map.
+     * Data member holding the current phase of the game.
      */
-    private final GameMap d_GameMap;
+    GamePhase d_GamePhase;
+
     /**
-     * The current phase of the game.
+     * Data member representing the game map.
      */
-    private GamePhase d_CurrentGamePhase;
+    GameMap d_GameMap;
+
     /**
-     * The current player.
+     * Data member representing the current player.
      */
-    private Player d_CurrentPlayer;
+    Player d_CurrentPlayer;
+
     /**
-     * Created object d_GameEventLogger of GameEventLogger.
-     */
-    GameEventLogger d_GameEventLogger = new GameEventLogger();
-    /**
-     * Default constructor initializing the game map data member with
-     * {@code GameMap} singleton object.
+     * Default constructor that initializes the game map data member with the {@code GameMap} singleton object.
      */
     public ReinforcementController() {
         d_GameMap = GameMap.getInstance();
@@ -52,78 +48,44 @@ public class ReinforcementController implements GameFlowManager {
     /**
      * Begins the Reinforcement phase of the game.
      *
-     * @param p_CurrentPhase The current game phase.
+     * @param p_GamePhase The current game phase.
      * @return The next game phase upon successful execution.
+     * @throws ValidationException       if there is invalid input or output.
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
     @Override
-    public GamePhase start(GamePhase p_CurrentPhase) {
-        d_GameEventLogger.logEvent(Constants.REINFORCEMENT_PHASE);
-        return run(p_CurrentPhase);
-    }
-
-    /**
-     * run is entry method of Reinforcement Controller and it will run Issue order
-     *
-     * @param p_CurrentGamePhase : Current phase of game.
-     * @return : It will return game phase to go next
-     */
-    private GamePhase run(GamePhase p_CurrentGamePhase)  {
-        d_CurrentGamePhase = p_CurrentGamePhase;
-        try {
-            computerReinforcements();
-        } catch (InvalidExecutionException e) {
-            throw new RuntimeException(e);
+    public GamePhase startPhase(GamePhase p_GamePhase) throws ValidationException, InvalidExecutionException {
+        if (GameSettings.getInstance().MAX_TRIES != 0) {
+            d_GameMap.nextTry();
         }
-        return d_UpcomingGamePhase;
+        d_GamePhase = p_GamePhase;
+        calculateReinforcements();
+        d_GameMap.setGamePhase(d_NextGamePhase);
+        return d_NextGamePhase;
     }
 
     /**
-     * Calculates reinforcements for each player.
+     * Calculates and sets reinforcement armies for each player.
      *
-     * @throws InvalidExecutionException If the game phase command is invalid.
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
-    public void computerReinforcements() throws InvalidExecutionException {
-        for (Player l_GamePlayer : d_GameMap.getPlayers().values()) {
-            d_CurrentPlayer = l_GamePlayer;
-            assignReinforcementTroops();
+    public void calculateReinforcements() throws InvalidExecutionException {
+        for (Player l_Player : d_GameMap.getPlayers().values()) {
+            d_CurrentPlayer = l_Player;
+            setReinforcementTroops();
         }
     }
 
     /**
-     * Sets reinforcement armies for the current player based on captured countries.
+     * Calculates the reinforcement armies for the current player based on the number of countries they control.
      *
-     * @throws InvalidExecutionException If the game phase command is invalid.
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
-    public void assignReinforcementTroops() throws InvalidExecutionException {
-        if (d_CurrentGamePhase.equals(GamePhase.Reinforcement)) {
-            if (!d_CurrentPlayer.getCapturedCountries().isEmpty()) {
-                int l_Reinforcements = (int) Math.floor(d_CurrentPlayer.getCapturedCountries().size() / 3f);
-                Map<String, List<Country>> l_CountryMap = d_CurrentPlayer.getCapturedCountries()
-                        .stream()
-                        .collect(Collectors.groupingBy(Country::getParentContinent));
-                for (String l_Continent : l_CountryMap.keySet()) {
-                    try {
-                        if (d_GameMap.getContinent(l_Continent) != null) {
-                            if (d_GameMap.getContinent(l_Continent).getCountries().size() == l_CountryMap.get(l_Continent).size()) {
-                                l_Reinforcements += d_GameMap.getContinent(l_Continent).getAwardArmies();
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                        d_GameEventLogger.logEvent("Exception: " + e.getMessage());
-                    }
-                }
-                d_CurrentPlayer.setReinforcementArmies(Math.max(l_Reinforcements, 5));
-                System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
-                d_GameEventLogger.logEvent("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
-            } else {
-                d_CurrentPlayer.setReinforcementArmies(5);
-                System.out.println("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
-                d_GameEventLogger.logEvent("Player " + d_CurrentPlayer.getName() + " receives " + d_CurrentPlayer.getReinforcementArmies() + " armies for reinforcements.");
-            }
+    public void setReinforcementTroops() throws InvalidExecutionException {
+        if (d_GamePhase.equals(GamePhase.Reinforcement)) {
+            d_CurrentPlayer.calculateReinforcementArmies(d_GameMap);
         } else {
-            d_GameEventLogger.logEvent(Constants.INVALID_GAME_PHASE);
-            throw new InvalidExecutionException(Constants.INVALID_GAME_PHASE);
+            throw new InvalidExecutionException();
         }
     }
 }

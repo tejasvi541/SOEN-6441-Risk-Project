@@ -1,144 +1,68 @@
 package org.team21.game.models.map;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
 /**
- * The type Continent test.
- *
- * @author Nishith
+ * The ContinentTest class is responsible for testing the methods of the Continent class.
  */
 public class ContinentTest {
-
     private Continent d_Continent;
-
     /**
-     * Sets up.
+     * Sets up the test environment by initializing a Continent object with predefined values.
      */
     @Before
-    public void setUp() {
-        // Initialize the Continent object
-        d_Continent = new Continent("Africa", "5", 1);
+    public void setUp(){
+        d_Continent = new Continent();
+        d_Continent.setId("Asia");
+        d_Continent.setName("Asia");
+        d_Continent.setCredited(true);
+        d_Continent.setAwardArmies(10);
+        d_Continent.setCountries(new HashSet<>());
     }
-
     /**
-     * Test get continent id.
+     * Test method for getId().
+     * It checks if the ID of the continent matches the expected value.
      */
     @Test
-    public void testGetContinentId() {
-        assertEquals("Africa", d_Continent.getContinentId());
+    public void getId() {
+        assertEquals(d_Continent.getId(), "Asia");
     }
-
     /**
-     * Test set continent id.
+     * Test method for getName().
+     * It checks if the name of the continent matches the expected value.
      */
     @Test
-    public void testSetContinentId() {
-        d_Continent.setContinentId("Europe");
-        assertEquals("Europe", d_Continent.getContinentId());
+    public void getName() {
+        assertEquals(d_Continent.getName(), "Asia");
     }
 
     /**
-     * Test get control value.
+     * Test method for getAwardArmies().
+     * It checks if the number of awarded armies for the continent matches the expected value.
      */
     @Test
-    public void testGetControlValue() {
-        assertEquals(5, d_Continent.getControlValue());
+    public void getAwardArmies() {
+        assertEquals(d_Continent.getAwardArmies(), 10);
     }
-
     /**
-     * Test set control value.
+     * Test method for isCredited().
+     * It checks if the continent is credited, i.e., if it has been assigned a credit or not.
      */
     @Test
-    public void testSetControlValue() {
-        d_Continent.setControlValue("10");
-        assertEquals(10, d_Continent.getControlValue());
+    public void isCredited() {
+        assertEquals(d_Continent.isCredited(), true);
     }
-
     /**
-     * Test get countries.
+     * Test method for getCountries().
+     * It checks if the set of countries belonging to the continent is empty.
      */
     @Test
-    public void testGetCountries() {
-        HashMap<String, Country> l_Countries = d_Continent.getCountries();
-        assertNotNull(l_Countries);
-        assertTrue(l_Countries.isEmpty());
-    }
-
-    /**
-     * Test set countries.
-     */
-    @Test
-    public void testSetCountries() {
-        Country l_Country1 = new Country("UK", "Europe");
-        Country l_Country2 = new Country("France", "Europe");
-        HashMap<String, Country> l_Countries = new HashMap<>();
-        l_Countries.put("UK", l_Country1);
-        l_Countries.put("France", l_Country2);
-        System.out.println(l_Countries);
-        d_Continent.setCountries(l_Countries);
-        assertEquals(l_Countries, d_Continent.getCountries());
-    }
-
-    /**
-     * Test false set countries.
-     */
-    @Test
-    public void testFalseSetCountries() {
-        Country l_Country1 = new Country("UK", "Europe");
-        Country l_Country2 = new Country("France", "Europe");
-        HashMap<String, Country> l_Countries = new HashMap<>();
-        l_Countries.put("UK", l_Country1);
-        l_Countries.put("France", l_Country2);
-        System.out.println(l_Countries);
-        d_Continent.setCountries(l_Countries);
-        assertNotEquals(l_Countries.put("France", l_Country2), d_Continent.getCountries());
-    }
-
-    /**
-     * Test get continent file index.
-     */
-    @Test
-    public void testGetContinentFileIndex() {
-        assertEquals(1, d_Continent.getContinentFileIndex());
-    }
-
-    /**
-     * Test set continent file index.
-     */
-    @Test
-    public void testSetContinentFileIndex() {
-        d_Continent.setContinentFileIndex("2");
-        assertEquals(2, d_Continent.getContinentFileIndex());
-    }
-
-    /**
-     * Test get award armies.
-     */
-    @Test
-    public void testGetAwardArmies() {
-        assertEquals(0, d_Continent.getAwardArmies());
-    }
-
-    /**
-     * Test set award armies.
-     */
-    @Test
-    public void testSetAwardArmies() {
-        d_Continent.setAwardArmies(3);
-        assertEquals(3, d_Continent.getAwardArmies());
-    }
-
-    /**
-     * Tear down.
-     */
-    @After
-    public void tearDown() {
-        d_Continent = null;
+    public void getCountries() {
+        assertEquals(d_Continent.getCountries(), new HashSet<>());
     }
 }

@@ -1,135 +1,77 @@
 package org.team21.game.models.map;
 
-import java.util.HashMap;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Continent Class for the information storage of Continent IDs, their Control Values and Country within that continent
- * A Hashmap is used to store all the countries belonging to one Continent, Key is CountryId and the Value is its object.
- *
+ * Concrete Class to set and get all the properties of Continent.
  * @author Tejasvi
- * @author Kapil
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
-public class Continent {
+public class Continent implements Serializable {
     /**
-     * Continent control value
+     * A string to store the ID of continent
      */
-    private int d_ControlValue;
+    private String d_Id;
     /**
-     * ID of continent
+     * A string to store the name of continent
      */
-    private String d_ContinentId;
+    private String d_Name;
     /**
-     * Continent File index
-     */
-    private int d_ContinentFileIndex;
-    /**
-     * Continent Countries
-     */
-    private HashMap<String, Country> d_Countries;
-    /**
-     * Armies to award to player when captured
+     * An integer to store the awardedarmies
      */
     private int d_AwardArmies;
     /**
-     * Armies are credited or not
+     * A boolean data member to get if credited or not
      */
     private boolean d_Credited;
-
+    /**
+     * A set of countries in the continent
+     */
+    private Set<Country> d_Countries;
 
     /**
-     * Constructor to initialise the Continent class with the arguments passed below
-     * Used during loading the map data
+     * Get the continent ID also known as continent value
      *
-     * @param p_ContinentId        Continent ID
-     * @param p_ControlValue       Control Value of Continent
-     * @param p_ContinentFileIndex the p continent file index
+     * @return d_Id The continent ID also known as continent value
      */
-    public Continent(String p_ContinentId, String p_ControlValue, int p_ContinentFileIndex) {
-        this.d_ContinentId = p_ContinentId;
-        this.d_ControlValue = Integer.parseInt(p_ControlValue);
-        this.d_Countries = new HashMap<>();
-        this.d_ContinentFileIndex = p_ContinentFileIndex;
+    public String getId() {
+        return d_Id;
     }
 
     /**
-     * getter function to Continent ID
+     * Set the continent ID also known as continent value
      *
-     * @return returns the Continent ID
+     * @param p_Id Continent ID also known as continent value
      */
-    public String getContinentId() {
-        return this.d_ContinentId;
+    public void setId(String p_Id) {
+        this.d_Id = p_Id;
     }
 
     /**
-     * Setter function to ContinentId
+     * Get the continent name
      *
-     * @param p_ContinentId Continent ID
+     * @return d_Name Continent name which is of type string
      */
-    public void setContinentId(String p_ContinentId) {
-        this.d_ContinentId = p_ContinentId;
+    public String getName() {
+        return d_Name;
     }
 
     /**
-     * Getter function of control value
+     * Set the continent name
      *
-     * @return control value of the content
+     * @param p_Name Continent name
      */
-    public int getControlValue() {
-        return this.d_ControlValue;
+    public void setName(String p_Name) {
+        this.d_Name = p_Name;
     }
-
-    /**
-     * Setter function of the control value which saves it in integer from string
-     *
-     * @param p_ControlValue Control value of Continent
-     */
-    public void setControlValue(String p_ControlValue) {
-        this.d_ControlValue = Integer.parseInt(p_ControlValue);
-    }
-
-    /**
-     * Getter function of the countries as HashMap that belong to this Continent
-     *
-     * @return returns the HashMap containing countries for a continent
-     */
-    public HashMap<String, Country> getCountries() {
-        return this.d_Countries;
-    }
-
-    /**
-     * Setter function to the Countries Hashmap, if Needed one
-     *
-     * @param p_Countries Countries in the Continent
-     */
-    public void setCountries(HashMap<String, Country> p_Countries) {
-        this.d_Countries = p_Countries;
-    }
-
-    /**
-     * Getter function for the Continent File Index
-     *
-     * @return The Continent's Index on the file
-     */
-    public int getContinentFileIndex() {
-        return this.d_ContinentFileIndex;
-    }
-
-    /**
-     * Setter function for the Continent File Index
-     *
-     * @param p_ContinentFileIndex File Index of the Continent
-     */
-    public void setContinentFileIndex(String p_ContinentFileIndex) {
-        this.d_ContinentFileIndex = Integer.parseInt(p_ContinentFileIndex);
-    }
-
-    //Todo refactor
 
     /**
      * Get the Awarded armies
      *
-     * @return d_AwardArmies The Awarded armies assigned to the continent
+     * @return d_AwardArmies  The Awarded armies assigned to the continent
      */
     public int getAwardArmies() {
         return d_AwardArmies;
@@ -142,5 +84,43 @@ public class Continent {
      */
     public void setAwardArmies(int p_AwardArmies) {
         this.d_AwardArmies = p_AwardArmies;
+    }
+
+    /**
+     * Check if Armies are credited or not
+     *
+     * @return true if armies are credited else false if not credited
+     */
+    public boolean isCredited() {
+        return d_Credited;
+    }
+
+    /**
+     * Set the number of armies credited
+     *
+     * @param p_Credited Credited armies
+     */
+    public void setCredited(boolean p_Credited) {
+        this.d_Credited = p_Credited;
+    }
+
+    /**
+     * Returns the list of countries belonging to the continent
+     *
+     * @return set of countries
+     */
+    public Set<Country> getCountries() {
+        if (d_Countries == null) {
+            d_Countries = new HashSet<>();
+        }
+        return d_Countries;
+    }
+
+    /**
+     * Set countries for the testing and adding countries in continents
+     * @param p_Countries holds the set of countries
+     */
+    public void setCountries(Set<Country> p_Countries) {
+        this.d_Countries = p_Countries;
     }
 }

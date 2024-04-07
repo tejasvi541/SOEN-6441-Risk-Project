@@ -1,74 +1,93 @@
 package org.team21.game.utils.logger;
 
-import org.team21.game.interfaces.observer.Observer;
+import org.team21.game.interfaces.observers.Observer;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Logs gameplay events received from an observed subject (e.g., GameEventLogger)
- * into a customizable log file.
+ * The GameLogFileWriter class implements the Observer interface to observe the LogEntryBuffer and write logs to a file.
+ * It maintains a log file for recording game actions and events.
+ * This class provides functionality to update the log file with messages received from the subject.
+ * It ensures that logs are written to a designated log file with proper formatting.
  *
- * @author Kapil Soni
+ * @author Nishith Soni
+ * @version 1.0.0
  */
-public class GameLogFileWriter implements Observer {
+public class GameLogFileWriter implements Observer, Serializable {
     /**
-     * Log filename prefix for further usage
+     * The file path for the log file.
      */
-    public static final String d_LOG_FILE_PATH = "logfile_"+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-    /**
-     * To get log file path
-     * @return : return file path in string where it will store log file
-     */
-    public String getDirectoryPath() {
-        return d_Path;
-    }
+    public static final String d_LOG_FILE_PATH = "logfile_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
     /**
-     * path of directory and file path where it will store log file
+     * The directory path where log files are stored.
      */
-    private String d_Path;
+    private final String d_FilePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "logFiles" + File.separator;
 
     /**
-     * Constructor to initialize the GameLogWriter
+     * Constructs a GameLogFileWriter object and clears existing log files.
      */
     public GameLogFileWriter() {
-        // You could optionally add code here to load preferences
-        // or customize the d_LogFilenamePrefix from a configuration file
-        d_Path = System.getProperty("user.dir") + File.separator + "src" + File.separator + "Logs" +File.separator;
-        File l_MakeDir = new File(d_Path);
-        if(!l_MakeDir.exists()){
-            l_MakeDir.mkdirs();
-        }
+        clearGameLogs();
     }
 
-
     /**
-     * Writes a log entry including a timestamp to a  designated log file.
+     * Receives updates from the subject and writes the message to the log file.
      *
-     * @param p_eventMessage The event message to be logged.
+     * @param p_s The message to be written to the log file.
      */
-    private void writeLogEntry(String p_eventMessage) {
-        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_Path + d_LOG_FILE_PATH + ".log", true)))) {
-            LocalDateTime l_Now = LocalDateTime.now();
-            DateTimeFormatter l_Formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String l_Timestamp = l_Now.format(l_Formatter);
-            l_Writer.println("[" + l_Timestamp + "] " + p_eventMessage);
-        } catch (IOException e) {
-            System.err.println("Error writing to log file: " + e.getMessage());
+    public void update(String p_s) {
+        writeLogFile(p_s);
+    }
+
+    /**
+     * Writes the provided message to the log file.
+     *
+     * @param p_str The message to be written to the log file.
+     */
+    public void writeLogFile(String p_str) {
+        PrintWriter l_WriteData = null;
+        try {
+            checkDirectory(d_FilePath);
+            l_WriteData = new PrintWriter(new BufferedWriter(new FileWriter(d_FilePath + d_LOG_FILE_PATH + ".log", true)));
+            l_WriteData.println(p_str);
+
+        } catch (Exception p_Exception) {
+            System.out.println(p_Exception.getMessage());
+        } finally {
+            if (l_WriteData != null) {
+                l_WriteData.close();
+            }
         }
     }
 
+    /**
+     * Checks if the directory exists and creates it if it doesn't.
+     *
+     * @param path The path to check and create if necessary.
+     */
+    private void checkDirectory(String path) {
+        File l_directory = new File(path);
+        if (!l_directory.exists() || !l_directory.isDirectory()) {
+            l_directory.mkdirs();
+        }
+    }
 
     /**
-     * Function to update the message for the observer
-     *
-     * @param p_S the message to be updated
+     * Clears the log file by deleting it before starting a new game.
      */
     @Override
-    public void update(String p_S) {
-        writeLogEntry(p_S);
+    public void clearGameLogs() {
+        try {
+            checkDirectory(d_FilePath);
+            File l_File = new File(d_FilePath + d_LOG_FILE_PATH + ".log");
+            if (l_File.exists()) {
+                l_File.delete();
+            }
+        } catch (Exception ex) {
+            // Handle exception
+        }
     }
 }
-

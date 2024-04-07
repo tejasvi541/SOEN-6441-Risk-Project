@@ -1,69 +1,109 @@
 package org.team21.game.models.map;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.team21.game.models.game_play.Player;
+import org.team21.game.utils.validation.ValidationException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
- * The type Game map test.
- *
- * @author Nishith
+ * This class contains JUnit tests for the GameMap class.
+ * @author Tejasvi
  */
 public class GameMapTest {
+    private GameMap d_GameMap;
 
     /**
-     * Game map objects
-     */
-    private GameMap d_GameMap, d_GameMap1;
-    /**
-     * Player for map objects
-     */
-    private Player d_P;
-
-    /**
-     * Sets up.
+     * Initializes a GameMap object before each test.
      */
     @Before
     public void setUp() {
-        d_GameMap = new GameMap();
-        d_GameMap1 = new GameMap("Canada");
-        d_P = new Player();
+        d_GameMap = GameMap.getInstance();
     }
 
     /**
-     * Is valid name.
+     * Tests the getInstance method of the GameMap class.
      */
     @Test
-    public void isValidName() {
-        assertEquals("", d_GameMap.getMapName());
+    public void testGetInstance() {
+        assertNotNull(d_GameMap);
     }
 
     /**
-     * Is valid name map.
+     * Tests the addContinent method of the GameMap class.
      */
     @Test
-    public void isValidNameMap() {
-        assertEquals("Canada", d_GameMap1.getMapName());
+    public void testAddContinent() {
+            assertTrue(d_GameMap.getContinents().containsKey("Asia"));
     }
 
     /**
-     * Valid player.
+     * Tests the addCountry method of the GameMap class.
      */
     @Test
-    public void validPlayer() {
-        d_GameMap.addPlayer("Player1");
-        assertEquals("Player1", d_GameMap.getPlayers().keySet().toArray()[0]);
+    public void testAddCountry() {
+        try {
+            d_GameMap.addContinent("Asia", "10");
+
+            d_GameMap.addCountry("India", "Asia");
+            assertTrue(d_GameMap.getCountries().containsKey("India"));
+        } catch (ValidationException e) {
+            fail("Unexpected ValidationException: " + e.getMessage());
+        }
     }
 
     /**
-     * Tear down.
+     * Tests the removeContinent method of the GameMap class.
      */
-    @After
-    public void tearDown() {
-        d_GameMap = null;
-        d_GameMap1 = null;
+    @Test
+    public void testRemoveContinent() {
+        try {
+            d_GameMap.removeContinent("Asia");
+            assertFalse(d_GameMap.getContinents().containsKey("Asia"));
+        } catch (ValidationException e) {
+            fail("Unexpected ValidationException: " + e.getMessage());
+        }
     }
+
+    /**
+     * Tests the removeCountry method of the GameMap class.
+     */
+    @Test
+    public void testRemoveCountry() {
+        try {
+            d_GameMap.removeCountry("India");
+            assertFalse(d_GameMap.getCountries().containsKey("India"));
+        } catch (ValidationException e) {
+            fail("Unexpected ValidationException: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the addPlayer method of the GameMap class.
+     */
+    @Test
+    public void testAddPlayer() {
+        try {
+            d_GameMap.addPlayer("Player1");
+            assertTrue(d_GameMap.getPlayers().containsKey("Player1"));
+        } catch (ValidationException e) {
+            fail("Unexpected ValidationException: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the removePlayer method of the GameMap class.
+     */
+    @Test
+    public void testRemovePlayer() {
+        try {
+            d_GameMap.addPlayer("Player1");
+            d_GameMap.removePlayer("Player1");
+            assertFalse(d_GameMap.getPlayers().containsKey("Player1"));
+        } catch (ValidationException e) {
+            fail("Unexpected ValidationException: " + e.getMessage());
+        }
+    }
+
+
 }

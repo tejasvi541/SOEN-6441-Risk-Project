@@ -1,127 +1,138 @@
 package org.team21.game.controllers;
 
-import org.team21.game.interfaces.main_engine.GameFlowManager;
-import org.team21.game.models.game_play.GameCommands;
-import org.team21.game.models.game_play.GamePhase;
+import org.team21.game.game_engine.GamePhase;
+import org.team21.game.game_engine.GameProgress;
+import org.team21.game.interfaces.game.GameFlowManager;
+import org.team21.game.models.map.DominationMap;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.adapter.Adaptee;
+import org.team21.game.utils.adapter.Adapter;
 import org.team21.game.utils.logger.GameEventLogger;
+import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static org.team21.game.utils.Constants.MAP_FILE_DIRECTORY;
-
 /**
- * The StartGameController will perform main load game actions and associated controllers are
- * {ExecuteOrderController,IssueOrderController,ReinforcementController,MapLoaderController,ShowMapController}
+ * This class represents the controller for starting and managing the phases of the game.
+ * It facilitates user interaction through a command-line interface and executes various game commands.
+ * Implements GameFlowManager interface.
  *
- * @author Kapil Soni
- * @version 1.0.0
+ * @author : Nishith Soni
+ * @version : 1.0.0
  */
 public class StartGameController implements GameFlowManager {
+    /**
+     * A data member for scanner used for user input.
+     */
+    private final Scanner d_SCANNER = new Scanner(System.in);
 
     /**
-     * List of commands are
+     * A list of valid commands for the command-line interface.
      */
-    private final static List<GameCommands> CLI_COMMANDS = Arrays.asList(GameCommands.SHOW_MAP, GameCommands.LOAD_MAP, GameCommands.GAME_PLAYER, GameCommands.ASSIGN_COUNTRIES);
+    private final List<String> CLI_COMMANDS = Arrays.asList(
+            Constants.SHOW_MAP, Constants.LOAD_MAP, Constants.GAMEPLAYER,
+            Constants.ASSIGNCOUNTRIES, Constants.SAVEGAME_COMMAND,
+            Constants.LOADGAME_COMMAND, Constants.TOURNAMENT
+    );
+
     /**
-     * Game Map for performing map related options
+     * Instance of the game map.
      */
-    private final GameMap d_GameMap;
+    GameMap d_GameMap;
+
     /**
-     * Upcoming game phase to run that
+     * The reinforcement phase of the game.
      */
-    private final GamePhase d_UpcomingGamePhase = GamePhase.Reinforcement;
+    GamePhase d_ReinforcementPhase = GamePhase.Reinforcement;
+
     /**
-     * Scanner to scan user inputs from CMD.
+     * The map editor phase of the game.
      */
-    private final Scanner d_Scanner = new Scanner(System.in);
+    GamePhase d_MapEditorPhase = GamePhase.MapEditor;
+
     /**
-     * Created object d_GameEventLogger of GameEventLogger.
+     * Instance of the game event logger for logging events.
      */
-    GameEventLogger d_GameEventLogger = new GameEventLogger();
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
+
     /**
-     * Default constructor initializing the game map.
+     * Default constructor initializing the game map instance.
      */
     public StartGameController() {
         d_GameMap = GameMap.getInstance();
     }
 
     /**
-     * Starts the game phase and performs tasks based on the commands given.
+     * This function starts the game phase and passes through the tasks in the game phase
+     * depending on the command given
      *
-     * @param p_CurrentPhase The current game phase.
-     * @return The next game phase.
-     * @throws ValidationException When validation fails.
+     * @param p_GamePhase current Game Phase
+     * @return the next Game Phase
+     * @throws ValidationException when validation fails
      */
-    public GamePhase start(GamePhase p_CurrentPhase) throws ValidationException {
-        d_GameEventLogger.logEvent(Constants.START_UP_PHASE);
-        return run(p_CurrentPhase);
-    }
-
-    /**
-     * Run is entry point of the StartGameController
-     *
-     * @param p_UpcomingGamePhase : Upcoming Game Phase
-     * @return : Next GamePhase to execute
-     */
-    private GamePhase run(GamePhase p_UpcomingGamePhase)  {
+    public GamePhase startPhase(GamePhase p_GamePhase) throws ValidationException {
         while (true) {
-            System.out.println(Constants.HELP_COMMAND+"\n"+Constants.EXIT_COMMAND);
-            String l_StartUpCommand = d_Scanner.nextLine();
+            d_Logger.log("-----------------------------------------------------------------------------------------");
+            d_Logger.log("Enter Command: ");
+            d_Logger.log("1. Enter help to view the set of commands" + "\n" + "2. Enter exit to end");
+            d_Logger.log("-----------------------------------------------------------------------------------------");
+            String l_Input = d_SCANNER.nextLine();
             List<String> l_InputList;
-            if (l_StartUpCommand.contains("-")) {
-                l_InputList = Arrays.stream(l_StartUpCommand.split("-"))
+            if (l_Input.contains("-")) {
+                l_InputList = Arrays.stream(l_Input.split("-"))
                         .filter(s -> !s.isEmpty())
                         .map(String::trim)
                         .collect(Collectors.toList());
             } else {
-                l_InputList = Arrays.stream(l_StartUpCommand.split(" ")).collect(Collectors.toList());
+                l_InputList = Arrays.stream(l_Input.split(" ")).collect(Collectors.toList());
             }
 
-            if (!checkCommandValidator(l_InputList)) {
-                if (l_StartUpCommand.startsWith(Constants.EXIT)) {
-                    l_InputList.addFirst(Constants.EXIT);
+            if (!inputValidator(l_InputList)) {
+                if (l_Input.startsWith(Constants.EXIT)) {
+                    l_InputList.add(0, Constants.EXIT);
                 } else {
                     l_InputList.clear();
+                    // if not available in command list forcing to call help
                     l_InputList.add(Constants.HELP);
                     l_InputList.add(Constants.DUMMY);
                 }
             }
-
-            String l_FinalCommand = l_InputList.get(0);
-            l_InputList.remove(l_FinalCommand);
-            for (String l_CommandFromInput : l_InputList) {
-                String[] commandArray = l_CommandFromInput.split(" ");
-                GameCommands l_GameCommand = GameCommands.fromString(l_FinalCommand.toLowerCase());
-                switch (l_GameCommand) {
-                    case LOAD_MAP: {
-                        if (commandArray.length == 1) {
-                            loadMapForStaringGame(commandArray[0]);
+            String l_MainCommand = l_InputList.get(0);
+            l_InputList.remove(l_MainCommand);
+            for (String l_Command : l_InputList) {
+                String[] l_CommandArray = l_Command.split(" ");
+                switch (l_MainCommand.toLowerCase()) {
+                    case Constants.LOAD_MAP: {
+                        if (l_CommandArray.length == 1) {
+                            loadMap(l_CommandArray[0]);
                         }
                         break;
                     }
-                    case GAME_PLAYER: {
-                        if (commandArray.length > 0) {
-                            switch (commandArray[0]) {
+                    case Constants.GAMEPLAYER: {
+                        if (l_CommandArray.length > 0) {
+                            switch (l_CommandArray[0]) {
                                 case Constants.SIMPLE_ADD: {
-                                    if (commandArray.length == 2) {
-                                        d_GameMap.addPlayer(commandArray[1]);
+                                    if (l_CommandArray.length == 2) {
+                                        d_GameMap.addPlayer(l_CommandArray[1]);
                                     } else {
-                                        System.out.println(Constants.INVALID_COMMAND);
+                                        throw new ValidationException();
                                     }
                                     break;
                                 }
                                 case Constants.SIMPLE_REMOVE: {
-                                    if (commandArray.length == 2) {
-                                        d_GameMap.removePlayer(commandArray[1]);
+                                    if (l_CommandArray.length == 2) {
+                                        d_GameMap.removePlayer(l_CommandArray[1]);
                                     } else {
-                                        System.out.println(Constants.INVALID_COMMAND);
+                                        throw new ValidationException();
                                     }
                                     break;
                                 }
@@ -129,26 +140,55 @@ public class StartGameController implements GameFlowManager {
                         }
                         break;
                     }
-                    case ASSIGN_COUNTRIES: {
+                    //Handle assigncountries command from console
+
+                    case Constants.ASSIGNCOUNTRIES: {
                         if (d_GameMap.getPlayers().size() > 1) {
                             d_GameMap.assignCountries();
-                            System.out.println(Constants.SEPERATER);
-                            return p_UpcomingGamePhase.nextState(d_UpcomingGamePhase);
                         } else {
-                            System.out.println(Constants.ADD_TWO_PLAYERS);
+                            d_Logger.log("Game ended as the minimum players are not there.");
+                            throw new ValidationException("Create atleast two players");
                         }
-                    }
-                    case SHOW_MAP: {
-                        new ShowMapController(d_GameMap).show();
                         break;
                     }
-                    case EXIT: {
-                        return p_UpcomingGamePhase.nextState(d_UpcomingGamePhase);
+                    //Handle showmap command from console
+                    case Constants.SHOW_MAP: {
+                        d_GameMap.showMap();
+                        break;
                     }
-                    case null:
-                        System.out.println(Constants.ENTER_CORRECT_COMMAND);
+                    case Constants.SAVEGAME_COMMAND: {
+                        if (l_CommandArray.length == 1) {
+                            GameProgress.SaveGameProgress(d_GameMap, l_CommandArray[0]);
+                            d_GameMap.setGamePhase(d_MapEditorPhase);
+                            return d_MapEditorPhase;
+                        }
+                        break;
+                    }
+                    case Constants.LOADGAME_COMMAND: {
+                        if (l_CommandArray.length == 1) {
+                            GamePhase l_GameLoaded = GameProgress.LoadGameProgress(l_CommandArray[0]);
+                            if (!l_GameLoaded.equals(GamePhase.StartUp)) {
+                                return l_GameLoaded;
+                            }
+                        }
+                        break;
+                    }
+                    case Constants.EXIT: {
+                        d_GameMap.setGamePhase(d_ReinforcementPhase);
+                        return p_GamePhase.nextState(d_ReinforcementPhase);
+                    }
+                    //Print the commands for help
                     default: {
-                        Constants.showStartGameCommand();
+                        d_Logger.log("-----------------------------------------------------------------------------------------");
+                        d_Logger.log("Order of game play commands:");
+                        d_Logger.log("-----------------------------------------------------------------------------------------");
+                        d_Logger.log("To load the map : loadmap filename");
+                        d_Logger.log("To show the loaded map : showmap");
+                        d_Logger.log("To add or remove a player : gameplayer -add playername -remove playername");
+                        d_Logger.log("To assign countries : assigncountries");
+                        d_Logger.log("To save the game : savegame filename");
+                        d_Logger.log("To load the game : loadgame filename");
+
                     }
                 }
             }
@@ -156,33 +196,49 @@ public class StartGameController implements GameFlowManager {
     }
 
     /**
-     * Loads the game map from the map file.
+     * This method loads the game map from the map file
      *
-     * @param p_Filename The map file name.
+     * @param p_Filename the map file name
+     * @throws ValidationException when validation fails
      */
-    private void loadMapForStaringGame(String p_Filename) {
-        if(new File(MAP_FILE_DIRECTORY+p_Filename+".map").isFile()){
-            new MapLoaderController().readMap(p_Filename);
+    private void loadMap(String p_Filename) throws ValidationException {
+        boolean l_ShouldUseConquestAdapter = true;
+        try {
+            File l_File = new File("maps/" + p_Filename);
+            BufferedReader l_BufferedReader = new BufferedReader(new FileReader(l_File));
+            while (l_BufferedReader.ready()) {
+                String l_FirstLine = l_BufferedReader.readLine();
+                if (!l_FirstLine.isEmpty()) {
+                    if (l_FirstLine.contains(";")) {
+                        l_ShouldUseConquestAdapter = false;
+                    }
+                    l_BufferedReader.close();
+                }
+            }
+        } catch (IOException l_E) {
+            // Do nothing.
         }
-        else{
-            System.out.println("Map File is Invalid Please Try Again");
-            d_GameEventLogger.logEvent("Invalid Map File");
+        DominationMap l_MapReader = l_ShouldUseConquestAdapter ? new Adapter(new Adaptee()) : new DominationMap();
+        l_MapReader.readMap(d_GameMap, p_Filename);
+        if (!MapValidation.validateMap(d_GameMap, 0)) {
+            throw new ValidationException("Invalid Map");
         }
     }
 
     /**
-     * Validates if the current CLI command is executable in the current phase.
+     * This method validates to check if the current cli command is executable
+     * in the current phase
      *
-     * @param p_InputList The command list from the console.
-     * @return True if the command is executable, else false.
+     * @param p_InputList the command list from console
+     * @return true if command is executable else false
      */
-    public boolean checkCommandValidator(List<String> p_InputList) {
-        if (!p_InputList.isEmpty()) {
-            String l_MainCommand = p_InputList.getFirst();
+    public boolean inputValidator(List<String> p_InputList) {
+        if (p_InputList.size() > 0) {
+            String l_MainCommand = p_InputList.get(0);
             if (p_InputList.size() == 1) {
                 p_InputList.add(Constants.DUMMY);
             }
-            return CLI_COMMANDS.contains(GameCommands.fromString(l_MainCommand.toLowerCase()));
+            return CLI_COMMANDS.contains(l_MainCommand.toLowerCase());
         }
         return false;
     }

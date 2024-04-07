@@ -1,62 +1,91 @@
 package org.team21.game.utils.logger;
 
+import org.team21.game.interfaces.observers.Observable;
+import org.team21.game.interfaces.observers.Observer;
 
-import org.team21.game.interfaces.observer.Observable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
- * Manages and dispatches game-related event logs. Leverages the Observable pattern
- * for efficient notification of registered observers.
+ * The GameEventLogger class records and manages game events, acting as an Observable.
+ * It follows the singleton pattern to ensure only one instance exists throughout the game.
+ * This class provides functionality to log game events and notify registered observers.
+ * Observers can subscribe to receive updates about game events.
  *
- * @author Kapil Soni
+ * @author Nishith Soni
+ * @version 1.0.0
  */
-public class GameEventLogger implements Observable {
+public class GameEventLogger implements Observable, Serializable {
+    /**
+     * The singleton instance of the GameEventLogger.
+     */
+    private static GameEventLogger Logger;
 
     /**
-     * Object of GameLogFileWriter
+     * A list of observers subscribed to receive notifications.
      */
-    private GameLogFileWriter d_LogEntryWriter;
+    private List<Observer> d_ObserverList = new ArrayList<>();
 
     /**
-     * Initializes a new GameEventLogger instance.
+     * Private constructor to prevent instantiation from outside.
      */
-    public GameEventLogger() {
-        d_LogEntryWriter = new GameLogFileWriter();// Automatically register LogEntryWriter
+    private GameEventLogger() {
     }
 
     /**
-     * Logs an informational event message and broadcasts it to all observers.
+     * Retrieves the singleton instance of the GameEventLogger.
      *
-     * @param p_message The event message to log and broadcast.
+     * @return The singleton instance of the GameEventLogger.
      */
-    public void logEvent(String p_message) {
-        // Indicate state change for observers
-        notifyObservers(p_message);
+    public static GameEventLogger getInstance() {
+        Logger = Objects.isNull(Logger) ? new GameEventLogger() : Logger;
+        return Logger;
     }
 
     /**
-     * Prepares the log file for a new game session.
+     * Logs the provided message and notifies registered observers.
      *
-     * @param p_filenamePrefix The base filename to use for the log file (without extension).
-     * @throws IOException If there's an error preparing the log file.
+     * @param p_s The message to be logged and notified.
      */
-    public void initializeNewLog(String p_filenamePrefix) throws IOException {
-        try (PrintWriter l_Writer = new PrintWriter(new BufferedWriter(new FileWriter(d_LogEntryWriter.getDirectoryPath() + p_filenamePrefix + ".log", false)))) {
-            // File cleared on creation
-        }
+    public void log(String p_s) {
+        notifyObservers(p_s);
     }
 
     /**
-     * A function to notify to Observer.
+     * Clears all logs and unsubscribes observers.
+     */
+    public void clear() {
+        clearObservers();
+    }
+
+    /**
+     * Notifies all registered observers with the provided message.
      *
-     * @param p_s the observable
+     * @param p_s The message to be notified to observers.
      */
     @Override
     public void notifyObservers(String p_s) {
-        d_LogEntryWriter.update(p_s);
+        d_ObserverList.forEach(p_observer -> p_observer.update(p_s));
+    }
+
+    /**
+     * Adds an observer to the list of registered observers.
+     *
+     * @param p_Observer The observer to be added.
+     */
+    @Override
+    public void addObserver(Observer p_Observer) {
+        this.d_ObserverList.add(p_Observer);
+    }
+
+    /**
+     * Clears all observers from the list, effectively unsubscribing them.
+     */
+    @Override
+    public void clearObservers() {
+        d_ObserverList.forEach(Observer::clearGameLogs);
     }
 }

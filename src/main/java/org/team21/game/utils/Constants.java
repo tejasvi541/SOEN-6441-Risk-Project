@@ -6,8 +6,12 @@ import java.util.List;
 /**
  * This class handles defined constants
  *
+ * @author Meet Boghani
  * @author Bharti Chhabra
  * @author Kapil Soni
+ * @author Nishith Soni
+ * @author Yesha Shah
+ * @author Tejasvi
  * @version 1.0.1
  */
 public final class Constants {
@@ -49,6 +53,10 @@ public final class Constants {
      */
     public final static String EDIT_MAP = "editmap";
     /**
+     * The constant LOAD_MAP.
+     */
+    public final static String LOAD_MAP = "loadmap";
+    /**
      * The constant ADD.
      */
     public final static String ADD = "-add";
@@ -59,7 +67,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE_MAP_EDITOR.
      */
-    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************";
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************/";
     /**
      * The constant ASK_FOR_ACTION.
      */
@@ -108,6 +116,10 @@ public final class Constants {
      * The constant SEPERATER.
      */
     public final static String SEPERATER = "******************************************************************************";
+    /**
+     * The constant EQUAL SEPERATER.
+     */
+    public final static String EQUAL_SEPERATER = "=============================================================================";
     /**
      * The constant ENTER_CORRECT_COMMAND.
      */
@@ -229,14 +241,6 @@ public final class Constants {
      */
     public final static String ASSIGNED_COUNTRIES = "The Assigned countries are :: ";
     /**
-     * The constant TEAM_NAME.
-     */
-    public static String TEAM_NAME = "Team21";
-    /**
-     * The constant WELCOME_MESSAGE.
-     */
-    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
-    /**
      * The constant non exists player message.
      */
     public final static String NONEXISTENT_PLAYER = "The Player name does not exist.";
@@ -244,6 +248,54 @@ public final class Constants {
      * The constant for no negotiate card message.
      */
     public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
+    /**
+     * The constant for command check.
+     */
+    public final static String COMMAND_CHECK = "Check your command";
+    /**
+     * The constant for no airlift card message.
+     */
+    public final static String NO_AIRLIFT_CARD = "Player doesn't have Airlift Card.";
+    /**
+     * The constant for no bomb card message.
+     */
+    public final static String NO_BOMB_CARD = "Player doesn't have Bomb Card.";
+    /**
+     * The constant SAVEGAME_COMMAND.
+     */
+    public final static String SAVEGAME_COMMAND = "savegame";
+    /**
+     * The constant LOADGAME_COMMAND.
+     */
+    public final static String LOADGAME_COMMAND = "loadgame";
+    /**
+     * The constant THE_COMMAND_SYNTAX_IS_INVALID.
+     */
+    public static final String THE_COMMAND_SYNTAX_IS_INVALID = "The command syntax is invalid.";
+    /**
+     * The constant THE_NUMBER_FORMAT_IS_INVALID.
+     */
+    public static final String THE_NUMBER_FORMAT_IS_INVALID = "The number format is invalid";
+    /**
+     * The constant ASSIGNCOUNTRIES.
+     */
+    public static final String ASSIGNCOUNTRIES = "assigncountries";
+    /**
+     * The constant GAMEPLAYER.
+     */
+    public static final String GAMEPLAYER = "gameplayer";
+    /**
+     * The constant TOURNAMENT.
+     */
+    public static final String TOURNAMENT = "tournament";
+    /**
+     * The constant TEAM_NAME.
+     */
+    public static String TEAM_NAME = "Team21";
+    /**
+     * The constant WELCOME_MESSAGE.
+     */
+    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
 
     /**
      * Instantiates a new Constants.
@@ -269,14 +321,19 @@ public final class Constants {
      */
     public static void showIssueOrderCommand() {
         System.out.println("Please remember when all the member determines their command please use pass to execute orders");
+        System.out.println(Constants.SEPERATER);
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
+        System.out.println("To execute game further use : pass");
+        System.out.println("To see map : showmap");
+        System.out.println(Constants.SEPERATER);
+        System.out.println("Below commands can be used only if you have the desired card.");
+        System.out.println(Constants.SEPERATER);
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
-        System.out.println("To execute game further use : pass");
-        System.out.println("To see map : showmap");
+        System.out.println(Constants.SEPERATER);
     }
 
     /**

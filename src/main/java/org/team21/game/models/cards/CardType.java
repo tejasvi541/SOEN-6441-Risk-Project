@@ -1,38 +1,37 @@
 package org.team21.game.models.cards;
+
 import java.util.Random;
 
 /**
- * This is an enum for the cards to be held by the player
- * @author Tejasvi
+ * This is the enum class for card type
+ * @author Kapil Soni
  */
 public enum CardType {
     /**
-     * Bomb Card
+     * Bomb Card Type
      */
     BOMB,
-
     /**
-     * BlockadeOrder Card
+     * Blockade Card Type
      */
     BLOCKADE,
-
     /**
-     * Airlift Card
+     * Airlift Card Type
      */
     AIRLIFT,
-
     /**
-     * Negotiate Card
-      */
+     * Diplomacy Card Type
+     */
     DIPLOMACY;
 
     /**
-     * This function will generate and return a random card name
+     * This method assigns a Random Card from the Enum of Card types
      *
      * @return The random Card Name
      */
     public static CardType getRandomCard() {
-        Random d_Random = new Random();
-        return values()[d_Random.nextInt(values().length)];
+        Random l_Random = new Random();
+        CardType l_Type = values()[l_Random.nextInt(values().length)];
+        return l_Type;
     }
 }
