@@ -2,28 +2,25 @@ package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.models.map.MapReader;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.strategy.player.PlayerStrategy;
 import org.team21.game.models.tournament.TournamentOptions;
 import org.team21.game.models.tournament.TournamentResult;
-import org.team21.game.models.map.MapReader;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
 /**
  * class to implement single game engine
+ *
  * @author Bharti Chhabra
  */
 public class SingleGameEngine implements Engine {
 
-    /**
-     * the logger observable
-     */
-    private GameEventLogger d_Logger;
     /**
      * tournament options
      */
@@ -36,6 +33,10 @@ public class SingleGameEngine implements Engine {
      * current game map
      */
     GameMap d_CurrentMap;
+    /**
+     * the logger observable
+     */
+    private GameEventLogger d_Logger;
 
     /**
      * constructor for single game engine
@@ -117,7 +118,7 @@ public class SingleGameEngine implements Engine {
      *
      * @throws ValidationException if it occurs
      */
-    public void start() throws ValidationException {
+    public void startEngine() throws ValidationException {
         String l_File = d_Options.getMap().get(0);
         GameSettings.getInstance().MAX_TRIES = 30;
         d_CurrentMap = GameMap.newInstance();
@@ -138,7 +139,7 @@ public class SingleGameEngine implements Engine {
         d_CurrentMap.assignCountries();
         GameEngine l_GameEngine = new GameEngine();
         l_GameEngine.setGamePhase(GamePhase.Reinforcement);
-        l_GameEngine.start();
+        l_GameEngine.startEngine();
         Player l_Winner = d_CurrentMap.getWinner();
         if (Objects.nonNull(l_Winner)) {
             l_Result.setWinner(l_Winner.getName());

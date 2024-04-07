@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * This class handles defined constants
+ *
  * @author Meet Boghani
  * @author Bharti Chhabra
  * @author Kapil Soni
@@ -262,14 +263,39 @@ public final class Constants {
     /**
      * The constant for no airlift card message.
      */
-    public final static String NO_AIRLIFT_CARD= "Player doesn't have Airlift Card.";
+    public final static String NO_AIRLIFT_CARD = "Player doesn't have Airlift Card.";
     /**
      * The constant for no bomb card message.
      */
     public final static String NO_BOMB_CARD = "Player doesn't have Bomb Card.";
-
-
-
+    /**
+     * The constant SAVEGAME_COMMAND.
+     */
+    public final static String SAVEGAME_COMMAND = "savegame";
+    /**
+     * The constant LOADGAME_COMMAND.
+     */
+    public final static String LOADGAME_COMMAND = "loadgame";
+    /**
+     * The constant THE_COMMAND_SYNTAX_IS_INVALID.
+     */
+    public static final String THE_COMMAND_SYNTAX_IS_INVALID = "The command syntax is invalid.";
+    /**
+     * The constant THE_NUMBER_FORMAT_IS_INVALID.
+     */
+    public static final String THE_NUMBER_FORMAT_IS_INVALID = "The number format is invalid";
+    /**
+     * The constant ASSIGNCOUNTRIES.
+     */
+    public static final String ASSIGNCOUNTRIES = "assigncountries";
+    /**
+     * The constant GAMEPLAYER.
+     */
+    public static final String GAMEPLAYER = "gameplayer";
+    /**
+     * The constant TOURNAMENT.
+     */
+    public static final String TOURNAMENT = "tournament";
     /**
      * Instantiates a new Constants.
      */

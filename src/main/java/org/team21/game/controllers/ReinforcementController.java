@@ -9,47 +9,52 @@ import org.team21.game.utils.validation.InvalidExecutionException;
 import org.team21.game.utils.validation.ValidationException;
 
 /**
- * Controller for {@code Reinforcement} phase of game.
- * @author Yesha Shah
- * @version 1.0.0
+ * This class represents the controller responsible for managing the Reinforcement phase of the game.
+ * It implements the {@code GameFlowManager} interface.
+ * This controller handles the calculation and distribution of reinforcement armies to players based on the number of countries they control.
+ *
+ * @author : Yesha Shah
+ * @version : 1.0.0
  */
 public class ReinforcementController implements GameFlowManager {
+
     /**
-     * Data Member holding next phase of game
+     * Data member holding the next phase of the game.
      */
     GamePhase d_NextGamePhase = GamePhase.IssueOrder;
+
     /**
-     * Data Member holding current phase of game
+     * Data member holding the current phase of the game.
      */
     GamePhase d_GamePhase;
+
     /**
-     * Data Member for Game map
+     * Data member representing the game map.
      */
     GameMap d_GameMap;
 
     /**
-     * Data Member for Current Player
+     * Data member representing the current player.
      */
     Player d_CurrentPlayer;
 
     /**
-     * Default constructor initialising the Game map data member with
-     * {@code GameMap} singleton object
+     * Default constructor that initializes the game map data member with the {@code GameMap} singleton object.
      */
     public ReinforcementController() {
         d_GameMap = GameMap.getInstance();
     }
 
     /**
-     * Beginner method of the Reinforcement phase
+     * Begins the Reinforcement phase of the game.
      *
-     * @param p_GamePhase holding the current game phase
-     * @return Next game phase upon successful execution
-     * @throws ValidationException       upon invalid input or output
-     * @throws InvalidExecutionException upon invalid game phase command
+     * @param p_GamePhase The current game phase.
+     * @return The next game phase upon successful execution.
+     * @throws ValidationException       if there is invalid input or output.
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
     @Override
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException, InvalidExecutionException {
+    public GamePhase startPhase(GamePhase p_GamePhase) throws ValidationException, InvalidExecutionException {
         if (GameSettings.getInstance().MAX_TRIES != 0) {
             d_GameMap.nextTry();
         }
@@ -60,9 +65,9 @@ public class ReinforcementController implements GameFlowManager {
     }
 
     /**
-     * Method to calculate and set reinforcement armies for each player.
+     * Calculates and sets reinforcement armies for each player.
      *
-     * @throws InvalidExecutionException upon invalid game phase command
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
     public void calculateReinforcements() throws InvalidExecutionException {
         for (Player l_Player : d_GameMap.getPlayers().values()) {
@@ -72,14 +77,15 @@ public class ReinforcementController implements GameFlowManager {
     }
 
     /**
-     * Game Logic to calculate reinforcement armies for each player based on
-     * number of countries captured.
+     * Calculates the reinforcement armies for the current player based on the number of countries they control.
      *
-     * @throws InvalidExecutionException upon invalid game phase command
+     * @throws InvalidExecutionException if there is an invalid game phase command.
      */
     public void setReinforcementTroops() throws InvalidExecutionException {
         if (d_GamePhase.equals(GamePhase.Reinforcement)) {
             d_CurrentPlayer.calculateReinforcementArmies(d_GameMap);
-        } else throw new InvalidExecutionException();
+        } else {
+            throw new InvalidExecutionException();
+        }
     }
 }
