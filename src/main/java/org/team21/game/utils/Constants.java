@@ -255,11 +255,17 @@ public final class Constants {
      * The constant for no negotiate card message.
      */
     public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
-
+    /**
+     * The constant for command check.
+     */
     public final static String COMMAND_CHECK = "Check your command";
-
+    /**
+     * The constant for no airlift card message.
+     */
     public final static String NO_AIRLIFT_CARD= "Player doesn't have Airlift Card.";
-
+    /**
+     * The constant for no bomb card message.
+     */
     public final static String NO_BOMB_CARD = "Player doesn't have Bomb Card.";
 
 

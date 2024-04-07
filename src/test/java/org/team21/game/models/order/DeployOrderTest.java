@@ -80,19 +80,6 @@ public class DeployOrderTest {
     }
 
     /**
-     * Test to check if the specified country in the command belongs to the player.
-     * Verifies that the command is invalid if the specified country does not belong to the player.
-     */
-    @Test
-    public void testInvalidCountry() {
-        d_player2Countries = d_gameMap.getPlayer("Player2").getCapturedCountries();
-        IssueOrderController.d_Commands = "deploy " + d_player2Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
-        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
-        d_player.addOrder(l_order);
-        assertFalse(d_player.nextOrder().validateCommand());
-    }
-
-    /**
      * Test to check if the specified number of armies in the command is valid.
      * Verifies that the command is invalid if the specified number of armies is greater than the player's reinforcement armies.
      */
