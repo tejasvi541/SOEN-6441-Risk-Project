@@ -36,6 +36,7 @@ public class BombOrderTest {
     @Before
     public void setUp() throws Exception {
         d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
 
         d_gameMap.addContinent("Asia", "10");
         d_gameMap.addContinent("Africa", "20");

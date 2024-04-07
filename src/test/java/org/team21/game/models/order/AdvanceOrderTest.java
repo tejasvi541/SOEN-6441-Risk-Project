@@ -37,6 +37,7 @@ public class AdvanceOrderTest {
           Singleton game map instance
          */
         d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
 
         /*
           Singleton game settings instance

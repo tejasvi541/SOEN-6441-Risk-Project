@@ -34,6 +34,8 @@ public class DeployOrderTest {
     @Before
     public void setUp() throws Exception {
         d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
+
         d_gameMap.addContinent("Asia", "4");
         d_gameMap.addCountry("India", "Asia");
         d_gameMap.addCountry("China", "Asia");
