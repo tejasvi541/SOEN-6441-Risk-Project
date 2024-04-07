@@ -75,8 +75,8 @@ public class NegotiateOrder extends Order implements Serializable {
         // check if the player exists
         d_Logger.log("player exists:" + d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName()));
         if (!d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName())) {
-            System.err.println("The Player name doesn't exist.");
-            d_Logger.log("The Player name doesn't exist.");
+            System.err.println(Constants.NONEXISTENT_PLAYER);
+            d_Logger.log(Constants.NONEXISTENT_PLAYER);
             return false;
         }
         return true;

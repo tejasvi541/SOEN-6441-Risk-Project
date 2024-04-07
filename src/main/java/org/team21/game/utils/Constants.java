@@ -246,7 +246,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE.
      */
-    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
+    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER;
     /**
      * The constant non exists player message.
      */

@@ -9,16 +9,17 @@ import java.util.Set;
 
 /**
  * Class to implement the tournament options
+ *
  * @author Nishith Soni
  */
 public class TournamentOptions {
 
     /**
-     * list for Map
+     * list object for map
      */
     private List<String> d_Map = new ArrayList<>();
     /**
-     * hash set to hold player strategy
+     * hash set object to hold player strategy
      */
     private Set<PlayerStrategy> d_PlayerStrategies = new HashSet<>();
     /**
@@ -31,7 +32,8 @@ public class TournamentOptions {
     private int d_MaxTries;
 
     /**
-     * method to get map
+     * get the map
+     *
      * @return the map
      */
     public List<String> getMap() {
@@ -39,7 +41,7 @@ public class TournamentOptions {
     }
 
     /**
-     * method to get player strategies
+     * get the player strategies
      *
      * @return player strategies
      */
@@ -48,7 +50,8 @@ public class TournamentOptions {
     }
 
     /**
-     * method to get games
+     * To get the games
+     *
      * @return number of games
      */
     public int getGames() {
@@ -56,15 +59,16 @@ public class TournamentOptions {
     }
 
     /**
-     * method to set game
-     * @param p_Games number of games
+     * Set the games
+     *
+     * @param p_Games hold the number of games
      */
     public void setGames(int p_Games) {
         d_Games = p_Games;
     }
 
     /**
-     * method to get maximum tried per game
+     * To get the maximum tries in a tournament
      *
      * @return the maximum tries
      */
@@ -73,8 +77,9 @@ public class TournamentOptions {
     }
 
     /**
-     * method to set maximum tries
-     * @param p_MaxTries maximum tries
+     * To set the maximum tries in a tournament
+     *
+     * @param p_MaxTries hold the maximum tries
      */
     public void setMaxTries(int p_MaxTries) {
         d_MaxTries = p_MaxTries;

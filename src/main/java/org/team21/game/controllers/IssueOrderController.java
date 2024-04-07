@@ -219,7 +219,7 @@ public class IssueOrderController implements GameFlowManager {
         System.out.format(l_Table, p_Player.getName(), p_Player.getReinforcementArmies(), p_Player.getIssuedArmies());
         System.out.format("+--------------+-----------------------+------------------+%n");
 
-        d_Logger.log("The countries assigned to the player are: ");
+        d_Logger.log(Constants.ASSIGNED_COUNTRIES);
         System.out.format("+--------------+-----------------------+------------------+---------+%n");
 
         System.out.format(
