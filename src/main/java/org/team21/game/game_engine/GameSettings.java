@@ -1,8 +1,8 @@
 package org.team21.game.game_engine;
 
+import org.team21.game.interfaces.game.GameStrategy;
 import org.team21.game.models.strategy.game.DefaultStrategy;
 import org.team21.game.models.strategy.game.DiceStrategy;
-import org.team21.game.interfaces.game.GameStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Class containing the different strategy settings for advance order calculation.
+ *
  * @author Yesha Shah
  */
 public class GameSettings {
@@ -18,10 +19,6 @@ public class GameSettings {
      */
     private static GameSettings d_Settings;
     /**
-     * Game strategy object
-     */
-    private GameStrategy d_Strategy;
-    /**
      * The Attacker probability
      */
     public final double ATTACKER_PROBABILITY = 60 / 100d;
@@ -29,11 +26,14 @@ public class GameSettings {
      * The Defender probability
      */
     public final double DEFENDER_PROBABILITY = 70 / 100d;
-
     /**
      * Max tries
      */
     public int MAX_TRIES;
+    /**
+     * Game strategy object
+     */
+    private GameStrategy d_Strategy;
 
     /**
      * Constructor for Game Settings

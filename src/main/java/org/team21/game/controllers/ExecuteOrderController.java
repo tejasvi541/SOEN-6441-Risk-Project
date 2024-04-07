@@ -9,7 +9,9 @@ import org.team21.game.models.order.Order;
 import org.team21.game.utils.logger.GameEventLogger;
 
 /**
- * This is a class which contains the Execute Order phase
+ * The ExecuteOrderController class implements the GameFlowManager interface and is responsible for executing orders
+ * and managing the flow of the game.
+ *
  * @author Kapil Soni
  * @version 1.0.0
  */
@@ -50,7 +52,7 @@ public class ExecuteOrderController implements GameFlowManager {
      * @throws Exception when execution fails
      */
     @Override
-    public GamePhase start(GamePhase p_GamePhase) throws Exception {
+    public GamePhase startPhase(GamePhase p_GamePhase) throws Exception {
         d_GamePhase = p_GamePhase;
         executeOrders();
         clearAllNeutralPlayers();
