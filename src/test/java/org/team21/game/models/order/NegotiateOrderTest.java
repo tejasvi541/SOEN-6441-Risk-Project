@@ -29,6 +29,7 @@ public class NegotiateOrderTest {
     @Before
     public void setUp() throws Exception {
         gameMap = GameMap.getInstance();
+        gameMap.flushGameMap();
         gameMap.addPlayer("Player1");
         gameMap.addPlayer("Player2");
     }

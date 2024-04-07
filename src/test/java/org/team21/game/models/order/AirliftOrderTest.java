@@ -35,6 +35,7 @@ public class AirliftOrderTest {
     @Before
     public void setUp() throws Exception {
         gameMap = GameMap.getInstance();
+        gameMap.flushGameMap();
         gameMap.addPlayer("Player1");
         gameMap.addPlayer("Player2");
         gameMap.addContinent("Asia", "5");

@@ -33,11 +33,12 @@ public class AdvanceOrderTest {
      */
     @Before
     public void setUp() throws Exception {
+
         /*
           Singleton game map instance
          */
         gameMap = GameMap.getInstance();
-
+        gameMap.flushGameMap();
         /*
           Singleton game settings instance
          */
