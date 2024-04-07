@@ -7,6 +7,7 @@ import org.team21.game.models.strategy.player.PlayerStrategy;
 import org.team21.game.models.tournament.TournamentOptions;
 import org.team21.game.models.tournament.TournamentResult;
 import org.team21.game.models.map.MapReader;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.GameEventLogger;
@@ -117,7 +118,7 @@ public class TournamentEngine implements Engine {
             }
             return d_Options;
         } catch (Exception e) {
-            d_Logger.log("Check your command");
+            d_Logger.log(Constants.COMMAND_CHECK);
             d_Logger.log("command should be in this format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
             return null;
         }

@@ -71,13 +71,13 @@ public class BlockadeOrder extends Order implements Serializable {
         }
 
         if (l_Country.getPlayer() != l_Player) {
-            System.err.println("The target country does not belong to the player");
-            d_Logger.log("The target country does not belong to the player");
+            System.err.println(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
+            d_Logger.log(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
             return false;
         }
         if (!l_Player.checkIfCardAvailable(CardType.BLOCKADE)) {
-            System.err.println("Player doesn't have Blockade Card.");
-            d_Logger.log("Player doesn't have Blockade Card.");
+            System.err.println(Constants.NO_BLOCKADE_CARD);
+            d_Logger.log(Constants.NO_BLOCKADE_CARD);
             return false;
         }
         return true;

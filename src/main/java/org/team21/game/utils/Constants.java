@@ -66,7 +66,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE_MAP_EDITOR.
      */
-    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************";
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************/";
     /**
      * The constant ASK_FOR_ACTION.
      */
@@ -115,6 +115,10 @@ public final class Constants {
      * The constant SEPERATER.
      */
     public final static String SEPERATER = "******************************************************************************";
+    /**
+     * The constant EQUAL SEPERATER.
+     */
+    public final static String EQUAL_SEPERATER = "=============================================================================";
     /**
      * The constant ENTER_CORRECT_COMMAND.
      */
@@ -251,6 +255,20 @@ public final class Constants {
      * The constant for no negotiate card message.
      */
     public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
+    /**
+     * The constant for command check.
+     */
+    public final static String COMMAND_CHECK = "Check your command";
+    /**
+     * The constant for no airlift card message.
+     */
+    public final static String NO_AIRLIFT_CARD= "Player doesn't have Airlift Card.";
+    /**
+     * The constant for no bomb card message.
+     */
+    public final static String NO_BOMB_CARD = "Player doesn't have Bomb Card.";
+
+
 
     /**
      * Instantiates a new Constants.

@@ -51,7 +51,7 @@ public class MapEditorController implements GameFlowManager {
     @Override
     public GamePhase start(GamePhase p_GamePhase) throws ValidationException, IOException {
         d_Logger.clear();
-        d_Logger.log("/************************************ You are in MAP EDITOR PHASE *******************************/");
+        d_Logger.log(Constants.WELCOME_MESSAGE_MAP_EDITOR);
         while (true) {
             d_Logger.log("Enter your map operation:" + "\n" + "1. Enter help to view the set of commands" + "\n" + "2. Enter exit to end map creation and save phase");
             d_Logger.log("-----------------------------------------------------------------------------------------");

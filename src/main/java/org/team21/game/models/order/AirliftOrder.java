@@ -74,7 +74,7 @@ public class AirliftOrder extends Order implements Serializable {
         }
         //check if the player has an airlift card
         if (!l_Player.checkIfCardAvailable(CardType.AIRLIFT)) {
-            d_Logger.log("Player doesn't have Airlift Card.");
+            d_Logger.log(Constants.NO_AIRLIFT_CARD);
             return false;
         }
         //check if countries belong to the player
