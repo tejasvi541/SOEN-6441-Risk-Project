@@ -74,8 +74,8 @@ public class BombOrder extends Order implements Serializable {
         }
         // validate that the player has the bomb card
         if (!l_Player.checkIfCardAvailable(CardType.BOMB)) {
-            System.err.println("Player doesn't have Bomb Card.");
-            d_Logger.log("Player doesn't have Bomb Card.");
+            System.err.println(Constants.NO_BOMB_CARD);
+            d_Logger.log(Constants.NO_BOMB_CARD);
             return false;
         }
 

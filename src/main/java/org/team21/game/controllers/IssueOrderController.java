@@ -100,8 +100,8 @@ public class IssueOrderController implements GameFlowManager {
                 if (!d_Commands.equals(Constants.PASS_COMMAND)) {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
-                    d_Logger.log("The order has been added to the list of orders.");
-                    d_Logger.log("=============================================================================");
+                    d_Logger.log(Constants.All_ORDERS_ADDED);
+                    d_Logger.log(Constants.EQUAL_SEPERATER);
                 }
             }
             d_GameMap.setGameLoaded(false);
@@ -166,7 +166,6 @@ public class IssueOrderController implements GameFlowManager {
                 }
             default:
                 break;
-
         }
         return true;
     }
@@ -237,8 +236,8 @@ public class IssueOrderController implements GameFlowManager {
         }
         System.out.format("+--------------+-----------------------+------------------+---------+\n");
 
+        d_Logger.log(Constants.CARDS_OF_PLAYER);
         if (!p_Player.getPlayerCards().isEmpty()) {
-            d_Logger.log("The Cards assigned to the Player are: ");
             for (Card l_Card : p_Player.getPlayerCards()) {
                 d_Logger.log(l_Card.getCardType().toString());
             }

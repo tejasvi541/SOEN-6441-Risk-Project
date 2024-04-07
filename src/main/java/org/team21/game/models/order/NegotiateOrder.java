@@ -62,8 +62,8 @@ public class NegotiateOrder extends Order implements Serializable {
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         //check if the player has the card
         if (!l_Player.checkIfCardAvailable(CardType.DIPLOMACY)) {
-            System.err.println("Player doesn't have the card to be used.");
-            d_Logger.log("Player doesn't have the card to be used.");
+            System.err.println(Constants.NO_NEGOTIATE_CARD);
+            d_Logger.log(Constants.NO_NEGOTIATE_CARD);
             return false;
         }
         //check if player is valid
