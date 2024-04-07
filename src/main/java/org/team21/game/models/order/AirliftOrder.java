@@ -4,12 +4,14 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 
 /**
  * This class gives the order to execute AirliftOrder, from one country to another.
+ * @author Nishith Soni
  */
 public class AirliftOrder extends Order implements Serializable {
     /**
@@ -41,12 +43,12 @@ public class AirliftOrder extends Order implements Serializable {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_fromCountry = getOrderInfo().getDeparture();
         Country l_toCountry = getOrderInfo().getDestination();
-        int p_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
+        int l_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
         d_Logger.log("---------------------------------------------------------------------------------------------");
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
-            l_fromCountry.setArmies(l_fromCountry.getArmies() - p_armyNumberToAirLift);
-            l_toCountry.setArmies(l_toCountry.getArmies() + p_armyNumberToAirLift);
+            l_fromCountry.setArmies(l_fromCountry.getArmies() - l_armyNumberToAirLift);
+            l_toCountry.setArmies(l_toCountry.getArmies() + l_armyNumberToAirLift);
             l_Player.removeCard(CardType.AIRLIFT);
             return true;
         }
@@ -63,16 +65,16 @@ public class AirliftOrder extends Order implements Serializable {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_fromCountry = getOrderInfo().getDeparture();
         Country l_toCountry = getOrderInfo().getDestination();
-        int p_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
+        int l_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
 
         //check if the player is valid
         if (l_Player == null) {
-            d_Logger.log("The Player is not valid.");
+            d_Logger.log(Constants.INVALID_PLAYER);
             return false;
         }
         //check if the player has an airlift card
         if (!l_Player.checkIfCardAvailable(CardType.AIRLIFT)) {
-            d_Logger.log("Player doesn't have Airlift Card.");
+            d_Logger.log(Constants.NO_AIRLIFT_CARD);
             return false;
         }
         //check if countries belong to the player
@@ -82,12 +84,12 @@ public class AirliftOrder extends Order implements Serializable {
 
         }
         //check if army number is more than 0
-        if (p_armyNumberToAirLift <= 0) {
+        if (l_armyNumberToAirLift <= 0) {
             d_Logger.log("The number of airlift army should be greater than 0");
             return false;
         }
         //check if army number is more that they own
-        if (l_fromCountry.getArmies() < p_armyNumberToAirLift) {
+        if (l_fromCountry.getArmies() < l_armyNumberToAirLift) {
             d_Logger.log("Player has less no. of army in country " + getOrderInfo().getDeparture().getName());
             return false;
         }

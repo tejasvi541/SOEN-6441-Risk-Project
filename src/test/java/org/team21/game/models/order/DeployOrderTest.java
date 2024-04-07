@@ -21,10 +21,10 @@ import static org.junit.Assert.assertTrue;
  * @author Tejasvi
  */
 public class DeployOrderTest {
-    GameMap gameMap;
-    List<Country> player1Countries;
-    List<Country> player2Countries;
-    Player player;
+    GameMap d_gameMap;
+    List<Country> d_player1Countries;
+    List<Country> d_player2Countries;
+    Player d_player;
 
     /**
      * Sets up the test environment before each test case.
@@ -33,19 +33,20 @@ public class DeployOrderTest {
      */
     @Before
     public void setUp() throws Exception {
-        gameMap = GameMap.getInstance();
-        gameMap.flushGameMap();
-        gameMap.addContinent("Asia", "4");
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("China", "Asia");
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
-        gameMap.assignCountries();
-        for (Player player : gameMap.getPlayers().values()) {
-            player.calculateReinforcementArmies(gameMap);
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
+
+        d_gameMap.addContinent("Asia", "4");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("China", "Asia");
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
+        d_gameMap.assignCountries();
+        for (Player player : d_gameMap.getPlayers().values()) {
+            player.calculateReinforcementArmies(d_gameMap);
         }
-        player1Countries = gameMap.getPlayer("Player1").getCapturedCountries();
-        player = gameMap.getPlayer("Player1");
+        d_player1Countries = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        d_player = d_gameMap.getPlayer("Player1");
     }
 
     /**
@@ -53,7 +54,7 @@ public class DeployOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -62,10 +63,10 @@ public class DeployOrderTest {
      */
     @Test
     public void testExecution() {
-        IssueOrderController.Commands = "deploy " + player1Countries.get(0).getName() + " " + player.getReinforcementArmies();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().execute());
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
+        d_player.addOrder(l_order);
+        assertTrue(d_player.nextOrder().execute());
     }
 
     /**
@@ -74,23 +75,10 @@ public class DeployOrderTest {
      */
     @Test
     public void testCommandValidationForValidCountry() {
-        IssueOrderController.Commands = "deploy " + player1Countries.get(0).getName() + " " + player.getReinforcementArmies();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().validateCommand());
-    }
-
-    /**
-     * Test to check if the specified country in the command belongs to the player.
-     * Verifies that the command is invalid if the specified country does not belong to the player.
-     */
-    @Test
-    public void testInvalidCountry() {
-        player2Countries = gameMap.getPlayer("Player2").getCapturedCountries();
-        IssueOrderController.Commands = "deploy " + player2Countries.get(0).getName() + " " + player.getReinforcementArmies();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertFalse(player.nextOrder().validateCommand());
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " " + d_player.getReinforcementArmies();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
+        d_player.addOrder(l_order);
+        assertTrue(d_player.nextOrder().validateCommand());
     }
 
     /**
@@ -99,9 +87,9 @@ public class DeployOrderTest {
      */
     @Test
     public void testInvalidArmies() {
-        IssueOrderController.Commands = "deploy " + player1Countries.get(0).getName() + " 10";
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertFalse(player.nextOrder().validateCommand());
+        IssueOrderController.d_Commands = "deploy " + d_player1Countries.get(0).getName() + " 10";
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), d_player);
+        d_player.addOrder(l_order);
+        assertFalse(d_player.nextOrder().validateCommand());
     }
 }

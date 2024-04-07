@@ -24,9 +24,9 @@ import static org.junit.Assert.assertTrue;
  * @author Tejasvi
  */
 public class BombOrderTest {
-    GameMap gameMap;
-    List<Country> player1Countries;
-    List<Country> player2Countries;
+    GameMap d_gameMap;
+    List<Country> d_player1Countries;
+    List<Country> d_player2Countries;
 
     /**
      * Sets up the test environment before each test case.
@@ -35,22 +35,23 @@ public class BombOrderTest {
      */
     @Before
     public void setUp() throws Exception {
-        gameMap = GameMap.getInstance();
-        gameMap.flushGameMap();
-        gameMap.addContinent("Asia", "10");
-        gameMap.addContinent("Africa", "20");
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("Zambia", "Africa");
-        gameMap.addNeighbor("India", "Zambia");
-        gameMap.addNeighbor("Zambia", "India");
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
-        gameMap.assignCountries();
-        for (Player player : gameMap.getPlayers().values()) {
-            player.calculateReinforcementArmies(gameMap);
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
+
+        d_gameMap.addContinent("Asia", "10");
+        d_gameMap.addContinent("Africa", "20");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("Zambia", "Africa");
+        d_gameMap.addNeighbor("India", "Zambia");
+        d_gameMap.addNeighbor("Zambia", "India");
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
+        d_gameMap.assignCountries();
+        for (Player player : d_gameMap.getPlayers().values()) {
+            player.calculateReinforcementArmies(d_gameMap);
         }
-        player1Countries = gameMap.getPlayer("Player1").getCapturedCountries();
-        player2Countries = gameMap.getPlayer("Player2").getCapturedCountries();
+        d_player1Countries = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        d_player2Countries = d_gameMap.getPlayer("Player2").getCapturedCountries();
     }
 
     /**
@@ -58,7 +59,7 @@ public class BombOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -67,12 +68,12 @@ public class BombOrderTest {
      */
     @Test
     public void testExecution() {
-        Player player = gameMap.getPlayer("Player2");
-        player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + player1Countries.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().execute());
+        Player l_player = d_gameMap.getPlayer("Player2");
+        l_player.addPlayerCard(new Card(CardType.BOMB));
+        IssueOrderController.d_Commands = "bomb " + d_player1Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertTrue(l_player.nextOrder().execute());
     }
 
     /**
@@ -81,12 +82,12 @@ public class BombOrderTest {
      */
     @Test
     public void testCommandValidationForValidTargetCountry() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + player2Countries.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().validateCommand());
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.BOMB));
+        IssueOrderController.d_Commands = "bomb " + d_player2Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertTrue(l_player.nextOrder().validateCommand());
     }
 
     /**
@@ -95,12 +96,12 @@ public class BombOrderTest {
      */
     @Test
     public void testNoBombCard() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "bomb " + player2Countries.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertFalse(player.nextOrder().validateCommand());
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.BLOCKADE));
+        IssueOrderController.d_Commands = "bomb " + d_player2Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertFalse(l_player.nextOrder().validateCommand());
     }
 
     /**
@@ -109,11 +110,11 @@ public class BombOrderTest {
      */
     @Test
     public void testInvalidTargetCountry() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.BOMB));
-        IssueOrderController.Commands = "bomb " + player1Countries.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertFalse(player.nextOrder().validateCommand());
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.BOMB));
+        IssueOrderController.d_Commands = "bomb " + d_player1Countries.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertFalse(l_player.nextOrder().validateCommand());
     }
 }

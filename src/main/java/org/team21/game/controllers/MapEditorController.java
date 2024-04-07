@@ -4,6 +4,7 @@ import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.game_engine.GamePhase;
 import org.team21.game.models.map.MapReader;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.GameEventLogger;
@@ -16,7 +17,8 @@ import java.util.stream.Collectors;
 
 /**
  * This class is used to create map using game console commands.
- *
+ * @author Tejasvi
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class MapEditorController implements GameFlowManager {
@@ -27,7 +29,7 @@ public class MapEditorController implements GameFlowManager {
     /**
      * A data member that stores the list of commands for mapeditor as list
      */
-    private final List<String> CLI_COMMANDS = Arrays.asList("editcontinent", "editcountry", "editneighbor", "showmap", "savemap", "editmap", "validatemap");
+    private final List<String> CLI_COMMANDS = Arrays.asList(Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR, Constants.SHOW_MAP, Constants.SAVE_MAP, Constants.EDIT_MAP, Constants.VALIDATE_MAP);
     GameMap d_GameMap;
     GamePhase d_NextState = GamePhase.StartUp;
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
@@ -49,7 +51,7 @@ public class MapEditorController implements GameFlowManager {
     @Override
     public GamePhase start(GamePhase p_GamePhase) throws ValidationException, IOException {
         d_Logger.clear();
-        d_Logger.log("/************************************ You are in MAP EDITOR PHASE *******************************/");
+        d_Logger.log(Constants.WELCOME_MESSAGE_MAP_EDITOR);
         while (true) {
             d_Logger.log("Enter your map operation:" + "\n" + "1. Enter help to view the set of commands" + "\n" + "2. Enter exit to end map creation and save phase");
             d_Logger.log("-----------------------------------------------------------------------------------------");
@@ -65,12 +67,12 @@ public class MapEditorController implements GameFlowManager {
             }
 
             if (!inputValidator(l_InputList)) {
-                if (l_Input.startsWith("exit")) {
-                    l_InputList.add(0, "exit");
+                if (l_Input.startsWith(Constants.EXIT)) {
+                    l_InputList.add(0, Constants.EXIT);
                 } else {
                     l_InputList.clear();
                     // if not available in command list forcing to call help
-                    l_InputList.add("help");
+                    l_InputList.add(Constants.HELP);
                     l_InputList.add("dummy");
                 }
             }
@@ -84,10 +86,10 @@ public class MapEditorController implements GameFlowManager {
             for (String l_Command : l_InputList) {
                 String[] l_CommandArray = l_Command.split(" ");
                 switch (l_MainCommand.toLowerCase()) {
-                    case "editcontinent": {
+                    case Constants.EDIT_CONTINENT: {
                         if (l_CommandArray.length > 0) {
                             switch (l_CommandArray[0]) {
-                                case "add": {
+                                case Constants.SIMPLE_ADD: {
                                     if (l_CommandArray.length == 3) {
                                         d_GameMap.addContinent(l_CommandArray[1], l_CommandArray[2]);
                                     } else {
@@ -95,7 +97,7 @@ public class MapEditorController implements GameFlowManager {
                                     }
                                     break;
                                 }
-                                case "remove": {
+                                case Constants.SIMPLE_REMOVE: {
                                     if (l_CommandArray.length == 2) {
                                         d_GameMap.removeContinent(l_CommandArray[1]);
                                     } else {
@@ -112,7 +114,7 @@ public class MapEditorController implements GameFlowManager {
                       Handle editcountry command from console
                      */
 
-                    case "editcountry": {
+                    case Constants.EDIT_COUNTRY: {
                         switch (l_CommandArray[0]) {
                             case "add": {
                                 if (l_CommandArray.length == 3) {
@@ -122,7 +124,7 @@ public class MapEditorController implements GameFlowManager {
                                 }
                                 break;
                             }
-                            case "remove": {
+                            case Constants.SIMPLE_REMOVE: {
                                 if (l_CommandArray.length == 2) {
                                     d_GameMap.removeCountry(l_CommandArray[1]);
                                 } else {
@@ -138,7 +140,7 @@ public class MapEditorController implements GameFlowManager {
                       Handle editneighbor command from console
                      */
 
-                    case "editneighbor": {
+                    case Constants.EDIT_NEIGHBOUR: {
                         switch (l_CommandArray[0]) {
                             case "add": {
                                 if (l_CommandArray.length == 3) {
@@ -148,7 +150,7 @@ public class MapEditorController implements GameFlowManager {
                                 }
                                 break;
                             }
-                            case "remove": {
+                            case Constants.SIMPLE_REMOVE: {
                                 if (l_CommandArray.length == 3) {
                                     d_GameMap.removeNeighbor(l_CommandArray[1], l_CommandArray[2]);
                                 } else {
@@ -162,12 +164,12 @@ public class MapEditorController implements GameFlowManager {
 
 
                     // Handle showmap command from console
-                    case "showmap": {
+                    case Constants.SHOW_MAP: {
                         d_GameMap.showMap();
                         break;
                     }
                     //Handle validatemap command from console
-                    case "validatemap": {
+                    case Constants.VALIDATE_MAP: {
                         if (MapValidation.validateMap(d_GameMap, 0)) {
                             d_Logger.log("Validation successful");
                         } else {
@@ -178,7 +180,7 @@ public class MapEditorController implements GameFlowManager {
 
 
                     //Handle savemap command from console
-                    case "savemap": {
+                    case Constants.SAVE_MAP: {
                         if (l_CommandArray.length == 1) {
                             d_GameMap.setName(l_CommandArray[0]);
                             d_Logger.log(" Which format do you want to save the file? Type the number.");
@@ -202,7 +204,7 @@ public class MapEditorController implements GameFlowManager {
 
 
                     //Handle editmap command from console
-                    case "editmap": {
+                    case Constants.EDIT_MAP: {
                         if (l_CommandArray.length == 1) {
                             MapReader.readMap(d_GameMap, l_CommandArray[0]);
                         }
@@ -211,7 +213,7 @@ public class MapEditorController implements GameFlowManager {
 
 
                     //To exit the map creation phase type "exit"
-                    case "exit": {
+                    case Constants.EXIT: {
                         d_GameMap.flushGameMap();
                         d_GameMap.setGamePhase(d_NextState);
                         return p_GamePhase.nextState(d_NextState);

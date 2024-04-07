@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class BlockadeOrderTest {
 
-    GameMap gameMap;
-    List<Country> countryList1 = new ArrayList<Country>();
-    List<Country> countryList2 = new ArrayList<Country>();
+    GameMap d_gameMap;
+    List<Country> d_countryList1 = new ArrayList<Country>();
+    List<Country> d_countryList2 = new ArrayList<Country>();
 
     /**
      * Sets up the test environment before each test case.
@@ -35,6 +35,9 @@ public class BlockadeOrderTest {
      */
     @Before
     public void setUp() throws Exception {
+
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
         gameMap = GameMap.getInstance();
         gameMap.flushGameMap();
         gameMap.addPlayer("Player1");
@@ -57,7 +60,7 @@ public class BlockadeOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -67,10 +70,10 @@ public class BlockadeOrderTest {
      */
     @Test
     public void testExecution() {
-        Player player = gameMap.getPlayer("Player1");
+        Player player = d_gameMap.getPlayer("Player1");
         player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + countryList1.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
+        IssueOrderController.d_Commands = "blockade " + d_countryList1.get(0).getName();
+        Order order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player);
         player.addOrder(order);
         assertTrue(player.nextOrder().execute());
     }
@@ -81,12 +84,12 @@ public class BlockadeOrderTest {
      */
     @Test
     public void testCommandValidationForSamePlayer() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + countryList1.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order);
-        assertTrue(player.nextOrder().validateCommand());
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.BLOCKADE));
+        IssueOrderController.d_Commands = "blockade " + d_countryList1.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order);
+        assertTrue(l_player.nextOrder().validateCommand());
     }
 
     /**
@@ -96,11 +99,11 @@ public class BlockadeOrderTest {
      */
     @Test
     public void testCommandValidationForDifferentPlayer() {
-        Player player1 = gameMap.getPlayer("Player1");
-        player1.addPlayerCard(new Card(CardType.BLOCKADE));
-        IssueOrderController.Commands = "blockade " + countryList2.get(0).getName();
-        Order order = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order);
-        assertFalse(player1.nextOrder().validateCommand());
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        l_player1.addPlayerCard(new Card(CardType.BLOCKADE));
+        IssueOrderController.d_Commands = "blockade " + d_countryList2.get(0).getName();
+        Order l_order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order);
+        assertFalse(l_player1.nextOrder().validateCommand());
     }
 }

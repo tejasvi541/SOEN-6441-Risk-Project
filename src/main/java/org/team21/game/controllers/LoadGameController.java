@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Loadgame controller
+ * @author Meet Boghani
  */
 public class LoadGameController implements GameFlowManager {
 

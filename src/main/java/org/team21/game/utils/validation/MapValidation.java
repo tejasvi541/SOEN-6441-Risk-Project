@@ -10,7 +10,8 @@ import java.util.*;
 /**
  * The class is used to create the map validation to check the if the map is a map which is strongly connected
  * or not and to check if there are any continents without country or countries without any neighbors.
- *
+ * @author Tejasvi
+ * @author Meet Boghani
  * @version 1.0.0
  */
 public class MapValidation {
@@ -211,8 +212,7 @@ public class MapValidation {
         private void dfsTraversal(int p_Node, Boolean[] p_Visited) {
             p_Visited[p_Node] = true;
             for (Integer l_Integer : (Iterable<Integer>) d_Edges[p_Node]) {
-                int l_NextNode;
-                l_NextNode = l_Integer;
+                int l_NextNode = l_Integer;
                 if (!p_Visited[l_NextNode]) {
                     dfsTraversal(l_NextNode, p_Visited);
                 }
@@ -333,10 +333,6 @@ public class MapValidation {
      * @return true if the graph is connected else false
      */
     private static boolean checkMapConnectivity(ConnectedGraph p_Graph) {
-        if (p_Graph.checkIfStronglyConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+        return p_Graph.checkIfStronglyConnected();
     }
 }

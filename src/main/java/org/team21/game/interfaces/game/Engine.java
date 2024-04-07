@@ -4,6 +4,7 @@ import org.team21.game.game_engine.GamePhase;
 
 /**
  * interface for Engine classes
+ * @author Kapil Soni
  */
 public interface Engine {
     /**

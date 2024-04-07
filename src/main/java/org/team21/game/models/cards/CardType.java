@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * This is the enum class for card type
- *
+ * @author Kapil Soni
  */
 public enum CardType {
     /**
@@ -30,8 +30,8 @@ public enum CardType {
      * @return The random Card Name
      */
     public static CardType getRandomCard() {
-        Random d_Random = new Random();
-        CardType d_Type = values()[d_Random.nextInt(values().length)];
-        return d_Type;
+        Random l_Random = new Random();
+        CardType l_Type = values()[l_Random.nextInt(values().length)];
+        return l_Type;
     }
 }

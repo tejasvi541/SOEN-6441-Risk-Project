@@ -6,7 +6,8 @@ import java.util.Set;
 
 /**
  * Concrete Class to set and get all the properties of Continent.
- *
+ * @author Tejasvi
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class Continent implements Serializable {
@@ -61,10 +62,10 @@ public class Continent implements Serializable {
     /**
      * Set the continent name
      *
-     * @param p_name Continent name
+     * @param p_Name Continent name
      */
-    public void setName(String p_name) {
-        this.d_Name = p_name;
+    public void setName(String p_Name) {
+        this.d_Name = p_Name;
     }
 
     /**

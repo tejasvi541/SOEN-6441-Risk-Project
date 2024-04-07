@@ -24,7 +24,7 @@ public class AdvanceOrderTest {
     /**
      * The instance of the game map.
      */
-    GameMap gameMap;
+    GameMap d_gameMap;
 
     /**
      * Sets up the environment before each test case runs.
@@ -37,8 +37,9 @@ public class AdvanceOrderTest {
         /*
           Singleton game map instance
          */
-        gameMap = GameMap.getInstance();
-        gameMap.flushGameMap();
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
+
         /*
           Singleton game settings instance
          */
@@ -46,27 +47,27 @@ public class AdvanceOrderTest {
         gameSettings.setStrategy("dice");
 
         // Add Continent
-        gameMap.addContinent("Asia", "4");
+        d_gameMap.addContinent("Asia", "4");
         // Add Countries
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("China", "Asia");
-        gameMap.addCountry("Vietnam", "Asia");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("China", "Asia");
+        d_gameMap.addCountry("Vietnam", "Asia");
         // Add Neighbors
-        Country country1 = gameMap.getCountry("India");
-        Country country2 = gameMap.getCountry("China");
-        Country country3 = gameMap.getCountry("Vietnam");
-        country1.setNeighbors(country2);
-        country2.setNeighbors(country3);
-        country3.setNeighbors(country1);
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
+        Country l_country1 = d_gameMap.getCountry("India");
+        Country l_country2 = d_gameMap.getCountry("China");
+        Country l_country3 = d_gameMap.getCountry("Vietnam");
+        l_country1.setNeighbors(l_country2);
+        l_country2.setNeighbors(l_country3);
+        l_country3.setNeighbors(l_country1);
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
         // Add Countries to players
-        gameMap.getPlayer("Player1").getCapturedCountries().add(gameMap.getCountry("India"));
-        gameMap.getPlayer("Player1").getCapturedCountries().add(gameMap.getCountry("Vietnam"));
-        gameMap.getPlayer("Player2").getCapturedCountries().add(gameMap.getCountry("China"));
+        d_gameMap.getPlayer("Player1").getCapturedCountries().add(d_gameMap.getCountry("India"));
+        d_gameMap.getPlayer("Player1").getCapturedCountries().add(d_gameMap.getCountry("Vietnam"));
+        d_gameMap.getPlayer("Player2").getCapturedCountries().add(d_gameMap.getCountry("China"));
         // Add Reinforcements to players
-        gameMap.getPlayer("Player1").setReinforcementArmies(10);
-        gameMap.getPlayer("Player2").setReinforcementArmies(10);
+        d_gameMap.getPlayer("Player1").setReinforcementArmies(10);
+        d_gameMap.getPlayer("Player2").setReinforcementArmies(10);
     }
 
     /**
@@ -74,7 +75,7 @@ public class AdvanceOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -82,14 +83,14 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testExecutionFailOnNoTroopsDeployed() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        List<Country> countriesPlayer2 = gameMap.getPlayer("Player2").getCapturedCountries();
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        List<Country> l_countriesPlayer2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
 
-        Player player1 = gameMap.getPlayer("Player1");
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer2.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertFalse(player1.nextOrder().execute());
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer2.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertFalse(l_player1.nextOrder().execute());
     }
 
     /**
@@ -97,13 +98,13 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testExecutionFailOnNotANeighbor() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        countriesPlayer1.get(0).setArmies(6);
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer1.get(1).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertFalse(player1.nextOrder().execute());
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        l_countriesPlayer1.get(0).setArmies(6);
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer1.get(1).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertFalse(l_player1.nextOrder().execute());
     }
 
     /**
@@ -111,13 +112,13 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testExecutionSuccessOnNeighborAndTroopsDeployedInOwnCountry() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        countriesPlayer1.get(1).setArmies(6);
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(1).getName() + " " + countriesPlayer1.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertTrue(player1.nextOrder().execute());
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        l_countriesPlayer1.get(1).setArmies(6);
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(1).getName() + " " + l_countriesPlayer1.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertTrue(l_player1.nextOrder().execute());
     }
 
     /**
@@ -126,18 +127,18 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testAdvanceSuccessOnNeighborIfNoKingExists() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        List<Country> countriesPlayer2 = gameMap.getPlayer("Player2").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        List<Country> l_countriesPlayer2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
         // Set Armies to each country
-        countriesPlayer1.get(0).setArmies(6);
+        l_countriesPlayer1.get(0).setArmies(6);
 
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer2.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertTrue(player1.nextOrder().execute());
-        assertEquals("Armies Depleted from source and deployed to target", 5, gameMap.getCountry("China").getArmies());
-        assertTrue(countriesPlayer1.get(0).getArmies() > 0);
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer2.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertTrue(l_player1.nextOrder().execute());
+        assertEquals("Armies Depleted from source and deployed to target", 5, d_gameMap.getCountry("China").getArmies());
+        assertTrue(l_countriesPlayer1.get(0).getArmies() > 0);
     }
 
     /**
@@ -145,21 +146,21 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testAttackSuccessOnNeighborWithKing() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        List<Country> countriesPlayer2 = gameMap.getPlayer("Player2").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        Player player2 = gameMap.getPlayer("Player2");
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        List<Country> l_countriesPlayer2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        Player l_player2 = d_gameMap.getPlayer("Player2");
         // Set Players to countries
-        countriesPlayer1.get(0).setPlayer(player1);
-        countriesPlayer2.get(0).setPlayer(player2);
+        l_countriesPlayer1.get(0).setPlayer(l_player1);
+        l_countriesPlayer2.get(0).setPlayer(l_player2);
         // Set Armies to each country
-        countriesPlayer1.get(0).setArmies(6);
-        countriesPlayer2.get(0).setArmies(6);
+        l_countriesPlayer1.get(0).setArmies(6);
+        l_countriesPlayer2.get(0).setArmies(6);
 
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer2.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertTrue(player1.nextOrder().execute());
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer2.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertTrue(l_player1.nextOrder().execute());
     }
 
     /**
@@ -168,22 +169,22 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testOwnershipChangeOnAdvanceSuccess() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        List<Country> countriesPlayer2 = gameMap.getPlayer("Player2").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        Player player2 = gameMap.getPlayer("Player2");
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        List<Country> l_countriesPlayer2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        Player l_player2 = d_gameMap.getPlayer("Player2");
 
         // Set Players to Countries
-        countriesPlayer1.get(0).setPlayer(player1);
-        countriesPlayer2.get(0).setPlayer(player2);
+        l_countriesPlayer1.get(0).setPlayer(l_player1);
+        l_countriesPlayer2.get(0).setPlayer(l_player2);
         // Set Armies to each country
-        countriesPlayer1.get(0).setArmies(6);
+        l_countriesPlayer1.get(0).setArmies(6);
 
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer2.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertTrue(player1.nextOrder().execute());
-        assertEquals("Ownership changed", player1, gameMap.getCountry("China").getPlayer());
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer2.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertTrue(l_player1.nextOrder().execute());
+        assertEquals("Ownership changed", l_player1, d_gameMap.getCountry("China").getPlayer());
     }
 
     /**
@@ -191,24 +192,24 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testExecutionSkipsOnNeutralPlayer() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        List<Country> countriesPlayer2 = gameMap.getPlayer("Player2").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        Player player2 = gameMap.getPlayer("Player2");
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        List<Country> l_countriesPlayer2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        Player l_player2 = d_gameMap.getPlayer("Player2");
         // Set Players to countries
-        countriesPlayer1.get(0).setPlayer(player1);
-        countriesPlayer2.get(0).setPlayer(player2);
+        l_countriesPlayer1.get(0).setPlayer(l_player1);
+        l_countriesPlayer2.get(0).setPlayer(l_player2);
         // Set Armies to each country
-        countriesPlayer1.get(0).setArmies(6);
-        countriesPlayer2.get(0).setArmies(6);
+        l_countriesPlayer1.get(0).setArmies(6);
+        l_countriesPlayer2.get(0).setArmies(6);
         // Set Neutral Players
-        player1.getNeutralPlayers().add(player2);
-        player2.getNeutralPlayers().add(player1);
+        l_player1.getNeutralPlayers().add(l_player2);
+        l_player2.getNeutralPlayers().add(l_player1);
 
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(0).getName() + " " + countriesPlayer2.get(0).getName() + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertTrue(player1.nextOrder().execute());
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(0).getName() + " " + l_countriesPlayer2.get(0).getName() + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertTrue(l_player1.nextOrder().execute());
     }
 
     /**
@@ -216,13 +217,13 @@ public class AdvanceOrderTest {
      */
     @Test
     public void testExecutionFailOnInvalidCommand() {
-        List<Country> countriesPlayer1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        Player player1 = gameMap.getPlayer("Player1");
-        countriesPlayer1.get(1).setArmies(6);
-        IssueOrderController.Commands = "advance " + countriesPlayer1.get(1).getName() + " " + "Thailand" + " " + (player1.getReinforcementArmies() - 5);
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
-        assertFalse(player1.nextOrder().execute());
+        List<Country> l_countriesPlayer1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        Player l_player1 = d_gameMap.getPlayer("Player1");
+        l_countriesPlayer1.get(1).setArmies(6);
+        IssueOrderController.d_Commands = "advance " + l_countriesPlayer1.get(1).getName() + " " + "Thailand" + " " + (l_player1.getReinforcementArmies() - 5);
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player1);
+        l_player1.addOrder(l_order1);
+        assertFalse(l_player1.nextOrder().execute());
     }
 
 }

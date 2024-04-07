@@ -3,12 +3,14 @@ package org.team21.game.models.order;
 import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
 
 /**
  * The class is a extended from Order, and overrides the methods from Order
+ * @author Nishith Soni
  */
 public class NegotiateOrder extends Order implements Serializable {
     /**
@@ -60,14 +62,14 @@ public class NegotiateOrder extends Order implements Serializable {
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         //check if the player has the card
         if (!l_Player.checkIfCardAvailable(CardType.DIPLOMACY)) {
-            System.err.println("Player doesn't have the card to be used.");
-            d_Logger.log("Player doesn't have the card to be used.");
+            System.err.println(Constants.NO_NEGOTIATE_CARD);
+            d_Logger.log(Constants.NO_NEGOTIATE_CARD);
             return false;
         }
         //check if player is valid
         if (l_NeutralPlayer == null) {
-            System.err.println("The Player is not valid.");
-            d_Logger.log("The Player is not valid.");
+            System.err.println(Constants.INVALID_PLAYER);
+            d_Logger.log(Constants.INVALID_PLAYER);
             return false;
         }
         // check if the player exists

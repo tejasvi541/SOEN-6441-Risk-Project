@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.Set;
 /**
  * This class is used to save map as a text file
+ * @author Bharti Chhabra
  */
 public class SaveMap {
 
@@ -36,6 +37,7 @@ public class SaveMap {
      * @return boolean true if written
      */
 
+    //todo
     public boolean saveMapIntoFile(GameMap p_GameMap, String p_Name) {
         String l_MapData = "[Map]\nauthor=Anonymous\n[Continents]\n";
         for (Continent l_Continent : p_GameMap.getContinents().values()) {
@@ -44,6 +46,7 @@ public class SaveMap {
         }
 
         l_MapData += "[Territories]\n";
+        //todo
         for (Continent l_Continent : p_GameMap.getContinents().values()) {
             for (Country l_Country : p_GameMap.getCountries().values()) {
                 l_MapData += l_Country.getName() + " " + l_Country.getContinent() + " " + createANeighborList(l_Country.getNeighbors()) + "\n";

@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * This class gets all the actions of the game. It is an Observable.
  * Singleton class
- *
+ * @author Nishith Soni
  */
 public class GameEventLogger implements Observable, Serializable {
     /**
@@ -35,9 +35,7 @@ public class GameEventLogger implements Observable, Serializable {
      * @return LogEntryBuffer Logger
      */
     public static GameEventLogger getInstance() {
-        if (Objects.isNull(Logger)) {
-            Logger = new GameEventLogger();
-        }
+        Logger = Objects.isNull(Logger) ? new GameEventLogger(): Logger;
         return Logger;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 /**
  * Concrete Class to set and get all the properties of country.
- *
+ * @author Tejasvi
  */
 public class Country implements Serializable {
     /**
@@ -144,10 +144,10 @@ public class Country implements Serializable {
     /**
      * This method depletes the number of armies
      *
-     * @param p_armies the number of armies
+     * @param p_Armies the number of armies
      */
-    public void depleteArmies(int p_armies) {
-        d_Armies -= p_armies;
+    public void depleteArmies(int p_Armies) {
+        d_Armies -= p_Armies;
         d_Armies =Math.max(d_Armies, 0);
     }
 

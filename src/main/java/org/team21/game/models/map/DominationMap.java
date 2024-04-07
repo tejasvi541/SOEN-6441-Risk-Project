@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * Domination class
+ * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class DominationMap {
@@ -30,11 +31,11 @@ public class DominationMap {
     /**
      * continent list
      */
-    private List<String> Continents = new ArrayList<>();
+    private List<String> d_Continents = new ArrayList<>();
     /**
      * country hashmap
      */
-    private HashMap<String, String> Country = new HashMap<>();
+    private HashMap<String, String> d_Country = new HashMap<>();
 
     /**
      * This function reads the file and places the contents of the file
@@ -85,7 +86,7 @@ public class DominationMap {
             }
             String[] l_ContinentDetails = d_CurrentLine.split(" ");
             p_GameMap.addContinent(l_ContinentDetails[0], l_ContinentDetails[1]);
-            Continents.add(l_ContinentDetails[0]);
+            d_Continents.add(l_ContinentDetails[0]);
         }
     }
 
@@ -103,8 +104,8 @@ public class DominationMap {
                 continue;
             }
             String[] l_CountryDetails = d_CurrentLine.split(" ");
-            p_GameMap.addCountry(l_CountryDetails[1], Continents.get((Integer.parseInt(l_CountryDetails[2]) - 1)));
-            Country.put(l_CountryDetails[0], l_CountryDetails[1]);
+            p_GameMap.addCountry(l_CountryDetails[1], d_Continents.get((Integer.parseInt(l_CountryDetails[2]) - 1)));
+            d_Country.put(l_CountryDetails[0], l_CountryDetails[1]);
         }
     }
 
@@ -123,7 +124,7 @@ public class DominationMap {
             }
             String[] l_NeighbourDetails = d_CurrentLine.split(" ");
             for (int i = 1; i < l_NeighbourDetails.length; i++) {
-                p_GameMap.addNeighbor(Country.get(l_NeighbourDetails[0]), Country.get(l_NeighbourDetails[i]));
+                p_GameMap.addNeighbor(d_Country.get(l_NeighbourDetails[0]), d_Country.get(l_NeighbourDetails[i]));
             }
         }
     }
@@ -152,7 +153,7 @@ public class DominationMap {
             d_Content += (continent.getName() + " " + continent.getAwardArmies() + " 00000\r\n");
         }
         d_Content += ("\r\n[countries]\r\n");
-        String borders = "";
+        String l_Borders = "";
         HashMap<Integer, String> l_CountryMap = createCountryList(p_GameMap);
         for (Map.Entry<Integer, String> l_Country : l_CountryMap.entrySet()) {
             for(Map.Entry<Integer, String> l_Continent : l_ContinentMap.entrySet()) {
@@ -161,17 +162,17 @@ public class DominationMap {
                     break;
                 }
             }
-            borders += (l_Country.getKey() + "");
+            l_Borders += (l_Country.getKey() + "");
             for (Country l_Neighbor : p_GameMap.getCountry(l_Country.getValue()).getNeighbors()) {
                 for(Map.Entry<Integer, String> l_CountryList : l_CountryMap.entrySet()){
                     if(l_Neighbor.getName().equals(l_CountryList.getValue())){
-                        borders += (" " + l_CountryList.getKey());
+                        l_Borders += (" " + l_CountryList.getKey());
                     }
                 }
             }
-            borders += ("\r\n");
+            l_Borders += ("\r\n");
         }
-        d_Content += ("\r\n[borders]\r\n" + borders);
+        d_Content += ("\r\n[borders]\r\n" + l_Borders);
         bwFile.write(d_Content);
         bwFile.close();
         System.out.println("Map file saved as: " + p_FileName + ".map");
@@ -186,9 +187,9 @@ public class DominationMap {
      */
     public HashMap<Integer, String> createCountryList(GameMap p_GameMap){
         HashMap<Integer, String> l_CountryMap = new HashMap<>();
-        int counter = 1;
+        int l_Counter = 1;
         for(Country l_Country : p_GameMap.getCountries().values()){
-            l_CountryMap.put(counter++, l_Country.getName());
+            l_CountryMap.put(l_Counter++, l_Country.getName());
         }
         return l_CountryMap;
     }
@@ -201,9 +202,9 @@ public class DominationMap {
      */
     public HashMap<Integer, String> createContinentList(GameMap p_GameMap){
         HashMap<Integer, String> l_CountryMap = new HashMap<>();
-        int counter = 1;
+        int l_Counter = 1;
         for(Continent l_Continent : p_GameMap.getContinents().values()){
-            l_CountryMap.put(counter++, l_Continent.getName());
+            l_CountryMap.put(l_Counter++, l_Continent.getName());
         }
         return l_CountryMap;
     }

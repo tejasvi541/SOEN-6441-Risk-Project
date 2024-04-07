@@ -2,7 +2,7 @@ package org.team21.game.models.strategy.player;
 
     /**
      * This is the enum class for Player Strategy type
-     *
+     * @author Meet Boghani
      */
     public enum PlayerStrategyType {
         /**

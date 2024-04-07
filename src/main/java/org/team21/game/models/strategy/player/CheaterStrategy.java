@@ -3,6 +3,7 @@ package org.team21.game.models.strategy.player;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * A class to implement the Cheater strategy for a player
- *
+ * @author Bharti Chhabra
  */
 
 public class CheaterStrategy extends PlayerStrategy implements Serializable {
@@ -55,6 +56,6 @@ public class CheaterStrategy extends PlayerStrategy implements Serializable {
                 }
             }
         }
-        return "pass";
+        return Constants.PASS_COMMAND;
     }
 }

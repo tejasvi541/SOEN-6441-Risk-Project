@@ -12,7 +12,7 @@ import java.util.List;
  * <p>Contains list 0f states and list of possible states to move
  * from current state.</p>
  * Also provides respective {@code controller object} for each state.
- *
+ * @author Meet Boghani
  * @version 1.0.0
  */
 public enum GamePhase {

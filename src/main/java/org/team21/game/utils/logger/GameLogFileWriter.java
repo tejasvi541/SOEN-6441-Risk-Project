@@ -6,13 +6,13 @@ import java.io.*;
 
 /**
  * A class implementing Observer which observes LogEntryBuffer and writes to log file
- *
+ * @author Nishith Soni
  */
 public class GameLogFileWriter implements Observer, Serializable {
     /**
      * File name for logger
      */
-    private String l_Filename = "demo";
+    private String d_Filename = "demo";
 
     /**
      * log entry writer
@@ -39,7 +39,7 @@ public class GameLogFileWriter implements Observer, Serializable {
         PrintWriter l_WriteData = null;
         try {
             checkDirectory("logFiles");
-            l_WriteData = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + l_Filename + ".log", true)));
+            l_WriteData = new PrintWriter(new BufferedWriter(new FileWriter("logFiles/" + d_Filename + ".log", true)));
             l_WriteData.println(p_str);
 
         } catch (Exception p_Exception) {
@@ -55,9 +55,9 @@ public class GameLogFileWriter implements Observer, Serializable {
      * @param path the path to check
      */
     private void checkDirectory(String path) {
-        File directory = new File(path);
-        if (!directory.exists() || !directory.isDirectory()) {
-            directory.mkdirs();
+        File l_directory = new File(path);
+        if (!l_directory.exists() || !l_directory.isDirectory()) {
+            l_directory.mkdirs();
         }
     }
 
@@ -68,7 +68,7 @@ public class GameLogFileWriter implements Observer, Serializable {
     public void clearLogs() {
         try {
             checkDirectory("logFiles");
-            File l_File = new File("logFiles/" + l_Filename + ".log");
+            File l_File = new File("logFiles/" + d_Filename + ".log");
             if (l_File.exists()) {
                 l_File.delete();
             }

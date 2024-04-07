@@ -8,25 +8,25 @@ import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
 import org.team21.game.game_engine.GameProgress;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
 /**
  * Class which is the controller for the Issue Order phase
- *
- *
+ * @author Kapil Soni
  * @version 1.0.0
  */
 public class IssueOrderController implements GameFlowManager {
     /**
      * variable to keep track of players who skipped
      */
-    private static Set<Player> SkippedPlayers = new HashSet<>();
+    private static Set<Player> d_SkippedPlayers = new HashSet<>();
     /**
      * Static variable to hold commands
      */
-    public static String Commands = null;
+    public static String d_Commands = null;
     /**
      * GamePhase Instance with next phase
      */
@@ -69,12 +69,12 @@ public class IssueOrderController implements GameFlowManager {
             d_GameMap.setCurrentPlayer(d_GameMap.getPlayers().entrySet().iterator().next().getValue());
         }
         d_GamePhase = p_GamePhase;
-        while (!(SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
+        while (!(d_SkippedPlayers.size() == d_GameMap.getPlayers().size())) {
             for (Player l_Player : d_GameMap.getPlayers().values()) {
                 if ((d_GameMap.getGameLoaded() && !(l_Player.getName().equalsIgnoreCase(d_GameMap.getCurrentPlayer().getName())))) {
                     continue;
                 }
-                if (!SkippedPlayers.isEmpty() && SkippedPlayers.contains(l_Player)) {
+                if (!d_SkippedPlayers.isEmpty() && d_SkippedPlayers.contains(l_Player)) {
                     continue;
                 }
                 d_GameMap.setGameLoaded(false);
@@ -82,31 +82,31 @@ public class IssueOrderController implements GameFlowManager {
                 boolean l_IssueCommand = false;
                 while (!l_IssueCommand) {
                     showStatus(l_Player);
-                    Commands = l_Player.readFromPlayer();
-                    if (Objects.isNull(Commands)) {
-                        Commands = "";
+                    d_Commands = l_Player.readFromPlayer();
+                    if (Objects.isNull(d_Commands)) {
+                        d_Commands = "";
                     }
-                    if (!Commands.isEmpty()) {
-                        l_IssueCommand = validateCommand(Commands, l_Player);
+                    if (!d_Commands.isEmpty()) {
+                        l_IssueCommand = validateCommand(d_Commands, l_Player);
                     }
-                    if (Commands.equals("pass")) {
+                    if (d_Commands.equals("pass")) {
                         break;
                     }
-                    if (Commands.split(" ")[0].equals("savegame") && l_IssueCommand) {
+                    if (d_Commands.split(" ")[0].equals("savegame") && l_IssueCommand) {
                         d_GameMap.setGamePhase(d_MapEditorPhase);
                         return d_MapEditorPhase;
                     }
                 }
-                if (!Commands.equals("pass")) {
-                    d_Logger.log(l_Player.getName() + " has issued this order :- " + Commands);
+                if (!d_Commands.equals(Constants.PASS_COMMAND)) {
+                    d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
-                    d_Logger.log("The order has been added to the list of orders.");
-                    d_Logger.log("=============================================================================");
+                    d_Logger.log(Constants.All_ORDERS_ADDED);
+                    d_Logger.log(Constants.EQUAL_SEPERATER);
                 }
             }
             d_GameMap.setGameLoaded(false);
         }
-        SkippedPlayers.clear();
+        d_SkippedPlayers.clear();
         d_GameMap.setGamePhase(d_ExecutePhase);
         return d_ExecutePhase;
     }
@@ -119,7 +119,7 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if the command is correct else false
      */
     public boolean validateCommand(String p_CommandArr, Player p_Player) {
-        List<String> l_Commands = Arrays.asList("deploy", "advance", "bomb", "blockade", "airlift", "negotiate", "savegame");
+        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, "savegame");
         String[] l_CommandArr = p_CommandArr.split(" ");
         if (p_CommandArr.toLowerCase().contains("pass")) {
             AddToSetOfPlayers(p_Player);
@@ -166,7 +166,6 @@ public class IssueOrderController implements GameFlowManager {
                 }
             default:
                 break;
-
         }
         return true;
     }
@@ -177,7 +176,7 @@ public class IssueOrderController implements GameFlowManager {
      * @param p_Player The player who has skipped his iteration for the issuing
      */
     private static void AddToSetOfPlayers(Player p_Player) {
-        SkippedPlayers.add(p_Player);
+        d_SkippedPlayers.add(p_Player);
     }
 
     /**
@@ -187,11 +186,11 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if length is correct else false
      */
     private static boolean CheckLengthOfCommand(String p_Command, int p_Length) {
-        if (p_Command.contains("deploy")) {
+        if (p_Command.contains(Constants.DEPLOY_COMMAND)) {
             return p_Length == 3;
-        } else if (p_Command.contains("bomb") || p_Command.contains("blockade") || p_Command.contains("negotiate") || p_Command.contains("savegame")) {
+        } else if (p_Command.contains(Constants.BOMB_COMMAND) || p_Command.contains(Constants.BLOCKADE_COMMAND) || p_Command.contains(Constants.NEGOTIATE_COMMAND) || p_Command.contains("savegame")) {
             return (p_Length == 2);
-        } else if (p_Command.contains("airlift") || p_Command.contains("advance")) {
+        } else if (p_Command.contains(Constants.AIRLIFT_COMMAND) || p_Command.contains(Constants.ADVANCE_COMMAND)) {
             return (p_Length == 4);
         }
         return false;
@@ -237,8 +236,8 @@ public class IssueOrderController implements GameFlowManager {
         }
         System.out.format("+--------------+-----------------------+------------------+---------+\n");
 
+        d_Logger.log(Constants.CARDS_OF_PLAYER);
         if (!p_Player.getPlayerCards().isEmpty()) {
-            d_Logger.log("The Cards assigned to the Player are: ");
             for (Card l_Card : p_Player.getPlayerCards()) {
                 d_Logger.log(l_Card.getCardType().toString());
             }
@@ -251,6 +250,3 @@ public class IssueOrderController implements GameFlowManager {
         }
     }
 }
-
-
-

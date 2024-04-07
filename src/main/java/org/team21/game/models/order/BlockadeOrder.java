@@ -4,6 +4,7 @@ import org.team21.game.models.cards.CardType;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * This class helps in executing the Blockade Card
- *
+ * @author Bharti Chhabra
  */
 public class BlockadeOrder extends Order implements Serializable {
     /**
@@ -64,19 +65,19 @@ public class BlockadeOrder extends Order implements Serializable {
         Country l_Country = getOrderInfo().getTargetCountry();
 
         if (l_Player == null) {
-            System.err.println("The Player is not valid.");
-            d_Logger.log("The Player is not valid.");
+            System.err.println(Constants.INVALID_PLAYER);
+            d_Logger.log(Constants.INVALID_PLAYER);
             return false;
         }
 
         if (l_Country.getPlayer() != l_Player) {
-            System.err.println("The target country does not belong to the player");
-            d_Logger.log("The target country does not belong to the player");
+            System.err.println(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
+            d_Logger.log(Constants.TARGET_COUNTRY_DOES_NOT_BELONG);
             return false;
         }
         if (!l_Player.checkIfCardAvailable(CardType.BLOCKADE)) {
-            System.err.println("Player doesn't have Blockade Card.");
-            d_Logger.log("Player doesn't have Blockade Card.");
+            System.err.println(Constants.NO_BLOCKADE_CARD);
+            d_Logger.log(Constants.NO_BLOCKADE_CARD);
             return false;
         }
         return true;

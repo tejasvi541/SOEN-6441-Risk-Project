@@ -24,9 +24,9 @@ import java.util.List;
  * @author Tejasvi
  */
 public class AirliftOrderTest {
-    GameMap gameMap;
-    List<Country> countryList1 = new ArrayList<Country>();
-    List<Country> countryList2 = new ArrayList<Country>();
+    GameMap d_gameMap;
+    List<Country> d_countryList1 = new ArrayList<Country>();
+    List<Country> d_countryList2 = new ArrayList<Country>();
 
     /**
      * Setup for the test case
@@ -34,21 +34,22 @@ public class AirliftOrderTest {
      */
     @Before
     public void setUp() throws Exception {
-        gameMap = GameMap.getInstance();
-        gameMap.flushGameMap();
-        gameMap.addPlayer("Player1");
-        gameMap.addPlayer("Player2");
-        gameMap.addContinent("Asia", "5");
-        gameMap.addCountry("India", "Asia");
-        gameMap.addCountry("Pakistan", "Asia");
-        gameMap.addCountry("SriLanka", "Asia");
-        gameMap.addCountry("Afganisthan", "Asia");
-        gameMap.addCountry("Bangladesh", "Asia");
-        gameMap.addCountry("Myanmar", "Asia");
-        gameMap.addCountry("China", "Asia");
-        gameMap.assignCountries();
-        countryList1 = gameMap.getPlayer("Player1").getCapturedCountries();
-        countryList2 = gameMap.getPlayer("Player2").getCapturedCountries();
+        d_gameMap = GameMap.getInstance();
+        d_gameMap.flushGameMap();
+
+        d_gameMap.addPlayer("Player1");
+        d_gameMap.addPlayer("Player2");
+        d_gameMap.addContinent("Asia", "5");
+        d_gameMap.addCountry("India", "Asia");
+        d_gameMap.addCountry("Pakistan", "Asia");
+        d_gameMap.addCountry("SriLanka", "Asia");
+        d_gameMap.addCountry("Afganisthan", "Asia");
+        d_gameMap.addCountry("Bangladesh", "Asia");
+        d_gameMap.addCountry("Myanmar", "Asia");
+        d_gameMap.addCountry("China", "Asia");
+        d_gameMap.assignCountries();
+        d_countryList1 = d_gameMap.getPlayer("Player1").getCapturedCountries();
+        d_countryList2 = d_gameMap.getPlayer("Player2").getCapturedCountries();
     }
 
     /**
@@ -56,7 +57,7 @@ public class AirliftOrderTest {
      */
     @After
     public void tearDown() {
-        gameMap.flushGameMap();
+        d_gameMap.flushGameMap();
     }
 
     /**
@@ -66,13 +67,13 @@ public class AirliftOrderTest {
      */
     @Test
     public void testExecution() {
-        Player player = gameMap.getPlayer("Player1");
-        player.addPlayerCard(new Card(CardType.AIRLIFT));
-        countryList1.get(0).setArmies(100);
-        IssueOrderController.Commands = "airlift " + countryList1.get(0).getName() + " " + countryList1.get(1).getName()+ " "+ 10;
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order1);
-        assertTrue(player.nextOrder().execute());
+        Player l_player = d_gameMap.getPlayer("Player1");
+        l_player.addPlayerCard(new Card(CardType.AIRLIFT));
+        d_countryList1.get(0).setArmies(100);
+        IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList1.get(1).getName()+ " "+ 10;
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        l_player.addOrder(l_order1);
+        assertTrue(l_player.nextOrder().execute());
     }
 
     /**
@@ -81,13 +82,13 @@ public class AirliftOrderTest {
      */
     @Test
     public void testCommandValidationForSamePlayer() {
-        Player player = gameMap.getPlayer("Player1");
+        Player player = d_gameMap.getPlayer("Player1");
         player.addPlayerCard(new Card(CardType.AIRLIFT));
-        countryList1.get(0).setArmies(100);
-        System.out.println("Source: "+ countryList1.get(0).getArmies());
-        IssueOrderController.Commands = "airlift " + countryList1.get(0).getName() + " " + countryList1.get(1).getName()+ " "+ 10;
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player);
-        player.addOrder(order1);
+        d_countryList1.get(0).setArmies(100);
+        System.out.println("Source: "+ d_countryList1.get(0).getArmies());
+        IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList1.get(1).getName()+ " "+ 10;
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player);
+        player.addOrder(l_order1);
         assertTrue(player.nextOrder().validateCommand());
     }
 
@@ -98,11 +99,11 @@ public class AirliftOrderTest {
      */
     @Test
     public void testCommandValidationForDifferentPlayer() {
-        Player player1 = gameMap.getPlayer("Player1");
+        Player player1 = d_gameMap.getPlayer("Player1");
         player1.addPlayerCard(new Card(CardType.AIRLIFT));
-        IssueOrderController.Commands = "airlift " + countryList1.get(0).getName() + " " + countryList2.get(1).getName()+" "+2;
-        Order order1 = OrderOwner.CreateOrder(IssueOrderController.Commands.split(" "), player1);
-        player1.addOrder(order1);
+        IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList2.get(1).getName()+" "+2;
+        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player1);
+        player1.addOrder(l_order1);
         assertFalse(player1.nextOrder().validateCommand());
     }
 
