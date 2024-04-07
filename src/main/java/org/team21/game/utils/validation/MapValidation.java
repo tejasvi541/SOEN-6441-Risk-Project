@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * The class is used to create the map validation to check the if the map is a map which is strongly connected
  * or not and to check if there are any continents without country or countries without any neighbors.
+ *
  * @author Tejasvi
  * @author Meet Boghani
  * @version 1.0.0
@@ -179,6 +180,74 @@ public class MapValidation {
     }
 
     /**
+     * A function to check if the Continent is connected graph
+     *
+     * @param p_GameMap The GameMap Continent object which contains all the data
+     * @return true if continent is strongly connected else false
+     */
+    public static boolean checkIfContinentIsConnected(GameMap p_GameMap) {
+        for (Continent l_Continent : p_GameMap.getContinents().values()) {
+            if (!checkContinent(l_Continent)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * utility function to check the continent
+     *
+     * @param p_Continent Continent object
+     * @return true if continent is connected else false
+     */
+    private static boolean checkContinent(Continent p_Continent) {
+        HashMap<String, Country> l_CountriesMap = new HashMap<>();
+        Set<Country> l_Countries = p_Continent.getCountries();
+        for (Country l_Country : l_Countries) {
+            l_CountriesMap.put(l_Country.getName(), l_Country);
+        }
+        return checkIfMapIsConnected(l_CountriesMap);
+    }
+
+    /**
+     * A function to check if the Whole Map is connected graph
+     *
+     * @param p_Countries The GameMap Country object which contains all the data
+     * @return true if whole map is strongly connected else false
+     */
+    public static boolean checkIfMapIsConnected(HashMap<String, Country> p_Countries) {
+        List<String> l_ListOfCountries = new ArrayList<>();
+        for (String l_Name : p_Countries.keySet()) {
+            l_ListOfCountries.add(l_Name.toLowerCase());
+        }
+
+        int l_NoOfVertices = l_ListOfCountries.size();
+        ConnectedGraph l_Graph = new ConnectedGraph(l_NoOfVertices);
+        int l_Temp = 0;
+        for (Map.Entry<String, Country> l_Country : p_Countries.entrySet()) {
+            Set<Country> l_Neighbors = l_Country.getValue().getNeighbors();
+            for (Country l_Current : l_Neighbors) {
+                int l_Index = l_ListOfCountries.indexOf(l_Current.getName().toLowerCase());
+                if (l_Index != -1) {
+                    l_Graph.addEdge(l_Temp, l_Index);
+                }
+            }
+            l_Temp++;
+        }
+        return checkMapConnectivity(l_Graph);
+    }
+
+    /**
+     * A function to check the connectivity based on the graph
+     *
+     * @param p_Graph The Connected class object to check if connected or not
+     * @return true if the graph is connected else false
+     */
+    private static boolean checkMapConnectivity(ConnectedGraph p_Graph) {
+        return p_Graph.checkIfStronglyConnected();
+    }
+
+    /**
      * Nested Class for checking the Connectivity of the graph
      */
     static class ConnectedGraph {
@@ -265,74 +334,5 @@ public class MapValidation {
             }
             return true;
         }
-    }
-
-    /**
-     * A function to check if the Continent is connected graph
-     *
-     * @param p_GameMap The GameMap Continent object which contains all the data
-     * @return true if continent is strongly connected else false
-     */
-    public static boolean checkIfContinentIsConnected(GameMap p_GameMap) {
-        for (Continent l_Continent : p_GameMap.getContinents().values()) {
-            if (!checkContinent(l_Continent)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * utility function to check the continent
-     *
-     * @param p_Continent Continent object
-     * @return true if continent is connected else false
-     */
-    private static boolean checkContinent(Continent p_Continent) {
-        HashMap<String, Country> l_CountriesMap = new HashMap<>();
-        Set<Country> l_Countries = p_Continent.getCountries();
-        for (Country l_Country : l_Countries) {
-            l_CountriesMap.put(l_Country.getName(), l_Country);
-        }
-        return checkIfMapIsConnected(l_CountriesMap);
-    }
-
-    /**
-     * A function to check if the Whole Map is connected graph
-     *
-     * @param p_Countries The GameMap Country object which contains all the data
-     * @return true if whole map is strongly connected else false
-     */
-    public static boolean checkIfMapIsConnected(HashMap<String, Country> p_Countries) {
-        List<String> l_ListOfCountries = new ArrayList<>();
-        for (String l_Name : p_Countries.keySet()) {
-            l_ListOfCountries.add(l_Name.toLowerCase());
-        }
-
-        int l_NoOfVertices = l_ListOfCountries.size();
-        ConnectedGraph l_Graph = new ConnectedGraph(l_NoOfVertices);
-        int l_Temp = 0;
-        for (Map.Entry<String, Country> l_Country : p_Countries.entrySet()) {
-            Set<Country> l_Neighbors = l_Country.getValue().getNeighbors();
-            for (Country l_Current : l_Neighbors) {
-                int l_Index = l_ListOfCountries.indexOf(l_Current.getName().toLowerCase());
-                if (l_Index != -1) {
-                    l_Graph.addEdge(l_Temp, l_Index);
-                }
-            }
-            l_Temp++;
-        }
-        return checkMapConnectivity(l_Graph);
-    }
-
-
-    /**
-     * A function to check the connectivity based on the graph
-     *
-     * @param p_Graph The Connected class object to check if connected or not
-     * @return true if the graph is connected else false
-     */
-    private static boolean checkMapConnectivity(ConnectedGraph p_Graph) {
-        return p_Graph.checkIfStronglyConnected();
     }
 }
