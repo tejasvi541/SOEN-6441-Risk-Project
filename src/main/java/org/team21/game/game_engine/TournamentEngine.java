@@ -43,6 +43,10 @@ public class TournamentEngine implements Engine {
         init();
     }
 
+    public TournamentEngine(boolean test) {
+        d_Logger = GameEventLogger.getInstance();
+    }
+
     /**
      * method to check if object is null
      */
