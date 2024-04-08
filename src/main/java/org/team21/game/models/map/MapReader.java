@@ -12,23 +12,29 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * A class to handle reading data from the map
+ * A utility class for reading data from map files and populating the game map.
+ * Provides methods to read continents, countries, and their neighbors from a map file.
+ * The map file format is expected to have sections for Continents and Territories.
+ * Continents are defined with their names and corresponding control values separated by an equal sign.
+ * Territories are defined with their names and corresponding continent names, followed by their neighbors.
+ * Neighbors are listed after the country name, separated by spaces.
+ * The MapReader class provides methods to parse these sections and populate the game map.
+ *
  * @author Tejasvi
  */
 public class MapReader {
 
     /**
-     * Logger Observable
+     * The singleton instance of the game event logger.
      */
     private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * This function reads the file and places the contents of the file
-     * in a Hash Map
+     * Reads a map file and populates the provided game map with continents, countries, and their neighbors.
      *
-     * @param p_FileName the map file name
-     * @param p_GameMap  the game map
-     * @throws ValidationException when validation fails
+     * @param p_GameMap   The game map object to populate.
+     * @param p_FileName  The file name of the map to read.
+     * @throws ValidationException Thrown if validation fails during the map reading process.
      */
     public static void readMap(GameMap p_GameMap, String p_FileName) throws ValidationException {
         d_Logger.clear();
@@ -61,11 +67,11 @@ public class MapReader {
     }
 
     /**
-     * This function reads the Continents from the file
+     * Reads continent information from the given list and adds continents to the game map.
      *
-     * @param p_ContinentArray the value list for Continents
-     * @param p_GameMap        the game map
-     * @throws ValidationException when validation fails
+     * @param p_GameMap        The game map object to populate with continents.
+     * @param p_ContinentArray The list of continent information from the map file.
+     * @throws ValidationException Thrown if validation fails during continent reading.
      */
     public static void readContinentsFromFile(GameMap p_GameMap, List<String> p_ContinentArray) throws ValidationException {
         for (String l_InputString : p_ContinentArray) {
@@ -77,14 +83,13 @@ public class MapReader {
     }
 
     /**
-     * This function reads the Countries from the file
+     * Reads country information from the given list and adds countries to the game map.
      *
-     * @param p_CountryArray the value list for Countries
-     * @param p_GameMap      the game map
-     * @return Neighbouring countries
-     * @throws ValidationException when validation fails
+     * @param p_GameMap      The game map object to populate with countries.
+     * @param p_CountryArray The list of country information from the map file.
+     * @return A map containing country names as keys and lists of neighboring country names as values.
+     * @throws ValidationException Thrown if validation fails during country reading.
      */
-
     public static Map<String, List<String>> readCountriesFromFile(GameMap p_GameMap, List<String> p_CountryArray) throws ValidationException {
         Map<String, List<String>> l_CountryNeighbors = new HashMap<>();
         for (String l_InputString : p_CountryArray) {
@@ -98,13 +103,12 @@ public class MapReader {
     }
 
     /**
-     * This function adds the neighbouring Countries
+     * Adds neighboring countries to the game map based on the provided map of country neighbors.
      *
-     * @param p_NeighborList the neighbouring country list
-     * @param p_GameMap      the game map
-     * @throws ValidationException when validation fails
+     * @param p_GameMap      The game map object to populate with neighboring country information.
+     * @param p_NeighborList The map containing country names as keys and lists of neighboring country names as values.
+     * @throws ValidationException Thrown if validation fails during neighbor addition.
      */
-
     public static void addNeighborsFromFile(GameMap p_GameMap, Map<String, List<String>> p_NeighborList) throws ValidationException {
         for (String l_Country : p_NeighborList.keySet()) {
             for (String l_Neighbor : p_NeighborList.get(l_Country)) {

@@ -11,39 +11,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Domination class
+ * Represents a Domination map for the game.
+ * This class provides functionality to read, write, and manipulate Domination map files.
+ *
  * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class DominationMap {
     /**
-     * Logger Observable
+     * Logger Observable instance.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
     /**
-     * current line
+     * Current line being processed while reading the map file.
      */
     private String d_CurrentLine;
     /**
-     * buffer for reading
+     * Buffered reader for file reading.
      */
     private BufferedReader d_Buffer;
     /**
-     * continent list
+     * List of continents read from the map file.
      */
     private List<String> d_Continents = new ArrayList<>();
     /**
-     * country hashmap
+     * HashMap containing country names and their corresponding continents.
      */
     private HashMap<String, String> d_Country = new HashMap<>();
 
     /**
-     * This function reads the file and places the contents of the file
-     * in a Hash Map
+     * Reads the map file and populates the game map with its contents.
      *
-     * @param p_FileName the map file name
-     * @param p_GameMap  the game map
-     * @throws ValidationException when validation fails
+     * @param p_GameMap  The game map instance to populate.
+     * @param p_FileName The name of the map file to read.
+     * @throws ValidationException If validation fails while reading the map file.
      */
     public void readMap(GameMap p_GameMap, String p_FileName) throws ValidationException {
         d_Logger.clear();
@@ -73,11 +74,11 @@ public class DominationMap {
     }
 
     /**
-     * This function reads the Continents from the file
+     * Reads continents from the map file and adds them to the game map.
      *
-     * @param p_GameMap        the game map
-     * @throws ValidationException when validation fails
-     * @throws IOException file IO exception
+     * @param p_GameMap The game map instance.
+     * @throws ValidationException If validation fails while reading continents from the map file.
+     * @throws IOException If an I/O error occurs while reading the map file.
      */
     public void readContinentsFromFile(GameMap p_GameMap) throws ValidationException, IOException {
         while ((d_CurrentLine = d_Buffer.readLine()) != null && !d_CurrentLine.contains("[")) {
@@ -91,11 +92,11 @@ public class DominationMap {
     }
 
     /**
-     * This function reads the Countries from the file
+     * Reads countries from the map file and adds them to the game map.
      *
-     * @param p_GameMap      the game map
-     * @throws ValidationException when validation fails
-     * @throws IOException file IO exception
+     * @param p_GameMap The game map instance.
+     * @throws ValidationException If validation fails while reading countries from the map file.
+     * @throws IOException If an I/O error occurs while reading the map file.
      */
 
     public void readCountriesFromFile(GameMap p_GameMap) throws ValidationException, IOException {
@@ -110,13 +111,12 @@ public class DominationMap {
     }
 
     /**
-     * This function adds the neighbouring Countries
+     * Adds neighboring countries to the game map.
      *
-     * @param p_GameMap      the game map
-     * @throws ValidationException when validation fails
-     * @throws IOException file IO exception
+     * @param p_GameMap The game map instance.
+     * @throws ValidationException If validation fails while adding neighbors from the map file.
+     * @throws IOException If an I/O error occurs while reading the map file.
      */
-
     public void addNeighborsFromFile(GameMap p_GameMap) throws ValidationException, IOException {
         while ((d_CurrentLine = d_Buffer.readLine()) != null && !d_CurrentLine.contains("[")) {
             if (d_CurrentLine.length() == 0) {
@@ -130,12 +130,12 @@ public class DominationMap {
     }
 
     /**
-     * function to save the map
+     * Saves the game map as a map file.
      *
-     * @param p_GameMap Gamemap instance
-     * @param p_FileName file name to be save
-     * @return the saved map
-     * @throws IOException exception for file save
+     * @param p_GameMap  The game map instance to save.
+     * @param p_FileName The name of the map file to save.
+     * @return true if the map file is saved successfully, false otherwise.
+     * @throws IOException If an I/O error occurs while saving the map file.
      */
     public boolean saveMap(GameMap p_GameMap, String p_FileName) throws IOException {
         String l_Message = " ";
@@ -180,10 +180,10 @@ public class DominationMap {
     }
 
     /**
-     * Create hashmap of country
+     * Creates a HashMap of countries with their index.
      *
-     * @param p_GameMap instance of gamemap
-     * @return hashmap of country with index
+     * @param p_GameMap The game map instance.
+     * @return A HashMap containing country indices and names.
      */
     public HashMap<Integer, String> createCountryList(GameMap p_GameMap){
         HashMap<Integer, String> l_CountryMap = new HashMap<>();
@@ -195,10 +195,10 @@ public class DominationMap {
     }
 
     /**
-     * create a continent hashmap
+     * Creates a HashMap of continents with their index.
      *
-     * @param p_GameMap gamemap instance
-     * @return hashmap of continent and index
+     * @param p_GameMap The game map instance.
+     * @return A HashMap containing continent indices and names.
      */
     public HashMap<Integer, String> createContinentList(GameMap p_GameMap){
         HashMap<Integer, String> l_CountryMap = new HashMap<>();
