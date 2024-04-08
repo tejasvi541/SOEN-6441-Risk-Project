@@ -201,7 +201,7 @@ public class StartGameController implements GameFlowManager {
      * @param p_Filename the map file name
      * @throws ValidationException when validation fails
      */
-    private void loadMap(String p_Filename) throws ValidationException {
+    public void loadMap(String p_Filename) throws ValidationException {
         boolean l_ShouldUseConquestAdapter = true;
         try {
             File l_File = new File("maps/" + p_Filename);
@@ -233,7 +233,7 @@ public class StartGameController implements GameFlowManager {
      * @return true if command is executable else false
      */
     public boolean inputValidator(List<String> p_InputList) {
-        if (p_InputList.size() > 0) {
+        if (!p_InputList.isEmpty()) {
             String l_MainCommand = p_InputList.get(0);
             if (p_InputList.size() == 1) {
                 p_InputList.add(Constants.DUMMY);
