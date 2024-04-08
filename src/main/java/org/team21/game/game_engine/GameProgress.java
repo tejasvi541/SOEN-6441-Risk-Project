@@ -1,6 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
@@ -76,9 +77,9 @@ public class GameProgress {
      * @throws IOException File exception
      */
     public static void showFiles() throws IOException {
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
         d_Logger.log("\t\t\t Warzone");
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
         d_Logger.log("\t\t\t Load Game");
         d_Logger.log("\t=======================\n");
         if (new File(PATH).exists()) {
@@ -93,7 +94,7 @@ public class GameProgress {
         d_Logger.log("");
         d_Logger.log("\t=======================");
         d_Logger.log("\t use file name to load");
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
         d_Logger.log("example command: loadgame");
     }
 }
