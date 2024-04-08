@@ -10,27 +10,31 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Class holding the properties of advance order
+ * Class representing an Advance order, which allows a player to move armies from one country to another.
+ * This order can be used to advance to a neighboring country, attack an enemy country, or negotiate with a neutral player.
+ *
  * @author Yesha Shah
+ * @version 1.0.0
  */
 public class AdvanceOrder extends Order implements Serializable {
+
     /**
-     * Game Settings object
+     * Instance of GameSettings to access game configuration.
      */
     GameSettings d_Settings = GameSettings.getInstance();
 
     /**
-     * Game Strategy object
+     * Instance of GameStrategy to handle game-specific strategies.
      */
     GameStrategy d_GameStrategy;
 
     /**
-     * Log Entry Buffer Object
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor for class AdvanceOrder
+     * Constructs an AdvanceOrder object and sets its type to "advance".
      */
     public AdvanceOrder() {
         super();
@@ -39,16 +43,11 @@ public class AdvanceOrder extends Order implements Serializable {
     }
 
     /**
-     * Advance the number of armies from a source country to destination country
-     * Advance if self conquered
-     * Advance if destination does not belong to any player.
-     * Attack if a country belongs to enemy player.
-     * Skips the attack command if player exists in NeutralPlayers list.
-     * Remove the neutral player from the list once the attack is negotiated.
-     * The attack happens in the next turn of the same phase on same player if the
-     * negotiation happened already once in the phase.
+     * Executes the AdvanceOrder command.
+     * Moves armies from one country to another, advances if destination is unoccupied or conquered,
+     * attacks if destination belongs to an enemy player, or negotiates with a neutral player.
      *
-     * @return true if command is successfully executed or skipped else false
+     * @return true if the command is successfully executed or skipped, false otherwise.
      */
     @Override
     public boolean execute() {
@@ -83,9 +82,10 @@ public class AdvanceOrder extends Order implements Serializable {
 
 
     /**
-     * Validate command
+     * Validates the AdvanceOrder command.
+     * Checks if the command is valid based on player, departure country, destination country, and number of armies.
      *
-     * @return Returns true if valid command else false
+     * @return true if the command is valid, false otherwise.
      */
     @Override
     public boolean validateCommand() {
@@ -122,7 +122,8 @@ public class AdvanceOrder extends Order implements Serializable {
     }
 
     /**
-     * Print the command
+     * Prints the AdvanceOrder command.
+     * Logs the order information including the number of armies, departure country, and destination country.
      */
     @Override
     public void printOrderCommand() {

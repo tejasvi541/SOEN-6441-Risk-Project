@@ -10,22 +10,25 @@ import org.team21.game.utils.logger.GameEventLogger;
 import java.io.Serializable;
 
 /**
- * This class implements the bomb order card
+ * Represents a Bomb order, which allows a player to execute a bomb attack on a country.
+ * This order requires a Bomb card.
+ *
  * @author Tejasvi
+ * @version 1.0.0
  */
 public class BombOrder extends Order implements Serializable {
 
     /**
-     * the Game Map Object
+     * Instance of GameMap to access game map information.
      */
     private GameMap d_GameMap;
     /**
-     * Logger Observable
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * This is the Constructor for Bomb Order class
+     * Constructs a BombOrder object and sets its type to "bomb".
      */
     public BombOrder() {
         super();
@@ -34,9 +37,10 @@ public class BombOrder extends Order implements Serializable {
     }
 
     /**
-     * This is the execute method for bomb order
+     * Executes the BombOrder command.
+     * Reduces the armies in the target country by half and consumes a Bomb card.
      *
-     * @return true if the execute was successful else false
+     * @return true if the execution was successful, false otherwise.
      */
     @Override
     public boolean execute() {
@@ -58,9 +62,10 @@ public class BombOrder extends Order implements Serializable {
     }
 
     /**
-     * This method Contains the Validations for the bomb command
+     * Validates the BombOrder command.
+     * Checks if the command is valid based on player, target country, and if the player has a Bomb card.
      *
-     * @return true if successful or else false
+     * @return true if the command is valid, false otherwise.
      */
     @Override
     public boolean validateCommand() {
@@ -114,7 +119,8 @@ public class BombOrder extends Order implements Serializable {
     }
 
     /**
-     * This is the method to print
+     * Prints the BlockadeOrder command.
+     * Logs the order information including the target country and player.
      */
     @Override
     public void printOrderCommand() {

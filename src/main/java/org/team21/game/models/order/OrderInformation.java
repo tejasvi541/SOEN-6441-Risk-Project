@@ -6,106 +6,112 @@ import org.team21.game.models.map.Player;
 import java.io.Serializable;
 
 /**
- * A class with the information of Order details
+ * A class representing the information of an order.
+ * This class holds details such as the command entered by the player,
+ * player object, neutral player object, departure country, destination country,
+ * target country, and the number of armies involved in the order.
+ *
  * @author Kapil Soni
+ * @version 1.0.0
  */
 public class OrderInformation implements Serializable {
+
     /**
-     * Command entered by the player
+     * The command entered by the player.
      */
     private String d_Command;
     /**
-     * A player object
+     * The player involved in the order.
      */
     private Player d_Player;
     /**
-     * An object for neutral player
+     * The neutral player involved in the order.
      */
     private Player d_NeutralPlayer;
     /**
-     * A country object for departure
+     * The departure country from where the armies are being deployed.
      */
     private Country d_Departure;
     /**
-     * A country object for destination
+     * The destination country where the armies are being deployed.
      */
     private Country d_Destination;
     /**
-     * A country object for a target country
+     * The target country for the order.
      */
     private Country d_TargetCountry;
     /**
-     * An integer data member to store the number of armies
+     * The number of armies involved in the order.
      */
     private int d_NumberOfArmy;
 
     /**
-     * function to get the Neutral player
+     * Retrieves the neutral player involved in the order.
      *
-     * @return the Neutral player
+     * @return the neutral player.
      */
     public Player getNeutralPlayer() {
         return d_NeutralPlayer;
     }
 
     /**
-     * function to set the Neutral Player
+     * Sets the neutral player involved in the order.
      *
-     * @param p_NeutralPlayer the Neutral player
+     * @param p_NeutralPlayer the neutral player.
      */
     public void setNeutralPlayer(Player p_NeutralPlayer) {
         this.d_NeutralPlayer = p_NeutralPlayer;
     }
 
     /**
-     * A function to get the player information
+     * Retrieves the player involved in the order.
      *
-     * @return the object of player
+     * @return the player.
      */
     public Player getPlayer() {
         return d_Player;
     }
 
     /**
-     * A function to set the player information
+     * Sets the player involved in the order.
      *
-     * @param p_Player the object of player
+     * @param p_Player the player.
      */
     public void setPlayer(Player p_Player) {
         this.d_Player = p_Player;
     }
 
     /**
-     * A function to get the departure of the armies from the order
+     * Retrieves the departure country from the order.
      *
-     * @return the departure country object
+     * @return the departure country.
      */
     public Country getDeparture() {
         return d_Departure;
     }
 
     /**
-     * A function to set the departure of the armies from the order
+     * Sets the departure country for the order.
      *
-     * @param p_Departure departure country object
+     * @param p_Departure the departure country.
      */
     public void setDeparture(Country p_Departure) {
         this.d_Departure = p_Departure;
     }
 
     /**
-     * A function to get where the army is going to.
+     * Retrieves the destination country for the order.
      *
-     * @return the destination of armies
+     * @return the destination country.
      */
     public Country getDestination() {
         return d_Destination;
     }
 
     /**
-     * A function to set the destination of the armies
+     * Sets the destination country for the order.
      *
-     * @param p_Destination the destination of armies
+     * @param p_Destination the destination country.
      */
     public void setDestination(Country p_Destination) {
         this.d_Destination = p_Destination;
@@ -113,54 +119,54 @@ public class OrderInformation implements Serializable {
 
 
     /**
-     * A function to get the number of armies in the order
+     * Retrieves the number of armies involved in the order.
      *
-     * @return the number of armies
+     * @return the number of armies.
      */
     public int getNumberOfArmy() {
         return d_NumberOfArmy;
     }
 
     /**
-     * A function to set the number of armies in the order
+     * Sets the number of armies involved in the order.
      *
-     * @param p_NumberOfArmy the number of armies
+     *  @param p_NumberOfArmy the number of armies.
      */
     public void setNumberOfArmy(int p_NumberOfArmy) {
         this.d_NumberOfArmy = p_NumberOfArmy;
     }
 
     /**
-     * A function to get the target country of the order
+     * Retrieves the target country for the order.
      *
-     * @return the target country
+     * @return the target country.
      */
     public Country getTargetCountry() {
         return this.d_TargetCountry;
     }
 
     /**
-     * A function to set the target country of the order
+     * Sets the target country for the order.
      *
-     * @param p_TargetCountry the target country
+     * @param p_TargetCountry the target country.
      */
     public void setTargetCountry(Country p_TargetCountry) {
         this.d_TargetCountry = p_TargetCountry;
     }
 
     /**
-     * Getter for Command
+     * Retrieves the command entered by the player.
      *
-     * @return command
+     * @return the command.
      */
     public String getCommand(){
         return d_Command;
     }
 
     /**
-     * Setter for command
+     * Sets the command entered by the player.
      *
-     * @param p_Command command
+     * @param p_Command the command.
      */
     public void setCommand(String p_Command){
         d_Command = p_Command;

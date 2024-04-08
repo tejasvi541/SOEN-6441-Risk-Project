@@ -9,12 +9,15 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 /**
- * A class to create Orders in the game.
+ * A class responsible for creating orders in the game.
+ * This class contains methods to generate different types of orders based on the input command.
+ *
  * @author Kapil Soni
  */
 public class OrderOwner implements Serializable {
+
     /**
-     * Static object of Game Map to hold instance of game map
+     * Static object of Game Map to hold instance of game map.
      */
     public static GameMap d_GameMap = GameMap.getInstance();
 
@@ -24,11 +27,11 @@ public class OrderOwner implements Serializable {
     private static GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * A function to create an order
+     * Creates an order based on the input command and player.
      *
      * @param p_Commands the command entered
-     * @param p_Player   object parameter of type Player
-     * @return the order
+     * @param p_Player the player issuing the order
+     * @return the created order
      */
     public static Order CreateOrder(String[] p_Commands, Player p_Player) {
         String l_Type = p_Commands[0].toLowerCase();
@@ -67,11 +70,11 @@ public class OrderOwner implements Serializable {
     }
 
     /**
-     * A function to generate the information of Deploying the order
+     * Generates order information for deploying armies.
      *
      * @param p_Command the command entered
-     * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
+     * @param p_Player the player issuing the order
+     * @return the order information for deployment
      */
     public static OrderInformation GenerateDeployOrderInfo(String[] p_Command, Player p_Player) {
         Country l_Country = d_GameMap.getCountry(p_Command[1]);
@@ -88,11 +91,11 @@ public class OrderOwner implements Serializable {
     }
 
     /**
-     * A function to generate the information for advance order
+     * Generates order information for advance or airlift orders.
      *
      * @param p_Command the command entered
-     * @param p_Player  the player who issued the order
-     * @return the order information of advance/attack
+     * @param p_Player the player issuing the order
+     * @return the order information for advance or airlift
      */
     public static OrderInformation GenerateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
         String l_FromCountryID = p_Command[1];
@@ -111,11 +114,11 @@ public class OrderOwner implements Serializable {
 
 
     /**
-     * A function to generate the information of Negotiate order
+     * Generates order information for a negotiate order.
      *
      * @param p_Command the command entered
-     * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
+     * @param p_Player the player issuing the order
+     * @return the order information for negotiate
      */
     public static OrderInformation GenerateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
@@ -126,11 +129,11 @@ public class OrderOwner implements Serializable {
     }
 
     /**
-     * A function to generate information about Blockade Order
+     * Generates order information for a blockade order.
      *
      * @param p_Command the command entered
-     * @param p_Player  object parameter of type Player
-     * @return the order information of deploy
+     * @param p_Player the player issuing the order
+     * @return the order information for blockade
      */
     public static OrderInformation GenerateBlockadeOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
@@ -142,34 +145,12 @@ public class OrderOwner implements Serializable {
         return l_OrderInformation;
     }
 
-//    /**
-//     * function to generate information about Airlift Order
-//     *
-//     * @param p_Command the command entered
-//     * @param p_Player  object parameter of type Player
-//     * @return the order information of deploy
-//     */
-//    public static OrderInformation GenerateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
-//        String l_FromCountryID = p_Command[1];
-//        Country l_FromCountry = d_GameMap.getCountry(l_FromCountryID);
-//        String l_ToCountryID = p_Command[2];
-//        Country l_ToCountry = d_GameMap.getCountry(l_ToCountryID);
-//        int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
-//        OrderInformation l_OrderInformation = new OrderInformation();
-//        l_OrderInformation.setCommand(ConvertToString(p_Command));
-//        l_OrderInformation.setPlayer(p_Player);
-//        l_OrderInformation.setDeparture(l_FromCountry);
-//        l_OrderInformation.setDestination(l_ToCountry);
-//        l_OrderInformation.setNumberOfArmy(l_NumberOfArmies);
-//        return l_OrderInformation;
-//    }
-
     /**
-     * function to generate information about Bomb Order
+     * Generates order information for a bomb order.
      *
      * @param p_Command the command entered
-     * @param p_Player  object parameter of type Player
-     * @return the order information
+     * @param p_Player the player issuing the order
+     * @return the order information for bomb
      */
     public static OrderInformation GenerateBombOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
@@ -182,10 +163,10 @@ public class OrderOwner implements Serializable {
     }
 
     /**
-     * The method to convert command to string
+     * Converts an array of strings into a single string.
      *
-     * @param p_Commands the command entered
-     * @return the string
+     * @param p_Commands the array of strings
+     * @return the concatenated string
      */
     private static String ConvertToString(String[] p_Commands) {
         StringJoiner l_Joiner = new StringJoiner(" ");
@@ -194,5 +175,4 @@ public class OrderOwner implements Serializable {
         }
         return l_Joiner.toString();
     }
-
 }

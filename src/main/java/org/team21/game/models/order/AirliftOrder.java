@@ -10,22 +10,26 @@ import org.team21.game.utils.logger.GameEventLogger;
 import java.io.Serializable;
 
 /**
- * This class gives the order to execute AirliftOrder, from one country to another.
+ * Represents an Airlift order, which allows a player to move armies from one country to another.
+ * This order requires an Airlift card.
+ *
  * @author Nishith Soni
+ * @version 1.0.0
  */
 public class AirliftOrder extends Order implements Serializable {
+
     /**
-     * A data member to store the instance of the gamemap.
+     * Instance of GameMap to access game map information.
      */
     private final GameMap d_GameMap;
 
     /**
-     * Logger Observable
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor class for Airlift Order
+     * Constructs an AirliftOrder object and sets its type to "airlift".
      */
     public AirliftOrder() {
         super();
@@ -34,9 +38,9 @@ public class AirliftOrder extends Order implements Serializable {
     }
 
     /**
-     * execute the Airlift Order
-     *
-     * @return true if the execute was successful else false
+     * Executes the AirliftOrder command.
+     * Moves armies from one country to another and consumes an Airlift card.
+     * @return true if the execution was successful, false otherwise.
      */
     @Override
     public boolean execute() {
@@ -56,9 +60,10 @@ public class AirliftOrder extends Order implements Serializable {
     }
 
     /**
-     * Validate the command
+     * Validates the AirliftOrder command.
+     * Checks if the command is valid based on player, departure country, destination country, and number of armies.
      *
-     * @return true if successful or else false
+     * @return true if the command is valid, false otherwise.
      */
     @Override
     public boolean validateCommand() {
@@ -97,7 +102,8 @@ public class AirliftOrder extends Order implements Serializable {
     }
 
     /**
-     * Print the command
+     * Prints the AirliftOrder command.
+     * Logs the order information including the number of armies, departure country, and destination country.
      */
     @Override
     public void printOrderCommand() {
