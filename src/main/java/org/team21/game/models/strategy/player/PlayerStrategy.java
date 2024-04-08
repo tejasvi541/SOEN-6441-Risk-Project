@@ -3,36 +3,41 @@ package org.team21.game.models.strategy.player;
 import org.team21.game.models.map.Player;
 
 /**
- * Abstract class holding the different types of player.
+ * Abstract class representing different types of player strategies.
+ * This class serves as a base for various player strategy implementations.
+ * It provides a method to create commands based on the strategy.
+ * It also contains a static factory method to instantiate the appropriate strategy class.
+ *
  * @author Kapil Soni
  * @version 1.0.0
  */
 public abstract class PlayerStrategy {
+
     /**
-     * player
+     * The current player.
      */
     static Player d_Player;
 
     /**
-     * Default constructor
+     * Default constructor for PlayerStrategy class.
      */
     PlayerStrategy() {
 
     }
 
     /**
-     * declaring abstract method
+     * Declares an abstract method to create a command based on the player's strategy.
      *
-     * @return command
+     * @return The command created based on the strategy.
      */
     public abstract String createCommand();
 
     /**
-     * Method which returns the class holding the player gameplay
-     * logic based on strategy chosen.
+     * Static factory method to instantiate the appropriate strategy class based on the provided strategy type.
      *
-     * @param p_Strategy Player strategy provided
-     * @return the respective strategy class
+     * @param p_Strategy The type of player strategy.
+     * @return An instance of the respective strategy class.
+     * @throws IllegalStateException if the provided strategy type is not valid.
      */
     public static PlayerStrategy getStrategy(String p_Strategy) {
         switch (p_Strategy) {

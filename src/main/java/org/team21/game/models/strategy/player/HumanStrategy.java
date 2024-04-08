@@ -4,28 +4,30 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 /**
- * Human Strategy class, taking command inputs from human player.
+ * Implements the Human player strategy, allowing command inputs from a human player.
+ * This strategy simply reads the user's input from the console.
+ *
  * @author Yesha Shah
  * @version 1.0.0
  */
 public class HumanStrategy extends PlayerStrategy implements Serializable {
 
     /**
-     * scanner to read from user
+     * Scanner object to read input from the user
      */
     private final static Scanner SCANNER = new Scanner(System.in);
 
     /**
-     * Default constructor
+     * Default constructor for HumanStrategy class.
      */
     public HumanStrategy() {
 
     }
 
     /**
-     * Function to read and return the next input of user
+     * Reads and returns the next input provided by the human player.
      *
-     * @return next input of the user
+     * @return The next input provided by the human player.
      */
     @Override
     public String createCommand() {
