@@ -2,43 +2,48 @@ package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
 import org.team21.game.models.map.GameMap;
+import org.team21.game.models.map.MapReader;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.strategy.player.PlayerStrategy;
 import org.team21.game.models.tournament.TournamentOptions;
 import org.team21.game.models.tournament.TournamentResult;
-import org.team21.game.models.map.MapReader;
+import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
 /**
  * Class to implement the tournament mode game
+ *
  * @author Kapil Soni
  */
-public class TournamentEngine implements Engine {
+public class TournamentGameEngine implements Engine {
     /**
-     * logger observable
-     */
-    private GameEventLogger d_Logger;
-    /**
-     * Tournament options variable
+     * The set of options defining the parameters and rules of the tournament.
      */
     TournamentOptions d_Options;
+
     /**
-     * List to hold the tournament results
+     * A collection storing the outcomes and statistics of completed tournaments.
      */
     List<TournamentResult> d_Results = new ArrayList<>();
+
     /**
-     * game map instace
+     * The current game map instance utilized within the tournament context.
      */
     GameMap d_CurrentMap;
 
     /**
+     * The observable entity responsible for logging game events and tournament proceedings.
+     */
+    private GameEventLogger d_Logger;
+
+    /**
      * default constructor
      */
-    public TournamentEngine() {
+    public TournamentGameEngine() {
         d_Logger = GameEventLogger.getInstance();
         init();
     }
@@ -53,7 +58,7 @@ public class TournamentEngine implements Engine {
     public void init() {
         d_Options = getTournamentOptions();
         if (Objects.isNull(d_Options)) {
-            d_Logger.log("re enter command");
+            d_Logger.log(Constants.INVALID_COMMAND);
             init();
         }
     }
@@ -66,11 +71,11 @@ public class TournamentEngine implements Engine {
     //tournament -M Australia.map,newmap.map -P aggressive,random -G 2 -D 3
     public TournamentOptions getTournamentOptions() {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.SEPERATER);
         d_Logger.log("You are in Tournament Mode");
         d_Logger.log("Enter the tournament command:");
         d_Logger.log("Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns");
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.SEPERATER);
         String l_TournamentCommand = l_Scanner.nextLine();
         d_Options = parseCommand(l_TournamentCommand);
         if (Objects.isNull(d_Options)) {
@@ -97,7 +102,7 @@ public class TournamentEngine implements Engine {
                 String l_GameCount = l_CommandList.get(l_CommandList.indexOf("-G") + 1);
                 String l_maxTries = l_CommandList.get(l_CommandList.indexOf("-D") + 1);
                 d_Options.getMap().addAll(Arrays.asList(l_MapValue.split(",")));
-                if(l_PlayerTypes.contains("human")) {
+                if (l_PlayerTypes.contains("human")) {
                     d_Logger.log("Tournament mode does not support human player: Switch to Single Game Mode");
                     return null;
                 }
@@ -121,7 +126,7 @@ public class TournamentEngine implements Engine {
             }
             return d_Options;
         } catch (Exception e) {
-            d_Logger.log("Check your command");
+            d_Logger.log(Constants.COMMAND_CHECK);
             d_Logger.log("command should be in this format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
             return null;
         }
@@ -132,7 +137,7 @@ public class TournamentEngine implements Engine {
      *
      * @throws ValidationException if exception occurs
      */
-    public void start() throws ValidationException {
+    public void startEngine() throws ValidationException {
         for (String l_File : d_Options.getMap()) {
             for (int l_game = 1; l_game <= d_Options.getGames(); l_game++) {
                 GameSettings.getInstance().MAX_TRIES = d_Options.getMaxTries();
@@ -154,7 +159,7 @@ public class TournamentEngine implements Engine {
                 d_CurrentMap.assignCountries();
                 GameEngine l_GameEngine = new GameEngine();
                 l_GameEngine.setGamePhase(GamePhase.Reinforcement);
-                l_GameEngine.start();
+                l_GameEngine.startEngine();
                 Player l_Winner = d_CurrentMap.getWinner();
                 if (Objects.nonNull(l_Winner)) {
                     l_Result.setWinner(l_Winner.getName());
@@ -171,7 +176,7 @@ public class TournamentEngine implements Engine {
 
         for (TournamentResult l_Result : d_Results) {
 
-            System.out.format(l_Table, l_Result.getMap(), l_Result.getWinner(), l_Result.getGame() );
+            System.out.format(l_Table, l_Result.getMap(), l_Result.getWinner(), l_Result.getGame());
 
         }
         System.out.format("+--------------+-----------------------+-------------------------+%n");

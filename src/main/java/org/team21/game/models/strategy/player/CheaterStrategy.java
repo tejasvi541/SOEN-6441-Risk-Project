@@ -12,21 +12,22 @@ import java.util.List;
 
 
 /**
- * A class to implement the Cheater strategy for a player
+ * Implements the Cheater player strategy, which aggressively conquers neighboring countries and doubles the army count of its own countries.
+ * This strategy focuses on expanding its territory rapidly and overpowering nearby enemies.
+ *
  * @author Bharti Chhabra
  */
-
 public class CheaterStrategy extends PlayerStrategy implements Serializable {
 
     /**
-     * Logger Observable
+     * Logger for game events
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Implementation of create command
+     * Creates commands for the Cheater player strategy.
      *
-     * @return null
+     * @return "null" to indicate no further action.
      */
     public String createCommand() {
         d_Player = GameMap.getInstance().getCurrentPlayer();

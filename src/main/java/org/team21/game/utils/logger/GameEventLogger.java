@@ -8,58 +8,63 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
- * This class gets all the actions of the game. It is an Observable.
- * Singleton class
+ * The GameEventLogger class records and manages game events, acting as an Observable.
+ * It follows the singleton pattern to ensure only one instance exists throughout the game.
+ * This class provides functionality to log game events and notify registered observers.
+ * Observers can subscribe to receive updates about game events.
+ *
  * @author Nishith Soni
+ * @version 1.0.0
  */
 public class GameEventLogger implements Observable, Serializable {
     /**
-     * A static object of LogEntryBuffer
+     * The singleton instance of the GameEventLogger.
      */
     private static GameEventLogger Logger;
+
     /**
-     * A list of observers
+     * A list of observers subscribed to receive notifications.
      */
     private List<Observer> d_ObserverList = new ArrayList<>();
 
     /**
-     * A constructor for LogEntryBuffer
+     * Private constructor to prevent instantiation from outside.
      */
     private GameEventLogger() {
-
     }
 
     /**
-     * A function to get the instance of LogEntryBuffer
-     * @return LogEntryBuffer Logger
+     * Retrieves the singleton instance of the GameEventLogger.
+     *
+     * @return The singleton instance of the GameEventLogger.
      */
     public static GameEventLogger getInstance() {
-        Logger = Objects.isNull(Logger) ? new GameEventLogger(): Logger;
+        Logger = Objects.isNull(Logger) ? new GameEventLogger() : Logger;
         return Logger;
     }
 
     /**
-     * This method gets the information from the game and notifies the Observer.
+     * Logs the provided message and notifies registered observers.
      *
-     * @param p_s The message to be notified
+     * @param p_s The message to be logged and notified.
      */
     public void log(String p_s) {
         notifyObservers(p_s);
     }
 
-
     /**
-     * Clear logs
+     * Clears all logs and unsubscribes observers.
      */
     public void clear() {
         clearObservers();
     }
 
     /**
-     * This method updates the Observer with the message.
+     * Notifies all registered observers with the provided message.
      *
-     * @param p_s The message to be updated
+     * @param p_s The message to be notified to observers.
      */
     @Override
     public void notifyObservers(String p_s) {
@@ -67,8 +72,9 @@ public class GameEventLogger implements Observable, Serializable {
     }
 
     /**
-     * A function to add an observer to the list of observers
-     * @param p_Observer The observer to be added
+     * Adds an observer to the list of registered observers.
+     *
+     * @param p_Observer The observer to be added.
      */
     @Override
     public void addObserver(Observer p_Observer) {
@@ -76,11 +82,10 @@ public class GameEventLogger implements Observable, Serializable {
     }
 
     /**
-     * A function to format the list of observers in the list.
+     * Clears all observers from the list, effectively unsubscribing them.
      */
     @Override
     public void clearObservers() {
-        d_ObserverList.forEach(Observer::clearLogs);
+        d_ObserverList.forEach(Observer::clearGameLogs);
     }
-
 }

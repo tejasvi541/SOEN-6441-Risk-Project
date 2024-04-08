@@ -5,26 +5,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Concrete Class to set and get all the properties of Continent.
+ * Continent Class for the information storage of Continent IDs, their Names and Countries within that continent
+ * A Set is used to store all the countries belonging to one Continent.
+ *
  * @author Tejasvi
  * @author Bharti Chhabra
  * @version 1.0.0
  */
 public class Continent implements Serializable {
     /**
-     * A string to store the ID of continent
+     * ID of the continent
      */
     private String d_Id;
     /**
-     * A string to store the name of continent
+     * Name of the continent
      */
     private String d_Name;
     /**
-     * An integer to store the awardedarmies
+     * Award armies to a player when captured.
      */
     private int d_AwardArmies;
     /**
-     * A boolean data member to get if credited or not
+     * A boolean when armies credited or not
      */
     private boolean d_Credited;
     /**
@@ -33,36 +35,36 @@ public class Continent implements Serializable {
     private Set<Country> d_Countries;
 
     /**
-     * Get the continent ID also known as continent value
+     * Getter to get the continent ID
      *
-     * @return d_Id The continent ID also known as continent value
+     * @return the continent ID
      */
     public String getId() {
         return d_Id;
     }
 
     /**
-     * Set the continent ID also known as continent value
+     * Setter to set the continent ID
      *
-     * @param p_Id Continent ID also known as continent value
+     * @param p_Id holds the continent ID
      */
     public void setId(String p_Id) {
         this.d_Id = p_Id;
     }
 
     /**
-     * Get the continent name
+     * Getter to get the continent name
      *
-     * @return d_Name Continent name which is of type string
+     * @return the continent name
      */
     public String getName() {
         return d_Name;
     }
 
     /**
-     * Set the continent name
+     * Setter to set the continent name
      *
-     * @param p_Name Continent name
+     * @param p_Name hold the continent name
      */
     public void setName(String p_Name) {
         this.d_Name = p_Name;
@@ -87,18 +89,18 @@ public class Continent implements Serializable {
     }
 
     /**
-     * Check if Armies are credited or not
+     * To check if armies are credited or not
      *
-     * @return true if armies are credited else false if not credited
+     * @return true if armies are credited else false
      */
     public boolean isCredited() {
         return d_Credited;
     }
 
     /**
-     * Set the number of armies credited
+     * To set the credited armies
      *
-     * @param p_Credited Credited armies
+     * @param p_Credited holds the credited armies
      */
     public void setCredited(boolean p_Credited) {
         this.d_Credited = p_Credited;
@@ -117,7 +119,8 @@ public class Continent implements Serializable {
     }
 
     /**
-     * Set countries for the testing and adding countries in continents
+     * Set countries in the continents
+     *
      * @param p_Countries holds the set of countries
      */
     public void setCountries(Set<Country> p_Countries) {

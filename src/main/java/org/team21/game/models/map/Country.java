@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 /**
  * Concrete Class to set and get all the properties of country.
+ *
  * @author Tejasvi
  */
 public class Country implements Serializable {
@@ -233,7 +234,6 @@ public class Country implements Serializable {
 
     /**
      * A function to store the list of neighbors for a country
-     *
      * @param p_Neighbors the set of neighbors
      * @return the neighbors as String
      */

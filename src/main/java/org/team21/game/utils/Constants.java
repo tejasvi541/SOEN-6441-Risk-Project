@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * This class handles defined constants
+ *
  * @author Meet Boghani
  * @author Bharti Chhabra
  * @author Kapil Soni
@@ -66,7 +67,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE_MAP_EDITOR.
      */
-    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************";
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************/";
     /**
      * The constant ASK_FOR_ACTION.
      */
@@ -115,6 +116,10 @@ public final class Constants {
      * The constant SEPERATER.
      */
     public final static String SEPERATER = "******************************************************************************";
+    /**
+     * The constant EQUAL SEPERATER.
+     */
+    public final static String EQUAL_SEPERATER = "=============================================================================";
     /**
      * The constant ENTER_CORRECT_COMMAND.
      */
@@ -242,7 +247,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE.
      */
-    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER + "\n";
+    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER;
     /**
      * The constant non exists player message.
      */
@@ -251,7 +256,46 @@ public final class Constants {
      * The constant for no negotiate card message.
      */
     public final static String NO_NEGOTIATE_CARD = "Player doesn't have NegotiateOrder Card.";
-
+    /**
+     * The constant for command check.
+     */
+    public final static String COMMAND_CHECK = "Check your command";
+    /**
+     * The constant for no airlift card message.
+     */
+    public final static String NO_AIRLIFT_CARD = "Player doesn't have Airlift Card.";
+    /**
+     * The constant for no bomb card message.
+     */
+    public final static String NO_BOMB_CARD = "Player doesn't have Bomb Card.";
+    /**
+     * The constant SAVEGAME_COMMAND.
+     */
+    public final static String SAVEGAME_COMMAND = "savegame";
+    /**
+     * The constant LOADGAME_COMMAND.
+     */
+    public final static String LOADGAME_COMMAND = "loadgame";
+    /**
+     * The constant THE_COMMAND_SYNTAX_IS_INVALID.
+     */
+    public static final String THE_COMMAND_SYNTAX_IS_INVALID = "The command syntax is invalid.";
+    /**
+     * The constant THE_NUMBER_FORMAT_IS_INVALID.
+     */
+    public static final String THE_NUMBER_FORMAT_IS_INVALID = "The number format is invalid";
+    /**
+     * The constant ASSIGNCOUNTRIES.
+     */
+    public static final String ASSIGNCOUNTRIES = "assigncountries";
+    /**
+     * The constant GAMEPLAYER.
+     */
+    public static final String GAMEPLAYER = "gameplayer";
+    /**
+     * The constant TOURNAMENT.
+     */
+    public static final String TOURNAMENT = "tournament";
     /**
      * Instantiates a new Constants.
      */

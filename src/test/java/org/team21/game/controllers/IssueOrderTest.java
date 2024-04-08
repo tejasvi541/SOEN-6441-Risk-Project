@@ -54,7 +54,7 @@ public class IssueOrderTest {
      */
     @Test
     public void testValidateCommand() {
-        assert d_IssueOrder.validateCommand("deploy Pakistan 10", d_GameMap.getPlayer("Player1"));
-        assert !d_IssueOrder.validateCommand("deploye Pakistan 10", d_GameMap.getPlayer("Player2"));
+        assert d_IssueOrder.validateIssueOrderCommands("deploy Pakistan 10", d_GameMap.getPlayer("Player1"));
+        assert !d_IssueOrder.validateIssueOrderCommands("deploye Pakistan 10", d_GameMap.getPlayer("Player2"));
     }
 }

@@ -10,28 +10,32 @@ import org.team21.game.utils.logger.GameEventLogger;
 import java.util.stream.IntStream;
 
 /**
- * Class holding the Dice strategy for advance logic
+ * Implementation of Dice strategy for advance logic
+ *
+ * This class implements the GameStrategy interface to define the behavior of attack using dice rolls.
+ * It calculates the outcome of an attack based on probabilities defined in the GameSettings class.
+ *
  * @author Yesha Shah
  */
 public class DiceStrategy implements GameStrategy {
     /**
-     * Game settings object
+     * The singleton instance of GameSettings.
      */
     GameSettings SETTINGS = GameSettings.getInstance();
 
     /**
-     * Logger Observable
+     * The logger for recording game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Method holding the default attack logic
+     * Executes the default attack logic using dice rolls.
      *
-     * @param p_Player The player who initiated attack
-     * @param p_From   The country from which the attack is initiated
-     * @param p_To     The country on which the attack is going to happen
-     * @param p_Armies The number of armies to be moved
-     * @return true on successful execution else false
+     * @param p_Player The player initiating the attack.
+     * @param p_From   The country from which the attack is initiated.
+     * @param p_To     The target country of the attack.
+     * @param p_Armies The number of armies involved in the attack.
+     * @return true if the attack is successful, false otherwise.
      */
     @Override
     public boolean attack(Player p_Player, Country p_From, Country p_To, int p_Armies) {

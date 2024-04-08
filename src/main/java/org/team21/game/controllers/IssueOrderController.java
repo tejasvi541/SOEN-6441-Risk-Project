@@ -1,59 +1,91 @@
 package org.team21.game.controllers;
 
 import org.team21.game.game_engine.GamePhase;
+import org.team21.game.game_engine.GameProgress;
 import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.cards.Card;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
 import org.team21.game.models.order.Order;
-import org.team21.game.game_engine.GameProgress;
 import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.util.*;
 
 /**
- * Class which is the controller for the Issue Order phase
+ * Manages the Issue Order phase of the game. Responsible for player turns,
+ * command input, validation, and transitioning to the next game phase.
+ *
  * @author Kapil Soni
  * @version 1.0.0
  */
 public class IssueOrderController implements GameFlowManager {
     /**
-     * variable to keep track of players who skipped
-     */
-    private static Set<Player> d_SkippedPlayers = new HashSet<>();
-    /**
-     * Static variable to hold commands
+     * Holds the current command input by the player.
      */
     public static String d_Commands = null;
     /**
-     * GamePhase Instance with next phase
+     * Set to track players who have skipped their order-issuing turn.
+     */
+    private static Set<Player> d_SkippedPlayers = new HashSet<>();
+    /**
+     * GamePhase instance representing the Execute Order phase.
      */
     GamePhase d_ExecutePhase = GamePhase.ExecuteOrder;
+
     /**
-     * GamePhase Instance with next phase
+     * GamePhase instance representing the Map Editor phase.
      */
     GamePhase d_MapEditorPhase = GamePhase.MapEditor;
+
     /**
-     * GamePhase instance
+     * Tracks the current GamePhase.
      */
     GamePhase d_GamePhase;
+
     /**
-     * GameMap instance
+     * Holds the central GameMap object.
      */
     GameMap d_GameMap;
 
     /**
-     * Log Entry
+     * Used for logging game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor to get the GameMap instance
+     * Initializes the IssueOrderController, obtaining the GameMap instance.
      */
+
     public IssueOrderController() {
         d_GameMap = GameMap.getInstance();
+    }
+
+    /**
+     * A function to map the players and their status for the issuing of the order.
+     *
+     * @param p_Player The player who has skipped his iteration for the issuing.
+     */
+    private static void addToSetOfPlayers(Player p_Player) {
+        d_SkippedPlayers.add(p_Player);
+    }
+
+    /**
+     * A function to check the length of each command.
+     *
+     * @param p_Command The command to be validated.
+     * @return true if length is correct else false.
+     */
+    private static boolean checkLengthOfIssueOrderCommand(String p_Command, int p_Length) {
+        if (p_Command.contains(Constants.DEPLOY_COMMAND)) {
+            return p_Length == 3;
+        } else if (p_Command.contains(Constants.BOMB_COMMAND) || p_Command.contains(Constants.BLOCKADE_COMMAND) || p_Command.contains(Constants.NEGOTIATE_COMMAND) || p_Command.contains(Constants.SAVEGAME_COMMAND)) {
+            return (p_Length == 2);
+        } else if (p_Command.contains(Constants.AIRLIFT_COMMAND) || p_Command.contains(Constants.ADVANCE_COMMAND)) {
+            return (p_Length == 4);
+        }
+        return false;
     }
 
     /**
@@ -64,7 +96,7 @@ public class IssueOrderController implements GameFlowManager {
      * @throws Exception when execution fails
      */
     @Override
-    public GamePhase start(GamePhase p_GamePhase) throws Exception {
+    public GamePhase startPhase(GamePhase p_GamePhase) throws Exception {
         if (d_GameMap.getCurrentPlayer() == null) {
             d_GameMap.setCurrentPlayer(d_GameMap.getPlayers().entrySet().iterator().next().getValue());
         }
@@ -81,18 +113,18 @@ public class IssueOrderController implements GameFlowManager {
                 d_GameMap.setCurrentPlayer(l_Player);
                 boolean l_IssueCommand = false;
                 while (!l_IssueCommand) {
-                    showStatus(l_Player);
+                    showPlayerStatusAndCommands(l_Player);
                     d_Commands = l_Player.readFromPlayer();
                     if (Objects.isNull(d_Commands)) {
                         d_Commands = "";
                     }
                     if (!d_Commands.isEmpty()) {
-                        l_IssueCommand = validateCommand(d_Commands, l_Player);
+                        l_IssueCommand = validateIssueOrderCommands(d_Commands, l_Player);
                     }
-                    if (d_Commands.equals("pass")) {
+                    if (d_Commands.equals(Constants.PASS_COMMAND)) {
                         break;
                     }
-                    if (d_Commands.split(" ")[0].equals("savegame") && l_IssueCommand) {
+                    if (d_Commands.split(" ")[0].equals(Constants.SAVEGAME_COMMAND) && l_IssueCommand) {
                         d_GameMap.setGamePhase(d_MapEditorPhase);
                         return d_MapEditorPhase;
                     }
@@ -100,8 +132,8 @@ public class IssueOrderController implements GameFlowManager {
                 if (!d_Commands.equals(Constants.PASS_COMMAND)) {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
-                    d_Logger.log("The order has been added to the list of orders.");
-                    d_Logger.log("=============================================================================");
+                    d_Logger.log(Constants.All_ORDERS_ADDED);
+                    d_Logger.log(Constants.EQUAL_SEPERATER);
                 }
             }
             d_GameMap.setGameLoaded(false);
@@ -113,49 +145,51 @@ public class IssueOrderController implements GameFlowManager {
 
     /**
      * A static function to validate the deploy command
+     * It will check all the commands validation
+     * as a first entry point validation for Issue Order
      *
      * @param p_CommandArr The string entered by the user
      * @param p_Player     the player object
      * @return true if the command is correct else false
      */
-    public boolean validateCommand(String p_CommandArr, Player p_Player) {
+    public boolean validateIssueOrderCommands(String p_CommandArr, Player p_Player) {
         List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, "savegame");
         String[] l_CommandArr = p_CommandArr.split(" ");
         if (p_CommandArr.toLowerCase().contains("pass")) {
-            AddToSetOfPlayers(p_Player);
+            addToSetOfPlayers(p_Player);
             return false;
         }
         if (!l_Commands.contains(l_CommandArr[0].toLowerCase())) {
-            d_Logger.log("The command syntax is invalid." + p_CommandArr);
+            d_Logger.log(Constants.THE_COMMAND_SYNTAX_IS_INVALID + p_CommandArr);
             return false;
         }
-        if (!CheckLengthOfCommand(l_CommandArr[0], l_CommandArr.length)) {
-            d_Logger.log("The command syntax is invalid." + p_CommandArr);
+        if (!checkLengthOfIssueOrderCommand(l_CommandArr[0], l_CommandArr.length)) {
+            d_Logger.log(Constants.THE_COMMAND_SYNTAX_IS_INVALID + p_CommandArr);
             return false;
         }
         switch (l_CommandArr[0].toLowerCase()) {
-            case "deploy":
+            case Constants.DEPLOY_COMMAND:
                 try {
                     Integer.parseInt(l_CommandArr[2]);
                 } catch (NumberFormatException l_Exception) {
-                    d_Logger.log("The number format is invalid");
+                    d_Logger.log(Constants.THE_NUMBER_FORMAT_IS_INVALID);
                     return false;
                 }
-                if(Integer.parseInt(l_CommandArr[2]) < 0){
-                    d_Logger.log("The number format is invalid");
+                if (Integer.parseInt(l_CommandArr[2]) < 0) {
+                    d_Logger.log(Constants.THE_NUMBER_FORMAT_IS_INVALID);
                     return false;
                 }
                 break;
-            case "advance":
+            case Constants.ADVANCE_COMMAND:
                 try {
                     Integer.parseInt(l_CommandArr[3]);
                 } catch (NumberFormatException l_Exception) {
-                    d_Logger.log("The number format is invalid");
+                    d_Logger.log(Constants.THE_NUMBER_FORMAT_IS_INVALID);
                     return false;
                 }
                 break;
-            case "savegame":
-                System.out.println("Are you sure you want to save the file? Enter Yes/No.");
+            case Constants.SAVEGAME_COMMAND:
+                d_Logger.log("Are you sure you want to save the file? Enter Yes/No.");
                 String l_Input = new Scanner(System.in).nextLine();
                 if (l_Input.equalsIgnoreCase("Yes")) {
                     GameProgress.SaveGameProgress(d_GameMap, l_CommandArr[1]);
@@ -166,43 +200,16 @@ public class IssueOrderController implements GameFlowManager {
                 }
             default:
                 break;
-
         }
         return true;
     }
 
     /**
-     * A function to map the players and their status for the issuing of the order
+     * A function to show the player the status while issuing the order.
      *
-     * @param p_Player The player who has skipped his iteration for the issuing
+     * @param p_Player The current player object.
      */
-    private static void AddToSetOfPlayers(Player p_Player) {
-        d_SkippedPlayers.add(p_Player);
-    }
-
-    /**
-     * A function to check the length of each command
-     *
-     * @param p_Command the command to be validated
-     * @return true if length is correct else false
-     */
-    private static boolean CheckLengthOfCommand(String p_Command, int p_Length) {
-        if (p_Command.contains(Constants.DEPLOY_COMMAND)) {
-            return p_Length == 3;
-        } else if (p_Command.contains(Constants.BOMB_COMMAND) || p_Command.contains(Constants.BLOCKADE_COMMAND) || p_Command.contains(Constants.NEGOTIATE_COMMAND) || p_Command.contains("savegame")) {
-            return (p_Length == 2);
-        } else if (p_Command.contains(Constants.AIRLIFT_COMMAND) || p_Command.contains(Constants.ADVANCE_COMMAND)) {
-            return (p_Length == 4);
-        }
-        return false;
-    }
-
-    /**
-     * A function to show the player the status while issuing the order
-     *
-     * @param p_Player The current player object
-     */
-    public void showStatus(Player p_Player) {
+    public void showPlayerStatusAndCommands(Player p_Player) {
         d_Logger.log("-----------------------------------------------------------------------------------------");
         d_Logger.log("List of game loop commands");
         d_Logger.log("To deploy the armies : deploy countryID numarmies");
@@ -220,7 +227,7 @@ public class IssueOrderController implements GameFlowManager {
         System.out.format(l_Table, p_Player.getName(), p_Player.getReinforcementArmies(), p_Player.getIssuedArmies());
         System.out.format("+--------------+-----------------------+------------------+%n");
 
-        d_Logger.log("The countries assigned to the player are: ");
+        d_Logger.log(Constants.ASSIGNED_COUNTRIES);
         System.out.format("+--------------+-----------------------+------------------+---------+%n");
 
         System.out.format(
@@ -237,8 +244,8 @@ public class IssueOrderController implements GameFlowManager {
         }
         System.out.format("+--------------+-----------------------+------------------+---------+\n");
 
+        d_Logger.log(Constants.CARDS_OF_PLAYER);
         if (!p_Player.getPlayerCards().isEmpty()) {
-            d_Logger.log("The Cards assigned to the Player are: ");
             for (Card l_Card : p_Player.getPlayerCards()) {
                 d_Logger.log(l_Card.getCardType().toString());
             }

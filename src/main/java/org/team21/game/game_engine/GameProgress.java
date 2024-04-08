@@ -1,8 +1,8 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.models.map.GameMap;
-import org.team21.game.utils.validation.ValidationException;
 import org.team21.game.utils.logger.GameEventLogger;
+import org.team21.game.utils.validation.ValidationException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -10,9 +10,10 @@ import java.nio.file.Path;
 
 
 /**
- *  A class to save and load game progress
- *  @version 1.0.0
+ * A class to save and load game progress
+ *
  * @author Tejasvi
+ * @version 1.0.0
  */
 public class GameProgress {
     /**
@@ -28,10 +29,10 @@ public class GameProgress {
      * A function to save the game progress
      *
      * @param p_GameMap instance of the game
-     * @param p_Name file name
+     * @param p_Name    file name
      * @return true is successful else false
      */
-    public static boolean SaveGameProgress(GameMap p_GameMap, String p_Name){
+    public static boolean SaveGameProgress(GameMap p_GameMap, String p_Name) {
         try {
             FileOutputStream l_Fs = new FileOutputStream(PATH + p_Name + ".bin");
             ObjectOutputStream l_Os = new ObjectOutputStream(l_Fs);
@@ -41,7 +42,7 @@ public class GameProgress {
             l_Fs.close();
             p_GameMap.flushGameMap();
             return true;
-        } catch(Exception p_Exception) {
+        } catch (Exception p_Exception) {
             d_Logger.log(p_Exception.toString());
             return false;
         }
@@ -53,7 +54,7 @@ public class GameProgress {
      * @param p_Filename the file name string
      * @return Gamephase instance
      */
-    public static GamePhase LoadGameProgress(String p_Filename){
+    public static GamePhase LoadGameProgress(String p_Filename) {
         FileInputStream l_Fs;
         GameMap l_LoadedGameMap;
         try {

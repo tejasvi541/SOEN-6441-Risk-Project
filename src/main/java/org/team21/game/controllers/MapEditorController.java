@@ -1,13 +1,13 @@
 package org.team21.game.controllers;
 
+import org.team21.game.game_engine.GamePhase;
 import org.team21.game.interfaces.game.GameFlowManager;
 import org.team21.game.models.map.GameMap;
-import org.team21.game.game_engine.GamePhase;
 import org.team21.game.models.map.MapReader;
 import org.team21.game.utils.Constants;
+import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.MapValidation;
 import org.team21.game.utils.validation.ValidationException;
-import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * This class is used to create map using game console commands.
+ *
  * @author Tejasvi
  * @author Bharti Chhabra
  * @version 1.0.0
@@ -25,11 +26,11 @@ public class MapEditorController implements GameFlowManager {
     /**
      * A data member for scanner
      */
-    private final Scanner SCANNER = new Scanner(System.in);
+    private final Scanner d_SCANNER = new Scanner(System.in);
     /**
      * A data member that stores the list of commands for mapeditor as list
      */
-    private final List<String> CLI_COMMANDS = Arrays.asList(Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR, Constants.SHOW_MAP, Constants.SAVE_MAP, Constants.EDIT_MAP, Constants.VALIDATE_MAP);
+    private final List<String> d_CLI_COMMANDS = Arrays.asList(Constants.EDIT_CONTINENT, Constants.EDIT_COUNTRY, Constants.EDIT_NEIGHBOUR, Constants.SHOW_MAP, Constants.SAVE_MAP, Constants.EDIT_MAP, Constants.VALIDATE_MAP);
     GameMap d_GameMap;
     GamePhase d_NextState = GamePhase.StartUp;
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
@@ -49,13 +50,13 @@ public class MapEditorController implements GameFlowManager {
      * @throws ValidationException when validation fails
      */
     @Override
-    public GamePhase start(GamePhase p_GamePhase) throws ValidationException, IOException {
+    public GamePhase startPhase(GamePhase p_GamePhase) throws ValidationException, IOException {
         d_Logger.clear();
-        d_Logger.log("/************************************ You are in MAP EDITOR PHASE *******************************/");
+        d_Logger.log(Constants.WELCOME_MESSAGE_MAP_EDITOR);
         while (true) {
             d_Logger.log("Enter your map operation:" + "\n" + "1. Enter help to view the set of commands" + "\n" + "2. Enter exit to end map creation and save phase");
             d_Logger.log("-----------------------------------------------------------------------------------------");
-            String l_Input = SCANNER.nextLine();
+            String l_Input = d_SCANNER.nextLine();
             List<String> l_InputList;
             if (l_Input.contains("-")) {
                 l_InputList = Arrays.stream(l_Input.split("-"))
@@ -73,7 +74,7 @@ public class MapEditorController implements GameFlowManager {
                     l_InputList.clear();
                     // if not available in command list forcing to call help
                     l_InputList.add(Constants.HELP);
-                    l_InputList.add("dummy");
+                    l_InputList.add(Constants.DUMMY);
                 }
             }
 
@@ -116,7 +117,7 @@ public class MapEditorController implements GameFlowManager {
 
                     case Constants.EDIT_COUNTRY: {
                         switch (l_CommandArray[0]) {
-                            case "add": {
+                            case Constants.SIMPLE_ADD: {
                                 if (l_CommandArray.length == 3) {
                                     d_GameMap.addCountry(l_CommandArray[1], l_CommandArray[2]);
                                 } else {
@@ -142,7 +143,7 @@ public class MapEditorController implements GameFlowManager {
 
                     case Constants.EDIT_NEIGHBOUR: {
                         switch (l_CommandArray[0]) {
-                            case "add": {
+                            case Constants.SIMPLE_ADD: {
                                 if (l_CommandArray.length == 3) {
                                     d_GameMap.addNeighbor(l_CommandArray[1], l_CommandArray[2]);
                                 } else {
@@ -187,15 +188,13 @@ public class MapEditorController implements GameFlowManager {
                             d_Logger.log("1. Domination map \n2. Conquest map");
                             Scanner l_Scanner = new Scanner(System.in);
                             String l_UserInput = l_Scanner.nextLine();
-                            if (l_UserInput.equals("1")){
+                            if (l_UserInput.equals("1")) {
                                 d_GameMap.saveMap(false);
                                 d_Logger.log("The loaded file is of the format Domination map");
-                            }
-                            else if (l_UserInput.equals("2")) {
+                            } else if (l_UserInput.equals("2")) {
                                 d_GameMap.saveMap(true);
                                 d_Logger.log("The loaded file is of the format Conquest map");
-                            }
-                            else
+                            } else
                                 d_Logger.log("Please enter the right value");
 
                         }
@@ -253,7 +252,7 @@ public class MapEditorController implements GameFlowManager {
             if (p_InputList.size() == 1) {
                 p_InputList.add("dummy");
             }
-            return CLI_COMMANDS.contains(l_MainCommand.toLowerCase());
+            return d_CLI_COMMANDS.contains(l_MainCommand.toLowerCase());
         }
         return false;
     }

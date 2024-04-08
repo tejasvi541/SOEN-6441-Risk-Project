@@ -9,21 +9,25 @@ import org.team21.game.utils.logger.GameEventLogger;
 import java.io.Serializable;
 
 /**
- * The class is a extended from Order, and overrides the methods from Order
+ * Represents a Negotiate order, which allows a player to negotiate with another player.
+ * This order is executed using a Negotiate card during the player's turn.
+ *
  * @author Nishith Soni
+ * @version 1.0.0
  */
 public class NegotiateOrder extends Order implements Serializable {
+
     /**
-     * A gamemap object
+     * Instance of GameMap to access game information.
      */
     private final GameMap d_GameMap;
     /**
-     * Logger variable
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor for class Negotiate Order
+     * Constructs a NegotiateOrder object and sets its type to "negotiate".
      */
     public NegotiateOrder() {
         super();
@@ -32,9 +36,10 @@ public class NegotiateOrder extends Order implements Serializable {
     }
 
     /**
-     * execute the Negotiate Order
+     * Executes the NegotiateOrder command.
+     * Initiates a negotiation between the player and a neutral player.
      *
-     * @return true if the execute was successful else false
+     * @return true if the execution was successful, false otherwise.
      */
     @Override
     public boolean execute() {
@@ -52,9 +57,10 @@ public class NegotiateOrder extends Order implements Serializable {
     }
 
     /**
-     * Validate the command
+     * Validates the NegotiateOrder command.
+     * Checks if the command is valid based on the player's possession of the Diplomacy card and the existence of the neutral player.
      *
-     * @return true if successful or else false
+     * @return true if the command can be executed, false otherwise.
      */
     @Override
     public boolean validateCommand() {
@@ -62,8 +68,8 @@ public class NegotiateOrder extends Order implements Serializable {
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
         //check if the player has the card
         if (!l_Player.checkIfCardAvailable(CardType.DIPLOMACY)) {
-            System.err.println("Player doesn't have the card to be used.");
-            d_Logger.log("Player doesn't have the card to be used.");
+            System.err.println(Constants.NO_NEGOTIATE_CARD);
+            d_Logger.log(Constants.NO_NEGOTIATE_CARD);
             return false;
         }
         //check if player is valid
@@ -75,15 +81,16 @@ public class NegotiateOrder extends Order implements Serializable {
         // check if the player exists
         d_Logger.log("player exists:" + d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName()));
         if (!d_GameMap.getPlayers().containsKey(l_NeutralPlayer.getName())) {
-            System.err.println("The Player name doesn't exist.");
-            d_Logger.log("The Player name doesn't exist.");
+            System.err.println(Constants.NONEXISTENT_PLAYER);
+            d_Logger.log(Constants.NONEXISTENT_PLAYER);
             return false;
         }
         return true;
     }
 
     /**
-     * Print the command
+     * Prints the NegotiateOrder command.
+     * Logs the order information including the negotiated neutral player.
      */
     @Override
     public void printOrderCommand() {

@@ -1,6 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.interfaces.game.Engine;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameConsoleWriter;
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.logger.GameLogFileWriter;
@@ -39,6 +40,7 @@ public class Game {
      * @throws Exception if it occurs
      */
     public static void main(String[] args) throws Exception {
+        System.out.println(Constants.WELCOME_MESSAGE);
         new Game().start();
     }
 
@@ -49,10 +51,6 @@ public class Game {
      */
     public void start() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log("");
-        d_Logger.log("==================================");
-        d_Logger.log("\t\t\t Warzone");
-        d_Logger.log("==================================");
         d_Logger.log("\t\t\t Main Menu");
         d_Logger.log("\t=======================");
         d_Logger.log("\t\t 1. New Game");
@@ -80,7 +78,7 @@ public class Game {
                     break;
                 }
                 case 4: {
-                    d_Engine = new TournamentEngine();
+                    d_Engine = new TournamentGameEngine();
                     break;
                 }
                 case 5: {
@@ -92,10 +90,10 @@ public class Game {
                 }
             }
         } catch (Exception p_Exception) {
-            d_Logger.log("\nPlease choose the correct option number");
+            d_Logger.log("\n"+ Constants.INVALID_COMMAND);
             start();
         }
         d_Engine.setGamePhase(d_GamePhase);
-        d_Engine.start();
+        d_Engine.startEngine();
     }
 }

@@ -80,7 +80,7 @@ public class ReinforcementTest extends Player {
      */
     @Test
     public void testStartShouldReturnNextPhase() throws ValidationException, InvalidExecutionException {
-        GamePhase nextPhase = d_reinforcement.start(GamePhase.Reinforcement);
+        GamePhase nextPhase = d_reinforcement.startPhase(GamePhase.Reinforcement);
         assertEquals(d_nextGamePhase, nextPhase);
     }
 

@@ -2,6 +2,7 @@ package org.team21.game.utils.validation;
 
 /**
  * This class manages invalid execution of commands in the game stage
+ *
  * @author Meet Boghani
  */
 public class InvalidExecutionException extends Exception {
@@ -18,7 +19,8 @@ public class InvalidExecutionException extends Exception {
     }
 
     /**
-     *Exception Message
+     * Exception Message
+     *
      * @param p_Message exception message
      */
     public InvalidExecutionException(String p_Message) {
@@ -27,6 +29,7 @@ public class InvalidExecutionException extends Exception {
 
     /**
      * Get the message and check for exception
+     *
      * @return message
      */
     @Override
