@@ -153,7 +153,7 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if the command is correct else false
      */
     public boolean validateIssueOrderCommands(String p_CommandArr, Player p_Player) {
-        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, "savegame");
+        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, Constants.SAVEGAME_COMMAND);
         String[] l_CommandArr = p_CommandArr.split(" ");
         if (p_CommandArr.toLowerCase().contains("pass")) {
             addToSetOfPlayers(p_Player);
