@@ -17,30 +17,34 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * Random Strategy class, taking random commands for tournament mode.
+ * Random Strategy class, implementing a strategy where commands are chosen randomly.
+ * This strategy is intended for use in tournament mode.
+ * It randomly selects commands such as deploying armies, advancing, or playing cards.
+ *
  * @author Tejasvi
  * @author Kapil Soni
  * @version 1.0.0
  */
 public class RandomStrategy extends PlayerStrategy implements Serializable {
+
     /**
-     * Random variable
+     * Random number generator instance.
      */
     private static final Random d_Random = new Random();
     /**
-     * GameMap instance
+     * Instance of the game map.
      */
     private static GameMap d_GameMap;
     /**
-     * Logger Observable
+     * Instance of the logger for recording game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Get a random player other than itself
+     * Retrieves a random player other than itself.
      *
-     * @param d_Player current player
-     * @return Random Player
+     * @param d_Player The current player.
+     * @return Random Player object.
      */
     protected Player getRandomPlayer(Player d_Player) {
         List<Country> l_Enemies = d_Player.getCapturedCountries().stream()
@@ -55,10 +59,10 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Get Random Country not belonging to the player
+     * Retrieves a random unconquered country not belonging to the player.
      *
-     * @param p_Player current player
-     * @return Random country
+     * @param p_Player The current player.
+     * @return Random unconquered country.
      */
     protected Country getRandomUnconqueredCountry(Player p_Player) {
         Country l_RandomCountry = null;
@@ -74,10 +78,10 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Random country belonging to the player
+     * Retrieves a random conquered country belonging to the player.
      *
-     * @param p_Player current player
-     * @return random country
+     * @param p_Player The current player.
+     * @return Random conquered country.
      */
     protected Country getRandomConqueredCountry(Player p_Player) {
         if (p_Player.getCapturedCountries().size() > 0) {
@@ -88,10 +92,10 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Get the random neighbor of the country
+     * Retrieves a random neighbor of the specified country.
      *
-     * @param p_CurrentCountry current country
-     * @return random neighbor
+     * @param p_CurrentCountry The current country.
+     * @return Random neighbor country.
      */
     protected Country getRandomNeighbor(Country p_CurrentCountry) {
         if (Objects.isNull(p_CurrentCountry) || p_CurrentCountry.getNeighbors().size() == 0) {
@@ -102,9 +106,9 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Create the orders in random fashion
+     * Creates orders randomly based on predefined probabilities.
      *
-     * @return command, the orders on creation
+     * @return Command representing the orders.
      */
     public String createCommand() {
         d_GameMap = GameMap.getInstance();
@@ -168,6 +172,13 @@ public class RandomStrategy extends PlayerStrategy implements Serializable {
         return "";
     }
 
+    /**
+     * Executes an attack based on the given card.
+     *
+     * @param l_Card The card representing the type of attack.
+     * @param l_RandomCountry The country where the attack is initiated.
+     * @return True if the attack is successfully executed, false otherwise.
+     */
     private boolean cardAttack(Card l_Card, Country l_RandomCountry) {
         switch (l_Card.getCardType()) {
             case BLOCKADE:
