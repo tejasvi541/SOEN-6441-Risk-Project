@@ -48,7 +48,11 @@ public class TournamentGameEngine implements Engine {
         init();
     }
 
-    public TournamentEngine(boolean test) {
+
+    /**
+     * parameterised constructor
+     */
+    public  TournamentGameEngine(boolean test) {
         d_Logger = GameEventLogger.getInstance();
     }
 

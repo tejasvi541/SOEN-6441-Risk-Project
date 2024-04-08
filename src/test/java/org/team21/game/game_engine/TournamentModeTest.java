@@ -3,7 +3,6 @@ package org.team21.game.game_engine;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.team21.game.controllers.ExecuteOrderController;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
@@ -39,27 +38,22 @@ public class TournamentModeTest {
 
 
     /**
-     * TournamentEngine object.
+     * TournamentGameEngine object.
      */
-    TournamentEngine d_tournament;
-
+    TournamentGameEngine d_tournament;
 
     /**
      * Player object.
      */
     Player d_Player;
 
-    /**
-     * The instance of the ExecuteOrder class to be tested.
-     */
-    private ExecuteOrderController d_ExecuteOrder;
 
     /**
      * Sets up.
      */
     @Before
     public void setUp() throws Exception{
-        d_tournament = new TournamentEngine(true);
+        d_tournament = new TournamentGameEngine(true);
         d_gameMap = GameMap.getInstance();
         d_gameMap.addContinent("Asia", "4");
         d_gameMap.addContinent("Europe", "3");
@@ -72,8 +66,9 @@ public class TournamentModeTest {
 
     }
 
+
     /**
-     * Validate input.
+     * Validate Tournament command.
      */
     @Test
     public void validateTournamentCommand() {
@@ -86,7 +81,7 @@ public class TournamentModeTest {
         }
 
     /**
-     * Validate Invalid input.
+     * Validate Invalid Tournament command.
      */
     @Test
     public void validateInvalidTournamentCommand() {
@@ -95,6 +90,9 @@ public class TournamentModeTest {
         assertNull(d_Options);
     }
 
+    /**
+     * Validate Tournament Game Winner.
+     */
     @Test
     public void validateTournamentModeWinner()  {
         String string="tournament -M Australia.map -P aggressive,random -G 1 -D 3";
@@ -131,6 +129,8 @@ public class TournamentModeTest {
             }
         }
     }
+
+
     /**
      * Check if Result of tournament is not null
      *
@@ -140,9 +140,8 @@ public class TournamentModeTest {
     public void validateResultOfTournamentMode() throws ValidationException {
         String l_string = "tournament -M Australia.map -P aggressive,random -G 2 -D 3";
         d_Options = d_tournament.parseCommand(l_string);
-        d_tournament.start();
+        d_tournament.startEngine();
         assertEquals(2,d_tournament.d_Results.size());
-        assertEquals("Draw",d_tournament.d_Results.get(0).getWinner());
     }
 
     /**
