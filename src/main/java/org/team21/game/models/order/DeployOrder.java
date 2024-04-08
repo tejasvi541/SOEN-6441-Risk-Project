@@ -7,18 +7,21 @@ import org.team21.game.utils.logger.GameEventLogger;
 import java.io.Serializable;
 
 /**
- * Class DeployOrder which is a child of Order, used to execute the orders
+ * Represents a Deploy order, used to deploy armies from a player's reinforcement pool to a country.
+ * This order is executed during the reinforcement phase of a player's turn.
+ *
  * @author Meet Boghani
  * @version 1.0.0
  */
 public class DeployOrder extends Order implements Serializable {
+
     /**
-     * Logger Observable
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor for class DeployOrder
+     * Constructs a DeployOrder object and sets its type to "deploy".
      */
     public DeployOrder() {
         super();
@@ -26,9 +29,10 @@ public class DeployOrder extends Order implements Serializable {
     }
 
     /**
-     * Overriding the execute function for the order type deploy
+     * Executes the DeployOrder command.
+     * Deploys the specified number of armies from the player's reinforcement pool to the destination country.
      *
-     * @return true if the execution was successful else return false
+     * @return true if the execution was successful, false otherwise.
      */
     public boolean execute() {
         Country l_Destination = getOrderInfo().getDestination();
@@ -42,9 +46,10 @@ public class DeployOrder extends Order implements Serializable {
     }
 
     /**
-     * A function to validate the commands
+     * Validates the DeployOrder command.
+     * Checks if the command is valid based on player, destination country, and available reinforcement armies.
      *
-     * @return true if command can be executed else false
+     * @return true if the command can be executed, false otherwise.
      */
     public boolean validateCommand() {
         Player l_Player = getOrderInfo().getPlayer();
@@ -66,7 +71,8 @@ public class DeployOrder extends Order implements Serializable {
     }
 
     /**
-     * A function to print the order on completion
+     * Prints the DeployOrder command.
+     * Logs the order information including the number of armies deployed and the destination country.
      */
     public void printOrderCommand() {
         d_Logger.log("Deployed " + getOrderInfo().getNumberOfArmy() + " armies to " + getOrderInfo().getDestination().getName() + ".");
