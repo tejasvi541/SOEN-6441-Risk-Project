@@ -210,7 +210,7 @@ public class IssueOrderController implements GameFlowManager {
      * @param p_Player The current player object.
      */
     public void showPlayerStatusAndCommands(Player p_Player) {
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log("List of game loop commands");
         d_Logger.log("To deploy the armies : deploy countryID numarmies");
         d_Logger.log("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
@@ -219,13 +219,13 @@ public class IssueOrderController implements GameFlowManager {
         d_Logger.log("To negotiate with player : negotiate playerID");
         d_Logger.log("To bomb the country : bomb countryID");
         d_Logger.log("To skip: pass");
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_Table = "|%-15s|%-19s|%-22s|%n";
-        System.out.format("+--------------+-----------------------+------------------+%n");
+        System.out.format("+===============+======================+=====================+%n");
         System.out.format("| Current Player   | Initial Assigned  | Left Armies      | %n");
-        System.out.format("+---------------+------------------  +---------------------+%n");
+        System.out.format("+===============+======================+=====================+%n");
         System.out.format(l_Table, p_Player.getName(), p_Player.getReinforcementArmies(), p_Player.getIssuedArmies());
-        System.out.format("+--------------+-----------------------+------------------+%n");
+        System.out.format("+===============+=======================+===================+%n");
 
         d_Logger.log(Constants.ASSIGNED_COUNTRIES);
         System.out.format("+--------------+-----------------------+------------------+---------+%n");

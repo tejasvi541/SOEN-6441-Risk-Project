@@ -75,11 +75,11 @@ public class TournamentGameEngine implements Engine {
     //tournament -M Australia.map,newmap.map -P aggressive,random -G 2 -D 3
     public TournamentOptions getTournamentOptions() {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log(Constants.SEPARATOR);
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log("You are in Tournament Mode");
         d_Logger.log("Enter the tournament command:");
         d_Logger.log("Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns");
-        d_Logger.log(Constants.SEPARATOR);
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_TournamentCommand = l_Scanner.nextLine();
         d_Options = parseCommand(l_TournamentCommand);
         if (Objects.isNull(d_Options)) {

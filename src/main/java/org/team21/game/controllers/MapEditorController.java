@@ -55,7 +55,7 @@ public class MapEditorController implements GameFlowManager {
         d_Logger.log(Constants.WELCOME_MESSAGE_MAP_EDITOR);
         while (true) {
             d_Logger.log("Enter your map operation:" + "\n" + "1. Enter help to view the set of commands" + "\n" + "2. Enter exit to end map creation and save phase");
-            d_Logger.log("-----------------------------------------------------------------------------------------");
+            d_Logger.log(Constants.EQUAL_SEPARATOR);
             String l_Input = d_SCANNER.nextLine();
             List<String> l_InputList;
             if (l_Input.contains("-")) {
@@ -223,15 +223,15 @@ public class MapEditorController implements GameFlowManager {
                         d_Logger.log("To add or remove a continent : editcontinent -add continentID continentvalue -remove continentID");
                         d_Logger.log("To add or remove a country : editcountry -add countryID continentID -remove countryID");
                         d_Logger.log("To add or remove a neighbor to a country : editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID");
-                        d_Logger.log("-----------------------------------------------------------------------------------------");
+                        d_Logger.log(Constants.EQUAL_SEPARATOR);
                         d_Logger.log("Map Commands(Edit/Save)");
                         d_Logger.log("To edit map: editmap filename");
                         d_Logger.log("To save map: savemap filename");
-                        d_Logger.log("-----------------------------------------------------------------------------------------");
+                        d_Logger.log(Constants.EQUAL_SEPARATOR);
                         d_Logger.log("Additional map commands:");
                         d_Logger.log("To show the map: showmap");
                         d_Logger.log("To validate map: validatemap");
-                        d_Logger.log("-----------------------------------------------------------------------------------------");
+                        d_Logger.log(Constants.EQUAL_SEPARATOR);
 
                     }
                 }

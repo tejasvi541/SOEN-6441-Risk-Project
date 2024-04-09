@@ -486,9 +486,9 @@ public class GameMap implements Serializable {
 
         String l_Table = "|%-18s|%n";
 
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
         System.out.format("| Continent's name |%n");
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
 
         while (l_IteratorForContinents.hasNext()) {
             Map.Entry<String, Continent> continentMap = l_IteratorForContinents.next();
@@ -497,7 +497,7 @@ public class GameMap implements Serializable {
 
             System.out.format(l_Table, l_Continent.getName());
         }
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
 
 
         // Showing Countries in the Continent and their details
@@ -509,11 +509,11 @@ public class GameMap implements Serializable {
         l_Table = "|%-23s|%-18s|%-60s|%n";
 
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+---------------+-%n");
+                "|===========|=================|==============|======================|===========|-%n");
         System.out.format(
                 "     Country's name     | Continent's Name |   Neighbour Countries                                      |%n");
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+----------------+%n");
+                "|===========|=================|==============|======================|============|%n");
 
 
         while (l_IteratorForContinent.hasNext()) {
@@ -530,7 +530,7 @@ public class GameMap implements Serializable {
         }
 
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+----------------+%n");
+                "|===========|=================|==============|======================|============|%n");
 
 
         HashMap<String, Player> l_Players = d_GameMap.getPlayers();
@@ -544,9 +544,9 @@ public class GameMap implements Serializable {
         d_Logger.log("The Map ownership of the players are : ");
 
 
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
         System.out.format("| Player's name |    Continent's Controlled    |%n");
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
 
         String l_Table1 = "|%-15s|%-30s|%n";
 
@@ -555,7 +555,7 @@ public class GameMap implements Serializable {
             System.out.format(l_Table1, l_Player.getName(), l_Player.createACaptureList(l_Player.getCapturedCountries()), l_Player.getReinforcementArmies());
         }
 
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
 
     }
 
