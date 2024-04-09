@@ -277,7 +277,7 @@ public class Player implements Serializable {
      * Issues an order for the player.
      */
     public void issueOrder() {
-        Order l_Order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), this);
+        Order l_Order = OrderOwner.createOrder(IssueOrderController.d_Commands.split(" "), this);
         addOrder(l_Order);
     }
 

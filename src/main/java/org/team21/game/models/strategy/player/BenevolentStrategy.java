@@ -85,7 +85,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
         l_Commands.add(2, String.valueOf((l_ArmiesReinforce)));
         l_CommandsArr = l_Commands.toArray(new String[0]);
         l_Order = new DeployOrder();
-        l_Order.setOrderInfo(OrderOwner.GenerateDeployOrderInfo(l_CommandsArr, d_Player));
+        l_Order.setOrderInfo(OrderOwner.generateDeployOrderInfo(l_CommandsArr, d_Player));
         IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
         d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
         d_Player.issueOrder();
@@ -101,7 +101,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                         l_Commands.add(1, l_RandomPlayer.getName());
                         l_CommandsArr = l_Commands.toArray(new String[0]);
                         l_Order = new NegotiateOrder();
-                        l_Order.setOrderInfo(OrderOwner.GenerateNegotiateOrderInfo(l_CommandsArr, d_Player));
+                        l_Order.setOrderInfo(OrderOwner.generateNegotiateOrderInfo(l_CommandsArr, d_Player));
                         IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                         d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                         d_Player.issueOrder();
@@ -121,7 +121,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(3, String.valueOf(l_Country.getArmies()));
                 l_CommandsArr = l_Commands.toArray(new String[0]);
                 l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+                l_Order.setOrderInfo(OrderOwner.generateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
                 IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                 d_Player.issueOrder();
                 d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
