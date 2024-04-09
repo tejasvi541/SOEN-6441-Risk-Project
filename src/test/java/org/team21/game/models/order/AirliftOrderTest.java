@@ -71,7 +71,7 @@ public class AirliftOrderTest {
         l_player.addPlayerCard(new Card(CardType.AIRLIFT));
         d_countryList1.get(0).setArmies(100);
         IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList1.get(1).getName()+ " "+ 10;
-        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), l_player);
+        Order l_order1 = OrderOwner.createOrder(IssueOrderController.d_Commands.split(" "), l_player);
         l_player.addOrder(l_order1);
         assertTrue(l_player.nextOrder().execute());
     }
@@ -87,7 +87,7 @@ public class AirliftOrderTest {
         d_countryList1.get(0).setArmies(100);
         System.out.println("Source: "+ d_countryList1.get(0).getArmies());
         IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList1.get(1).getName()+ " "+ 10;
-        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player);
+        Order l_order1 = OrderOwner.createOrder(IssueOrderController.d_Commands.split(" "), player);
         player.addOrder(l_order1);
         assertTrue(player.nextOrder().validateCommand());
     }
@@ -102,7 +102,7 @@ public class AirliftOrderTest {
         Player player1 = d_gameMap.getPlayer("Player1");
         player1.addPlayerCard(new Card(CardType.AIRLIFT));
         IssueOrderController.d_Commands = "airlift " + d_countryList1.get(0).getName() + " " + d_countryList2.get(1).getName()+" "+2;
-        Order l_order1 = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), player1);
+        Order l_order1 = OrderOwner.createOrder(IssueOrderController.d_Commands.split(" "), player1);
         player1.addOrder(l_order1);
         assertFalse(player1.nextOrder().validateCommand());
     }

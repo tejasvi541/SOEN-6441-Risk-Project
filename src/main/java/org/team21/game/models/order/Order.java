@@ -3,72 +3,80 @@ package org.team21.game.models.order;
 import java.io.Serializable;
 
 /**
- * Concrete Class to manage the orders of the players
+ * Represents a concrete class to manage player orders.
+ * This class serves as the base class for specific order types.
+ * It contains methods to set and retrieve order information, get and set order type,
+ * execute orders, validate commands, and print executed commands.
+ *
  * @author Kapil Soni
  * @version 1.0.0
  */
 public abstract class Order implements Serializable {
+
     /**
-     * A data member to strore the order type
+     * The type of the order.
      */
     private String d_Type;
     /**
-     * An object of OrderInfo
+     * The information related to the order.
      */
     private OrderInformation d_OrderInformation;
 
     /**
-     * A function to get order information
+     * Retrieves the order information.
      *
-     * @return the order information in an object
+     * @return the order information object.
      */
     public OrderInformation getOrderInfo() {
         return d_OrderInformation;
     }
 
     /**
-     * A function to the set Order information based on the order
+     * Sets the order information.
      *
-     * @param p_OrderInformation Order Information contained in an object of type OrderInfo
+     * @param p_OrderInformation the order information to set.
      */
     public void setOrderInfo(OrderInformation p_OrderInformation) {
         this.d_OrderInformation = p_OrderInformation;
     }
 
     /**
-     * A function to return the type of order
+     * Retrieves the type of the order.
      *
-     * @return String which indicates the type of order
+     * @return the type of the order.
      */
     public String getType() {
         return d_Type;
     }
 
     /**
-     * A function to set the type of order
+     * Sets the type of the order.
      *
-     * @param p_Type String which indicates the type of order
+     * @param p_Type the type of the order to set.
      */
     public void setType(String p_Type) {
         this.d_Type = p_Type;
     }
 
     /**
-     * A function to be overridden  by the Child class
+     * Abstract method to execute the order.
+     * Must be overridden by concrete order classes.
      *
-     * @return false as there is not order to be executed
+     * @return true if the execution was successful, false otherwise.
      */
     public abstract boolean execute();
 
     /**
-     * A function to validate each command.
+     * Abstract method to execute the order.
+     * Must be overridden by concrete order classes.
      *
-     * @return true if command is valid else false
+     * @return true if the execution was successful, false otherwise.
      */
     public abstract boolean validateCommand();
 
     /**
-     * Print the command that is executed successfully
+     * Abstract method to print the executed command.
+     * Must be overridden by concrete order classes.
      */
     public abstract void printOrderCommand();
 

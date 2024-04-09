@@ -15,73 +15,77 @@ import java.util.stream.Collectors;
 
 
 /**
- * Concrete Class to set and get all the properties of the GameMap.
+ * Concrete class representing the game map. It stores information about continents, countries, players,
+ * and game progress. This class provides methods for managing continents, countries, players, and game phases.
+ * It also offers functionalities for saving and loading maps, assigning countries to players, and displaying map details.
+ *
+ * This class follows the Singleton design pattern to ensure only one instance of the game map exists throughout the game.
+ *
  * @author Tejasvi
- * @author Bharti Chhabra
+ * @author Bharti Bharti Chhabra
  * @version 1.0.0
  */
 public class GameMap implements Serializable {
     /**
-     * Serial ID
+     * Serial version UID for serialization.
      */
     private static final long d_serialVersionUID = 45443434343L;
     /**
-     * An object of the gamemap
+     * Singleton instance of the GameMap class.
      */
     private static GameMap d_GameMap;
     /**
-     * Gamephase object
+     * The current game phase.
      */
     private GamePhase d_GamePhase;
     /**
-     * A hashmap to store the continents
+     * A HashMap to store the continents in the game map.
      */
     private HashMap<String, Continent> d_Continents = new HashMap<>();
     /**
-     * A hashmap to store the countries
+     * A HashMap to store the countries in the game map.
      */
     private HashMap<String, Country> d_Countries = new HashMap<>();
     /**
-     * A hashmap to store the players
+     * A HashMap to store the players in the game map.
      */
     private HashMap<String, Player> d_Players = new HashMap<>();
     /**
-     * A string to store the name
+     * The name of the game map.
      */
     private String d_Name;
     /**
-     * A string to store the error message
+     * Error message associated with the game map.
      */
     private String d_ErrorMessage;
 
     /**
-     * LogEntry Buffer Instance
+     * Logger instance for logging game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Winner
+     * The winner of the game.
      */
     private Player d_Winner;
 
     /**
-     * number of tries
+     * Number of tries attempted in the game.
      */
     private int d_Tries;
 
     /**
-     * Current Player
+     * The current player in the game.
      */
     private Player d_CurrentPlayer;
 
-
     /**
-     * If the game has loaded
+     * Indicates whether the game has been loaded.
      */
     private Boolean d_GameLoaded = false;
 
     /**
-     * Default Constructor
+     * Default constructor.
      */
     public GameMap() {
     }
@@ -89,7 +93,7 @@ public class GameMap implements Serializable {
     /**
      * Method to get instance of Game map class
      *
-     * @return the class object
+     * @return The instance of the GameMap class
      */
     public static GameMap getInstance() {
         if (Objects.isNull(d_GameMap)) {
@@ -99,103 +103,100 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * To get the current phase
+     * Returns the current game phase.
      *
-     * @return gamephase instance
+     * @return The current game phase
      */
     public GamePhase getGamePhase() {
         return d_GamePhase;
     }
 
     /**
-     * Set the current phase
+     * Sets the current game phase.
      *
-     * @param p_GamePhase gamephase instance
+     * @param p_GamePhase The game phase to set
      */
     public void setGamePhase(GamePhase p_GamePhase) {
         this.d_GamePhase = p_GamePhase;
     }
 
     /**
-     * Get the list of all the continents
+     * Gets the list of all continents.
      *
-     * @return d_Continents List of the continents
+     * @return The list of continents
      */
     public HashMap<String, Continent> getContinents() {
         return d_Continents;
     }
 
     /**
-     * Get a single continent
+     * Gets a single continent by its unique ID.
      *
-     * @param p_Id Unique Continent name
-     * @return the required Continent object
+     * @param p_Id The unique ID of the continent
+     * @return The required Continent object
      */
     public Continent getContinent(String p_Id) {
         return d_Continents.get(p_Id);
     }
 
-
     /**
-     * Get the list of countries
+     * Gets the list of countries.
      *
-     * @return d_Countries List of the countries
+     * @return The list of countries
      */
     public HashMap<String, Country> getCountries() {
         return d_Countries;
     }
 
-
     /**
-     * Get a single country
+     * Gets a single country by its unique ID.
      *
-     * @param p_Id Unique Country name
-     * @return the required Country object
+     * @param p_Id The unique ID of the country
+     * @return The required Country object
      */
     public Country getCountry(String p_Id) {
         return d_Countries.get(p_Id);
     }
 
-
     /**
-     * Get the list of players
+     * Gets the list of players.
      *
-     * @return d_Players List of players
+     * @return The list of players
      */
     public HashMap<String, Player> getPlayers() {
         return d_Players;
     }
 
     /**
-     * Get a single player
+     * Gets a single player by their unique ID.
      *
-     * @param p_Id Unique Player name
-     * @return the required Player object
+     * @param p_Id The unique ID of the player
+     * @return The required Player object
      */
     public Player getPlayer(String p_Id) {
         return d_Players.get(p_Id);
     }
 
     /**
-     * Method to get error message.
+     * Gets the error message.
      *
-     * @return d_ErrorMessage - the error message set up
+     * @return The error message
      */
     public String getErrorMessage() {
         return d_ErrorMessage;
     }
 
     /**
-     * Method to set the error message.
+     * Sets the error message.
      *
-     * @param p_ErrorMessage - the actual error
+     * @param p_ErrorMessage The error message to set
      */
     public void setErrorMessage(String p_ErrorMessage) {
         this.d_ErrorMessage = p_ErrorMessage;
     }
 
     /**
-     * Returns the name of the map.
+     * Gets the name of the map.
      *
      * @return The map name
      */
@@ -204,53 +205,52 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Sets the map name
+     * Sets the name of the map.
      *
-     * @param p_Name the map name
+     * @param p_Name The map name to set
      */
     public void setName(String p_Name) {
         this.d_Name = p_Name;
     }
 
     /**
-     * Get the current Player
+     * Gets the current player.
      *
-     * @return player
+     * @return The current player
      */
     public Player getCurrentPlayer() {
         return d_CurrentPlayer;
     }
 
     /**
-     * Set the current Player
+     * Sets the current player.
      *
-     * @param p_CurrentPlayer player
+     * @param p_CurrentPlayer The player to set as current
      */
     public void setCurrentPlayer(Player p_CurrentPlayer) {
         this.d_CurrentPlayer = p_CurrentPlayer;
     }
 
     /**
-     * Get the game loaded status
+     * Gets the game loaded status.
      *
-     * @return true if game is loaded
+     * @return true if the game is loaded, false otherwise
      */
     public Boolean getGameLoaded() {
         return d_GameLoaded;
     }
 
     /**
-     * set the game loaded status
+     * Sets the game loaded status.
      *
-     * @param p_GameLoaded loaded status
+     * @param p_GameLoaded The loaded status to set
      */
     public void setGameLoaded(Boolean p_GameLoaded) {
         this.d_GameLoaded = p_GameLoaded;
     }
 
     /**
-     * Method to set the Game map object back to empty after
-     * each phase.
+     * Resets the game map by clearing all its elements.
      */
     public void flushGameMap() {
         GameMap.getInstance().getContinents().clear();
@@ -259,11 +259,11 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Adds the continent to the map's continent list.
+     * Adds a continent to the map's continent list.
      *
-     * @param p_ContinentName Continent name
-     * @param p_ControlValue  Continent control value
-     * @throws ValidationException if any input or output issue
+     * @param p_ContinentName The name of the continent to add
+     * @param p_ControlValue  The control value of the continent
+     * @throws ValidationException if any input or output issue occurs
      */
     public void addContinent(String p_ContinentName, String p_ControlValue) throws ValidationException {
         if (this.getContinents().containsKey(p_ContinentName)) {
@@ -277,12 +277,11 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Adds country to the map's country list and continent's
-     * country list.
+     * Adds a country to the map's country list and to the specified continent's country list.
      *
-     * @param p_CountryName   Country name
-     * @param p_ContinentName Continent name
-     * @throws ValidationException if any input or output issue
+     * @param p_CountryName   The name of the country to add
+     * @param p_ContinentName The name of the continent to which the country belongs
+     * @throws ValidationException if any input or output issue occurs
      */
     public void addCountry(String p_CountryName, String p_ContinentName) throws ValidationException {
 
@@ -298,11 +297,10 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Removes continent from the map's continent list and its
-     * respective countries
+     * Removes a continent from the map's continent list along with its respective countries.
      *
-     * @param p_ContinentName Continent name
-     * @throws ValidationException if any input/output issue
+     * @param p_ContinentName The name of the continent to remove
+     * @throws ValidationException if any input/output issue occurs
      */
     public void removeContinent(String p_ContinentName) throws ValidationException {
 
@@ -320,11 +318,10 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Removes country from the map's country list and continent's
-     * country list.
+     * Removes a country from the map's country list and its corresponding continent's country list.
      *
-     * @param p_CountryName Country name
-     * @throws ValidationException if any input/output issue
+     * @param p_CountryName The name of the country to remove
+     * @throws ValidationException if any input/output issue occurs
      */
     public void removeCountry(String p_CountryName) throws ValidationException {
         Country l_Country = this.getCountry(p_CountryName);
@@ -337,11 +334,11 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Adds the neighbor to particular country
+     * Adds a neighbor country to a particular country.
      *
-     * @param p_CountryName         Country name
-     * @param p_NeighborCountryName Neighbor country name
-     * @throws ValidationException if any input/output issue
+     * @param p_CountryName The name of the country to which a neighbor is added
+     * @param p_NeighborCountryName The name of the neighbor country
+     * @throws ValidationException if any input/output issue occurs
      */
     public void addNeighbor(String p_CountryName, String p_NeighborCountryName) throws ValidationException {
         Country l_Country1 = this.getCountry(p_CountryName);
@@ -355,11 +352,11 @@ public class GameMap implements Serializable {
 
 
     /**
-     * Removes neighbor to a particular country
+     * Removes a neighbor country from a particular country.
      *
-     * @param p_CountryName         Country name
-     * @param p_NeighborCountryName Neighbor country name
-     * @throws ValidationException if any input/output issue
+     * @param p_CountryName The name of the country from which a neighbor is removed
+     * @param p_NeighborCountryName The name of the neighbor country to remove
+     * @throws ValidationException if any input/output issue occurs
      */
     public void removeNeighbor(String p_CountryName, String p_NeighborCountryName) throws ValidationException {
         Country l_Country1 = this.getCountry(p_CountryName);
@@ -375,10 +372,10 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Adds player to the game map.
+     * Adds a player to the game map.
      *
      * @param p_PlayerName Player name
-     * @throws ValidationException if any input/output issue
+     * @throws ValidationException if any input/output issue occurs
      */
     public void addPlayer(String p_PlayerName) throws ValidationException {
         if (this.getPlayers().containsKey(p_PlayerName)) {
@@ -391,11 +388,11 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Adds player to the game map.
+     * Adds a player to the game map with a specified strategy.
      *
      * @param p_PlayerName Player name
-     * @param p_Strategy   Player Strategy
-     * @throws ValidationException if any input/output issue
+     * @param p_Strategy   Player strategy
+     * @throws ValidationException if any input/output issue occurs
      */
     public void addPlayer(String p_PlayerName, String p_Strategy) throws ValidationException {
         if (this.getPlayers().containsKey(p_PlayerName)) {
@@ -408,10 +405,10 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Removes player from game map.
+     * Removes a player from the game map.
      *
-     * @param p_PlayerName Player name
-     * @throws ValidationException if any input/output issue
+     * @param p_PlayerName Player name to remove
+     * @throws ValidationException if any input/output issue occurs
      */
     public void removePlayer(String p_PlayerName) throws ValidationException {
         Player l_Player = this.getPlayer(p_PlayerName);
@@ -423,11 +420,11 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Saves map as a file, if valid with the specified name.
+     * Saves the map as a file, with the specified name.
      *
-     * @param p_saveAsConquest to get user input
-     * @throws ValidationException files exception of correctness
-     * @throws IOException         files exception of correctness
+     * @param p_saveAsConquest Boolean value indicating if the map should be saved in Conquest format
+     * @throws ValidationException if any input/output issue occurs
+     * @throws IOException if an I/O error occurs
      */
     public void saveMap(boolean p_saveAsConquest) throws ValidationException, IOException {
         //Ask p_size for minimum number of countries based on player
@@ -453,7 +450,7 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Assign countries to each player of the game in random.
+     * Assigns countries to each player of the game randomly.
      */
     public void assignCountries() {
         int l_PlayerIndex = 0;
@@ -477,10 +474,8 @@ public class GameMap implements Serializable {
 
 
     /**
-     * A function to display the map chosen, its continents, countries, neighbours,
-     * players and their ownership
+     * Displays the details of the game map including continents, countries, neighbors, players, and their ownership.
      */
-
     public void showMap() {
         d_Logger.log("\nShowing the Map Details : \n");
 
@@ -491,9 +486,9 @@ public class GameMap implements Serializable {
 
         String l_Table = "|%-18s|%n";
 
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
         System.out.format("| Continent's name |%n");
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
 
         while (l_IteratorForContinents.hasNext()) {
             Map.Entry<String, Continent> continentMap = l_IteratorForContinents.next();
@@ -502,7 +497,7 @@ public class GameMap implements Serializable {
 
             System.out.format(l_Table, l_Continent.getName());
         }
-        System.out.format("+------------------+%n");
+        System.out.format("|==============|%n");
 
 
         // Showing Countries in the Continent and their details
@@ -514,11 +509,11 @@ public class GameMap implements Serializable {
         l_Table = "|%-23s|%-18s|%-60s|%n";
 
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+---------------+-%n");
+                "|===========|=================|==============|======================|===========|-%n");
         System.out.format(
                 "     Country's name     | Continent's Name |   Neighbour Countries                                      |%n");
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+----------------+%n");
+                "|===========|=================|==============|======================|============|%n");
 
 
         while (l_IteratorForContinent.hasNext()) {
@@ -535,7 +530,7 @@ public class GameMap implements Serializable {
         }
 
         System.out.format(
-                "+--------------+-----------------------+------------------+----------------------------+----------------+%n");
+                "|===========|=================|==============|======================|============|%n");
 
 
         HashMap<String, Player> l_Players = d_GameMap.getPlayers();
@@ -549,9 +544,9 @@ public class GameMap implements Serializable {
         d_Logger.log("The Map ownership of the players are : ");
 
 
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
         System.out.format("| Player's name |    Continent's Controlled    |%n");
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
 
         String l_Table1 = "|%-15s|%-30s|%n";
 
@@ -560,59 +555,59 @@ public class GameMap implements Serializable {
             System.out.format(l_Table1, l_Player.getName(), l_Player.createACaptureList(l_Player.getCapturedCountries()), l_Player.getReinforcementArmies());
         }
 
-        System.out.format("+---------------+-------------------------------+%n");
+        System.out.format("|===========|=======================|%n");
 
     }
 
     /**
-     * method to get tries
+     * Gets the number of tries.
      *
-     * @return number of tries
+     * @return the number of tries
      */
     public int getTries() {
         return d_Tries;
     }
 
     /**
-     * method to set number of tries
+     * Sets the number of tries.
      *
-     * @param p_Tries number of tries
+     * @param p_Tries the number of tries to set
      */
     public void setTries(int p_Tries) {
         d_Tries = p_Tries;
     }
 
     /**
-     * method to to go to next turn
+     * Increments the number of tries by 1.
      */
     public void nextTry() {
         d_Tries++;
     }
 
     /**
-     * method to get winner
+     * Gets the winner of the game.
      *
-     * @return the winner
+     * @return the winner of the game
      */
     public Player getWinner() {
         return d_Winner;
     }
 
     /**
-     * method to set winner
+     * Sets the winner of the game.
      *
-     * @param p_Winner the winner
+     * @param p_Winner the winner of the game to set
      */
     public void setWinner(Player p_Winner) {
         d_Winner = p_Winner;
     }
 
     /**
-     * Builder for setting the progress
+     * Builds the game phase from the given game map instance.
      *
-     * @param p_GameMap instance
-     * @return GamePhase
-     * @throws ValidationException Validation exception
+     * @param p_GameMap the game map instance
+     * @return the game phase
+     * @throws ValidationException if any validation error occurs
      */
     public GamePhase gamePlayBuilder(GameMap p_GameMap) throws ValidationException {
         this.flushGameMap();
@@ -645,9 +640,9 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Returns new instance of gamemap
+     * Creates a new instance of the game map.
      *
-     * @return instance of gamemap
+     * @return a new instance of the game map
      */
     public static GameMap newInstance() {
         GameMap l_GameMap = d_GameMap;

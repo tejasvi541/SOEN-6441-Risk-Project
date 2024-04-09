@@ -48,6 +48,14 @@ public class TournamentGameEngine implements Engine {
         init();
     }
 
+
+    /**
+     * parameterised constructor
+     */
+    public  TournamentGameEngine(boolean test) {
+        d_Logger = GameEventLogger.getInstance();
+    }
+
     /**
      * method to check if object is null
      */
@@ -67,11 +75,11 @@ public class TournamentGameEngine implements Engine {
     //tournament -M Australia.map,newmap.map -P aggressive,random -G 2 -D 3
     public TournamentOptions getTournamentOptions() {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log(Constants.SEPERATER);
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log("You are in Tournament Mode");
         d_Logger.log("Enter the tournament command:");
         d_Logger.log("Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns");
-        d_Logger.log(Constants.SEPERATER);
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_TournamentCommand = l_Scanner.nextLine();
         d_Options = parseCommand(l_TournamentCommand);
         if (Objects.isNull(d_Options)) {
@@ -99,7 +107,7 @@ public class TournamentGameEngine implements Engine {
                 String l_maxTries = l_CommandList.get(l_CommandList.indexOf("-D") + 1);
                 d_Options.getMap().addAll(Arrays.asList(l_MapValue.split(",")));
                 if (l_PlayerTypes.contains("human")) {
-                    d_Logger.log("Tournament mode does not support human player: Switch to Single Game Mode");
+                    d_Logger.log("Human player not supported in tournament mode: Switch to Single Game Mode");
                     return null;
                 }
                 for (String l_Strategy : l_PlayerTypes.split(",")) {
@@ -114,7 +122,7 @@ public class TournamentGameEngine implements Engine {
                     d_Options.setGames(l_NumOfGames);
                     d_Options.setMaxTries(l_NumofTurns);
                 } else {
-                    d_Logger.log("Give correct number of games and turns");
+                    d_Logger.log("Provide accurate number of games and turns");
                     return null;
                 }
             } else {
@@ -123,7 +131,7 @@ public class TournamentGameEngine implements Engine {
             return d_Options;
         } catch (Exception e) {
             d_Logger.log(Constants.COMMAND_CHECK);
-            d_Logger.log("command should be in this format: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
+            d_Logger.log("command format to be followed: tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns");
             return null;
         }
     }
@@ -166,16 +174,16 @@ public class TournamentGameEngine implements Engine {
         }
 
         String l_Table = "|%-15s|%-28s|%-19s|%n";
-        System.out.format("+--------------+-----------------------+-------------------------+%n");
+        System.out.format(Constants.DASH_SEPARATOR);
         System.out.format("|     Map      | Winner                     |   Game Number      |%n");
-        System.out.format("+--------------+-----------------------+-------------------------+%n");
+        System.out.format(Constants.DASH_SEPARATOR);
 
         for (TournamentResult l_Result : d_Results) {
 
             System.out.format(l_Table, l_Result.getMap(), l_Result.getWinner(), l_Result.getGame());
 
         }
-        System.out.format("+--------------+-----------------------+-------------------------+%n");
+        System.out.format(Constants.DASH_SEPARATOR);
     }
 
     /**

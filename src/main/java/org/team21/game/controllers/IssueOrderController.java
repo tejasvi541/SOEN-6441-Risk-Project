@@ -133,7 +133,7 @@ public class IssueOrderController implements GameFlowManager {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
                     d_Logger.log(Constants.All_ORDERS_ADDED);
-                    d_Logger.log(Constants.EQUAL_SEPERATER);
+                    d_Logger.log(Constants.EQUAL_SEPARATOR);
                 }
             }
             d_GameMap.setGameLoaded(false);
@@ -153,7 +153,7 @@ public class IssueOrderController implements GameFlowManager {
      * @return true if the command is correct else false
      */
     public boolean validateIssueOrderCommands(String p_CommandArr, Player p_Player) {
-        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, "savegame");
+        List<String> l_Commands = Arrays.asList(Constants.DEPLOY_COMMAND, Constants.ADVANCE_COMMAND, Constants.BOMB_COMMAND, Constants.BLOCKADE_COMMAND, Constants.AIRLIFT_COMMAND, Constants.NEGOTIATE_COMMAND, Constants.SAVEGAME_COMMAND);
         String[] l_CommandArr = p_CommandArr.split(" ");
         if (p_CommandArr.toLowerCase().contains("pass")) {
             addToSetOfPlayers(p_Player);
@@ -210,7 +210,7 @@ public class IssueOrderController implements GameFlowManager {
      * @param p_Player The current player object.
      */
     public void showPlayerStatusAndCommands(Player p_Player) {
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log("List of game loop commands");
         d_Logger.log("To deploy the armies : deploy countryID numarmies");
         d_Logger.log("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
@@ -219,21 +219,21 @@ public class IssueOrderController implements GameFlowManager {
         d_Logger.log("To negotiate with player : negotiate playerID");
         d_Logger.log("To bomb the country : bomb countryID");
         d_Logger.log("To skip: pass");
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_Table = "|%-15s|%-19s|%-22s|%n";
-        System.out.format("+--------------+-----------------------+------------------+%n");
+        System.out.format("|===============|======================|=====================|%n");
         System.out.format("| Current Player   | Initial Assigned  | Left Armies      | %n");
-        System.out.format("+---------------+------------------  +---------------------+%n");
+        System.out.format("|===============|======================|=====================|%n");
         System.out.format(l_Table, p_Player.getName(), p_Player.getReinforcementArmies(), p_Player.getIssuedArmies());
-        System.out.format("+--------------+-----------------------+------------------+%n");
+        System.out.format("|===============|=======================|===================|%n");
 
-        d_Logger.log("The countries assigned to the player are: ");
-        System.out.format("+--------------+-----------------------+------------------+---------+%n");
+        d_Logger.log(Constants.ASSIGNED_COUNTRIES);
+        System.out.format("|==============|=======================|==================|=========|%n");
 
         System.out.format(
-                "|Country name  |Country Armies  | Neighbors                         |%n");
+                "|Country name  |Country Armies  | Neighbors countries               |%n");
         System.out.format(
-                "+--------------+-----------------------+------------------+---------+%n");
+                "|==============|=======================|==================|=========|%n");
         for (Country l_Country : p_Player.getCapturedCountries()) {
             String l_TableCountry = "|%-15s|%-15s|%-35s|%n";
             String l_NeighborList = "";
@@ -242,7 +242,7 @@ public class IssueOrderController implements GameFlowManager {
             }
             System.out.format(l_TableCountry, l_Country.getName(), l_Country.getArmies(), l_Country.createANeighborList(l_Country.getNeighbors()));
         }
-        System.out.format("+--------------+-----------------------+------------------+---------+\n");
+        System.out.format("|==============|=======================|==================|=========|\n");
 
         d_Logger.log(Constants.CARDS_OF_PLAYER);
         if (!p_Player.getPlayerCards().isEmpty()) {
@@ -251,7 +251,7 @@ public class IssueOrderController implements GameFlowManager {
             }
         }
         if (!p_Player.getOrders().isEmpty()) {
-            d_Logger.log("The Orders issued by Player " + p_Player.getName() + " are:");
+            d_Logger.log("The Orders issued by the Player " + p_Player.getName() + " are:");
             for (Order l_Order : p_Player.getOrders()) {
                 d_Logger.log(l_Order.getOrderInfo().getCommand());
             }

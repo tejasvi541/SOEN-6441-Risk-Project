@@ -2,6 +2,7 @@ package org.team21.game.utils.validation;
 
 /**
  * This class manages invalid console commands
+ *
  * @author Bharti Chhabra
  */
 public class ValidationException extends Exception {
@@ -19,6 +20,7 @@ public class ValidationException extends Exception {
 
     /**
      * Exception message
+     *
      * @param message exception message
      */
     public ValidationException(String message) {
@@ -27,11 +29,12 @@ public class ValidationException extends Exception {
 
     /**
      * Get the message and check for exception
+     *
      * @return the message
      */
     @Override
     public String getMessage() {
-        if(super.getMessage() != null) {
+        if (super.getMessage() != null) {
             return super.getMessage();
         }
         return d_Message;

@@ -18,31 +18,35 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * Class that implements the Benevolent Player Strategy
+ * Implements the Benevolent player strategy, focusing on strengthening the weakest country and avoiding conflicts.
+ * This strategy is characterized by deploying armies to the weakest country, negotiating with random players if diplomacy cards are available,
+ * and reinforcing the weakest country further by moving armies from neighboring friendly countries.
+ *
  * @author Nishith Soni
  * @version 1.0.0
  */
 public class BenevolentStrategy extends PlayerStrategy implements Serializable {
 
     /**
-     * a random number
+     * Random number generator
      */
     private static final Random d_Random = new Random();
+
     /**
-     * Logger Observable
+     * Logger for game events
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
+
     /**
-     * An instance of gamemap object
+     * Instance of the game map
      */
     private static GameMap d_GameMap;
 
-
     /**
-     * A function to determine the weakest country from the list of captured countries
+     * Retrieves the weakest conquered country from the player's captured countries.
      *
-     * @param p_Player player object
-     * @return The weakest country
+     * @param p_Player The player object for which to find the weakest conquered country.
+     * @return The weakest conquered country owned by the player, or null if no countries are captured.
      */
     public Country getWeakestConqueredCountry(Player p_Player) {
         List<Country> l_CountryList = p_Player.getCapturedCountries();
@@ -58,9 +62,9 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * A function to create the commands for deploying, negotiating and advancing for a Benevolent player
+     * Creates commands for deploying, negotiating, and advancing for a Benevolent player.
      *
-     * @return null if empty
+     * @return "pass" if no action is taken; otherwise, returns the result of the action.
      */
     public String createCommand() {
         d_GameMap = GameMap.getInstance();
@@ -81,7 +85,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
         l_Commands.add(2, String.valueOf((l_ArmiesReinforce)));
         l_CommandsArr = l_Commands.toArray(new String[0]);
         l_Order = new DeployOrder();
-        l_Order.setOrderInfo(OrderOwner.GenerateDeployOrderInfo(l_CommandsArr, d_Player));
+        l_Order.setOrderInfo(OrderOwner.generateDeployOrderInfo(l_CommandsArr, d_Player));
         IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
         d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
         d_Player.issueOrder();
@@ -97,7 +101,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                         l_Commands.add(1, l_RandomPlayer.getName());
                         l_CommandsArr = l_Commands.toArray(new String[0]);
                         l_Order = new NegotiateOrder();
-                        l_Order.setOrderInfo(OrderOwner.GenerateNegotiateOrderInfo(l_CommandsArr, d_Player));
+                        l_Order.setOrderInfo(OrderOwner.generateNegotiateOrderInfo(l_CommandsArr, d_Player));
                         IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                         d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                         d_Player.issueOrder();
@@ -117,7 +121,7 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(3, String.valueOf(l_Country.getArmies()));
                 l_CommandsArr = l_Commands.toArray(new String[0]);
                 l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+                l_Order.setOrderInfo(OrderOwner.generateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
                 IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                 d_Player.issueOrder();
                 d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
@@ -128,10 +132,10 @@ public class BenevolentStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Get a random player other than itself
+     * Gets a random player other than the current player.
      *
-     * @param d_Player current player
-     * @return Random Player
+     * @param d_Player The current player.
+     * @return A random player other than the current player, or null if no such player exists.
      */
     protected Player getRandomPlayer(Player d_Player) {
         List<Country> l_Enemies = d_Player.getCapturedCountries().stream()

@@ -17,25 +17,26 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A class to implement the Aggressive strategy for a player
+ * Implements the Aggressive strategy for a player.
+ * This strategy focuses on deploying armies to the strongest country, attacking enemies, and bombing if a bomb card is available.
+ *
  * @author Meet Boghani
  */
 public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     /**
-     * Logger Observable
+     * The logger instance for recording game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Ordered list based on number of armies
+     * A list of countries sorted based on the number of armies.
      */
     private List<Country> orderedList;
 
-
     /**
-     * A function to create the commands for deploying, advancing and bombing for an Aggressive player
+     * Creates commands for deploying, advancing, and bombing for an Aggressive player.
      *
-     * @return null if empty
+     * @return "pass" if no valid actions can be performed.
      */
     public String createCommand() {
         d_Player = GameMap.getInstance().getCurrentPlayer();
@@ -44,15 +45,15 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
             createAndOrderCountryList();
             deployCommand();
             if (bombOrAttack()) {
-                return "pass";
+                return Constants.PASS_COMMAND;
             }
             moveToSelf();
         }
-        return "pass";
+        return Constants.PASS_COMMAND;
     }
 
     /**
-     * Create a list of sorted countries with respect to their army strength
+     * Creates a list of countries sorted by their army strength.
      */
     private void createAndOrderCountryList() {
         orderedList = d_Player.getCapturedCountries()
@@ -62,9 +63,9 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Generates deploy command
+     * Generates a deploy command to strengthen the strongest country.
      *
-     * @return true/false
+     * @return true if the command is successfully executed, false otherwise.
      */
     public boolean deployCommand() {
         List<String> l_Commands = new ArrayList<>();
@@ -76,7 +77,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
         l_Commands.add(2, String.valueOf((l_armiesReinforce)));
         String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
         Order l_Order = new DeployOrder();
-        l_Order.setOrderInfo(OrderOwner.GenerateDeployOrderInfo(l_CommandsArr, d_Player));
+        l_Order.setOrderInfo(OrderOwner.generateDeployOrderInfo(l_CommandsArr, d_Player));
         IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
         d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
         d_Player.issueOrder();
@@ -84,9 +85,9 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
     }
 
     /**
-     * Bomb an enemy if bomb card exists else attack the enemy with strongest country
+     * Bombs an enemy if a bomb card exists; otherwise, attacks the enemy with the strongest country.
      *
-     * @return true/false
+     * @return true if the command is successfully executed, false otherwise.
      */
     public boolean bombOrAttack() {
         boolean flag = false;
@@ -108,7 +109,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(1, l_EnemyWithHighTroops.getName());
                 String[] l_CommandsArr = l_Commands.toArray(new String[0]);
                 Order l_Order = new BombOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateBombOrderInfo(l_CommandsArr, d_Player));
+                l_Order.setOrderInfo(OrderOwner.generateBombOrderInfo(l_CommandsArr, d_Player));
                 IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                 d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                 d_Player.issueOrder();
@@ -133,7 +134,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
                 l_Commands.add(3, String.valueOf(l_FromCountry.getArmies()));
                 String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
                 Order l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+                l_Order.setOrderInfo(OrderOwner.generateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
                 IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
                 d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
                 d_Player.issueOrder();
@@ -147,10 +148,9 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
 
 
     /**
-     * If enemy doesnt exist to the strongest country
-     * Move armies to the next strongest country that has an enemy
+     * If no enemies exist near the strongest country, moves armies to the next strongest country that has an enemy.
      *
-     * @return true/false
+     * @return true if the command is successfully executed, false otherwise.
      */
     private boolean moveToSelf() {
         Country fromCountry = orderedList.get(0);
@@ -167,7 +167,7 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
             l_Commands.add(3, String.valueOf(fromCountry.getArmies()));
             String[] l_CommandsArr = l_Commands.toArray(new String[l_Commands.size()]);
             Order l_Order = new AdvanceOrder();
-            l_Order.setOrderInfo(OrderOwner.GenerateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
+            l_Order.setOrderInfo(OrderOwner.generateAdvanceOrderAndAirliftOrderInfo(l_CommandsArr, d_Player));
             IssueOrderController.d_Commands = l_Order.getOrderInfo().getCommand();
             d_Logger.log(String.format("%s issuing new command: %s", d_Player.getName(), IssueOrderController.d_Commands));
             d_Player.issueOrder();
@@ -176,6 +176,12 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
         return false;
     }
 
+    /**
+     * Retrieves neighbors of a country with enemies.
+     *
+     * @param p_FromCountry The country to check for neighbors with enemies.
+     * @return List of countries neighboring the given country that have enemies.
+     */
     private List<Country> getNeighborsWithEnemies(Country p_FromCountry) {
         return p_FromCountry.getNeighbors().stream()
                 .takeWhile(country -> {

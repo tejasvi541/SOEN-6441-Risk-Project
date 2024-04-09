@@ -11,21 +11,25 @@ import java.io.Serializable;
 
 
 /**
- * This class helps in executing the Blockade Card
+ * Represents a Blockade order, which allows a player to execute a blockade on a country.
+ * This order requires a Blockade card.
+ *
  * @author Bharti Chhabra
+ * @version 1.0.0
  */
 public class BlockadeOrder extends Order implements Serializable {
+
     /**
-     * A Gamemap object
+     * Instance of GameMap to access game map information.
      */
     private final GameMap d_GameMap;
     /**
-     * Logger Observable
+     * Instance of GameEventLogger to log game events.
      */
     private GameEventLogger d_Logger = GameEventLogger.getInstance();
 
     /**
-     * Constructor for class Blockade Order
+     * Constructs a BlockadeOrder object and sets its type to "blockade".
      */
     public BlockadeOrder() {
         super();
@@ -34,15 +38,16 @@ public class BlockadeOrder extends Order implements Serializable {
     }
 
     /**
-     * Execute the Blockade Order
+     * Executes the BlockadeOrder command.
+     * Triples the armies in the target country, adds it to the neutral countries list, removes it from the player's captured countries, and consumes a Blockade card.
      *
-     * @return true if the execute was successful else false
+     * @return true if the execution was successful, false otherwise.
      */
     @Override
     public boolean execute() {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_Country = getOrderInfo().getTargetCountry();
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
             l_Country.setArmies(l_Country.getArmies() * 3);
@@ -55,9 +60,10 @@ public class BlockadeOrder extends Order implements Serializable {
     }
 
     /**
-     * Validate the command
+     * Validates the BlockadeOrder command.
+     * Checks if the command is valid based on player and target country, and if the player has a Blockade card.
      *
-     * @return true if successful or else false
+     * @return true if the command is valid, false otherwise.
      */
     @Override
     public boolean validateCommand() {
@@ -84,11 +90,12 @@ public class BlockadeOrder extends Order implements Serializable {
     }
 
     /**
-     * Print the command
+     * Prints the BlockadeOrder command.
+     * Logs the order information including the target country and player.
      */
     @Override
     public void printOrderCommand() {
         d_Logger.log("Blockade on " + getOrderInfo().getTargetCountry().getName() + " by " + getOrderInfo().getPlayer().getName());
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 }

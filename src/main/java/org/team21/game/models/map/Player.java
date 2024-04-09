@@ -13,7 +13,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Concrete class with the details of the player
+ * Represents a player in the game, storing information such as player ID, name, captured countries,
+ * reinforcement armies, player cards, and orders.
+ * The class also provides methods for managing player actions, such as issuing orders, deploying reinforcement armies,
+ * and calculating reinforcement armies based on captured countries and continent ownership.
+ * <p>
+ * This class implements the Serializable interface to support serialization.
+ * </p>
+ *
  * @author Tejasvi
  * @author Bharti Chabbra
  * @version 1.0.0
@@ -22,36 +29,53 @@ import java.util.stream.Collectors;
 public class Player implements Serializable {
 
     /**
-     * Player Strategy to create the commands
+     * The strategy for creating player commands.
      */
     private final PlayerStrategy d_PlayerStrategy;
 
     /**
-     * AN integer to store the ID of player
+     * The ID of the player.
      */
     private int d_Id;
 
     /**
-     * An integer to store the name of the player
+     * The name of the player.
      */
     private String d_Name;
     /**
-     * A list of captured countries
+     * The list of countries captured by the player.
      */
     private List<Country> d_CapturedCountries = new ArrayList<>();
     /**
-     * A deque to manage the list of orders
+     * The deque to manage the list of orders.
      */
     private Deque<Order> d_Orders = new ArrayDeque<>();
     /**
-     * An integer to store the number of reinforcement armies
+     * The number of reinforcement armies available for the player.
      */
     private int d_ReinforcementArmies;
 
     /**
-     * the constructor for player class
+     * The number of armies to issue for the player.
+     */
+    private int d_ArmiesToIssue = 0;
+    /**
+     * The list of cards held by the player.
+     */
+    private List<Card> d_PlayerCards = new ArrayList<>();
+    /**
+     * The list of neutral players that the player cannot attack.
+     */
+    private final List<Player> d_NeutralPlayers = new ArrayList<>();
+    /**
+     * The logger for recording game events.
+     */
+    private GameEventLogger d_Logger = GameEventLogger.getInstance();
+
+    /**
+     * Constructs a player with the specified player strategy.
      *
-     * @param p_PlayerStrategy player strategy
+     * @param p_PlayerStrategy The player strategy to use.
      */
     public Player(PlayerStrategy p_PlayerStrategy) {
         this.d_PlayerStrategy = p_PlayerStrategy;
@@ -65,7 +89,6 @@ public class Player implements Serializable {
     public int getIssuedArmies() {
         return d_ArmiesToIssue;
     }
-
     /**
      * method to set the armies issued
      * @param p_ArmiesToIssue armies to issue to player
@@ -75,160 +98,146 @@ public class Player implements Serializable {
     }
 
     /**
-     * number of armies to issue
-     */
-    private int d_ArmiesToIssue = 0;
-    /**
-     * A list of cards for the player
-     */
-    private List<Card> d_PlayerCards = new ArrayList<>();
-    /**
-     * A list of neutral players
-     */
-    private final List<Player> d_NeutralPlayers = new ArrayList<>();
-    /**
-     * LogEntry Buffer
-     */
-    private GameEventLogger d_Logger = GameEventLogger.getInstance();
-
-    /**
-     * A function to get the player ID
+     * Gets the ID of the player.
      *
-     * @return the ID of player
+     * @return The ID of the player.
      */
     public int getId() {
         return d_Id;
     }
 
     /**
-     * A function to set the player ID
+     * Sets the ID of the player.
      *
-     * @param p_Id Player ID value
+     * @param p_Id The ID of the player.
      */
     public void setId(int p_Id) {
         this.d_Id = p_Id;
     }
 
     /**
-     * A function to get the name of the Player
+     * Gets the name of the player.
      *
-     * @return player name
+     * @return The name of the player.
      */
     public String getName() {
         return d_Name;
     }
 
     /**
-     * A function to set the name of the player
+     * Sets the name of the player.
      *
-     * @param p_Name Name of the player
+     * @param p_Name The name of the player.
      */
     public void setName(String p_Name) {
         this.d_Name = p_Name;
     }
 
     /**
-     * A function to get the list of captured countries
+     * Retrieves the list of countries captured by the player.
      *
-     * @return The list of captured countries
+     * @return The list of captured countries.
      */
     public List<Country> getCapturedCountries() {
         return d_CapturedCountries;
     }
 
     /**
-     * A function to record/set the captured countries
+     * Sets the list of countries captured by the player.
      *
-     * @param p_CapturedCountries List of the captured countries
+     * @param p_CapturedCountries The list of captured countries.
      */
     public void setCapturedCountries(List<Country> p_CapturedCountries) {
         this.d_CapturedCountries = p_CapturedCountries;
     }
 
     /**
-     * A function to get the list of orders
+     * Retrieves the list of orders issued by the player.
      *
-     * @return list of orders
+     * @return The list of orders.
      */
     public Deque<Order> getOrders() {
         return d_Orders;
     }
 
     /**
-     * method to set orders
-     * @param p_Orders the orders
+     * Sets the list of orders for the player.
+     *
+     * @param p_Orders The list of orders.
      */
     public void setOrders(Deque<Order> p_Orders){
         this.d_Orders = p_Orders;
     }
+
     /**
-     * A function to add the orders to the issue order list
+     * Adds an order to the list of orders issued by the player.
      *
-     * @param p_Order The order to be added
+     * @param p_Order The order to be added.
      */
     public void addOrder(Order p_Order) {
         this.d_Orders.add(p_Order);
     }
 
-    /**     * A function to get the reinforcement armies for each player
+    /**
+     * Retrieves the number of reinforcement armies assigned to the player.
      *
-     * @return armies assigned to player of type int
+     * @return The number of reinforcement armies.
      */
     public int getReinforcementArmies() {
         return d_ReinforcementArmies;
     }
 
     /**
-     * A function to set the reinforcement armies for each player
+     * Sets the number of reinforcement armies assigned to the player.
      *
-     * @param p_AssignedArmies armies assigned to player of type int
+     * @param p_AssignedArmies The number of reinforcement armies.
      */
     public void setReinforcementArmies(int p_AssignedArmies) {
         this.d_ReinforcementArmies = p_AssignedArmies;
     }
 
     /**
-     * A function to get list of all cards for the player
+     * Retrieves the list of cards held by the player.
      *
-     * @return list of all cards
+     * @return The list of player cards.
      */
     public List<Card> getPlayerCards() {
         return d_PlayerCards;
     }
 
     /**
-     * Method to check if particular card is available in the player's card list
+     * Checks if a particular card is available in the player's card list.
      *
-     * @param p_cardType The type of card
-     * @return true if card is available else false
+     * @param p_cardType The type of card.
+     * @return True if the card is available, false otherwise.
      */
     public boolean checkIfCardAvailable(CardType p_cardType) {
         return d_PlayerCards.stream().anyMatch(p_card -> p_card.getCardType().equals(p_cardType));
     }
 
     /**
-     * Remove the card for the player
+     * Removes a specified card from the player's card list.
      *
-     * @param p_CardType card to be removed
-     * @return the player cards
+     * @param p_CardType The type of card to be removed.
+     * @return True if the card is successfully removed, false otherwise.
      */
     public boolean removeCard(CardType p_CardType) {
         return d_PlayerCards.remove(new Card(p_CardType));
     }
 
     /**
-     * A function to remove the all cards from the player
+     * Sets the list of cards held by the player.
      *
-     * @param p_Cards list of player cards
+     * @param p_Cards The list of player cards.
      */
     public void setPlayerCards(List<Card> p_Cards) {
         d_PlayerCards = p_Cards;
     }
 
     /**
-     * Add the card to the player on conquering the territory
+     * Adds a card to the player's card list.
      *
-     * @param p_Card card to be added to player
+     * @param p_Card The card to be added.
      */
     public void addPlayerCard(Card p_Card) {
         d_PlayerCards.add(p_Card);
@@ -236,18 +245,18 @@ public class Player implements Serializable {
 
 
     /**
-     * Get the list of all players you cannot attack
+     * Retrieves the list of neutral players that the player cannot attack.
      *
-     * @return list of players
+     * @return The list of neutral players.
      */
     public List<Player> getNeutralPlayers() {
         return d_NeutralPlayers;
     }
 
     /**
-     * Add the neutral player to the list
+     * Adds a neutral player to the list of players that the player cannot attack.
      *
-     * @param p_NeutralPlayer The player you cannot attack
+     * @param p_NeutralPlayer The neutral player to be added.
      */
     public void addNeutralPlayers(Player p_NeutralPlayer) {
         if (!d_NeutralPlayers.contains(p_NeutralPlayer)) {
@@ -256,7 +265,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * Remove all the neutral players from list
+     * Removes all neutral players from the list of players that the player cannot attack.
      */
     public void removeNeutralPlayer() {
         if (!d_NeutralPlayers.isEmpty()) {
@@ -265,17 +274,17 @@ public class Player implements Serializable {
     }
 
     /**
-     * A function to get the issue order from player and add to the order list
+     * Issues an order for the player.
      */
     public void issueOrder() {
-        Order l_Order = OrderOwner.CreateOrder(IssueOrderController.d_Commands.split(" "), this);
+        Order l_Order = OrderOwner.createOrder(IssueOrderController.d_Commands.split(" "), this);
         addOrder(l_Order);
     }
 
     /**
-     * A function to read all the commands from player
+     * Reads commands entered by the player.
      *
-     * @return command entered by the player
+     * @return The command entered by the player.
      */
     public String readFromPlayer() {
         return this.d_PlayerStrategy.createCommand();
@@ -283,20 +292,19 @@ public class Player implements Serializable {
 
 
     /**
-     * A function to return the next order for execution
+     * Retrieves the next order for execution.
      *
-     * @return order for executing for each player
+     * @return The next order for execution.
      */
     public Order nextOrder() {
         return d_Orders.poll();
     }
 
-
     /**
-     * A function to check if the army to deployed is valid
+     * Checks if the specified number of armies to be deployed is valid.
      *
-     * @param p_ArmyCount The armies to be deployed to the country
-     * @return true if the armies are valid and deducted from the assigned army pool else false
+     * @param p_ArmyCount The number of armies to be deployed.
+     * @return True if the armies are valid and deducted from the assigned army pool, false otherwise.
      */
     public boolean deployReinforcementArmiesFromPlayer(int p_ArmyCount) {
         if (p_ArmyCount > d_ReinforcementArmies || p_ArmyCount <= 0) {
@@ -307,10 +315,10 @@ public class Player implements Serializable {
     }
 
     /**
-     * A function to create a list of countries assigned to player in a formatted string
+     * Creates a formatted string listing the countries assigned to the player.
      *
-     * @param p_Capture The list of countries of the player
-     * @return the formatted string
+     * @param p_Capture The list of countries assigned to the player.
+     * @return The formatted string listing the countries.
      */
     public String createACaptureList(List<Country> p_Capture) {
         String l_Result = "";
@@ -322,9 +330,9 @@ public class Player implements Serializable {
 
 
     /**
-     * Calculate the number of the armies to be assigned in reinforcement phase.
+     * Calculates the number of armies to be assigned in the reinforcement phase.
      *
-     * @param p_gameMap The game map object
+     * @param p_gameMap The game map object.
      */
     public void calculateReinforcementArmies(GameMap p_gameMap) {
         if (getCapturedCountries().size() > 0) {
@@ -339,10 +347,10 @@ public class Player implements Serializable {
     }
 
     /**
-     * Add bonus armies to reinforcement armies if a player owns the continent.
+     * Adds bonus armies to reinforcement armies if a player owns the continent.
      *
-     * @param p_gameMap The game map object
-     * @return reinforcements armies added with bonus armies
+     * @param p_gameMap The game map object.
+     * @return The reinforcement armies added with bonus armies.
      */
     private int getBonusIfKingOfContinents(GameMap p_gameMap) {
         int l_reinforcements = 0;
@@ -358,10 +366,10 @@ public class Player implements Serializable {
     }
 
     /**
-     * A function to check if the country exists in the list of player captured countries
+     * Checks if the country exists in the list of player-captured countries.
      *
-     * @param p_Country The country to be checked if present
-     * @return true if country exists in the assigned country list else false
+     * @param p_Country The country to be checked for presence.
+     * @return True if the country exists in the assigned country list, false otherwise.
      */
     public boolean isCaptured(Country p_Country) {
         return d_CapturedCountries.contains(p_Country);

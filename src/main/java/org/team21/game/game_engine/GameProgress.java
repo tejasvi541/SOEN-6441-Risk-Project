@@ -1,6 +1,7 @@
 package org.team21.game.game_engine;
 
 import org.team21.game.models.map.GameMap;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 import org.team21.game.utils.validation.ValidationException;
 
@@ -19,7 +20,7 @@ public class GameProgress {
     /**
      * constant path
      */
-    static final String PATH = "savedFiles/";
+    static final String d_PATH = System.getProperty("user.dir") + File.separator + "src" + File.separator + "savedGames" + File.separator;
     /**
      * LogEntry Buffer Instance
      */
@@ -34,10 +35,11 @@ public class GameProgress {
      */
     public static boolean SaveGameProgress(GameMap p_GameMap, String p_Name) {
         try {
-            FileOutputStream l_Fs = new FileOutputStream(PATH + p_Name + ".bin");
+            checkDirectory(d_PATH);
+            FileOutputStream l_Fs = new FileOutputStream(d_PATH + p_Name + ".bin");
             ObjectOutputStream l_Os = new ObjectOutputStream(l_Fs);
             l_Os.writeObject(p_GameMap);
-            d_Logger.log("The game has been saved successfully to file ./savedFiles/" + p_Name + ".bin");
+            d_Logger.log("The game has been saved successfully to file ./savedGames/" + p_Name + ".bin");
             l_Os.flush();
             l_Fs.close();
             p_GameMap.flushGameMap();
@@ -58,7 +60,7 @@ public class GameProgress {
         FileInputStream l_Fs;
         GameMap l_LoadedGameMap;
         try {
-            l_Fs = new FileInputStream(PATH + p_Filename);
+            l_Fs = new FileInputStream(d_PATH + p_Filename+ ".bin");
             ObjectInputStream l_Os = new ObjectInputStream(l_Fs);
             l_LoadedGameMap = (GameMap) l_Os.readObject();
             d_Logger.log("The game is loaded successfully will continue from where it last stopped.");
@@ -76,13 +78,13 @@ public class GameProgress {
      * @throws IOException File exception
      */
     public static void showFiles() throws IOException {
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("\t\t\t Warzone");
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("\t\t\t Load Game");
         d_Logger.log("\t=======================\n");
-        if (new File(PATH).exists()) {
-            Files.walk(Path.of(PATH))
+        if (new File(d_PATH).exists()) {
+            Files.walk(Path.of(d_PATH))
                     .filter(path -> path.toFile().isFile())
                     .forEach(path -> {
                         d_Logger.log("\t\t " + path.getFileName());
@@ -93,7 +95,19 @@ public class GameProgress {
         d_Logger.log("");
         d_Logger.log("\t=======================");
         d_Logger.log("\t use file name to load");
-        d_Logger.log("==================================");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("example command: loadgame");
+    }
+
+    /**
+     * Checks if the directory exists and creates it if it doesn't.
+     *
+     * @param path The path to check and create if necessary.
+     */
+    private static void checkDirectory(String path) {
+        File l_directory = new File(path);
+        if (!l_directory.exists() || !l_directory.isDirectory()) {
+            l_directory.mkdirs();
+        }
     }
 }
