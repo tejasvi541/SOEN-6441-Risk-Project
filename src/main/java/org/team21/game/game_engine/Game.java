@@ -60,7 +60,7 @@ public class Game {
         d_Logger.log("\t\t 5. Exit");
         d_Logger.log("\t=======================");
         d_Logger.log("\t\tSelect the option");
-        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
+        d_Logger.log("==================================");
         try {
             int option = l_Scanner.nextInt();
             d_Engine = new GameEngine();

@@ -133,7 +133,7 @@ public class IssueOrderController implements GameFlowManager {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
                     d_Logger.log(Constants.All_ORDERS_ADDED);
-                    d_Logger.log(Constants.EQUAL_SEPERATOR);
+                    d_Logger.log(Constants.EQUAL_SEPERATER);
                 }
             }
             d_GameMap.setGameLoaded(false);
@@ -231,7 +231,7 @@ public class IssueOrderController implements GameFlowManager {
         System.out.format("+--------------+-----------------------+------------------+---------+%n");
 
         System.out.format(
-                "|Country name  |Country Armies  | Neighbors countries               |%n");
+                "|Country name  |Country Armies  | Neighbors                         |%n");
         System.out.format(
                 "+--------------+-----------------------+------------------+---------+%n");
         for (Country l_Country : p_Player.getCapturedCountries()) {
@@ -251,7 +251,7 @@ public class IssueOrderController implements GameFlowManager {
             }
         }
         if (!p_Player.getOrders().isEmpty()) {
-            d_Logger.log("The Orders issued by the Player " + p_Player.getName() + " are:");
+            d_Logger.log("The Orders issued by Player " + p_Player.getName() + " are:");
             for (Order l_Order : p_Player.getOrders()) {
                 d_Logger.log(l_Order.getOrderInfo().getCommand());
             }
