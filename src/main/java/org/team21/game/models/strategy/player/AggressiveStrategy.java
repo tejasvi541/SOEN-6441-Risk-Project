@@ -45,11 +45,11 @@ public class AggressiveStrategy extends PlayerStrategy implements Serializable {
             createAndOrderCountryList();
             deployCommand();
             if (bombOrAttack()) {
-                return "pass";
+                return Constants.PASS_COMMAND;
             }
             moveToSelf();
         }
-        return "pass";
+        return Constants.PASS_COMMAND;
     }
 
     /**
