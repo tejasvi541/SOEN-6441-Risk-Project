@@ -29,18 +29,6 @@ public class StartGameControllerTest {
     }
 
     @Test
-    public void loadMapDominationNotOkay() throws ValidationException {
-        // This will send exception so CI will fail thats why commented it out as this map doesn't have country
-//        try {
-//            l_sgc.loadMap("CountryDoesntExist.map");
-//        }catch (ValidationException e){
-//            System.out.println(e.getMessage());
-//        }
-//        assertNull(d_gameMap.getName());
-//        d_gameMap.flushGameMap();
-    }
-
-    @Test
     public void loadMapConquest() throws ValidationException {
         l_sgc.loadMap("Australia.map");
         assertNotNull(d_gameMap);
