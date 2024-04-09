@@ -77,7 +77,7 @@ public class DeployOrder extends Order implements Serializable {
      */
     public void printOrderCommand() {
         d_Logger.log("Deployed " + getOrderInfo().getNumberOfArmy() + " armies to " + getOrderInfo().getDestination().getName() + ".");
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 
 }

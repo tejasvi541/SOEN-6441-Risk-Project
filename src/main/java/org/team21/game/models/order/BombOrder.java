@@ -126,8 +126,7 @@ public class BombOrder extends Order implements Serializable {
     public void printOrderCommand() {
         d_Logger.log("Bomb Order issued by player: " + getOrderInfo().getPlayer().getName()
                 + " on Country: " + getOrderInfo().getTargetCountry().getName());
-        d_Logger.log("------------------------------------------------------------------------" +
-                "---------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 }
 
