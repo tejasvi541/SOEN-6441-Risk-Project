@@ -2,6 +2,7 @@ package org.team21.game.models.order;
 
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -37,7 +38,7 @@ public class DeployOrder extends Order implements Serializable {
     public boolean execute() {
         Country l_Destination = getOrderInfo().getDestination();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         if (validateCommand()) {
             l_Destination.deployArmies(l_ArmiesToDeploy);
             return true;
