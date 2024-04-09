@@ -34,33 +34,33 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the created order
      */
-    public static Order CreateOrder(String[] p_Commands, Player p_Player) {
+    public static Order createOrder(String[] p_Commands, Player p_Player) {
         String l_Type = p_Commands[0].toLowerCase();
         Order l_Order;
         switch (l_Type) {
             case Constants.DEPLOY_COMMAND:
                 l_Order = new DeployOrder();
-                l_Order.setOrderInfo(GenerateDeployOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateDeployOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.ADVANCE_COMMAND:
                 l_Order = new AdvanceOrder();
-                l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.NEGOTIATE_COMMAND:
                 l_Order = new NegotiateOrder();
-                l_Order.setOrderInfo(GenerateNegotiateOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateNegotiateOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.BLOCKADE_COMMAND:
                 l_Order = new BlockadeOrder();
-                l_Order.setOrderInfo(GenerateBlockadeOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateBlockadeOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.AIRLIFT_COMMAND:
                 l_Order = new AirliftOrder();
-                l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
             case Constants.BOMB_COMMAND:
                 l_Order = new BombOrder();
-                l_Order.setOrderInfo(GenerateBombOrderInfo(p_Commands, p_Player));
+                l_Order.setOrderInfo(generateBombOrderInfo(p_Commands, p_Player));
                 break;
             default:
                 d_Logger.log("\nFailed to create an order due to invalid arguments");
@@ -77,11 +77,11 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the order information for deployment
      */
-    public static OrderInformation GenerateDeployOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation generateDeployOrderInfo(String[] p_Command, Player p_Player) {
         Country l_Country = d_GameMap.getCountry(p_Command[1]);
         int l_NumberOfArmies = Integer.parseInt(p_Command[2]);
         OrderInformation l_OrderInformation = new OrderInformation();
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
+        l_OrderInformation.setCommand(convertToString(p_Command));
         l_OrderInformation.setPlayer(p_Player);
         l_OrderInformation.setDestination(l_Country);
         l_OrderInformation.setNumberOfArmy(l_NumberOfArmies);
@@ -98,14 +98,14 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the order information for advance or airlift
      */
-    public static OrderInformation GenerateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation generateAdvanceOrderAndAirliftOrderInfo(String[] p_Command, Player p_Player) {
         String l_FromCountryID = p_Command[1];
         Country l_FromCountry = d_GameMap.getCountry(l_FromCountryID);
         String l_ToCountryID = p_Command[2];
         Country l_ToCountry = d_GameMap.getCountry(l_ToCountryID);
         int l_NumberOfArmies = Integer.parseInt(p_Command[3]);
         OrderInformation l_OrderInformation = new OrderInformation();
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
+        l_OrderInformation.setCommand(convertToString(p_Command));
         l_OrderInformation.setPlayer(p_Player);
         l_OrderInformation.setDeparture(l_FromCountry);
         l_OrderInformation.setDestination(l_ToCountry);
@@ -121,10 +121,10 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the order information for negotiate
      */
-    public static OrderInformation GenerateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation generateNegotiateOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
         l_OrderInformation.setPlayer(p_Player);
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
+        l_OrderInformation.setCommand(convertToString(p_Command));
         l_OrderInformation.setNeutralPlayer(d_GameMap.getPlayer(p_Command[1]));
         return l_OrderInformation;
     }
@@ -136,9 +136,9 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the order information for blockade
      */
-    public static OrderInformation GenerateBlockadeOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation generateBlockadeOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
+        l_OrderInformation.setCommand(convertToString(p_Command));
         l_OrderInformation.setPlayer(p_Player);
         String l_CountryID = p_Command[1];
         Country l_TargetCountry = d_GameMap.getCountry(l_CountryID);
@@ -153,9 +153,9 @@ public class OrderOwner implements Serializable {
      * @param p_Player the player issuing the order
      * @return the order information for bomb
      */
-    public static OrderInformation GenerateBombOrderInfo(String[] p_Command, Player p_Player) {
+    public static OrderInformation generateBombOrderInfo(String[] p_Command, Player p_Player) {
         OrderInformation l_OrderInformation = new OrderInformation();
-        l_OrderInformation.setCommand(ConvertToString(p_Command));
+        l_OrderInformation.setCommand(convertToString(p_Command));
         l_OrderInformation.setPlayer(p_Player);
         String l_CountryID = p_Command[1];
         Country l_TargetCountry = d_GameMap.getCountry(l_CountryID);
@@ -169,7 +169,7 @@ public class OrderOwner implements Serializable {
      * @param p_Commands the array of strings
      * @return the concatenated string
      */
-    private static String ConvertToString(String[] p_Commands) {
+    private static String convertToString(String[] p_Commands) {
         StringJoiner l_Joiner = new StringJoiner(" ");
         for (int l_Index = 0; l_Index < p_Commands.length; l_Index++) {
             l_Joiner.add(p_Commands[l_Index]);

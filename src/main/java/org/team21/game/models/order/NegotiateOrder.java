@@ -95,6 +95,6 @@ public class NegotiateOrder extends Order implements Serializable {
     @Override
     public void printOrderCommand() {
         d_Logger.log("Negotiated with " + getOrderInfo().getNeutralPlayer().getName() + ".");
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 }

@@ -129,6 +129,6 @@ public class AdvanceOrder extends Order implements Serializable {
     @Override
     public void printOrderCommand() {
         d_Logger.log("Order Info: Advance " + getOrderInfo().getNumberOfArmy() + " armies " + " from " + getOrderInfo().getDeparture().getName() + " to " + getOrderInfo().getDestination().getName() + ".");
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 }

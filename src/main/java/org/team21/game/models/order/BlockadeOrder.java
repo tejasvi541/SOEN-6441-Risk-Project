@@ -96,6 +96,6 @@ public class BlockadeOrder extends Order implements Serializable {
     @Override
     public void printOrderCommand() {
         d_Logger.log("Blockade on " + getOrderInfo().getTargetCountry().getName() + " by " + getOrderInfo().getPlayer().getName());
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
     }
 }
