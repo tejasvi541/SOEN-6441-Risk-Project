@@ -64,11 +64,11 @@ public class SingleGameEngine implements Engine {
      */
     private TournamentOptions getTournamentOptions() {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log("You are in Single Game Mode");
         d_Logger.log("Enter the start command for single game- ");
         d_Logger.log("Sample Command: tournament -M Map1.map -P strategy1,strategy2 ");
-        d_Logger.log("-----------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_TournamentCommand = l_Scanner.nextLine();
         d_Options = parseCommand(l_TournamentCommand);
         if (Objects.isNull(d_Options)) {

@@ -51,15 +51,15 @@ public class Game {
      */
     public void start() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
-        d_Logger.log("\t\t\t Main Menu");
-        d_Logger.log("\t=======================");
-        d_Logger.log("\t\t 1. New Game");
-        d_Logger.log("\t\t 2. Load Game");
-        d_Logger.log("\t\t 3. Single Game Mode");
-        d_Logger.log("\t\t 4. Simulation Mode");
-        d_Logger.log("\t\t 5. Exit");
-        d_Logger.log("\t=======================");
-        d_Logger.log("\t\tSelect the option");
+        d_Logger.log("Main Menu");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
+        d_Logger.log("1.Enter 1 for New Game");
+        d_Logger.log("2.Enter 2 for Load Game");
+        d_Logger.log("3.Enter 3 for Single Game Mode");
+        d_Logger.log("4.Enter 4 for Tournament Mode");
+        d_Logger.log("5.Enter 5 for Exit");
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
+        d_Logger.log("Select the option");
         d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         try {
             int option = l_Scanner.nextInt();

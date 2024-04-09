@@ -67,7 +67,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE_MAP_EDITOR.
      */
-    public final static String WELCOME_MESSAGE_MAP_EDITOR = "****************************** Welcome to MAP EDITOR PHASE *********************************/";
+    public final static String WELCOME_MESSAGE_MAP_EDITOR = "===================== You have entered the MapEditor Phase ===================";
     /**
      * The constant ASK_FOR_ACTION.
      */
@@ -112,10 +112,6 @@ public final class Constants {
      * The constant EXECUTE_ORDER_FAIL.
      */
     public final static String EXECUTE_ORDER_FAIL = "Orders can't be executed due to some reason.";
-    /**
-     * The constant SEPARATOR.
-     */
-    public final static String SEPARATOR = "******************************************************************************";
     /**
      * The constant EQUAL SEPARATOR.
      */
@@ -247,7 +243,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE.
      */
-    public final static String WELCOME_MESSAGE = SEPARATOR + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPARATOR;
+    public final static String WELCOME_MESSAGE = EQUAL_SEPARATOR + "\n" +"\t" +"\t"+"\t"+"\t"+TEAM_NAME + " welcomes you to warzone game" + "\n" + EQUAL_SEPARATOR;
     /**
      * The constant non exists player message.
      */
@@ -316,7 +312,7 @@ public final class Constants {
      * {org.team25.game.controllers.StartGameController}
      */
     public static void showStartGameCommand() {
-        System.out.println(SEPARATOR);
+        System.out.println(EQUAL_SEPARATOR);
         System.out.println("Order of Game play commands are Listed below ::");
         System.out.println("To load the map : loadmap filename" + "  e.g. loadmap canada");
         System.out.println("To show the loaded map : showmap" + "  e.g. showmap");
@@ -329,19 +325,19 @@ public final class Constants {
      */
     public static void showIssueOrderCommand() {
         System.out.println("Please remember when all the member determines their command please use pass to execute orders");
-        System.out.println(Constants.SEPARATOR);
+        System.out.println(Constants.EQUAL_SEPARATOR);
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
         System.out.println("To execute game further use : pass");
         System.out.println("To see map : showmap");
-        System.out.println(Constants.SEPARATOR);
+        System.out.println(Constants.EQUAL_SEPARATOR);
         System.out.println("Below commands can be used only if you have the desired card.");
-        System.out.println(Constants.SEPARATOR);
+        System.out.println(Constants.EQUAL_SEPARATOR);
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
-        System.out.println(Constants.SEPARATOR);
+        System.out.println(Constants.EQUAL_SEPARATOR);
     }
 
     /**
