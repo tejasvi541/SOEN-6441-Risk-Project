@@ -10,10 +10,10 @@ public class LoadGameControllerTest {
     private GamePhase phase;
     @Test
     public void startPhase() {
-//        LoadGameController lgc = new LoadGameController();
-//
-//        phase = GameProgress.LoadGameProgress("");
-//
-//        assertNotEquals(phase, GamePhase.StartUp);
+        LoadGameController lgc = new LoadGameController();
+
+        phase = GameProgress.LoadGameProgress("g1");
+
+        assertNotEquals(phase, GamePhase.StartUp);
     }
 }

@@ -60,7 +60,7 @@ public class GameProgress {
         FileInputStream l_Fs;
         GameMap l_LoadedGameMap;
         try {
-            l_Fs = new FileInputStream(d_PATH + p_Filename);
+            l_Fs = new FileInputStream(d_PATH + p_Filename+ ".bin");
             ObjectInputStream l_Os = new ObjectInputStream(l_Fs);
             l_LoadedGameMap = (GameMap) l_Os.readObject();
             d_Logger.log("The game is loaded successfully will continue from where it last stopped.");
