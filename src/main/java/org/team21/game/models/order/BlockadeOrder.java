@@ -47,7 +47,7 @@ public class BlockadeOrder extends Order implements Serializable {
     public boolean execute() {
         Player l_Player = getOrderInfo().getPlayer();
         Country l_Country = getOrderInfo().getTargetCountry();
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
             l_Country.setArmies(l_Country.getArmies() * 3);

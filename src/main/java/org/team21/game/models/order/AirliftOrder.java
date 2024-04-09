@@ -48,7 +48,7 @@ public class AirliftOrder extends Order implements Serializable {
         Country l_fromCountry = getOrderInfo().getDeparture();
         Country l_toCountry = getOrderInfo().getDestination();
         int l_armyNumberToAirLift = getOrderInfo().getNumberOfArmy();
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
             l_fromCountry.setArmies(l_fromCountry.getArmies() - l_armyNumberToAirLift);

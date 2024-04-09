@@ -221,19 +221,19 @@ public class IssueOrderController implements GameFlowManager {
         d_Logger.log("To skip: pass");
         d_Logger.log(Constants.EQUAL_SEPARATOR);
         String l_Table = "|%-15s|%-19s|%-22s|%n";
-        System.out.format("+===============+======================+=====================+%n");
+        System.out.format("|===============|======================|=====================|%n");
         System.out.format("| Current Player   | Initial Assigned  | Left Armies      | %n");
-        System.out.format("+===============+======================+=====================+%n");
+        System.out.format("|===============|======================|=====================|%n");
         System.out.format(l_Table, p_Player.getName(), p_Player.getReinforcementArmies(), p_Player.getIssuedArmies());
-        System.out.format("+===============+=======================+===================+%n");
+        System.out.format("|===============|=======================|===================|%n");
 
         d_Logger.log(Constants.ASSIGNED_COUNTRIES);
-        System.out.format("+--------------+-----------------------+------------------+---------+%n");
+        System.out.format("|==============|=======================|==================|=========|%n");
 
         System.out.format(
                 "|Country name  |Country Armies  | Neighbors countries               |%n");
         System.out.format(
-                "+--------------+-----------------------+------------------+---------+%n");
+                "|==============|=======================|==================|=========|%n");
         for (Country l_Country : p_Player.getCapturedCountries()) {
             String l_TableCountry = "|%-15s|%-15s|%-35s|%n";
             String l_NeighborList = "";
@@ -242,7 +242,7 @@ public class IssueOrderController implements GameFlowManager {
             }
             System.out.format(l_TableCountry, l_Country.getName(), l_Country.getArmies(), l_Country.createANeighborList(l_Country.getNeighbors()));
         }
-        System.out.format("+--------------+-----------------------+------------------+---------+\n");
+        System.out.format("|==============|=======================|==================|=========|\n");
 
         d_Logger.log(Constants.CARDS_OF_PLAYER);
         if (!p_Player.getPlayerCards().isEmpty()) {

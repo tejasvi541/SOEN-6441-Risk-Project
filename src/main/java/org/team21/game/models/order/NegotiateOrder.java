@@ -44,7 +44,7 @@ public class NegotiateOrder extends Order implements Serializable {
     @Override
     public boolean execute() {
         Player l_NeutralPlayer = getOrderInfo().getNeutralPlayer();
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
             Player l_Player = getOrderInfo().getPlayer();

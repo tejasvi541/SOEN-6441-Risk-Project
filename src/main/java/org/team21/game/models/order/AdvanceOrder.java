@@ -4,6 +4,7 @@ import org.team21.game.models.map.Country;
 import org.team21.game.game_engine.GameSettings;
 import org.team21.game.models.map.Player;
 import org.team21.game.interfaces.game.GameStrategy;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -51,7 +52,7 @@ public class AdvanceOrder extends Order implements Serializable {
      */
     @Override
     public boolean execute() {
-        d_Logger.log("---------------------------------------------------------------------------------------------");
+        d_Logger.log(Constants.EQUAL_SEPARATOR);
         d_Logger.log(getOrderInfo().getCommand());
         if (validateCommand()) {
             Player l_Player = getOrderInfo().getPlayer();

@@ -3,6 +3,7 @@ package org.team21.game.models.order;
 import org.team21.game.models.map.Country;
 import org.team21.game.models.map.GameMap;
 import org.team21.game.models.map.Player;
+import org.team21.game.utils.Constants;
 import org.team21.game.utils.logger.GameEventLogger;
 
 import java.io.Serializable;
@@ -37,27 +38,27 @@ public class OrderOwner implements Serializable {
         String l_Type = p_Commands[0].toLowerCase();
         Order l_Order;
         switch (l_Type) {
-            case "deploy":
+            case Constants.DEPLOY_COMMAND:
                 l_Order = new DeployOrder();
                 l_Order.setOrderInfo(GenerateDeployOrderInfo(p_Commands, p_Player));
                 break;
-            case "advance":
+            case Constants.ADVANCE_COMMAND:
                 l_Order = new AdvanceOrder();
                 l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
-            case "negotiate":
+            case Constants.NEGOTIATE_COMMAND:
                 l_Order = new NegotiateOrder();
                 l_Order.setOrderInfo(GenerateNegotiateOrderInfo(p_Commands, p_Player));
                 break;
-            case "blockade":
+            case Constants.BLOCKADE_COMMAND:
                 l_Order = new BlockadeOrder();
                 l_Order.setOrderInfo(GenerateBlockadeOrderInfo(p_Commands, p_Player));
                 break;
-            case "airlift":
+            case Constants.AIRLIFT_COMMAND:
                 l_Order = new AirliftOrder();
                 l_Order.setOrderInfo(GenerateAdvanceOrderAndAirliftOrderInfo(p_Commands, p_Player));
                 break;
-            case "bomb":
+            case Constants.BOMB_COMMAND:
                 l_Order = new BombOrder();
                 l_Order.setOrderInfo(GenerateBombOrderInfo(p_Commands, p_Player));
                 break;
