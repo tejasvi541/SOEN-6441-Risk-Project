@@ -113,13 +113,13 @@ public final class Constants {
      */
     public final static String EXECUTE_ORDER_FAIL = "Orders can't be executed due to some reason.";
     /**
-     * The constant SEPERATER.
+     * The constant SEPERATOR.
      */
-    public final static String SEPERATER = "******************************************************************************";
+    public final static String SEPERATOR = "******************************************************************************";
     /**
-     * The constant EQUAL SEPERATER.
+     * The constant EQUAL SEPERATOR.
      */
-    public final static String EQUAL_SEPERATER = "=============================================================================";
+    public final static String EQUAL_SEPERATOR = "=============================================================================";
     /**
      * The constant ENTER_CORRECT_COMMAND.
      */
@@ -247,7 +247,7 @@ public final class Constants {
     /**
      * The constant WELCOME_MESSAGE.
      */
-    public final static String WELCOME_MESSAGE = SEPERATER + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATER;
+    public final static String WELCOME_MESSAGE = SEPERATOR + "\n" + TEAM_NAME + " welcomes you to warzone game" + "\n" + SEPERATOR;
     /**
      * The constant non exists player message.
      */
@@ -297,6 +297,15 @@ public final class Constants {
      */
     public static final String TOURNAMENT = "tournament";
     /**
+     * The constant DASH SEPERATOR.
+     */
+    public static final String DASH_SEPERATOR= "+--------------+-----------------------+-------------------------+%n";
+    /**
+     * The constant SMALL EQUAL SEPERATOR
+     */
+    public static final String SMALL_EQUAL_SEPERATOR = "==================================";
+
+    /**
      * Instantiates a new Constants.
      */
     Constants() {
@@ -307,7 +316,7 @@ public final class Constants {
      * {org.team25.game.controllers.StartGameController}
      */
     public static void showStartGameCommand() {
-        System.out.println(SEPERATER);
+        System.out.println(SEPERATOR);
         System.out.println("Order of Game play commands are Listed below ::");
         System.out.println("To load the map : loadmap filename" + "  e.g. loadmap canada");
         System.out.println("To show the loaded map : showmap" + "  e.g. showmap");
@@ -320,19 +329,19 @@ public final class Constants {
      */
     public static void showIssueOrderCommand() {
         System.out.println("Please remember when all the member determines their command please use pass to execute orders");
-        System.out.println(Constants.SEPERATER);
+        System.out.println(Constants.SEPERATOR);
         System.out.println("To deploy the armies : deploy countryID numarmies");
         System.out.println("To advance/attack the armies : advance countrynamefrom countynameto numarmies");
         System.out.println("To execute game further use : pass");
         System.out.println("To see map : showmap");
-        System.out.println(Constants.SEPERATER);
+        System.out.println(Constants.SEPERATOR);
         System.out.println("Below commands can be used only if you have the desired card.");
-        System.out.println(Constants.SEPERATER);
+        System.out.println(Constants.SEPERATOR);
         System.out.println("To airlift the armies : airlift sourcecountryID targetcountryID numarmies");
         System.out.println("To blockade the armies : blockade countryID");
         System.out.println("To negotiate with player : negotiate playerID");
         System.out.println("To bomb the country : bomb countryID");
-        System.out.println(Constants.SEPERATER);
+        System.out.println(Constants.SEPERATOR);
     }
 
     /**
