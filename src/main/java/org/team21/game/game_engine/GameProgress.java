@@ -78,9 +78,9 @@ public class GameProgress {
      * @throws IOException File exception
      */
     public static void showFiles() throws IOException {
-        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("\t\t\t Warzone");
-        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("\t\t\t Load Game");
         d_Logger.log("\t=======================\n");
         if (new File(d_PATH).exists()) {
@@ -95,7 +95,7 @@ public class GameProgress {
         d_Logger.log("");
         d_Logger.log("\t=======================");
         d_Logger.log("\t use file name to load");
-        d_Logger.log(Constants.SMALL_EQUAL_SEPERATOR);
+        d_Logger.log(Constants.SMALL_EQUAL_SEPARATOR);
         d_Logger.log("example command: loadgame");
     }
 

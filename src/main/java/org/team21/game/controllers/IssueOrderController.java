@@ -133,7 +133,7 @@ public class IssueOrderController implements GameFlowManager {
                     d_Logger.log(l_Player.getName() + " has issued this order :- " + d_Commands);
                     l_Player.issueOrder();
                     d_Logger.log(Constants.All_ORDERS_ADDED);
-                    d_Logger.log(Constants.EQUAL_SEPERATOR);
+                    d_Logger.log(Constants.EQUAL_SEPARATOR);
                 }
             }
             d_GameMap.setGameLoaded(false);
