@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * Test case class to check the correct starting phase of game
  *
- * @author kapil soni
+ * @author yesha shah
  */
 public class GameEngineTest {
     /**

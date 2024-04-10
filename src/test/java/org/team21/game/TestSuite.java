@@ -3,6 +3,7 @@ package org.team21.game;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.team21.game.controllers.*;
+import org.team21.game.game_engine.GameProgressTest;
 import org.team21.game.game_engine.TournamentModeTest;
 import org.team21.game.models.map.ContinentTest;
 import org.team21.game.models.map.CountryTest;
@@ -14,6 +15,8 @@ import org.team21.game.utils.validation.MapValidationTest;
 
 /**
  * A class for test suites
+ *
+ * @author yesha shah
  */
 @RunWith(Suite.class)
 /**
@@ -38,7 +41,8 @@ import org.team21.game.utils.validation.MapValidationTest;
         DeployOrderTest.class,
         NegotiateOrderTest.class,
         MapValidationTest.class,
-        GameEngineTest.class
+        GameEngineTest.class,
+        GameProgressTest.class
 
 })
 
