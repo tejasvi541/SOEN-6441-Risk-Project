@@ -123,10 +123,10 @@ public class GameMapTest {
 //        d_GameMap.addCountry("Sydney", "USA");
 //        d_GameMap.addNeighbor("india", "Sydney");
 //        d_GameMap.addNeighbor("Sydney", "india");
-        d_GameMap.addPlayer("p2");
-        d_GameMap.setName("Australia1");
-        d_GameMap.showMap();
-        d_GameMap.saveMap(false);
+//        d_GameMap.addPlayer("p2");
+//        d_GameMap.setName("Australia1");
+//        d_GameMap.showMap();
+//        d_GameMap.saveMap(false);
 
 
         d_lgc.loadMap("Australia1.map");
