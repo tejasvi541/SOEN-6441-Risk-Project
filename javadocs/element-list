@@ -1,0 +1,15 @@
+org.team21.game
+org.team21.game.controllers
+org.team21.game.game_engine
+org.team21.game.interfaces.game
+org.team21.game.interfaces.observers
+org.team21.game.models.cards
+org.team21.game.models.map
+org.team21.game.models.order
+org.team21.game.models.strategy.game
+org.team21.game.models.strategy.player
+org.team21.game.models.tournament
+org.team21.game.utils
+org.team21.game.utils.adapter
+org.team21.game.utils.logger
+org.team21.game.utils.validation
