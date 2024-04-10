@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for verifying the behavior of the ExecuteOrder class.
@@ -82,5 +83,17 @@ public class ExecuteOrderTest {
         }
         GamePhase l_Output = d_ExecuteOrder.checkIfPlayerWonOrTriesExhausted(GamePhase.ExecuteOrder);
         assertEquals(GamePhase.ExitGame, l_Output);
+    }
+
+    /**
+     * Tests execute order statrup phase.
+     */
+    @Test
+    public void testExecuteOrderStartUp() {
+        try {
+            assertNotNull(d_ExecuteOrder.startPhase(GamePhase.ExecuteOrder));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
