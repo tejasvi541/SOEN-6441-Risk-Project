@@ -31,7 +31,7 @@ public class GameEngine implements Engine {
     /**
      * gamephase instance for the state
      */
-    GamePhase d_GamePhase = GamePhase.MapEditor;
+    public GamePhase d_GamePhase = GamePhase.MapEditor;
 
     /**
      * constructor for game engine
