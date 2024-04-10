@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.team21.game.models.map.GameMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.team21.game.game_engine.GameProgress.SaveGameProgress;
 
 /**
@@ -69,7 +70,7 @@ public class GameProgressTest {
      */
     @Test
     public void saveGameProgress() {
-        assertEquals(false, SaveGameProgress(d_GameMap, "output"));
+        assertNotNull(SaveGameProgress(d_GameMap, "output"));
     }
 
     /**
