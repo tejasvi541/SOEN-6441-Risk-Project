@@ -109,22 +109,28 @@ public class GameMapTest {
         }
     }
 
+    /**
+     * This function is to test save map functionality
+     * @throws ValidationException
+     * @throws IOException
+     */
     @Test
     public void saveMap() throws ValidationException, IOException {
-//        try {
-//            d_lgc.loadMap("Australia.map");
-//        } catch (Exception ignored){}
-//
+        try {
+            d_lgc.loadMap("Australia.map");
+        } catch (Exception ignored){}
+
 //        d_GameMap.addCountry("Sydney", "USA");
 //        d_GameMap.addNeighbor("india", "Sydney");
 //        d_GameMap.addNeighbor("Sydney", "india");
-//        d_GameMap.setName("Australia1");
-//        d_GameMap.showMap();
-//        d_GameMap.saveMap(false);
-//
-//
-//        d_lgc.loadMap("Australia1.map");
-//        System.out.println(d_GameMap.getCountries().containsKey("Sydney"));
+        d_GameMap.addPlayer("p2");
+        d_GameMap.setName("Australia1");
+        d_GameMap.showMap();
+        d_GameMap.saveMap(false);
+
+
+        d_lgc.loadMap("Australia1.map");
+        System.out.println(d_GameMap.getPlayers().containsKey("p2"));
 //        assertTrue(d_GameMap.getPlayers().containsKey("p2"));
 
     }
