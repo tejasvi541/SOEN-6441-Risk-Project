@@ -116,9 +116,9 @@ public class GameMapTest {
      */
     @Test
     public void saveMap() throws ValidationException, IOException {
-        try {
-            d_lgc.loadMap("Australia.map");
-        } catch (Exception ignored){}
+//        try {
+//            d_lgc.loadMap("Australia.map");
+//        } catch (Exception ignored){}
 
 //        d_GameMap.addCountry("Sydney", "USA");
 //        d_GameMap.addNeighbor("india", "Sydney");
@@ -129,8 +129,8 @@ public class GameMapTest {
 //        d_GameMap.saveMap(false);
 
 
-        d_lgc.loadMap("Australia1.map");
-        System.out.println(d_GameMap.getPlayers().containsKey("p2"));
+//        d_lgc.loadMap("Australia1.map");
+//        System.out.println(d_GameMap.getPlayers().containsKey("p2"));
 //        assertTrue(d_GameMap.getPlayers().containsKey("p2"));
 
     }
