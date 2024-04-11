@@ -141,7 +141,7 @@ public class Adaptee {
 
 
     public boolean saveMap(GameMap p_Map, String p_FileName) {
-        String l_MapData = "[Map]\nauthor=Anonymous\n[Continents]\\n";
+        String l_MapData = "[Map]\nauthor=Anonymous\n[Continents]\n";
         for (Continent l_Continent : p_Map.getContinents().values()) {
             l_MapData += l_Continent.getName() + "=" + l_Continent.getAwardArmies();
             l_MapData += "\n";

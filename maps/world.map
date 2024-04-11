@@ -1,0 +1,13 @@
+[Map]
+author=Anonymous
+[Continents]
+Africa=7
+Asia=10
+[Territories]
+China Asia Russia Pakistan Libya
+Russia Asia China
+Nigeria Africa Pakistan Libya
+Pakistan Asia China Nigeria India Libya
+India Asia China Pakistan
+Uganda Africa Libya
+Libya Africa Nigeria Pakistan Uganda
